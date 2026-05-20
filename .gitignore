@@ -1,0 +1,12 @@
+# Dependency folders
+node_modules/
+
+# Local env files
+.env
+
+# Mock test data
+tracking_history_mock.json
+
+# Operating System files
+.DS_Store
+Thumbs.db
