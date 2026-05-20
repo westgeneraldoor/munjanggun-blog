@@ -1,0 +1,1193 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>문장군 전략적 SEO 대시보드</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: 'Pretendard', -apple-system, sans-serif; background: #f1f5f9; color: #334155; margin: 0; padding: 20px; }
+    .header { margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+    h1 { margin: 0; color: #0f172a; font-size: 24px; }
+    
+    .core-metrics { display: flex; gap: 12px; margin-bottom: 20px; }
+    .core-card { background: linear-gradient(135deg, #1e293b, #0f172a); color: white; padding: 15px 20px; border-radius: 12px; flex: 1; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .core-title { font-size: 13px; color: #94a3b8; margin-bottom: 5px; }
+    .core-value { font-size: 26px; font-weight: bold; color: #fff; }
+    .core-diff { font-size: 13px; margin-top: 5px; }
+    .core-diff .diff-up { color: #f87171; }
+    .core-diff .diff-down { color: #60a5fa; }
+    .core-diff .diff-none { color: #64748b; }
+
+    .grid { display: grid; grid-template-columns: 1fr 500px; gap: 20px; align-items: start; }
+    .panel { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .chart-wrapper { height: 500px; width: 100%; margin-top: 15px; }
+    
+    .filter-group { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dashed #e2e8f0; }
+    .filter-label { font-size: 12px; font-weight: bold; color: #64748b; width: 100%; margin-bottom: 2px; }
+    button { padding: 6px 14px; border: 1px solid #cbd5e1; background: white; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 500; color: #475569; transition: all 0.2s; }
+    button:hover { background: #f1f5f9; }
+    button.active-s { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    button.active-a { background: #e0f2fe; color: #0369a1; border-color: #7dd3fc; }
+    button.active-grp { background: #f1f5f9; color: #0f172a; border-color: #94a3b8; }
+    button.active-avg { background: #4f46e5; color: white; border-color: #4338ca; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+    th { background: #f8fafc; font-weight: 600; color: #475569; position: sticky; top: 0; z-index: 10; }
+    tr:hover { background: #f8fafc; cursor: pointer; }
+    
+    .tier-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-weight: 800; font-size: 10px; margin-right: 5px; }
+    .tier-s { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
+    .tier-a { background: #e0f2fe; color: #2563eb; border: 1px solid #bfdbfe; }
+    .tier-b { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+    
+    .rank-badge { display: inline-block; width: 36px; text-align: center; padding: 2px 0; border-radius: 12px; font-weight: bold; font-size: 12px; }
+    .rank-top3 { background: #dcfce7; color: #166534; }
+    .rank-top10 { background: #e0f2fe; color: #0369a1; }
+    .rank-out { background: #f1f5f9; color: #94a3b8; }
+    
+    .diff-up { color: #ef4444; font-weight: bold; }
+    .diff-down { color: #3b82f6; font-weight: bold; }
+    .diff-none { color: #cbd5e1; }
+    
+    .table-container { max-height: 650px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <h1>🚀 문장군 전략적 SEO 대시보드</h1>
+      <span style="color: #64748b; font-size: 13px;">진짜 누적된 실제 데이터만 표시합니다. (가짜 데이터 제거)</span>
+    </div>
+  </div>
+
+  <div class="core-metrics">
+    
+      <div class="core-card">
+        <div class="core-title">현관중문</div>
+        <div class="core-value">OUT</div>
+        <div class="core-diff"><span class="diff-down">▼21</span></div>
+      </div>
+    
+    
+      <div class="core-card">
+        <div class="core-title">아파트중문</div>
+        <div class="core-value">OUT</div>
+        <div class="core-diff"><span class="diff-down">▼25</span></div>
+      </div>
+    
+    
+      <div class="core-card">
+        <div class="core-title">3연동중문</div>
+        <div class="core-value">OUT</div>
+        <div class="core-diff"><span class="diff-down">▼26</span></div>
+      </div>
+    
+    
+      <div class="core-card">
+        <div class="core-title">방문교체</div>
+        <div class="core-value">OUT</div>
+        <div class="core-diff"><span class="diff-down">▼24</span></div>
+      </div>
+    
+    
+      <div class="core-card">
+        <div class="core-title">ABS도어</div>
+        <div class="core-value">6위</div>
+        <div class="core-diff"><span class="diff-down">▼3</span></div>
+      </div>
+    
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      
+      <div class="filter-group">
+        <div class="filter-label">🎯 중요도(Tier) 별 보기</div>
+        <button onclick="filterByTier('S')" class="active-s" id="btn-tier-S">🔥 S등급 (메인 트래픽)</button>
+        <button onclick="filterByTier('A')" id="btn-tier-A">💰 A등급 (구매/전환 특화)</button>
+        <button onclick="filterByTier('B')" id="btn-tier-B">🌱 B등급 (일반/롱테일)</button>
+        <!-- 새 기능: 평균 라인 3개만 보기 -->
+        <button onclick="showAverages()" id="btn-avg" style="margin-left: 10px;">📊 S/A/B 등급별 평균 흐름</button>
+      </div>
+      
+      <div class="filter-group" style="border-bottom:none;">
+        <div class="filter-label">🚪 제품군(Group) 별 보기</div>
+        <button onclick="filterByGroup('현관/아파트중문')" id="btn-grp-1">현관/아파트중문</button>
+        <button onclick="filterByGroup('3연동/특수')" id="btn-grp-2">3연동/특수중문</button>
+        <button onclick="filterByGroup('방문/도어')" id="btn-grp-3">방문/ABS도어</button>
+        <button onclick="clearAll()" id="btn-clear" style="margin-left:auto; background:#f8fafc;">🗑️ 비우기</button>
+      </div>
+
+      <div class="chart-wrapper">
+        <canvas id="mainChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel table-container">
+      <table id="rankTable">
+        <thead>
+          <tr>
+            <th width="30">V</th>
+            <th>키워드</th>
+            <th width="70">그룹</th>
+            <th width="40">순위</th>
+            <th width="40">어제대비</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr onclick="toggleChart(14)" id="row-14">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-14" checked style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-s">S</span>
+                <strong>ABS도어</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-top10">
+                  6
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼3</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(0)" id="row-0">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-0" checked style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-s">S</span>
+                <strong>아파트중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼25</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(1)" id="row-1">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-1" checked style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-s">S</span>
+                <strong>현관중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼21</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(5)" id="row-5">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-5" checked style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-s">S</span>
+                <strong>3연동중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">3연동/특수</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼26</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(11)" id="row-11">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-11" checked style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-s">S</span>
+                <strong>방문교체</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼24</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(6)" id="row-6">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-6"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>3연동 중문 설치</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">3연동/특수</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  12
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼4</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(19)" id="row-19">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-19"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>아파트 현관 중문 설치</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  14
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼8</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(3)" id="row-3">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-3"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>중문 설치</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼22</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(4)" id="row-4">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-4"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>아파트 중문 설치</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼27</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(7)" id="row-7">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-7"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>3연동중문 설치 비용</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">3연동/특수</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼20</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(24)" id="row-24">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-24"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>문짝교체비용</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼27</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(25)" id="row-25">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-25"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>방문교체비용</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(32)" id="row-32">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-32"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>중문가격</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼28</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(33)" id="row-33">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-33"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>중문설치비용</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼29</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(41)" id="row-41">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-41"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>아파트중문설치비용</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼27</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(42)" id="row-42">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-42"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>아파트중문가격</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼18</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(43)" id="row-43">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-43"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>중문견적</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼29</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(44)" id="row-44">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-44"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>3연동중문가격</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">3연동/특수</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(45)" id="row-45">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-45"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-a">A</span>
+                <strong>현관중문비용</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(9)" id="row-9">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-9"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>현관 중문 종류</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-top3">
+                  2
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-up">▲1</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(27)" id="row-27">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-27"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>문장군</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">기타</td>
+              <td>
+                <span class="rank-badge rank-top3">
+                  2
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-up">▲3</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(26)" id="row-26">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-26"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>문장군중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-top3">
+                  3
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(2)" id="row-2">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-2"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>아파트 현관 중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-top10">
+                  5
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(15)" id="row-15">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-15"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>ABS도어 방문 교체</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-top10">
+                  5
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼2</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(39)" id="row-39">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-39"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>문짝교체</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-top10">
+                  5
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-up">▲4</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(37)" id="row-37">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-37"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>아파트현관중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-top10">
+                  6
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-up">▲8</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(23)" id="row-23">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-23"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>문틀교체</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-top10">
+                  7
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-up">▲24</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(12)" id="row-12">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-12"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>아파트 방문 교체</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-top10">
+                  10
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼6</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(10)" id="row-10">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-10"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>좁은 현관 중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  13
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼5</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(38)" id="row-38">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-38"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>좁은현관중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  13
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼5</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(21)" id="row-21">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-21"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>화장실문교체</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">기타</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  15
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼11</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(22)" id="row-22">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-22"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>화장실문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">기타</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  22
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼7</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(16)" id="row-16">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-16"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>멤브레인 도어</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  25
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-up">▲6</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(8)" id="row-8">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-8"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>초슬림 3연동중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">3연동/특수</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼10</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(13)" id="row-13">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-13"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>살면서 방문교체</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼29</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(17)" id="row-17">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-17"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>타공도어</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼11</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(18)" id="row-18">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-18"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>거주중시공</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">기타</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(20)" id="row-20">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-20"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>살면서 중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼29</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(28)" id="row-28">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-28"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>중문시공업체</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(29)" id="row-29">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-29"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>방문실측</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(30)" id="row-30">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-30"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>원슬라이딩중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">3연동/특수</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼22</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(31)" id="row-31">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-31"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>슬라이딩도어</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">3연동/특수</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(34)" id="row-34">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-34"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>셀프중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼26</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(35)" id="row-35">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-35"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>중문셀프시공</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(36)" id="row-36">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-36"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>초슬림3연동중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">3연동/특수</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼25</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(40)" id="row-40">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-40"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>도어교체</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">방문/도어</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-down">▼20</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(46)" id="row-46">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-46"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>천안중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">현관/아파트중문</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(47)" id="row-47">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-47"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>스윙도어</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">3연동/특수</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(48)" id="row-48">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-48"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>스윙도어중문</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">3연동/특수</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+            <tr onclick="toggleChart(49)" id="row-49">
+              <td style="text-align:center;">
+                <input type="checkbox" id="chk-49"  style="pointer-events: none;">
+              </td>
+              <td>
+                <span class="tier-badge tier-b">B</span>
+                <strong>욕실문교체</strong>
+              </td>
+              <td style="font-size:11px; color:#64748b;">기타</td>
+              <td>
+                <span class="rank-badge rank-out">
+                  OUT
+                </span>
+              </td>
+              <td style="text-align:center;">
+                <span class="diff-none">-</span>
+              </td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const chartData = [{"label":"아파트중문","data":[6,6,31],"borderColor":"#ef4444","backgroundColor":"#ef4444","borderWidth":4,"hidden":false,"tension":0.3,"pointRadius":5,"pointHoverRadius":7,"_tier":"S","_group":"현관/아파트중문","_isAvg":false},{"label":"현관중문","data":[10,10,31],"borderColor":"#ef4444","backgroundColor":"#ef4444","borderWidth":4,"hidden":false,"tension":0.3,"pointRadius":5,"pointHoverRadius":7,"_tier":"S","_group":"현관/아파트중문","_isAvg":false},{"label":"아파트 현관 중문","data":[5,5,5],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"중문 설치","data":[8,9,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"현관/아파트중문","_isAvg":false},{"label":"아파트 중문 설치","data":[4,4,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"현관/아파트중문","_isAvg":false},{"label":"3연동중문","data":[5,5,31],"borderColor":"#ef4444","backgroundColor":"#ef4444","borderWidth":4,"hidden":false,"tension":0.3,"pointRadius":5,"pointHoverRadius":7,"_tier":"S","_group":"3연동/특수","_isAvg":false},{"label":"3연동 중문 설치","data":[8,8,12],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"3연동/특수","_isAvg":false},{"label":"3연동중문 설치 비용","data":[11,11,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"3연동/특수","_isAvg":false},{"label":"초슬림 3연동중문","data":[21,21,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"3연동/특수","_isAvg":false},{"label":"현관 중문 종류","data":[3,3,2],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"좁은 현관 중문","data":[8,8,13],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"방문교체","data":[7,7,31],"borderColor":"#ef4444","backgroundColor":"#ef4444","borderWidth":4,"hidden":false,"tension":0.3,"pointRadius":5,"pointHoverRadius":7,"_tier":"S","_group":"방문/도어","_isAvg":false},{"label":"아파트 방문 교체","data":[4,4,10],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"방문/도어","_isAvg":false},{"label":"살면서 방문교체","data":[2,2,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"방문/도어","_isAvg":false},{"label":"ABS도어","data":[3,3,6],"borderColor":"#ef4444","backgroundColor":"#ef4444","borderWidth":4,"hidden":false,"tension":0.3,"pointRadius":5,"pointHoverRadius":7,"_tier":"S","_group":"방문/도어","_isAvg":false},{"label":"ABS도어 방문 교체","data":[3,3,5],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"방문/도어","_isAvg":false},{"label":"멤브레인 도어","data":[31,31,25],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"방문/도어","_isAvg":false},{"label":"타공도어","data":[20,20,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"방문/도어","_isAvg":false},{"label":"거주중시공","data":[31,31,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"기타","_isAvg":false},{"label":"아파트 현관 중문 설치","data":[6,6,14],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"현관/아파트중문","_isAvg":false},{"label":"살면서 중문","data":[2,2,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"화장실문교체","data":[4,4,15],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"기타","_isAvg":false},{"label":"화장실문","data":[15,15,22],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"기타","_isAvg":false},{"label":"문틀교체","data":[31,31,7],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"방문/도어","_isAvg":false},{"label":"문짝교체비용","data":[4,4,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"방문/도어","_isAvg":false},{"label":"방문교체비용","data":[31,31,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"방문/도어","_isAvg":false},{"label":"문장군중문","data":[3,3,3],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"문장군","data":[5,5,2],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"기타","_isAvg":false},{"label":"중문시공업체","data":[31,31,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"방문실측","data":[31,31,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"방문/도어","_isAvg":false},{"label":"원슬라이딩중문","data":[9,9,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"3연동/특수","_isAvg":false},{"label":"슬라이딩도어","data":[31,31,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"3연동/특수","_isAvg":false},{"label":"중문가격","data":[3,3,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"현관/아파트중문","_isAvg":false},{"label":"중문설치비용","data":[2,2,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"현관/아파트중문","_isAvg":false},{"label":"셀프중문","data":[5,5,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"중문셀프시공","data":[31,31,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"초슬림3연동중문","data":[6,6,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"3연동/특수","_isAvg":false},{"label":"아파트현관중문","data":[14,14,6],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"좁은현관중문","data":[8,8,13],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"문짝교체","data":[9,9,5],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"방문/도어","_isAvg":false},{"label":"도어교체","data":[11,11,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"방문/도어","_isAvg":false},{"label":"아파트중문설치비용","data":[4,4,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"현관/아파트중문","_isAvg":false},{"label":"아파트중문가격","data":[18,13,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"현관/아파트중문","_isAvg":false},{"label":"중문견적","data":[2,2,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"현관/아파트중문","_isAvg":false},{"label":"3연동중문가격","data":[31,31,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"3연동/특수","_isAvg":false},{"label":"현관중문비용","data":[31,31,31],"borderColor":"#3b82f6","backgroundColor":"#3b82f6","borderWidth":2,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"A","_group":"현관/아파트중문","_isAvg":false},{"label":"천안중문","data":[31,31,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"현관/아파트중문","_isAvg":false},{"label":"스윙도어","data":[31,31,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"3연동/특수","_isAvg":false},{"label":"스윙도어중문","data":[31,31,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"3연동/특수","_isAvg":false},{"label":"욕실문교체","data":[31,31,31],"borderColor":"#10b981","backgroundColor":"#10b981","borderWidth":1,"hidden":true,"tension":0.3,"pointRadius":3,"pointHoverRadius":7,"_tier":"B","_group":"기타","_isAvg":false},{"label":"S등급 전체 평균","data":[6.2,6.2,26],"borderColor":"#dc2626","backgroundColor":"#dc2626","borderWidth":5,"borderDash":[8,4],"hidden":true,"tension":0.2,"pointRadius":6,"_tier":"S","_group":"평균","_isAvg":true},{"label":"A등급 전체 평균","data":[11.6,11.4,28.4],"borderColor":"#2563eb","backgroundColor":"#2563eb","borderWidth":5,"borderDash":[8,4],"hidden":true,"tension":0.2,"pointRadius":6,"_tier":"A","_group":"평균","_isAvg":true},{"label":"B등급 전체 평균","data":[16.1,16.1,21.3],"borderColor":"#059669","backgroundColor":"#059669","borderWidth":5,"borderDash":[8,4],"hidden":true,"tension":0.2,"pointRadius":6,"_tier":"B","_group":"평균","_isAvg":true}];
+    const ctx = document.getElementById('mainChart').getContext('2d');
+    
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ["5/14 11:35","5/14 13:17","5/14 17:36"],
+        datasets: chartData
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            mode: 'index',
+            intersect: false,
+            callbacks: {
+              label: function(context) {
+                let val = context.parsed.y;
+                return context.dataset.label + ': ' + (val === 31 ? 'OUT' : val + '위');
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            reverse: true,
+            min: 1, max: 31,
+            ticks: { stepSize: 5, callback: val => val === 31 ? 'OUT' : val + '위' }
+          }
+        }
+      }
+    });
+
+    function toggleChart(id) {
+      const meta = chart.getDatasetMeta(id);
+      meta.hidden = meta.hidden === null ? !chart.data.datasets[id].hidden : !meta.hidden;
+      document.getElementById('chk-' + id).checked = !meta.hidden;
+      chart.update();
+      clearButtonStates();
+    }
+
+    function filterByTier(tier) {
+      chart.data.datasets.forEach((ds, i) => {
+        const show = ds._tier === tier && !ds._isAvg;
+        chart.getDatasetMeta(i).hidden = !show;
+        if (!ds._isAvg) document.getElementById('chk-' + i).checked = show;
+      });
+      chart.update();
+      clearButtonStates();
+      document.getElementById('btn-tier-' + tier).classList.add('active-' + tier.toLowerCase());
+    }
+
+    function filterByGroup(groupName) {
+      chart.data.datasets.forEach((ds, i) => {
+        const show = ds._group === groupName && !ds._isAvg;
+        chart.getDatasetMeta(i).hidden = !show;
+        if (!ds._isAvg) document.getElementById('chk-' + i).checked = show;
+      });
+      chart.update();
+      clearButtonStates();
+      document.querySelectorAll('button').forEach(b => {
+        if(b.innerText.includes(groupName.split('/')[0])) b.classList.add('active-grp');
+      });
+    }
+
+    function showAverages() {
+      chart.data.datasets.forEach((ds, i) => {
+        const show = ds._isAvg === true;
+        chart.getDatasetMeta(i).hidden = !show;
+        if (!ds._isAvg) document.getElementById('chk-' + i).checked = false;
+      });
+      chart.update();
+      clearButtonStates();
+      document.getElementById('btn-avg').classList.add('active-avg');
+    }
+
+    function clearAll() {
+      chart.data.datasets.forEach((ds, i) => {
+        chart.getDatasetMeta(i).hidden = true;
+        if (!ds._isAvg) document.getElementById('chk-' + i).checked = false;
+      });
+      chart.update();
+      clearButtonStates();
+      document.getElementById('btn-clear').classList.add('active-grp');
+    }
+
+    function clearButtonStates() {
+      document.querySelectorAll('button').forEach(b => {
+        b.className = '';
+      });
+    }
+  </script>
+</body>
+</html>
+  

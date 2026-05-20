@@ -1,0 +1,9 @@
+{
+  "name": "munjanggun-blog",
+  "version": "1.0.0",
+  "description": "문장군 블로그 SEO 자동화",
+  "dependencies": {
+    "puppeteer": "^24.43.1",
+    "puppeteer-core": "^24.43.1"
+  }
+}
