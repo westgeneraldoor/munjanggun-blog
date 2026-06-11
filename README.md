@@ -28,3 +28,4 @@ tests/               검증 스크립트
 ```
 
 상세 운영 방법은 [docs/operations/README.md](docs/operations/README.md)를 확인하세요.
+새 세션에서 콘텐츠 작성이나 리라이팅을 이어갈 때는 [docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md](docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md)를 먼저 확인하세요.

@@ -30,6 +30,8 @@
 2. **`docs/strategy/SEO_KEYWORD_RESEARCH.md`** — 3계층 키워드 전략 (허브→클러스터→롱테일) + 실데이터
 3. **`docs/strategy/CONTENT_PLAN.md`** — 월간 발행 계획 (있을 경우)
 4. **`outputs/reports/top10_analysis.md`** — ★ 상위 글 승리 공식 (제목 패턴, 최신성, 키워드별 TOP 10)
+5. **`outputs/reports/ranking_report.md`** — ★ 최신 순위 추적 결과와 하락/상승 키워드
+6. **`docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md`** — ★ 세션 독립형 신규 글/리라이팅 운영 기준
 
 ---
 
@@ -116,7 +118,9 @@
 2. docs/strategy/CONTENT_PLAN.md에서 다음 발행 대상 확인
 3. docs/strategy/SEO_KEYWORD_RESEARCH.md에서 해당 키워드의 클러스터·허브 관계 확인
 4. ★ outputs/reports/top10_analysis.md 읽기 — 상위 글의 승리 공식(제목 패턴, 길이, 최신성) 확인
-5. ★★ docs/strategy/POSTING_REGISTRY.md 읽기 — 두 가지를 확인:
+5. ★ outputs/reports/ranking_report.md 읽기 — 현재 보호 글/리라이팅 후보/신규 공략 키워드 확인
+6. ★ docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md 읽기 — 신규 글인지 리라이팅인지 운영 기준 확인
+7. ★★ docs/strategy/POSTING_REGISTRY.md 읽기 — 두 가지를 확인:
    a) 기존 발행 글 URL → 내부링크용
    b) "다룬 소재" 컬럼 → 중복 방지용
       - 기존 글이 이미 다룬 비교표/선택가이드/사례는 절대 반복 금지
@@ -124,17 +128,17 @@
       - 예: 001이 종류 비교를 했으면 → 003은 비용/견적 관점으로 작성
 
 [작성 단계]
-6. 글 유형 판별: 정보글이면 ENGINE 1~7, 시리즈물이면 ENGINE S(시리즈 템플릿) 실행
-7. 문장군 전용 규칙 적용 (톤, CTA, 제품 정확성, 제목 규칙, 해시태그 규칙)
-8. ★ 내부링크 삽입: docs/strategy/POSTING_REGISTRY.md의 기존 글 URL로 실제 링크
-9. ★★ 최종 중복 체크: docs/strategy/POSTING_REGISTRY.md의 "다룬 소재"와 겹치면 각도 변경
-10. ★★★ 해시태그 생성: 메인 키워드 3개 + 롱테일 4개 + 브랜드 2개 (+ 시리즈 태그)
+8. 글 유형 판별: 정보글이면 ENGINE 1~7, 시리즈물이면 ENGINE S(시리즈 템플릿) 실행
+9. 문장군 전용 규칙 적용 (톤, CTA, 제품 정확성, 제목 규칙, 해시태그 규칙)
+10. ★ 내부링크 삽입: docs/strategy/POSTING_REGISTRY.md의 기존 글 URL로 실제 링크
+11. ★★ 최종 중복 체크: docs/strategy/POSTING_REGISTRY.md의 "다룬 소재"와 겹치면 각도 변경
+12. ★★★ 해시태그 생성: 메인 키워드 3개 + 롱테일 4개 + 브랜드 2개 (+ 시리즈 태그)
 
 [저장 단계]
-11. 완성 글을 posts/ 폴더에 저장
-12. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트
-13. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그 추가 (다음 글을 위한 중복 방지)
-14. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
+13. 완성 글을 posts/ 폴더에 저장
+14. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트
+15. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그 추가 (다음 글을 위한 중복 방지)
+16. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
 ```
 
 ---
@@ -154,6 +158,7 @@
 5. 안 올라간 글 → 원인 분석 → 리라이팅 또는 규칙 업데이트
 6. outputs/reports/top10_analysis.md의 승리 공식이 업데이트됨
    → 다음 글 작성 시 자동 참조 → 품질 ↑
+7. 리라이팅 우선순위가 바뀌면 docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md와 docs/strategy/_context.md에 반영
 ```
 
 ### 피드백 주기
@@ -197,7 +202,7 @@
 ├── data/                   ← 원본/가공 키워드 데이터와 순위 이력
 ├── docs/
 │   ├── strategy/           ← 브랜드/SEO/발행계획/등록부/결정 로그
-│   └── operations/         ← 운영 문서
+│   └── operations/         ← 운영 문서와 콘텐츠 작업 플레이북
 ├── outputs/
 │   ├── reports/            ← 순위/TOP10 리포트
 │   └── dashboards/         ← HTML 대시보드
