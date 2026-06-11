@@ -14,16 +14,19 @@
 
 ## 핵심 문서 위치
 - 에이전트: `./AGENTS.md`
-- 브랜드: `./BRAND_CONTEXT.md` (v3.0)
-- 키워드: `./SEO_KEYWORD_RESEARCH.md` (v3.0)
-- 발행계획: `./CONTENT_PLAN.md` (v4.0)
-- 포스팅 등록: `./POSTING_REGISTRY.md`
-- 결정 로그: `./DECISION_LOG.md`
-- 진행현황: `./_context.md`
+- 브랜드: `./docs/strategy/BRAND_CONTEXT.md`
+- 키워드: `./docs/strategy/SEO_KEYWORD_RESEARCH.md`
+- 발행계획: `./docs/strategy/CONTENT_PLAN.md` (v5.1)
+- 포스팅 등록: `./docs/strategy/POSTING_REGISTRY.md`
+- 결정 로그: `./docs/strategy/DECISION_LOG.md`
+- 진행현황: `./docs/strategy/_context.md`
+- 콘텐츠 작업 플레이북: `./docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md`
+- 순위 리포트: `./outputs/reports/ranking_report.md`
+- TOP10 분석: `./outputs/reports/top10_analysis.md`
 
 ## 현재 단계
-블로그 Phase 4 진행 중 (35편 발행 완료).
-Phase 4 전략: 알고리즘 변동 대응 — 지역 시공사례 대량 확장 (하루 1편 유지 모드).
+블로그 Phase 5 + 순위 기반 리라이팅 병행 운영 중.
+2026-06-11 기준 66편 완료. 비용/가격/설치 계열은 강하고, 브랜드/3연동/슬라이딩 계열은 리라이팅 큐로 관리.
 인스타그램 프로젝트 분리 완료 (2026-05-18, DEC-019).
 
 ## 콘텐츠 규칙
@@ -40,7 +43,7 @@ Phase 4 전략: 알고리즘 변동 대응 — 지역 시공사례 대량 확장
 ```
 콘텐츠기획 → BRAND_CONTEXT + SEO_KEYWORD + CONTENT_PLAN
                          ↓
-AGENTS.md + 블로그엔진 → posts/NNN_키워드.md
+AGENTS.md + CONTENT_WORKFLOW_PLAYBOOK + 블로그엔진 → posts/NNN_키워드.md
                          ↓
 포스팅 → 순위 추적 → TOP10 분석 → 전략 고도화
 ```
