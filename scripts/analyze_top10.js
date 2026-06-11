@@ -13,31 +13,19 @@
  */
 
 const https = require('https');
-const fs = require('fs');
-const path = require('path');
 
 // ── 환경변수 로드 ────────────────────────────────────
-require('./utils/env_loader');
+require('./lib/env_loader');
+const { paths } = require('./lib/paths');
+const { readJsonFile, writeTextFile } = require('./lib/file_store');
 
 const CLIENT_ID = process.env.NAVER_CLIENT_ID;
 const CLIENT_SECRET = process.env.NAVER_CLIENT_SECRET;
-const BLOG_ID = process.env.NAVER_BLOG_ID || 'doorgeneral';
+const appConfig = readJsonFile(paths.config('app.json'), {});
+const BLOG_ID = process.env.NAVER_BLOG_ID || appConfig.defaultBlogId || 'doorgeneral';
 
 // ── 분석 대상 키워드 ────────────────────────────────
-const KEYWORDS = [
-  { keyword: '중문', hub: 'H1' },
-  { keyword: '아파트중문', hub: 'H1' },
-  { keyword: '현관중문', hub: 'H1' },
-  { keyword: '3연동중문', hub: 'H2' },
-  { keyword: '아파트 현관 중문', hub: 'H1' },
-  { keyword: '3연동 중문', hub: 'H2' },
-  { keyword: '중문스윙도어', hub: 'C2' },
-  { keyword: '현관중문인테리어', hub: 'C5' },
-  { keyword: '중문디자인', hub: 'A10' },
-  { keyword: '여닫이중문', hub: 'C4' },
-  { keyword: '모루유리중문', hub: 'A9' },
-  { keyword: 'ㄱ자중문', hub: 'A8' },
-];
+const KEYWORDS = readJsonFile(paths.config('top10_keywords.json'), []);
 
 // ── API 호출 ────────────────────────────────────────
 function searchBlog(query) {
@@ -154,6 +142,10 @@ async function main() {
     });
   });
 
+  if (patterns.total === 0) {
+    throw new Error('TOP 10 분석 결과가 비어 있어 리포트를 생성할 수 없습니다.');
+  }
+
   const avgLength = Math.round(titleLengths.reduce((a, b) => a + b, 0) / titleLengths.length);
 
   // ── 리포트 생성 ────────────────────────────────────
@@ -216,9 +208,9 @@ async function main() {
     md += `- 📌 **품질 우선** — 오래된 글도 상위에 있음. 한 번 잘 쓰면 오래 간다\n`;
   }
 
-  const reportPath = path.join(__dirname, '..', 'top10_analysis.md');
-  fs.writeFileSync(reportPath, md, 'utf-8');
-  console.log(`\n✅ 분석 리포트 저장: top10_analysis.md`);
+  const reportPath = paths.outputReport('top10_analysis.md');
+  writeTextFile(reportPath, md);
+  console.log(`\n✅ 분석 리포트 저장: ${reportPath}`);
 }
 
 main().catch(console.error);

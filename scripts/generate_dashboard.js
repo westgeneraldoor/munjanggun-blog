@@ -1,8 +1,9 @@
 const fs = require('fs');
-const path = require('path');
+const { paths } = require('./lib/paths');
+const { readJsonFile, writeTextFile } = require('./lib/file_store');
 
-const HISTORY_FILE = path.join(__dirname, '../tracking_history.json'); // 진짜 실제 데이터로 복구!
-const HTML_FILE = path.join(__dirname, '../ranking_dashboard.html');
+const HISTORY_FILE = paths.dataProcessed('tracking_history.json');
+const HTML_FILE = paths.outputDashboard('ranking_dashboard.html');
 
 function analyzeKeyword(kw, hub) {
   let tier = 'B';
@@ -36,7 +37,7 @@ function generateDashboard() {
     return;
   }
 
-  const data = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8'));
+  const data = readJsonFile(HISTORY_FILE, { version: 3, records: [] });
   const records = data.records;
   if (records.length === 0) return;
 
@@ -405,7 +406,7 @@ function generateDashboard() {
 </html>
   `;
 
-  fs.writeFileSync(HTML_FILE, htmlContent, 'utf8');
+  writeTextFile(HTML_FILE, htmlContent);
   console.log('✅ 대시보드 스크립트 업데이트 완료! (실제 데이터 반영 및 평균 라인 추가)');
 }
 

@@ -1,12 +1,13 @@
 const fs = require('fs');
 const path = require('path');
+const { ROOT_DIR } = require('./paths');
 
 /**
  * 프로젝트 루트의 .env 파일을 찾아 process.env에 주입하는 함수
  */
 function loadEnv() {
-  // 스크립트 파일 기준으로 프로젝트 루트의 .env 경로 계산 (scripts/utils/env_loader.js 기준 두 단계 상위)
-  const envPath = path.resolve(__dirname, '..', '..', '.env');
+  // 스크립트 파일 기준으로 프로젝트 루트의 .env 경로 계산
+  const envPath = path.join(ROOT_DIR, '.env');
 
   if (fs.existsSync(envPath)) {
     try {

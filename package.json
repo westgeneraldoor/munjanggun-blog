@@ -1,7 +1,17 @@
 {
   "name": "munjanggun-blog",
   "version": "1.0.0",
-  "description": "문장군 블로그 SEO 자동화",
+  "description": "문장군 블로그 SEO 콘텐츠 운영 파이프라인",
+  "scripts": {
+    "check": "node --check scripts/track_ranking.js && node --check scripts/analyze_top10.js && node --check scripts/fetch_keyword_data.js && node --check scripts/fetch_keyword_data_product.js && node --check scripts/generate_dashboard.js && node --check scripts/generate_mock_history.js && node --check tests/validate_project_structure.js",
+    "validate": "npm run check && node tests/validate_project_structure.js",
+    "track": "node scripts/track_ranking.js",
+    "analyze": "node scripts/analyze_top10.js",
+    "keywords:regional": "node scripts/fetch_keyword_data.js",
+    "keywords:product": "node scripts/fetch_keyword_data_product.js",
+    "dashboard": "node scripts/generate_dashboard.js",
+    "mock-history": "node scripts/generate_mock_history.js"
+  },
   "dependencies": {
     "puppeteer": "^24.43.1",
     "puppeteer-core": "^24.43.1"
