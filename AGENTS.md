@@ -26,10 +26,10 @@
 
 글을 작성하기 전에 **반드시** 아래 파일들을 읽는다:
 
-1. **`BRAND_CONTEXT.md`** — 회사 정보, 제품, 타겟, 톤, 차별점
-2. **`SEO_KEYWORD_RESEARCH.md`** — 3계층 키워드 전략 (허브→클러스터→롱테일) + 실데이터
-3. **`CONTENT_PLAN.md`** — 월간 발행 계획 (있을 경우)
-4. **`top10_analysis.md`** — ★ 상위 글 승리 공식 (제목 패턴, 최신성, 키워드별 TOP 10)
+1. **`docs/strategy/BRAND_CONTEXT.md`** — 회사 정보, 제품, 타겟, 톤, 차별점
+2. **`docs/strategy/SEO_KEYWORD_RESEARCH.md`** — 3계층 키워드 전략 (허브→클러스터→롱테일) + 실데이터
+3. **`docs/strategy/CONTENT_PLAN.md`** — 월간 발행 계획 (있을 경우)
+4. **`outputs/reports/top10_analysis.md`** — ★ 상위 글 승리 공식 (제목 패턴, 최신성, 키워드별 TOP 10)
 
 ---
 
@@ -112,11 +112,11 @@
 
 ```
 [분석 단계]
-1. BRAND_CONTEXT.md 읽기
-2. CONTENT_PLAN.md에서 다음 발행 대상 확인
-3. SEO_KEYWORD_RESEARCH.md에서 해당 키워드의 클러스터·허브 관계 확인
-4. ★ top10_analysis.md 읽기 — 상위 글의 승리 공식(제목 패턴, 길이, 최신성) 확인
-5. ★★ POSTING_REGISTRY.md 읽기 — 두 가지를 확인:
+1. docs/strategy/BRAND_CONTEXT.md 읽기
+2. docs/strategy/CONTENT_PLAN.md에서 다음 발행 대상 확인
+3. docs/strategy/SEO_KEYWORD_RESEARCH.md에서 해당 키워드의 클러스터·허브 관계 확인
+4. ★ outputs/reports/top10_analysis.md 읽기 — 상위 글의 승리 공식(제목 패턴, 길이, 최신성) 확인
+5. ★★ docs/strategy/POSTING_REGISTRY.md 읽기 — 두 가지를 확인:
    a) 기존 발행 글 URL → 내부링크용
    b) "다룬 소재" 컬럼 → 중복 방지용
       - 기존 글이 이미 다룬 비교표/선택가이드/사례는 절대 반복 금지
@@ -126,15 +126,15 @@
 [작성 단계]
 6. 글 유형 판별: 정보글이면 ENGINE 1~7, 시리즈물이면 ENGINE S(시리즈 템플릿) 실행
 7. 문장군 전용 규칙 적용 (톤, CTA, 제품 정확성, 제목 규칙, 해시태그 규칙)
-8. ★ 내부링크 삽입: POSTING_REGISTRY의 기존 글 URL로 실제 링크
-9. ★★ 최종 중복 체크: POSTING_REGISTRY의 "다룬 소재"와 겹치면 각도 변경
+8. ★ 내부링크 삽입: docs/strategy/POSTING_REGISTRY.md의 기존 글 URL로 실제 링크
+9. ★★ 최종 중복 체크: docs/strategy/POSTING_REGISTRY.md의 "다룬 소재"와 겹치면 각도 변경
 10. ★★★ 해시태그 생성: 메인 키워드 3개 + 롱테일 4개 + 브랜드 2개 (+ 시리즈 태그)
 
 [저장 단계]
 11. 완성 글을 posts/ 폴더에 저장
-12. CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트
-13. ★★★ POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그 추가 (다음 글을 위한 중복 방지)
-14. 사용자에게 안내: "포스팅 후 URL을 POSTING_REGISTRY.md에 등록하세요"
+12. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트
+13. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그 추가 (다음 글을 위한 중복 방지)
+14. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
 ```
 
 ---
@@ -145,21 +145,21 @@
 
 ```
 [포스팅 완료 후]
-1. POSTING_REGISTRY.md에 URL 등록 (사용자)
-2. 1주일 후 순위 추적: node scripts/track_ranking.js
-3. TOP 10 분석 재실행: node scripts/analyze_top10.js
+1. docs/strategy/POSTING_REGISTRY.md에 URL 등록 (사용자)
+2. 1주일 후 순위 추적: npm run track
+3. TOP 10 분석 재실행: npm run analyze
 
 [피드백]
 4. 올라간 글 → 성공 패턴 기록 (어떤 제목/구조가 먹혔는지)
 5. 안 올라간 글 → 원인 분석 → 리라이팅 또는 규칙 업데이트
-6. top10_analysis.md의 승리 공식이 업데이트됨
+6. outputs/reports/top10_analysis.md의 승리 공식이 업데이트됨
    → 다음 글 작성 시 자동 참조 → 품질 ↑
 ```
 
 ### 피드백 주기
-- **매일:** 순위 추적 (track_ranking.js)
-- **매주:** TOP 10 분석 (analyze_top10.js) + 제목 규칙 검토
-- **매월:** CONTENT_PLAN 재검토 + 키워드 전략 조정
+- **매일:** 순위 추적 (`npm run track`)
+- **매주:** TOP 10 분석 (`npm run analyze`) + 제목 규칙 검토
+- **매월:** docs/strategy/CONTENT_PLAN.md 재검토 + 키워드 전략 조정
 
 ---
 
@@ -193,22 +193,18 @@
 ```
 문장군블로그/
 ├── AGENTS.md               ★ 이 파일 (프로젝트 에이전트)
-├── BRAND_CONTEXT.md        ← 브랜드 정보 v3.0 (사장 인터뷰 기반)
-├── SEO_KEYWORD_RESEARCH.md ← 키워드 리서치 v3.0 (실데이터 기반)
-├── CONTENT_PLAN.md         ← 블로그 발행 계획 v4.0
-├── POSTING_REGISTRY.md     ← 블로그 포스팅 URL 등록부
-├── DECISION_LOG.md         ← 장기 결정 로그
-├── PHASE4_ANALYSIS_20260518.md ← Phase 4 전환 근거 분석
+├── config/                 ← 실행 설정과 키워드/시드 목록
+├── data/                   ← 원본/가공 키워드 데이터와 순위 이력
+├── docs/
+│   ├── strategy/           ← 브랜드/SEO/발행계획/등록부/결정 로그
+│   └── operations/         ← 운영 문서
+├── outputs/
+│   ├── reports/            ← 순위/TOP10 리포트
+│   └── dashboards/         ← HTML 대시보드
 ├── GEMINI.md               ← 프로젝트 신분증
-├── _context.md             ← 현재 작업 상태
-├── top10_analysis.md       ← TOP 10 분석 리포트
-├── keyword_data.json/md    ← 전체 키워드 데이터
-├── keyword_data_지역.json/md ← 지역 키워드 데이터
-├── ranking_report.md       ← 순위 추적 최신 리포트
-├── ranking_dashboard.html  ← 순위 대시보드
-├── tracking_history.json   ← 순위 추적 이력
 ├── scripts/
 │   ├── fetch_keyword_data.js   ← 키워드 발굴
+│   ├── fetch_keyword_data_product.js ← 제품/서비스 키워드 발굴
 │   ├── track_ranking.js        ← 순위 추적
 │   ├── analyze_top10.js        ← TOP 10 분석
 │   ├── generate_dashboard.js   ← 순위 대시보드 생성

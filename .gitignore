@@ -6,6 +6,11 @@ node_modules/
 
 # Mock test data
 tracking_history_mock.json
+data/processed/tracking_history_mock.json
+
+# Generated safety backups
+*.bak
+*.tmp
 
 # Operating System files
 .DS_Store
