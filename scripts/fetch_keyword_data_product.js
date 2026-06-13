@@ -1,9 +1,10 @@
 /**
- * 네이버 검색광고 API - 키워드 발굴 + 검색량 조회
+ * 네이버 검색광고 API - 제품/서비스 핵심 키워드 발굴
  * 
- * ★ 핵심: 대형 시드 키워드를 넣으면 → 연관 키워드를 자동 발굴 + 검색량 정렬
+ * ★ 기존 fetch_keyword_data.js(지역 시드)와 별도로,
+ *   제품·서비스·고객고민 중심 시드로 새 키워드를 발굴한다.
  * 
- * 실행: node scripts/fetch_keyword_data.js
+ * 실행: node scripts/fetch_keyword_data_product.js
  */
 
 // 환경변수 로드
@@ -22,8 +23,9 @@ const CUSTOMER_ID = process.env.NAVER_AD_CUSTOMER_ID;
 const BASE_URL = 'api.searchad.naver.com';
 const KEYWORD_TOOL_PATH = '/keywordstool';
 
-// ── 대형 시드 키워드 (여기서 연관 키워드를 뽑아냄) ────────
-const SEED_KEYWORDS = readJsonFile(paths.config('regional_seed_keywords.json'), []);
+// ── 제품/서비스 핵심 시드 키워드 ────────────────────────
+// 기존 keyword_data.json (2026-05-07)의 15개 시드 + 추가 확장 시드
+const SEED_KEYWORDS = readJsonFile(paths.config('product_seed_keywords.json'), []);
 
 // ── HMAC 서명 생성 ──────────────────────────────────
 function generateSignature(timestamp, method, uri) {
@@ -39,7 +41,6 @@ function fetchKeywordData(seedKeyword) {
     const method = 'GET';
     const signature = generateSignature(timestamp, method, KEYWORD_TOOL_PATH);
 
-    // 공백 제거
     const hint = seedKeyword.replace(/\s+/g, '');
     const queryParams = new URLSearchParams({
       hintKeywords: hint,
@@ -90,7 +91,7 @@ function fetchKeywordData(seedKeyword) {
 
 // ── 전체 시드 키워드 순회 ────────────────────────────
 async function discoverAllKeywords() {
-  const allResults = new Map(); // 중복 제거용
+  const allResults = new Map();
 
   for (let i = 0; i < SEED_KEYWORDS.length; i++) {
     const seed = SEED_KEYWORDS[i];
@@ -123,17 +124,33 @@ async function discoverAllKeywords() {
 function parseVolume(val) {
   if (typeof val === 'number') return val;
   if (typeof val === 'string') {
-    if (val.includes('<')) return 5; // "< 10" → 5로 추정
+    if (val.includes('<')) return 5;
     return parseInt(val, 10) || 0;
   }
   return 0;
+}
+
+// ── 문장군 관련 키워드 필터링 ─────────────────────────
+function isRelevantKeyword(keyword) {
+  const relevantTerms = [
+    '중문', '도어', '방문', '문짝', '문틀', '문선', '화장실문', '욕실문',
+    '슬라이딩', '스윙', '원슬라이딩', '미닫이', '여닫이', '폴딩',
+    '3연동', '4연동', '자동중문', '간살', 'ABS', '멤브레인',
+    '현관', '인테리어문', '도어교체', '문교체',
+    '걸레받이', '몰딩', '천장몰딩', '천정몰딩',
+    '리모델링', '시공', '셀프', '견적', '실측',
+    '타일', '습기', '분진', '소음',
+    '영림', '문장군', '모루유리', '유리',
+  ];
+  
+  const kw = keyword.toLowerCase();
+  return relevantTerms.some(term => kw.includes(term.toLowerCase()));
 }
 
 // ── 결과 포맷팅 ─────────────────────────────────────
 function formatResults(results) {
   const today = new Date().toISOString().split('T')[0];
 
-  // 검색량 합계 계산 + 정렬
   const enriched = results.map(item => {
     const pc = parseVolume(item.monthlyPcQcCnt);
     const mobile = parseVolume(item.monthlyMobileQcCnt);
@@ -143,62 +160,67 @@ function formatResults(results) {
       mobileRaw: item.monthlyMobileQcCnt,
       pc: pc,
       mobile: mobile,
-      pcNum: pc,
-      mobileNum: mobile,
       total: pc + mobile,
       competition: item.compIdx || '-',
     };
   });
 
-  // 검색량 합계 내림차순 정렬
   enriched.sort((a, b) => b.total - a.total);
 
-  // 마크다운 생성
-  let md = `# 문장군 키워드 발굴 결과 (네이버 API)\n\n`;
+  // 문장군 관련 키워드만 필터링
+  const relevant = enriched.filter(item => isRelevantKeyword(item.keyword));
+
+  let md = `# 문장군 제품/서비스 키워드 발굴 결과 (네이버 API)\n\n`;
   md += `> 조회일: ${today}\n`;
   md += `> 시드 키워드: ${SEED_KEYWORDS.join(', ')}\n`;
-  md += `> 총 발굴: ${enriched.length}개 (중복 제거 후)\n\n`;
+  md += `> 총 발굴: ${enriched.length}개 (중복 제거 후)\n`;
+  md += `> 문장군 관련 필터링: ${relevant.length}개\n\n`;
 
-  // TOP 50만 표시
-  const top = enriched.slice(0, 50);
-  md += `## TOP 50 키워드 (검색량 순)\n\n`;
-  md += `| 순위 | 키워드 | PC | 모바일 | 합계(추정) | 경쟁도 |\n`;
-  md += `|------|--------|-----|--------|-----------|--------|\n`;
+  // 관련 키워드 전체 표 (검색량 100 이상만)
+  const filtered100 = relevant.filter(item => item.total >= 100);
+  md += `## 문장군 관련 키워드 (검색량 100 이상, ${filtered100.length}개)\n\n`;
+  md += `| 순위 | 키워드 | PC | 모바일 | 합계 | 경쟁도 |\n`;
+  md += `|------|--------|-----|--------|------|--------|\n`;
 
-  top.forEach((item, i) => {
+  filtered100.forEach((item, i) => {
     md += `| ${i + 1} | ${item.keyword} | ${item.pc} | ${item.mobile} | ${item.total} | ${item.competition} |\n`;
   });
 
-  // 50~100위도 별도 표
-  if (enriched.length > 50) {
-    const next50 = enriched.slice(50, 100);
-    md += `\n## 51~100위 키워드\n\n`;
-    md += `| 순위 | 키워드 | PC | 모바일 | 합계(추정) | 경쟁도 |\n`;
-    md += `|------|--------|-----|--------|-----------|--------|\n`;
-    next50.forEach((item, i) => {
-      md += `| ${i + 51} | ${item.keyword} | ${item.pc} | ${item.mobile} | ${item.total} | ${item.competition} |\n`;
+  // 검색량 30~99 구간도 별도 표시 (틈새 키워드)
+  const filtered30 = relevant.filter(item => item.total >= 30 && item.total < 100);
+  if (filtered30.length > 0) {
+    md += `\n## 틈새 키워드 (검색량 30~99, ${filtered30.length}개)\n\n`;
+    md += `| 순위 | 키워드 | PC | 모바일 | 합계 | 경쟁도 |\n`;
+    md += `|------|--------|-----|--------|------|--------|\n`;
+    filtered30.forEach((item, i) => {
+      md += `| ${i + 1} | ${item.keyword} | ${item.pc} | ${item.mobile} | ${item.total} | ${item.competition} |\n`;
     });
   }
 
-  // 전체 데이터
-  md += `\n## 전체 키워드 수: ${enriched.length}개\n`;
+  // 전체 원본 TOP 100도 별도 포함 (레퍼런스)
+  md += `\n## 전체 원본 TOP 100 (필터 없음, 레퍼런스용)\n\n`;
+  md += `| 순위 | 키워드 | PC | 모바일 | 합계 | 경쟁도 |\n`;
+  md += `|------|--------|-----|--------|------|--------|\n`;
+  enriched.slice(0, 100).forEach((item, i) => {
+    md += `| ${i + 1} | ${item.keyword} | ${item.pc} | ${item.mobile} | ${item.total} | ${item.competition} |\n`;
+  });
 
-  return { markdown: md, data: enriched };
+  md += `\n## 전체 키워드 수: ${enriched.length}개 (관련: ${relevant.length}개)\n`;
+
+  return { markdown: md, data: enriched, relevant: relevant };
 }
 
 // ── 메인 실행 ───────────────────────────────────────
 async function main() {
   if (!API_KEY || !SECRET_KEY || !CUSTOMER_ID) {
     console.error(`
-❌ API 인증 정보 없음. 환경변수를 설정하세요:
-  $env:NAVER_AD_API_KEY="..."
-  $env:NAVER_AD_SECRET_KEY="..."
-  $env:NAVER_AD_CUSTOMER_ID="..."
+❌ API 인증 정보 없음. .env 파일 또는 환경변수를 확인하세요.
     `);
     process.exit(1);
   }
 
-  console.log('🔍 대형 시드 키워드에서 연관 키워드 발굴 시작...\n');
+  console.log('🔍 제품/서비스 핵심 시드 키워드에서 연관 키워드 발굴 시작...\n');
+  console.log(`📋 시드 키워드 ${SEED_KEYWORDS.length}개: ${SEED_KEYWORDS.join(', ')}\n`);
 
   const results = await discoverAllKeywords();
 
@@ -207,25 +229,29 @@ async function main() {
     return;
   }
 
-  const { markdown, data } = formatResults(results);
+  const { markdown, data, relevant } = formatResults(results);
 
-  // 콘솔 출력 (TOP 30만)
-  console.log('\n=== TOP 30 키워드 (검색량 순) ===\n');
-  data.slice(0, 30).forEach((item, i) => {
+  // 콘솔 출력 (관련 키워드 TOP 30)
+  console.log('\n=== 문장군 관련 키워드 TOP 30 (검색량 순) ===\n');
+  relevant.slice(0, 30).forEach((item, i) => {
     console.log(`  ${String(i + 1).padStart(2)}. ${item.keyword.padEnd(20)} | PC: ${String(item.pc).padStart(6)} | 모바일: ${String(item.mobile).padStart(6)} | 합계: ${String(item.total).padStart(6)} | 경쟁: ${item.competition}`);
   });
 
   // 저장
-  const jsonPath = paths.dataRaw('keyword_data_지역.json');
+  const jsonPath = paths.dataRaw('keyword_data_product.json');
   writeJsonFile(jsonPath, data);
-  console.log(`\n✅ JSON 저장: ${jsonPath}`);
+  console.log(`\n✅ JSON 저장 (전체): ${jsonPath}`);
 
-  const mdPath = paths.dataRaw('keyword_data_지역.md');
+  const relevantJsonPath = paths.dataProcessed('keyword_data_product_relevant.json');
+  writeJsonFile(relevantJsonPath, relevant);
+  console.log(`✅ JSON 저장 (관련만): ${relevantJsonPath}`);
+
+  const mdPath = paths.dataRaw('keyword_data_product.md');
   writeTextFile(mdPath, markdown);
   console.log(`✅ 마크다운 저장: ${mdPath}`);
 
-  console.log(`\n📊 총 ${data.length}개 키워드 발굴 완료!`);
-  console.log('👉 이 결과를 기반으로 docs/strategy/SEO_KEYWORD_RESEARCH.md와 docs/strategy/CONTENT_PLAN.md를 재수립합니다.');
+  console.log(`\n📊 총 ${data.length}개 발굴 → 문장군 관련 ${relevant.length}개 필터링 완료!`);
+  console.log('👉 이 결과를 기반으로 CONTENT_PLAN Phase 5를 수립합니다.');
 }
 
 main().catch(console.error);

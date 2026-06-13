@@ -1,7 +1,7 @@
 # Phase 4 전략 분석 리포트
 
 > 분석일: 2026-05-18
-> 데이터 소스: ranking_report.md, top10_analysis.md, keyword_data_지역_30이상.md
+> 데이터 소스: outputs/reports/ranking_report.md, outputs/reports/top10_analysis.md, data/processed/keyword_data_지역_30이상.md
 > 용도: CONTENT_PLAN.md Phase 4 수립 근거 + 총괄매니저 인계용
 
 ---
@@ -89,7 +89,7 @@ ABS도어 (2위)               ↔  원슬라이딩중문 (TOP 25 밖)
 
 ## 3. 지역 키워드 실데이터
 
-> 출처: keyword_data_지역_30이상.md (2026-05-18 네이버 검색광고 API 조회)
+> 출처: data/processed/keyword_data_지역_30이상.md (2026-05-18 네이버 검색광고 API 조회)
 
 ### 지역별 "중문" 검색량 랭킹
 
