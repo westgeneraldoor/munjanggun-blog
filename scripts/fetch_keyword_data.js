@@ -7,12 +7,12 @@
  */
 
 // 환경변수 로드
-require('./utils/env_loader');
+require('./lib/env_loader');
 
 const crypto = require('crypto');
 const https = require('https');
-const fs = require('fs');
-const path = require('path');
+const { paths } = require('./lib/paths');
+const { readJsonFile, writeJsonFile, writeTextFile } = require('./lib/file_store');
 
 // ── 설정 ──────────────────────────────────────────
 const API_KEY = process.env.NAVER_AD_API_KEY;
@@ -23,13 +23,7 @@ const BASE_URL = 'api.searchad.naver.com';
 const KEYWORD_TOOL_PATH = '/keywordstool';
 
 // ── 대형 시드 키워드 (여기서 연관 키워드를 뽑아냄) ────────
-const SEED_KEYWORDS = [
-  '서울중문', '수원중문', '대전중문', '청주중문', '세종중문',
-  '성남중문', '분당중문', '평택중문', '인천중문', '화성중문',
-  '용인중문', '안양중문', '안산중문', '남양주중문',
-  '수원방문교체', '서울방문교체', '대전방문교체',
-  '천안방문교체', '인천방문교체',
-];
+const SEED_KEYWORDS = readJsonFile(paths.config('regional_seed_keywords.json'), []);
 
 // ── HMAC 서명 생성 ──────────────────────────────────
 function generateSignature(timestamp, method, uri) {
@@ -222,16 +216,16 @@ async function main() {
   });
 
   // 저장
-  const jsonPath = path.join(__dirname, '..', 'keyword_data_지역.json');
-  fs.writeFileSync(jsonPath, JSON.stringify(data, null, 2), 'utf-8');
+  const jsonPath = paths.dataRaw('keyword_data_지역.json');
+  writeJsonFile(jsonPath, data);
   console.log(`\n✅ JSON 저장: ${jsonPath}`);
 
-  const mdPath = path.join(__dirname, '..', 'keyword_data_지역.md');
-  fs.writeFileSync(mdPath, markdown, 'utf-8');
+  const mdPath = paths.dataRaw('keyword_data_지역.md');
+  writeTextFile(mdPath, markdown);
   console.log(`✅ 마크다운 저장: ${mdPath}`);
 
   console.log(`\n📊 총 ${data.length}개 키워드 발굴 완료!`);
-  console.log('👉 이 결과를 기반으로 SEO_KEYWORD_RESEARCH.md와 CONTENT_PLAN.md를 재수립합니다.');
+  console.log('👉 이 결과를 기반으로 docs/strategy/SEO_KEYWORD_RESEARCH.md와 docs/strategy/CONTENT_PLAN.md를 재수립합니다.');
 }
 
 main().catch(console.error);

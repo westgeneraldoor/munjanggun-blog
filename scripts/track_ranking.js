@@ -8,11 +8,13 @@
  */
 
 // 환경변수 로드
-require('./utils/env_loader');
+require('./lib/env_loader');
 
 const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const path = require('path');
+const { paths } = require('./lib/paths');
+const { readJsonFile, writeJsonFile, writeTextFile } = require('./lib/file_store');
 
 // 플랫폼별 기본 크롬 실행 파일 경로 자동 탐색 함수
 function getPlatformDefaultChromePath() {
@@ -45,82 +47,13 @@ function getPlatformDefaultChromePath() {
   return 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 }
 
-const BLOG_ID = process.env.NAVER_BLOG_ID || 'doorgeneral';
+const appConfig = readJsonFile(paths.config('app.json'), {});
+const BLOG_ID = process.env.NAVER_BLOG_ID || appConfig.defaultBlogId || 'doorgeneral';
 const CHROME_PATH = process.env.CHROME_PATH || getPlatformDefaultChromePath();
-const DELAY_MS = 2000;
+const DELAY_MS = Number(process.env.TRACKING_DELAY_MS || appConfig.trackingDelayMs || 2000);
 
 // ── 추적 대상 키워드 (POSTING_REGISTRY 전체 — 중복제거 53개) ──────
-const TRACKING_KEYWORDS = [
-  // ── 허브 H1: 중문 (001) ──
-  { keyword: '아파트중문', hub: 'H1' },
-  { keyword: '현관중문', hub: 'H1/H3' },
-  { keyword: '아파트 현관 중문', hub: 'H1/H3' },
-  { keyword: '중문 설치', hub: 'H1' },
-  { keyword: '아파트 중문 설치', hub: 'H1' },
-  // ── 허브 H2: 3연동중문 (002) ──
-  { keyword: '3연동중문', hub: 'H2' },
-  { keyword: '3연동 중문 설치', hub: 'H2' },
-  { keyword: '3연동중문 설치 비용', hub: 'H2' },
-  { keyword: '초슬림 3연동중문', hub: 'H2' },
-  // ── 허브 H3: 현관중문 (003) ──
-  { keyword: '현관 중문 종류', hub: 'H3' },
-  { keyword: '좁은 현관 중문', hub: 'H3' },
-  // ── 허브 H4: 방문교체 (004) ──
-  { keyword: '방문교체', hub: 'H4' },
-  { keyword: '아파트 방문 교체', hub: 'H4' },
-  { keyword: '살면서 방문교체', hub: 'H4' },
-  // ── 허브 H5: ABS도어 (005) ──
-  { keyword: 'ABS도어', hub: 'H5' },
-  { keyword: 'ABS도어 방문 교체', hub: 'H5' },
-  { keyword: '멤브레인 도어', hub: 'H5' },
-  { keyword: '타공도어', hub: 'H5/022' },
-  // ── 006: 아파트중문 (거주중시공) ──
-  { keyword: '거주중시공', hub: '006' },
-  { keyword: '아파트 현관 중문 설치', hub: '006' },
-  { keyword: '살면서 중문', hub: '006' },
-  // ── 007: 화장실문교체 ──
-  { keyword: '화장실문교체', hub: '007' },
-  { keyword: '화장실문', hub: '007/013' },
-  { keyword: '문틀교체', hub: '007' },
-  // ── 010: 문짝교체비용 ──
-  { keyword: '문짝교체비용', hub: '010' },
-  { keyword: '방문교체비용', hub: '010' },
-  // ── 011: 문장군중문 (브랜드) ──
-  { keyword: '문장군중문', hub: '011' },
-  { keyword: '문장군', hub: '011' },
-  { keyword: '중문시공업체', hub: '011' },
-  { keyword: '방문실측', hub: '011' },
-  // ── 012: 원슬라이딩중문 ──
-  { keyword: '원슬라이딩중문', hub: '012' },
-  { keyword: '슬라이딩도어', hub: '012' },
-  // ── 014: 중문가격 ──
-  { keyword: '중문가격', hub: '014' },
-  { keyword: '중문설치비용', hub: '014/018' },
-  // ── 015: 셀프중문 ──
-  { keyword: '셀프중문', hub: '015' },
-  { keyword: '중문셀프시공', hub: '015' },
-  // ── 016: 초슬림3연동중문 ──
-  { keyword: '초슬림3연동중문', hub: '016' },
-  { keyword: '아파트현관중문', hub: '016/020' },
-  { keyword: '좁은현관중문', hub: '016/020/021' },
-  // ── 017: 문짝교체 ──
-  { keyword: '문짝교체', hub: '017' },
-  { keyword: '도어교체', hub: '017' },
-  // ── 018: 아파트중문설치비용 ──
-  { keyword: '아파트중문설치비용', hub: '018' },
-  // ── 019: 아파트중문가격 ──
-  { keyword: '아파트중문가격', hub: '019' },
-  { keyword: '중문견적', hub: '019' },
-  { keyword: '3연동중문가격', hub: '019' },
-  { keyword: '현관중문비용', hub: '019' },
-  // ── 020: 좁은현관중문 ──
-  { keyword: '천안중문', hub: '020' },
-  // ── 021: 스윙도어 ──
-  { keyword: '스윙도어', hub: '021' },
-  { keyword: '스윙도어중문', hub: '021' },
-  // ── 022: 욕실문교체 ──
-  { keyword: '욕실문교체', hub: '022' },
-];
+const TRACKING_KEYWORDS = readJsonFile(paths.config('tracking_keywords.json'), []);
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -174,14 +107,13 @@ async function findRanking(page, keyword) {
 }
 
 // ── 이력 & 리포트 ──────────────────────────────────────
-const HISTORY_PATH = path.join(__dirname, '..', 'tracking_history.json');
+const HISTORY_PATH = paths.dataProcessed('tracking_history.json');
 
 function loadHistory() {
-  if (fs.existsSync(HISTORY_PATH)) {
-    const data = JSON.parse(fs.readFileSync(HISTORY_PATH, 'utf-8'));
-    if (data.version === 3) return data;
-  }
-  return { version: 3, records: [] };
+  const version = appConfig.rankingHistoryVersion || 3;
+  const data = readJsonFile(HISTORY_PATH, { version, records: [] });
+  if (data.version === version && Array.isArray(data.records)) return data;
+  return { version, records: [] };
 }
 
 function generateReport(results, today, history) {
@@ -228,8 +160,9 @@ function generateReport(results, today, history) {
     });
   }
 
-  fs.writeFileSync(path.join(__dirname, '..', 'ranking_report.md'), md, 'utf-8');
-  console.log(`\n✅ 리포트 저장: ranking_report.md`);
+  const reportPath = paths.outputReport('ranking_report.md');
+  writeTextFile(reportPath, md);
+  console.log(`\n✅ 리포트 저장: ${reportPath}`);
 }
 
 // ── 메인 ────────────────────────────────────────────
@@ -296,7 +229,7 @@ async function main() {
   console.log('─'.repeat(70));
 
   history.records.push({ date: today, timestamp: new Date().toISOString(), rankings: results });
-  fs.writeFileSync(HISTORY_PATH, JSON.stringify(history, null, 2), 'utf-8');
+  writeJsonFile(HISTORY_PATH, history);
   console.log(`✅ 이력 저장: tracking_history.json (v3, ${history.records.length}회 누적)`);
 
   generateReport(results, today, history);
