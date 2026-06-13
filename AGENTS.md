@@ -135,10 +135,13 @@
 12. ★★★ 해시태그 생성: 메인 키워드 3개 + 롱테일 4개 + 브랜드 2개 (+ 시리즈 태그)
 
 [저장 단계]
-13. 완성 글을 posts/ 폴더에 저장
-14. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트
-15. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그 추가 (다음 글을 위한 중복 방지)
-16. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
+13. 발행 본문만 posts/ 폴더에 저장
+14. 제목 후보, 검색 의도, 품질 채점, 예상 성능, 이미지 지시는 outputs/drafts/ 폴더에 제작 노트로 분리 저장
+15. `npm run validate:posts`로 발행 전 자동 검수 실행
+16. 검수 결과를 outputs/checks/ 폴더에 저장
+17. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트 (원고완료 기준)
+18. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그와 상태 추가 (다음 글을 위한 중복 방지)
+19. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
 ```
 
 ---
@@ -173,8 +176,13 @@
 - 정보글: `posts/NNN_키워드.md` (NNN = 순번)
 - 시리즈물: `posts/NNN_시리즈_주제_EPN.md` (예: 008_시리즈_화장실문전체교체_EP1.md)
 - 리라이팅 발행본: `posts/NNN_키워드_리라이팅.md`
+- 제작 노트: `outputs/drafts/NNN_키워드_note.md`
+- 검수 결과: `outputs/checks/NNN_키워드_check.md`
 - 기존 글 번호 확인 후 다음 번호 부여
 - 파일명의 키워드는 언더스코어로 연결
+- `posts/` 파일은 네이버에 붙여넣을 발행 본문만 저장한다
+- 제목 후보, 검색 의도, 품질 채점, 예상 성능, 이미지 지시는 `posts/`에 남기지 않는다
+- `posts/` 파일이 `# 제목 후보`로 시작하면 발행 불가로 본다
 - **리라이팅 시 기존 파일 덮어쓰기 금지**
 - 기존 글은 원본 자산으로 보존하고, 새 번호의 리라이팅 발행본을 만든다
 - `POSTING_REGISTRY.md`에는 새 행으로 등록하고, "다룬 소재"에 원본 파일 번호를 남긴다
