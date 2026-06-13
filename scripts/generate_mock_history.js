@@ -1,11 +1,11 @@
-const fs = require('fs');
-const path = require('path');
+const { paths } = require('./lib/paths');
+const { readJsonFile, writeJsonFile } = require('./lib/file_store');
 
-const REAL_HISTORY = path.join(__dirname, '../tracking_history.json');
-const MOCK_HISTORY = path.join(__dirname, '../tracking_history_mock.json');
+const REAL_HISTORY = paths.dataProcessed('tracking_history.json');
+const MOCK_HISTORY = paths.dataProcessed('tracking_history_mock.json');
 
 function generateMock() {
-  const data = JSON.parse(fs.readFileSync(REAL_HISTORY, 'utf8'));
+  const data = readJsonFile(REAL_HISTORY, { version: 3, records: [] });
   const latestRecord = data.records[data.records.length - 1]; // 50개 꽉 찬 최신 데이터
   
   const mockRecords = [];
@@ -44,7 +44,7 @@ function generateMock() {
   }
 
   const mockData = { version: 3, records: mockRecords };
-  fs.writeFileSync(MOCK_HISTORY, JSON.stringify(mockData, null, 2), 'utf8');
+  writeJsonFile(MOCK_HISTORY, mockData);
   console.log('✅ 가상 데이터(7일치) 생성 완료: ' + MOCK_HISTORY);
 }
 

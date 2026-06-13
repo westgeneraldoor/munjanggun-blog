@@ -1,0 +1,41 @@
+name: 문장군 블로그 콘텐츠 브리프
+description: 신규 글 또는 리라이팅 작업 브리프
+title: "[콘텐츠] "
+labels:
+  - content
+body:
+  - type: input
+    id: keyword
+    attributes:
+      label: 타겟 키워드
+      description: 예) 화장실문틀교체
+    validations:
+      required: true
+  - type: dropdown
+    id: work_type
+    attributes:
+      label: 작업 유형
+      options:
+        - 신규 글
+        - 리라이팅
+        - URL 등록
+        - 성과 분석
+    validations:
+      required: true
+  - type: textarea
+    id: intent
+    attributes:
+      label: 검색 의도와 고객 고민
+      description: 고객이 왜 이 키워드를 검색하는지 적어주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: links
+    attributes:
+      label: 내부링크 후보
+      description: 연결할 기존 글 번호나 URL을 적어주세요.
+  - type: textarea
+    id: constraints
+    attributes:
+      label: 주의사항
+      description: 제품명, 지역, 금지 표현, 꼭 넣을 CTA 등을 적어주세요.
