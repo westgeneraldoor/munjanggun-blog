@@ -54,12 +54,14 @@ function parseArgs(argv) {
     strict: false,
     all: false,
     from: DEFAULT_FROM_NUMBER,
+    writeReports: true,
     files: [],
   };
 
   argv.forEach((arg) => {
     if (arg === '--strict') options.strict = true;
     else if (arg === '--all') options.all = true;
+    else if (arg === '--no-write-report') options.writeReports = false;
     else if (arg.startsWith('--from=')) options.from = Number(arg.slice('--from='.length));
     else options.files.push(arg);
   });
@@ -290,7 +292,9 @@ function main() {
     console.log(`\n[WARN] ${patternWarning}`);
   }
 
-  writeCheckReports(results, patternWarning);
+  if (options.writeReports) {
+    writeCheckReports(results, patternWarning);
+  }
 
   console.log(`\n검수 결과: fail ${failCount}개, warn ${warnCount}개`);
 

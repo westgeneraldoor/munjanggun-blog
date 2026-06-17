@@ -19,6 +19,8 @@
 - "캘린더 업데이트" → 콘텐츠기획 스킬 UPDATE 모드
 - "순위 체크해줘" → scripts/track_ranking.js 실행
 - "분석해줘" → scripts/analyze_top10.js 실행
+- "일일 SEO 관제" / "유입경로 보내줄게" / "검색어 봐줘" → `docs/operations/DAILY_SEO_ROUTINE.md` 기준으로 일일 관제 기록 작성
+- "발행 전 검수" / "발행 게이트" / "포스팅 발행해도 돼?" → `scripts/blog_quality_gate.js` 실행. FAIL이면 네이버 발행 금지.
 
 ---
 
@@ -32,6 +34,9 @@
 4. **`outputs/reports/top10_analysis.md`** — ★ 상위 글 승리 공식 (제목 패턴, 최신성, 키워드별 TOP 10)
 5. **`outputs/reports/ranking_report.md`** — ★ 최신 순위 추적 결과와 하락/상승 키워드
 6. **`docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md`** — ★ 세션 독립형 신규 글/리라이팅 운영 기준
+7. **`docs/operations/DAILY_SEO_ROUTINE.md`** — ★ 일일 유입경로·검색어·게시글 TOP 20 관제 기준
+8. **`docs/operations/BLOG_PUBLISH_WORKFLOW.md`** — ★ 발행 승인·잠금 파일 운영 기준
+9. **`docs/operations/BLOG_QUALITY_GATE.md`** — ★ CLI 발행 차단 기준
 
 ---
 
@@ -139,9 +144,11 @@
 14. 제목 후보, 검색 의도, 품질 채점, 예상 성능, 이미지 지시는 outputs/drafts/ 폴더에 제작 노트로 분리 저장
 15. `npm run validate:posts`로 발행 전 자동 검수 실행
 16. 검수 결과를 outputs/checks/ 폴더에 저장
-17. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트 (원고완료 기준)
-18. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그와 상태 추가 (다음 글을 위한 중복 방지)
-19. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
+17. `outputs/publish_control/NNN_키워드/STATUS.md`와 `APPROVAL_LOG.md`에 발행 승인 범위를 기록
+18. ★★★ `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` 실행. FAIL이면 발행 금지
+19. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트 (원고완료 기준)
+20. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그와 상태 추가 (다음 글을 위한 중복 방지)
+21. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
 ```
 
 ---
@@ -178,6 +185,7 @@
 - 리라이팅 발행본: `posts/NNN_키워드_리라이팅.md`
 - 제작 노트: `outputs/drafts/NNN_키워드_note.md`
 - 검수 결과: `outputs/checks/NNN_키워드_check.md`
+- 발행 제어 파일: `outputs/publish_control/NNN_키워드/STATUS.md`, `outputs/publish_control/NNN_키워드/APPROVAL_LOG.md`
 - 기존 글 번호 확인 후 다음 번호 부여
 - 파일명의 키워드는 언더스코어로 연결
 - `posts/` 파일은 네이버에 붙여넣을 발행 본문만 저장한다
@@ -186,6 +194,7 @@
 - **리라이팅 시 기존 파일 덮어쓰기 금지**
 - 기존 글은 원본 자산으로 보존하고, 새 번호의 리라이팅 발행본을 만든다
 - `POSTING_REGISTRY.md`에는 새 행으로 등록하고, "다룬 소재"에 원본 파일 번호를 남긴다
+- 네이버 발행 전 `scripts/blog_quality_gate.js`가 `ALLOW`를 반환해야 한다
 
 ---
 
