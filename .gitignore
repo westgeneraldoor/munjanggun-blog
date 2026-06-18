@@ -12,6 +12,10 @@ data/processed/tracking_history_mock.json
 data/naver/daily/
 data/naver/raw/
 data/naver/**/*.xlsx
+data/naver/**/*.png
+data/naver/**/*.jpg
+data/naver/**/*.jpeg
+data/naver/**/*.webp
 
 # Generated safety backups
 *.bak
