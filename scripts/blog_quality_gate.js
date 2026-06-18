@@ -192,14 +192,31 @@ function extractTitle(content) {
 }
 
 function extractHashtags(content) {
-  const hashtagSection = content.match(/# 해시태그[\s\S]*?\n\n([\s\S]*)$/);
-  const target = hashtagSection ? hashtagSection[1] : '';
+  const target = extractHashtagSection(content);
   return (target.match(/#[^\s#]+/g) || []).map((tag) => tag.trim());
 }
 
 function extractHashtagSection(content) {
-  const hashtagSection = content.match(/# 해시태그[\s\S]*?\n\n([\s\S]*)$/);
-  return hashtagSection ? hashtagSection[1] : '';
+  const lines = content.split(/\r?\n/);
+  let lastTagLine = -1;
+  lines.forEach((line, index) => {
+    const tagCount = (line.match(/#[^\s#]+/g) || []).length;
+    if (tagCount >= 3) lastTagLine = index;
+  });
+  if (lastTagLine < 0) return '';
+  return lines.slice(lastTagLine).join('\n');
+}
+
+function findHashtagSectionIndex(content) {
+  const lines = content.split(/\r?\n/);
+  let offset = 0;
+  let lastTagOffset = -1;
+  lines.forEach((line) => {
+    const tagCount = (line.match(/#[^\s#]+/g) || []).length;
+    if (tagCount >= 3) lastTagOffset = offset;
+    offset += line.length + 1;
+  });
+  return lastTagOffset;
 }
 
 function readEvidence(controlDir) {
@@ -311,7 +328,7 @@ function validatePublishContent(postPath) {
   const issues = [];
   const content = fs.readFileSync(postPath, 'utf8');
   const title = extractTitle(content);
-  const hashtagSectionIndex = content.indexOf('# 해시태그');
+  const hashtagSectionIndex = findHashtagSectionIndex(content);
   const bodyBeforeHashtags = hashtagSectionIndex >= 0 ? content.slice(0, hashtagSectionIndex) : content;
   const hashtags = extractHashtags(content);
   const hashtagSection = extractHashtagSection(content);
