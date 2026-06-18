@@ -8,6 +8,11 @@ node_modules/
 tracking_history_mock.json
 data/processed/tracking_history_mock.json
 
+# Naver analytics raw exports and screenshots
+data/naver/daily/
+data/naver/raw/
+data/naver/**/*.xlsx
+
 # Generated safety backups
 *.bak
 *.tmp

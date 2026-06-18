@@ -17,7 +17,7 @@
 - "제목 뽑아줘" → 블로그엔진 TITLE 모드
 - "다음 주제 뭐로 하지?" → CONTENT_PLAN에서 다음 주제 추천
 - "캘린더 업데이트" → 콘텐츠기획 스킬 UPDATE 모드
-- "순위 체크해줘" → scripts/track_ranking.js 실행
+- "순위 체크해줘" → `scripts/track_ranking.js`는 experimental 도구임을 먼저 고지하고, 자동 의사결정에는 사용하지 않는다
 - "분석해줘" → scripts/analyze_top10.js 실행
 - "일일 SEO 관제" / "유입경로 보내줄게" / "검색어 봐줘" → `docs/operations/DAILY_SEO_ROUTINE.md` 기준으로 일일 관제 기록 작성
 - "발행 전 검수" / "발행 게이트" / "포스팅 발행해도 돼?" → `scripts/blog_quality_gate.js` 실행. FAIL이면 네이버 발행 금지.
@@ -32,11 +32,12 @@
 2. **`docs/strategy/SEO_KEYWORD_RESEARCH.md`** — 3계층 키워드 전략 (허브→클러스터→롱테일) + 실데이터
 3. **`docs/strategy/CONTENT_PLAN.md`** — 월간 발행 계획 (있을 경우)
 4. **`outputs/reports/top10_analysis.md`** — ★ 상위 글 승리 공식 (제목 패턴, 최신성, 키워드별 TOP 10)
-5. **`outputs/reports/ranking_report.md`** — ★ 최신 순위 추적 결과와 하락/상승 키워드
+5. **`outputs/reports/ranking_report.md`** — ⚠️ experimental 참고 자료. 특정 게시물 URL 순위가 아니라 블로그 계정 첫 등장 위치에 가까우므로 신규 글/리라이팅 자동 판단 근거로 사용 금지
 6. **`docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md`** — ★ 세션 독립형 신규 글/리라이팅 운영 기준
 7. **`docs/operations/DAILY_SEO_ROUTINE.md`** — ★ 일일 유입경로·검색어·게시글 TOP 20 관제 기준
 8. **`docs/operations/BLOG_PUBLISH_WORKFLOW.md`** — ★ 발행 승인·잠금 파일 운영 기준
 9. **`docs/operations/BLOG_QUALITY_GATE.md`** — ★ CLI 발행 차단 기준
+10. **`docs/operations/DATA_SECURITY_POLICY.md`** — ★ 공개 저장소에 올릴 수 없는 원본 통계·고객 자료 기준
 
 ---
 
@@ -123,7 +124,7 @@
 2. docs/strategy/CONTENT_PLAN.md에서 다음 발행 대상 확인
 3. docs/strategy/SEO_KEYWORD_RESEARCH.md에서 해당 키워드의 클러스터·허브 관계 확인
 4. ★ outputs/reports/top10_analysis.md 읽기 — 상위 글의 승리 공식(제목 패턴, 길이, 최신성) 확인
-5. ★ outputs/reports/ranking_report.md 읽기 — 현재 보호 글/리라이팅 후보/신규 공략 키워드 확인
+5. ⚠️ outputs/reports/ranking_report.md는 읽더라도 experimental 참고로만 본다. 특정 게시물 URL 기반 추적이 구현되기 전까지 보호 글/리라이팅 후보/신규 공략 키워드 판단에 사용하지 않는다
 6. ★ docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md 읽기 — 신규 글인지 리라이팅인지 운영 기준 확인
 7. ★★ docs/strategy/POSTING_REGISTRY.md 읽기 — 두 가지를 확인:
    a) 기존 발행 글 URL → 내부링크용
@@ -160,7 +161,7 @@
 ```
 [포스팅 완료 후]
 1. docs/strategy/POSTING_REGISTRY.md에 URL 등록 (사용자)
-2. 1주일 후 순위 추적: npm run track
+2. 1주일 후 네이버 통계의 유입경로·상세 검색어·게시글 TOP 20을 확인한다
 3. TOP 10 분석 재실행: npm run analyze
 
 [피드백]
@@ -172,8 +173,8 @@
 ```
 
 ### 피드백 주기
-- **매일:** 순위 추적 (`npm run track`)
-- **매주:** TOP 10 분석 (`npm run analyze`) + 제목 규칙 검토
+- **매일:** 네이버 통계 유입경로·상세 검색어·게시글 TOP 20 기록
+- **매주:** TOP 10 분석 (`npm run analyze`) + 제목 규칙 검토. `npm run track`은 URL 기반 추적 구현 전까지 experimental 보조 지표로만 사용
 - **매월:** docs/strategy/CONTENT_PLAN.md 재검토 + 키워드 전략 조정
 
 ---

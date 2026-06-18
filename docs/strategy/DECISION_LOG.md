@@ -121,6 +121,26 @@
 - **영향:** `CONTENT_PLAN.md`, `_context.md`, 향후 078번 이후 신규 원고
 - **재검토 조건:** 문장군 시공 정책이 바뀌어 문틀 단독 교체 또는 비대칭양개형중문을 공식 취급하게 될 때.
 
+## DEC-028: 네이버 원본 통계 공개 저장소 커밋 금지 — 2026-06-18
+- **배경:** 외부 감사에서 Public 브랜치에 네이버 통계 XLSX와 관리자 화면 스크린샷이 포함된 점이 지적됨. 삭제 커밋만으로는 과거 Git 이력에 남을 수 있으므로 경로 차단과 이력 정리가 필요함.
+- **결정:**
+  1. `data/naver/daily/`, `data/naver/raw/`, `data/naver/**/*.xlsx`는 Git 추적 금지 경로로 둔다.
+  2. 저장소에는 원본 XLSX/스크린샷 대신 익명화된 일일 요약 리포트만 남긴다.
+  3. 실제 고객 자료는 공개 저장소에 두지 않고, 공개 문서에는 AppSheet 등 비공개 원본을 가리키는 불투명 `evidence_ref`만 남긴다.
+  4. 원본 통계가 Public에 노출된 경우 저장소를 Private으로 전환한 뒤 이력 제거와 강제 갱신을 우선한다.
+- **영향:** `.gitignore`, `docs/operations/DATA_SECURITY_POLICY.md`, `DAILY_SEO_ROUTINE.md`, 일일 관제 운영
+- **재검토 조건:** 비공개 저장소로 운영 정책이 바뀌더라도 고객자료·관리자 원본은 공개 저장소에 올리지 않는 원칙은 유지한다.
+
+## DEC-029: 기존 순위 추적기는 experimental로 격하 — 2026-06-18
+- **배경:** `track_ranking.js`는 특정 게시물 URL 순위가 아니라 문장군 블로그 계정 첫 등장 위치에 가까운 값을 기록한다. 따라서 보호 글, 리라이팅 후보, 신규 글감을 자동 판단하는 근거로 쓰면 잘못된 게시물을 대상으로 삼을 수 있음.
+- **결정:**
+  1. `outputs/reports/ranking_report.md`는 URL 기반 추적이 구현되기 전까지 experimental 참고 자료로만 사용한다.
+  2. 신규 글/리라이팅 판단은 네이버 통계 유입경로, 상세 검색어, 게시글 TOP 20, 등록부 상태를 우선한다.
+  3. `npm run ops:daily`에서 `npm run track`을 제거한다.
+  4. 특정 게시물 URL 기반 추적이 구현되기 전까지 `ranking_report.md`를 자동 의사결정 입력으로 사용하지 않는다.
+- **영향:** `AGENTS.md`, `CONTENT_PLAN.md`, `CONTENT_WORKFLOW_PLAYBOOK.md`, `package.json`, `docs/operations/README.md`
+- **재검토 조건:** 검색 결과 카드 단위로 정확한 게시물 URL/제목을 수집하고 `POSTING_REGISTRY.md` 목표 URL과 매칭하는 추적기가 구현될 때.
+
 ---
 
 ## 사용 규칙

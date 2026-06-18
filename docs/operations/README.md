@@ -8,9 +8,9 @@ npm run validate           # 구조/데이터/최신성/원고 검증
 npm run validate:posts     # 068번 이후 원고 품질 게이트
 npm run validate:data      # config/순위이력/등록부 스키마 검증
 npm run check:freshness    # 리포트와 대시보드 최신성 점검
-npm run ranking:summary    # 순위 변화 요약 리포트 생성
-npm run ops:daily          # track → dashboard → ranking summary → freshness
-npm run track              # 네이버 블로그 순위 추적
+npm run ranking:summary    # experimental 순위 변화 요약 리포트 생성
+npm run ops:daily          # 일일 운영 최신성 점검
+npm run track              # experimental 네이버 블로그 순위 추적
 npm run analyze            # TOP 10 상위 글 분석
 npm run keywords:regional  # 지역 키워드 데이터 수집
 npm run keywords:product   # 제품/서비스 키워드 데이터 수집
@@ -53,5 +53,5 @@ NAVER_AD_CUSTOMER_ID=your_ad_customer_id
 4. 제목 후보, 검색 의도, 품질 채점, 이미지 지시는 `outputs/drafts/NNN_키워드_note.md`에 저장합니다.
 5. 발행 전 `npm run validate:posts`와 `docs/operations/PREPUBLISH_CHECKLIST.md`를 확인합니다.
 6. 발행 후 URL은 `docs/strategy/POSTING_REGISTRY.md`에 등록합니다.
-7. 순위 추적 결과는 `data/processed/tracking_history.json`에 누적됩니다.
+7. 순위 추적 결과는 `data/processed/tracking_history.json`에 누적되지만, 특정 게시물 URL 기준이 구현되기 전까지 자동 의사결정 근거로 사용하지 않습니다.
 8. 생성 리포트와 대시보드는 `outputs/` 아래에 저장됩니다.

@@ -13,7 +13,7 @@
     "validate:data": "node scripts/validate_data_schema.js",
     "check:freshness": "node scripts/check_freshness.js",
     "ranking:summary": "node scripts/summarize_ranking_changes.js",
-    "ops:daily": "npm run track && npm run dashboard && npm run ranking:summary && npm run check:freshness",
+    "ops:daily": "npm run check:freshness",
     "track": "node scripts/track_ranking.js",
     "analyze": "node scripts/analyze_top10.js",
     "keywords:regional": "node scripts/fetch_keyword_data.js",

@@ -4,7 +4,7 @@
 > **기준:** data/raw/keyword_data_product.json 6,430개 (2026-05-26 재조회) + 기존 3,771개
 > **전략:** 5대 시리즈 교차 발행 + 🧱 마감재 신규 시리즈 + 순위 기반 리라이팅 큐 병행
 > **Phase 5 근거:** data/raw/keyword_data_product.md ← 2026-05-26 재조회, 49편 미작성 키워드 교차 분석
-> **리라이팅 근거:** outputs/reports/ranking_report.md + outputs/reports/top10_analysis.md (2026-06-11)
+> **리라이팅 근거:** 네이버 통계 유입어·게시글 TOP 20 + outputs/reports/top10_analysis.md. `outputs/reports/ranking_report.md`는 URL 기반 추적 구현 전까지 experimental 참고 자료로만 사용한다.
 >
 > ⚠️ **알고리즘 상황 (2026-06-11):** 변동성은 여전하지만 비용/설치/가격 계열은 강함. 신규 글과 리라이팅을 분리 운영.
 > ⛔ **현관문 제외:** 현관문 관련 키워드 일체 CONTENT_PLAN 포함 금지 (DEC-017)

@@ -6,7 +6,8 @@
 
 - 사장님 입력 부담은 5분 이내로 유지한다.
 - 채팅으로 받은 데이터는 `outputs/reports/daily/YYYY-MM-DD_seo_watch.md`에 남긴다.
-- 원본 엑셀이나 이미지가 있으면 `data/naver/daily/YYYY-MM-DD/`에 보관할 수 있다.
+- 원본 엑셀이나 관리자 화면 이미지는 공개 저장소에 커밋하지 않는다. 로컬 보관은 가능하지만 `data/naver/daily/`, `data/naver/raw/`, `data/naver/**/*.xlsx`는 Git 추적 금지다.
+- 저장소에는 익명화한 요약 리포트(`outputs/reports/daily/YYYY-MM-DD_seo_watch.md`)만 남긴다.
 - 하루 데이터로 결론을 확정하지 않고, 7일 누적과 14일 누적을 우선 판단 기준으로 본다.
 - 현관문/방화문처럼 제외 결정된 소재는 유입이 있어도 글감으로 확장하지 않는다.
 
@@ -77,7 +78,7 @@ YYYY-MM-DD 문장군 데일리 현황 보고
 
 ```text
 outputs/reports/daily/2026-06-15_seo_watch.md
-data/naver/daily/2026-06-15/
+data/naver/daily/2026-06-15/  # 로컬 전용, Git 커밋 금지
 ```
 
 일일 리포트에는 아래 4개만 남긴다.

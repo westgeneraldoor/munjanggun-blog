@@ -1,7 +1,7 @@
 # 문장군 블로그 콘텐츠 작업 플레이북
 
 > 목적: 어떤 세션에서 시작해도 같은 기준으로 신규 글 작성, URL 등록, 순위 점검, 리라이팅 판단을 이어가기 위한 운영 문서.
-> 최종 업데이트: 2026-06-13
+> 최종 업데이트: 2026-06-18
 
 ## 1. 세션 시작 체크
 
@@ -11,8 +11,8 @@
 2. `docs/strategy/_context.md`
 3. `docs/strategy/CONTENT_PLAN.md`
 4. `docs/strategy/POSTING_REGISTRY.md`
-5. `outputs/reports/ranking_report.md`
-6. `outputs/reports/top10_analysis.md`
+5. `outputs/reports/top10_analysis.md`
+6. `outputs/reports/ranking_report.md`는 experimental 참고로만 읽는다. 특정 게시물 URL 기반 추적 구현 전까지 의사결정 근거로 사용하지 않는다.
 7. 필요 시 `docs/strategy/BRAND_CONTEXT.md`, `docs/strategy/SEO_KEYWORD_RESEARCH.md`
 
 읽은 뒤 반드시 아래 4가지를 먼저 판단한다.
@@ -34,7 +34,7 @@
 | 발행상태 | 미발행, URL대기, 발행완료, 성과확인대기, 성과확인완료 |
 | 운영상태 | 일반, 보호글, 보강후보, 리라이팅후보, 리라이팅발행본 |
 
-순위 점검 기준으로 운영 기준은 아래처럼 둔다.
+운영 기준은 네이버 통계의 유입경로, 상세 검색어, 게시글 TOP 20, 등록부 상태를 우선한다. 기존 순위 추적기는 특정 게시물 URL 순위가 아니라 문장군 블로그 계정 첫 등장 위치에 가까우므로 아래 기준의 자동 근거로 쓰지 않는다.
 
 | 구분 | 기준 | 처리 |
 | --- | --- | --- |
@@ -45,7 +45,7 @@
 
 ## 3. 리라이팅 우선순위 큐
 
-2026-06-11 순위 점검 후 확정한 우선순위다. 새 세션은 이 큐를 먼저 확인한다.
+2026-06-11 순위 점검 후 작성된 과거 큐다. 현재 `track_ranking.js`는 특정 게시물 URL 기준이 아니므로 새 세션은 이 큐를 자동 실행하지 않고, 네이버 통계 유입어와 게시글 TOP 20로 재확인한 뒤 사용한다.
 
 | 우선순위 | 원본 참조 | 새 발행 파일명 | 현재 신호 | 작업 방향 |
 | --- | --- | --- | --- | --- |
@@ -86,9 +86,9 @@
 
 1. `CONTENT_PLAN.md`에서 다음 미작성 슬롯 확인
 2. `POSTING_REGISTRY.md`에서 같은 키워드와 같은 소재가 이미 있는지 확인
-3. `ranking_report.md`에서 관련 키워드 순위가 이미 강한지 확인
+3. 네이버 통계 유입어와 게시글 TOP 20에서 관련 키워드 반응을 확인
 4. 강한 키워드는 직접 중복 작성하지 말고 롱테일/사례/비용/단점 각도로 분화
-5. `top10_analysis.md`에서 제목 패턴 확인
+5. `top10_analysis.md`에서 제목 패턴 확인. `ranking_report.md`는 URL 기반 추적 구현 전까지 자동 판단에서 제외
 6. 글 작성 후 발행 본문은 `posts/NNN_키워드.md`에 저장
 7. 제목 후보, 검색 의도, 품질 채점, 예상 성능, 이미지 지시는 `outputs/drafts/NNN_키워드_note.md`에 저장
 8. `npm run validate:posts`로 자동 검수하고 결과를 `outputs/checks/`에 저장
@@ -134,8 +134,8 @@
 
 리라이팅은 무조건 아래 순서를 따른다.
 
-1. 현재 순위와 하락 폭 확인
-2. 네이버 통계 유입어가 있으면 함께 반영
+1. 네이버 통계 유입어, 게시글 TOP 20, 등록부의 URL/소재 상태 확인
+2. `ranking_report.md`의 순위와 하락 폭은 experimental 참고로만 보고, 특정 글 리라이팅 근거로 단독 사용하지 않는다
 3. 기존 글의 타겟 키워드, 제목, 도입부, 소제목, 내부링크를 점검
 4. 기존 강점을 훼손하지 않는 보강안부터 제안
 5. 제목 변경이 필요한 경우 기존 URL과 발행 이력 리스크를 명시
@@ -200,10 +200,10 @@ posts/3연동중문_리라이팅.md   # 번호 없음
 
 1. `POSTING_REGISTRY.md` URL 등록
 2. 제목이 깨져 있으면 사용자가 준 실제 제목으로 교정
-3. `npm run track`
+3. 네이버 통계 유입어와 게시글 TOP 20을 일일 리포트에 기록
 4. `npm run analyze`
-5. `npm run dashboard`
-6. 바뀐 결과를 기준으로 이 플레이북의 큐를 조정할 필요가 있는지 판단
+5. 필요할 때만 `npm run track`을 experimental 보조 지표로 실행
+6. 유입어와 게시글 TOP 20을 기준으로 이 플레이북의 큐를 조정할 필요가 있는지 판단
 
 ## 9. 자동 검수 명령
 
@@ -213,8 +213,8 @@ posts/3연동중문_리라이팅.md   # 번호 없음
 | `npm run validate:posts:strict` | warning까지 실패 처리하는 강한 검수 |
 | `npm run validate:data` | config, 순위 이력, 등록부 형식 검증 |
 | `npm run check:freshness` | 순위/TOP10/대시보드 최신성 점검 |
-| `npm run ranking:summary` | 최근 순위 변화와 리라이팅 후보 요약 |
-| `npm run ops:daily` | `track → dashboard → ranking summary → freshness` 일일 루틴 |
+| `npm run ranking:summary` | experimental 순위 변화 요약. URL 기반 추적 전까지 자동 의사결정 금지 |
+| `npm run ops:daily` | 일일 운영 점검. URL 기반 순위 추적은 포함하지 않음 |
 
 ## 10. 다음 작업 추천
 
@@ -222,4 +222,4 @@ posts/3연동중문_리라이팅.md   # 번호 없음
 
 1. 068~077 URL 등록 상태 정리
 2. 078번부터 v2 산출물 분리 방식으로 신규 작성
-3. 발행 1주 후 `npm run ops:daily`와 `npm run analyze`
+3. 발행 1주 후 네이버 통계 기반 일일 리포트와 `npm run analyze`
