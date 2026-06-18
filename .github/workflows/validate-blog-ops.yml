@@ -1,0 +1,38 @@
+name: Validate Blog Ops
+
+on:
+  pull_request:
+    paths:
+      - "posts/**/*.md"
+      - "scripts/**"
+      - "tests/**"
+      - "docs/operations/**"
+      - "docs/strategy/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/validate-blog-ops.yml"
+  push:
+    branches:
+      - main
+      - "codex/**"
+    paths:
+      - "posts/**/*.md"
+      - "scripts/**"
+      - "tests/**"
+      - "docs/operations/**"
+      - "docs/strategy/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/validate-blog-ops.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run validate

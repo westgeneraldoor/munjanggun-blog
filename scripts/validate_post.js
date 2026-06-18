@@ -47,6 +47,13 @@ const allowedProducts = [
   '걸레받이몰딩',
 ];
 
+const unsupportedProducts = [
+  { term: '현관문', reason: 'DEC-017: 현관문 관련 콘텐츠는 블로그 전략에서 영구 제외되었습니다.' },
+  { term: '방화문', reason: '현관문/방화문 계열은 블로그 발행 대상 제품이 아닙니다.' },
+  { term: '비대칭양개형중문', reason: '문장군 미취급 중문 제품입니다.' },
+  { term: '중문파티션', reason: '문장군 공식 중문 제품군에서 제외된 소재입니다.' },
+];
+
 const unavailableRegions = ['영종도', '연천', '동두천', '포천', '양평', '가평', '여주'];
 
 function parseArgs(argv) {
@@ -122,6 +129,30 @@ function addIssue(issues, level, message) {
   issues.push({ level, message });
 }
 
+function validateProductScope(content, issues) {
+  const unsupportedHits = unsupportedProducts
+    .filter(({ term }) => content.includes(term))
+    .filter(({ term }) => !allowedProducts.includes(term));
+
+  unsupportedHits.forEach(({ term, reason }) => {
+    addIssue(issues, 'fail', `미취급/제외 제품 언급: ${term} - ${reason}`);
+  });
+
+  const doorFrameOnlyPattern = /문틀만[^\r\n]{0,12}(교체|가능|바꾸|새로)|문틀[^\r\n]{0,8}단독[^\r\n]{0,12}(교체|가능|바꾸|새로)/g;
+  const positivePattern = /(가능|할 수|됩니다|진행합니다|가능합니다|교체할 수|바꿀 수|새로 할 수)/;
+  const negativePattern = /(하지 않습니다|진행하지 않습니다|안 됩니다|불가|어렵|아닙니다|못합니다|맞지 않습니다)/;
+  const inquiryPattern = /(\?|까요|있나요|되나요|될까요|얼마일까요|궁금)/;
+  for (const match of content.matchAll(doorFrameOnlyPattern)) {
+    const windowStart = Math.max(0, match.index - 30);
+    const windowEnd = Math.min(content.length, match.index + match[0].length + 40);
+    const localContext = content.slice(windowStart, windowEnd);
+    if (positivePattern.test(localContext) && !negativePattern.test(localContext) && !inquiryPattern.test(localContext)) {
+      addIssue(issues, 'fail', '문틀만 단독 교체 가능처럼 표현하면 안 됩니다. 문짝교체+문선마감 또는 문짝+문틀세트 범위로 안내해야 합니다.');
+      break;
+    }
+  }
+}
+
 function validateFile(filePath, options) {
   const content = fs.readFileSync(filePath, 'utf8');
   const rel = path.relative(ROOT_DIR, filePath).replace(/\\/g, '/');
@@ -183,7 +214,7 @@ function validateFile(filePath, options) {
   }
   if (content.includes('[사진:')) addIssue(issues, 'warn', '사진 플레이스홀더는 제작 노트로 분리하는 편이 좋습니다.');
 
-  allowedProducts.forEach(() => {});
+  validateProductScope(content, issues);
 
   return {
     file: rel,
