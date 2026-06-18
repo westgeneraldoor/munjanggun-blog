@@ -87,7 +87,42 @@ npm run gate:blog -- --post "posts/085_문틀교체비용.md" --mode publish --c
 - `ok: true` + `decision: ALLOW` → 발행 가능
 - `ok: false` 또는 `decision: BLOCK` → 발행 금지
 
-## 5. 발행 후
+## 5. P1 Evidence/Approval Gate
+
+2026-06-18부터 발행 승인은 본문 파일의 SHA-256과 묶어서 남긴다.
+
+```markdown
+## 2026-06-18 - Publish Approval
+
+- Decision: Blog publish approved.
+- Approved scope: Publish this checked post to Naver Blog.
+- Content SHA-256: <approved_post_sha256>
+- Not approved: Changing title, deleting CTA, or publishing a different file.
+```
+
+실제 고객 사례, 현장 사례, 직접 인용문, 숫자/성능/보장 표현을 쓰는 글은 같은 발행 제어 폴더에 `EVIDENCE.json`을 둔다.
+
+```text
+outputs/publish_control/NNN_키워드/
+├── STATUS.md
+├── APPROVAL_LOG.md
+└── EVIDENCE.json
+```
+
+아래 항목은 전부 하드 FAIL이며 네이버 발행 금지다.
+
+- 실제 사례처럼 보이는데 `evidence_refs`가 없음
+- 직접 인용문인데 `quote_status`가 없음
+- 가상 예시인데 실제 고객 사례처럼 표현함
+- 본문 지역과 `evidence_scope.region`이 다름
+- 강한 숫자/성능/보장 주장에 claim evidence가 없음
+- 승인 후 본문 SHA-256이 달라짐
+- 미취급 제품이나 제외 제품을 가능 제품처럼 씀
+- 해시태그에 공백을 넣음
+
+공개 저장소에는 원본 상담, 고객 정보, 관리자 통계, 현장 원본 사진을 넣지 않는다. 공개 저장소에는 비공개 원본을 가리키는 불투명 `evidence_ref`만 기록한다.
+
+## 6. 발행 후
 
 발행 후 사용자가 URL을 주면:
 

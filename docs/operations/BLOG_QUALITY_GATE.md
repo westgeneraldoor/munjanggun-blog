@@ -97,3 +97,51 @@ npm run test:blog-gate
 - 발행 승인 로그 없음/보류 문구 차단
 - 이미 발행완료 URL이 있는 글 재발행 차단
 - 기존 원고 검수 실패 시 발행 차단
+
+## 5. P1 편집국 하드게이트
+
+2026-06-18부터 블로그 게이트는 단순 문장 검수가 아니라 발행 전 사고 차단 시스템으로 본다.
+아래 항목은 경고가 아니라 모두 `FAIL`이며, 하나라도 나오면 네이버 발행 금지다.
+
+- `APPROVAL_HASH_MISSING`: `APPROVAL_LOG.md`에 승인 당시 본문 SHA-256이 없음
+- `APPROVAL_HASH_MISMATCH`: 승인 후 본문이 바뀜
+- `EVIDENCE_REQUIRED`: 실제 고객/현장/사례처럼 보이는 문장에 `EVIDENCE.json`의 `evidence_refs`가 없음
+- `QUOTE_EVIDENCE_REQUIRED`: 직접 인용문이 있는데 `quote_status`가 없음
+- `CONSTRUCTED_CASE_MISREPRESENTED`: 가상 예시를 실제 고객 사례처럼 작성함
+- `EVIDENCE_REGION_MISMATCH`: 본문 지역과 `evidence_scope.region`이 맞지 않음
+- `CLAIM_EVIDENCE_REQUIRED`: 숫자, 성능, 보장, 확신 표현에 claim evidence가 없음
+- `UNSUPPORTED_PRODUCT_CLAIM`: 문장군 미취급/제외 제품을 가능 제품처럼 언급함
+- `HASHTAG_SPACING_INVALID`: 태그란용 해시태그에 공백이 들어감
+
+근거 파일은 각 발행 제어 폴더에 둔다.
+
+```text
+outputs/publish_control/NNN_키워드/
+├── STATUS.md
+├── APPROVAL_LOG.md
+└── EVIDENCE.json
+```
+
+`EVIDENCE.json` 최소 구조:
+
+```json
+{
+  "source_type": "appsheet_case",
+  "evidence_refs": ["APPSHEET_CASE_20260613_001"],
+  "quote_status": "paraphrased",
+  "privacy_status": "anonymized",
+  "evidence_scope": {
+    "region": "안산",
+    "product": "ABS도어",
+    "case_type": "bathroom_door_replacement"
+  },
+  "claims": [
+    {
+      "claim": "소음 완화 체감",
+      "evidence_refs": ["APPSHEET_CASE_20260613_001"]
+    }
+  ]
+}
+```
+
+공개 저장소에는 원본 고객 자료를 넣지 않는다. `evidence_refs`는 AppSheet 등 비공개 원본을 가리키는 불투명 ID만 사용한다.

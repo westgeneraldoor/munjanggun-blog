@@ -1,4 +1,5 @@
 const fs = require('fs');
+const crypto = require('crypto');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { ROOT_DIR } = require('./lib/paths');
@@ -59,6 +60,23 @@ function defaultControlDir(postPath) {
 function readTextIfExists(filePath) {
   if (!fs.existsSync(filePath)) return null;
   return fs.readFileSync(filePath, 'utf8');
+}
+
+function fileSha256(filePath) {
+  return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+}
+
+function extractApprovalHash(approvalText) {
+  const patterns = [
+    /content\s+sha-?256\s*:\s*`?([a-f0-9]{64})`?/i,
+    /content[_ -]?sha(?:-?256)?["']?\s*[:=]\s*["']?([a-f0-9]{64})["']?/i,
+    /sha-?256\s*:\s*`?([a-f0-9]{64})`?/i,
+  ];
+  for (const pattern of patterns) {
+    const match = approvalText.match(pattern);
+    if (match) return match[1].toLowerCase();
+  }
+  return null;
 }
 
 function statusAllowsPublish(statusText) {
@@ -127,7 +145,7 @@ function approvalLogHasPublishApproval(text) {
   });
 }
 
-function validateControlFiles(controlDir) {
+function validateControlFiles(controlDir, postPath) {
   const issues = [];
   const statusPath = path.join(controlDir, 'STATUS.md');
   const approvalPath = path.join(controlDir, 'APPROVAL_LOG.md');
@@ -146,6 +164,18 @@ function validateControlFiles(controlDir) {
     issues.push(makeIssue(FAIL, 'APPROVAL_LOG_MISSING', 'APPROVAL_LOG.md is required before publishing.', approvalPath));
   } else if (!approvalLogHasPublishApproval(approvalText)) {
     issues.push(makeIssue(FAIL, 'PUBLISH_APPROVAL_MISSING', 'APPROVAL_LOG.md lacks explicit blog publish approval.', approvalPath));
+  }
+
+  if (approvalText && postPath && fs.existsSync(postPath)) {
+    const approvedHash = extractApprovalHash(approvalText);
+    if (!approvedHash) {
+      issues.push(makeIssue(FAIL, 'APPROVAL_HASH_MISSING', 'APPROVAL_LOG.md must record the approved post SHA-256.', approvalPath));
+    } else {
+      const currentHash = fileSha256(postPath);
+      if (approvedHash !== currentHash) {
+        issues.push(makeIssue(FAIL, 'APPROVAL_HASH_MISMATCH', 'Post content changed after approval. Re-run QA and approval.', approvalPath));
+      }
+    }
   }
 
   return issues;
@@ -167,6 +197,116 @@ function extractHashtags(content) {
   return (target.match(/#[^\s#]+/g) || []).map((tag) => tag.trim());
 }
 
+function extractHashtagSection(content) {
+  const hashtagSection = content.match(/# 해시태그[\s\S]*?\n\n([\s\S]*)$/);
+  return hashtagSection ? hashtagSection[1] : '';
+}
+
+function readEvidence(controlDir) {
+  const evidencePath = path.join(controlDir, 'EVIDENCE.json');
+  if (!fs.existsSync(evidencePath)) return { evidence: null, issues: [] };
+  try {
+    return { evidence: JSON.parse(fs.readFileSync(evidencePath, 'utf8')), issues: [] };
+  } catch (err) {
+    return {
+      evidence: null,
+      issues: [makeIssue(FAIL, 'EVIDENCE_INVALID', `EVIDENCE.json is not valid JSON: ${err.message}`, evidencePath)],
+    };
+  }
+}
+
+const REGION_TERMS = [
+  '서울',
+  '인천',
+  '경기',
+  '수원',
+  '용인',
+  '성남',
+  '고양',
+  '안산',
+  '안양',
+  '화성',
+  '평택',
+  '시흥',
+  '김포',
+  '광명',
+  '부천',
+  '천안',
+  '아산',
+  '청주',
+  '세종',
+  '대전',
+];
+
+const UNSUPPORTED_PRODUCT_TERMS = [
+  '현관문',
+  '방화문',
+  '비대칭양개형중문',
+  '중문파티션',
+];
+
+function uniqueMatches(content, terms) {
+  return [...new Set(terms.filter((term) => content.includes(term)))];
+}
+
+function hasActualCaseLanguage(content) {
+  return /(고객님|고객\s*사례|실제.{0,12}(사례|고객|현장)|사례에서는|현장에서는|현장\s*사례|시공 후기|교체 후기)/.test(content);
+}
+
+function hasDirectQuote(content) {
+  return /"[^"\r\n]{2,}"|“[^”\r\n]{2,}”|‘[^’\r\n]{2,}’/.test(content);
+}
+
+function hasStrongClaim(content) {
+  const body = content.replace(/^# .*(?:\r?\n|$)/, '');
+  return /(\d{1,3}\s*%|100\s*%|90\s*%|완벽|확실|보장|무조건|대폭|완전히|방음\s*(?:효과|차단|완벽)|소음.{0,12}(?:줄|차단|해결))/.test(body);
+}
+
+function hasEvidenceRefs(evidence) {
+  return Array.isArray(evidence?.evidence_refs) && evidence.evidence_refs.some(Boolean);
+}
+
+function hasClaimEvidence(evidence) {
+  return Array.isArray(evidence?.claims)
+    && evidence.claims.some((claim) => Array.isArray(claim.evidence_refs) && claim.evidence_refs.some(Boolean));
+}
+
+function validateEvidenceGate(content, controlDir) {
+  const { evidence, issues } = readEvidence(controlDir);
+  const evidencePath = path.join(controlDir, 'EVIDENCE.json');
+  const contentRegions = uniqueMatches(content, REGION_TERMS);
+
+  if (hasActualCaseLanguage(content)) {
+    if (!hasEvidenceRefs(evidence)) {
+      issues.push(makeIssue(FAIL, 'EVIDENCE_REQUIRED', 'Actual-looking customer or field case language requires evidence_refs.', evidencePath));
+    }
+    if (evidence?.source_type === 'constructed_example') {
+      issues.push(makeIssue(FAIL, 'CONSTRUCTED_CASE_MISREPRESENTED', 'Constructed examples must not be written as actual customer cases.', evidencePath));
+    }
+  }
+
+  if (hasDirectQuote(content) && !evidence?.quote_status) {
+    issues.push(makeIssue(FAIL, 'QUOTE_EVIDENCE_REQUIRED', 'Direct quotes require quote_status in EVIDENCE.json.', evidencePath));
+  }
+
+  if (contentRegions.length > 0 && evidence?.evidence_scope?.region) {
+    const evidenceRegion = evidence.evidence_scope.region;
+    if (!contentRegions.includes(evidenceRegion)) {
+      issues.push(makeIssue(FAIL, 'EVIDENCE_REGION_MISMATCH', `Content region (${contentRegions.join(', ')}) does not match evidence region (${evidenceRegion}).`, evidencePath));
+    }
+  }
+
+  if (hasStrongClaim(content) && !hasClaimEvidence(evidence)) {
+    issues.push(makeIssue(FAIL, 'CLAIM_EVIDENCE_REQUIRED', 'Strong numeric, performance, guarantee, or certainty claims require claim evidence_refs.', evidencePath));
+  }
+
+  if (evidence?.privacy_status === 'blocked') {
+    issues.push(makeIssue(FAIL, 'EVIDENCE_PRIVACY_BLOCKED', 'Evidence privacy_status=blocked cannot be used for publish approval.', evidencePath));
+  }
+
+  return issues;
+}
+
 function validatePublishContent(postPath) {
   const issues = [];
   const content = fs.readFileSync(postPath, 'utf8');
@@ -174,6 +314,7 @@ function validatePublishContent(postPath) {
   const hashtagSectionIndex = content.indexOf('# 해시태그');
   const bodyBeforeHashtags = hashtagSectionIndex >= 0 ? content.slice(0, hashtagSectionIndex) : content;
   const hashtags = extractHashtags(content);
+  const hashtagSection = extractHashtagSection(content);
 
   if (title && !/\d/.test(title)) {
     issues.push(makeIssue(FAIL, 'TITLE_NUMBER_MISSING', 'Publish mode requires a number in the title.', postPath));
@@ -203,6 +344,9 @@ function validatePublishContent(postPath) {
   if (hashtags.length === 0) {
     issues.push(makeIssue(FAIL, 'HASHTAG_SECTION_MISSING', 'Hashtag section is required before publishing.', postPath));
   }
+  if (/(^|\s)#[^\s#]+[ \t]+[^\s#]+/.test(hashtagSection)) {
+    issues.push(makeIssue(FAIL, 'HASHTAG_SPACING_INVALID', 'Hashtags must not contain spaces. Use #아파트중문, not #아파트 중문.', postPath));
+  }
   if (!hashtags.includes('#문장군') || !hashtags.includes('#문장군중문')) {
     issues.push(makeIssue(FAIL, 'BRAND_HASHTAG_MISSING', 'Publish mode requires #문장군 and #문장군중문.', postPath));
   }
@@ -213,6 +357,10 @@ function validatePublishContent(postPath) {
 
   if (/비대칭양개형중문|중문파티션/.test(content)) {
     issues.push(makeIssue(FAIL, 'EXCLUDED_PRODUCT_CLAIM', 'Excluded or unsupported product appears in publish copy.', postPath));
+  }
+  const unsupportedProducts = uniqueMatches(content, UNSUPPORTED_PRODUCT_TERMS);
+  if (unsupportedProducts.length > 0) {
+    issues.push(makeIssue(FAIL, 'UNSUPPORTED_PRODUCT_CLAIM', `Unsupported product terms appear in publish copy: ${unsupportedProducts.join(', ')}`, postPath));
   }
 
   if (/살면서리모델링|종합\s*리모델링/.test(content)) {
@@ -291,9 +439,10 @@ function runGate(options) {
     return buildPayload(options, postPath, controlDir, issues);
   }
 
-  issues.push(...validateControlFiles(controlDir));
+  issues.push(...validateControlFiles(controlDir, postPath));
   issues.push(...runPostValidator(postPath, options.strict));
   issues.push(...validatePublishContent(postPath));
+  issues.push(...validateEvidenceGate(fs.readFileSync(postPath, 'utf8'), controlDir));
   issues.push(...validateRegistry(postPath, options.mode));
 
   return buildPayload(options, postPath, controlDir, issues);

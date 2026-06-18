@@ -1,4 +1,5 @@
 const assert = require('assert');
+const crypto = require('crypto');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -25,7 +26,38 @@ function codes(payload) {
   return payload.issues.map((issue) => issue.code);
 }
 
-function makeControlDir({ status = true, approval = true } = {}) {
+function sha256File(filePath) {
+  return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+}
+
+function writeEvidence(controlDir, evidence = {}) {
+  fs.writeFileSync(
+    path.join(controlDir, 'EVIDENCE.json'),
+    JSON.stringify(
+      {
+        source_type: 'field_pattern',
+        evidence_refs: ['FIELD_PATTERN_GENERAL_001'],
+        quote_status: 'paraphrased',
+        privacy_status: 'anonymized',
+        evidence_scope: {},
+        claims: [{ claim: 'general field pattern', evidence_refs: ['FIELD_PATTERN_GENERAL_001'] }],
+        ...evidence,
+      },
+      null,
+      2,
+    ),
+    'utf8',
+  );
+}
+
+function makeControlDir({
+  status = true,
+  approval = true,
+  postPath = path.join(root, 'posts', '078_화장실문틀교체.md'),
+  approvalHash = postPath && fs.existsSync(postPath) ? sha256File(postPath) : null,
+  evidence = true,
+  evidenceData = {},
+} = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-gate-'));
   if (status) {
     fs.writeFileSync(
@@ -54,12 +86,14 @@ function makeControlDir({ status = true, approval = true } = {}) {
         '',
         '- Decision: Blog publish approved.',
         '- Approved scope: Publish this checked post to Naver Blog.',
+        approvalHash ? `- Content SHA-256: ${approvalHash}` : '',
         '- Not approved: Changing title, deleting CTA, or publishing a different file.',
         '',
       ].join('\n'),
       'utf8',
     );
   }
+  if (evidence) writeEvidence(dir, evidenceData);
   return dir;
 }
 
@@ -388,6 +422,160 @@ function testProductionNotesAndBodyHashtagsBlockPublish() {
   removeDir(controlDir);
 }
 
+function writeTempPost(name, lines) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-gate-p1-'));
+  const post = path.join(dir, name);
+  fs.writeFileSync(post, `${lines.join('\n')}\n`, 'utf8');
+  return { dir, post };
+}
+
+function basePostLines(extraLines = [], hashtagLine = '#아파트중문 #현관중문 #중문설치 #무료방문실측 #문장군 #문장군중문') {
+  return [
+    '# 아파트 중문 설치 3가지 기준',
+    '',
+    '아파트 중문 설치는 현장 구조와 사용 동선을 먼저 확인해야 합니다.',
+    ...extraLines,
+    '',
+    '무료 방문실측으로 현장 조건을 먼저 확인하고 결정하셔도 됩니다.',
+    '',
+    '관련 글',
+    'https://blog.naver.com/doorgeneral/224317511025',
+    'https://blog.naver.com/doorgeneral/224317523524',
+    '',
+    '# 해시태그',
+    '',
+    hashtagLine,
+    '',
+  ];
+}
+
+function testApprovalHashMissingBlocksPublish() {
+  const { dir, post } = writeTempPost('990_hash_missing.md', basePostLines());
+  const controlDir = makeControlDir({ postPath: post, approvalHash: null });
+  const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+  assert.strictEqual(result.status, 1);
+  assertBlocked(payload, 'APPROVAL_HASH_MISSING');
+  removeDir(dir);
+  removeDir(controlDir);
+}
+
+function testApprovalHashMismatchBlocksPublish() {
+  const { dir, post } = writeTempPost('989_hash_mismatch.md', basePostLines());
+  const controlDir = makeControlDir({ postPath: post, approvalHash: '0'.repeat(64) });
+  const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+  assert.strictEqual(result.status, 1);
+  assertBlocked(payload, 'APPROVAL_HASH_MISMATCH');
+  removeDir(dir);
+  removeDir(controlDir);
+}
+
+function testActualCaseWithoutEvidenceBlocksPublish() {
+  const { dir, post } = writeTempPost(
+    '988_case_no_evidence.md',
+    basePostLines(['안산 고객님 현장에서는 ABS도어 교체 후 만족도가 높았습니다.']),
+  );
+  const controlDir = makeControlDir({ postPath: post, evidence: false });
+  const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+  assert.strictEqual(result.status, 1);
+  assertBlocked(payload, 'EVIDENCE_REQUIRED');
+  removeDir(dir);
+  removeDir(controlDir);
+}
+
+function testDirectQuoteWithoutQuoteStatusBlocksPublish() {
+  const { dir, post } = writeTempPost(
+    '987_quote_no_status.md',
+    basePostLines(['고객님은 "생각보다 훨씬 조용해졌어요"라고 말씀하셨습니다.']),
+  );
+  const controlDir = makeControlDir({
+    postPath: post,
+    evidenceData: { quote_status: null, evidence_refs: ['APPSHEET_CASE_20260613_001'] },
+  });
+  const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+  assert.strictEqual(result.status, 1);
+  assertBlocked(payload, 'QUOTE_EVIDENCE_REQUIRED');
+  removeDir(dir);
+  removeDir(controlDir);
+}
+
+function testConstructedExampleCannotLookLikeActualCase() {
+  const { dir, post } = writeTempPost(
+    '986_constructed_actual.md',
+    basePostLines(['실제 안산 고객님 사례에서는 시공 후 바로 체감했다고 정리했습니다.']),
+  );
+  const controlDir = makeControlDir({
+    postPath: post,
+    evidenceData: {
+      source_type: 'constructed_example',
+      evidence_refs: ['CONSTRUCTED_EXAMPLE_001'],
+      evidence_scope: { region: '안산', product: 'ABS도어', case_type: 'bathroom_door_replacement' },
+    },
+  });
+  const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+  assert.strictEqual(result.status, 1);
+  assertBlocked(payload, 'CONSTRUCTED_CASE_MISREPRESENTED');
+  removeDir(dir);
+  removeDir(controlDir);
+}
+
+function testEvidenceRegionMismatchBlocksPublish() {
+  const { dir, post } = writeTempPost(
+    '985_region_mismatch.md',
+    basePostLines(['안산 고객님 현장은 ABS도어 교체가 필요한 구조였습니다.']),
+  );
+  const controlDir = makeControlDir({
+    postPath: post,
+    evidenceData: {
+      evidence_refs: ['APPSHEET_CASE_20260613_001'],
+      evidence_scope: { region: '수원', product: 'ABS도어', case_type: 'bathroom_door_replacement' },
+    },
+  });
+  const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+  assert.strictEqual(result.status, 1);
+  assertBlocked(payload, 'EVIDENCE_REGION_MISMATCH');
+  removeDir(dir);
+  removeDir(controlDir);
+}
+
+function testStrongClaimWithoutEvidenceBlocksPublish() {
+  const { dir, post } = writeTempPost(
+    '984_claim_no_evidence.md',
+    basePostLines(['중문 설치 후 소음이 90% 줄어드는 확실한 효과를 기대할 수 있습니다.']),
+  );
+  const controlDir = makeControlDir({ postPath: post, evidenceData: { claims: [] } });
+  const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+  assert.strictEqual(result.status, 1);
+  assertBlocked(payload, 'CLAIM_EVIDENCE_REQUIRED');
+  removeDir(dir);
+  removeDir(controlDir);
+}
+
+function testUnsupportedProductBlocksPublish() {
+  const { dir, post } = writeTempPost(
+    '983_unsupported_product.md',
+    basePostLines(['현관문과 방화문까지 함께 교체 가능한 것처럼 쓰면 안 됩니다.']),
+  );
+  const controlDir = makeControlDir({ postPath: post });
+  const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+  assert.strictEqual(result.status, 1);
+  assertBlocked(payload, 'UNSUPPORTED_PRODUCT_CLAIM');
+  removeDir(dir);
+  removeDir(controlDir);
+}
+
+function testHashtagSpacingBlocksPublish() {
+  const { dir, post } = writeTempPost(
+    '982_hashtag_spacing.md',
+    basePostLines([], '#아파트 중문 #현관중문 #중문설치 #무료방문실측 #문장군 #문장군중문'),
+  );
+  const controlDir = makeControlDir({ postPath: post });
+  const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+  assert.strictEqual(result.status, 1);
+  assertBlocked(payload, 'HASHTAG_SPACING_INVALID');
+  removeDir(dir);
+  removeDir(controlDir);
+}
+
 function main() {
   [
     testValidUrlWaitingPostPasses,
@@ -401,6 +589,15 @@ function main() {
     testPublishModeEscalatesTitleWithoutNumber,
     testMunjanggunSpecificForbiddenClaimsBlockPublish,
     testProductionNotesAndBodyHashtagsBlockPublish,
+    testApprovalHashMissingBlocksPublish,
+    testApprovalHashMismatchBlocksPublish,
+    testActualCaseWithoutEvidenceBlocksPublish,
+    testDirectQuoteWithoutQuoteStatusBlocksPublish,
+    testConstructedExampleCannotLookLikeActualCase,
+    testEvidenceRegionMismatchBlocksPublish,
+    testStrongClaimWithoutEvidenceBlocksPublish,
+    testUnsupportedProductBlocksPublish,
+    testHashtagSpacingBlocksPublish,
   ].forEach((test) => test());
   console.log('blog quality gate tests passed');
 }

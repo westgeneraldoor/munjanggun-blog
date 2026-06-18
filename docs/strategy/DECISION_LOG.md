@@ -141,6 +141,18 @@
 - **영향:** `AGENTS.md`, `CONTENT_PLAN.md`, `CONTENT_WORKFLOW_PLAYBOOK.md`, `package.json`, `docs/operations/README.md`
 - **재검토 조건:** 검색 결과 카드 단위로 정확한 게시물 URL/제목을 수집하고 `POSTING_REGISTRY.md` 목표 URL과 매칭하는 추적기가 구현될 때.
 
+## DEC-030: 블로그 P1 발행 하드게이트 도입 — 2026-06-18
+- **배경:** P0 보안 정리 이후 남은 핵심 리스크는 "글을 많이 쓰는 자동화"가 근거 없는 실제 고객 사례, 직접 인용, 강한 성능 주장, 지역 불일치, 미취급 제품 언급을 그대로 발행할 수 있다는 점이다. 감사원은 경고가 아니라 실제 발행 차단 시스템을 요구했다.
+- **결정:**
+  1. `scripts/blog_quality_gate.js`에 Evidence Gate, Quote Gate, Claim Gate, Region Gate, Product Gate, Approval Hash Gate, Hashtag Gate를 하드 FAIL로 추가한다.
+  2. `APPROVAL_LOG.md`에는 승인 당시 본문 SHA-256을 기록하고, 승인 후 본문이 바뀌면 `APPROVAL_HASH_MISMATCH`로 차단한다.
+  3. 실제 사례처럼 보이는 문장, 직접 인용문, 강한 숫자/성능/보장 주장은 `EVIDENCE.json`의 `evidence_refs`, `quote_status`, `claims`로 검증한다.
+  4. `evidence_scope.region`과 본문 지역이 맞지 않으면 발행을 막는다.
+  5. 현관문, 방화문, 비대칭양개형중문, 중문파티션 등 제외/미취급 제품은 가능 제품처럼 언급하지 않는다.
+  6. 068~085 기존 원고는 `scripts/blog_risk_scan.js`로 리스크 스캔 리포트를 생성해 검증기 보완 기준으로 삼는다.
+- **영향:** `scripts/blog_quality_gate.js`, `scripts/blog_risk_scan.js`, `tests/test_blog_quality_gate.js`, `tests/test_blog_risk_scan.js`, `docs/operations/BLOG_QUALITY_GATE.md`, `docs/operations/BLOG_PUBLISH_WORKFLOW.md`
+- **재검토 조건:** 실제 발행 제어 폴더의 `EVIDENCE.json` 운용 과정에서 오탐/누락 패턴이 3회 이상 반복될 때
+
 ---
 
 ## 사용 규칙
