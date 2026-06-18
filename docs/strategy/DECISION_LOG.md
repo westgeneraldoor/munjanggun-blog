@@ -109,6 +109,50 @@
 - **영향:** `package.json`, `scripts/validate_post.js`, `docs/operations/PREPUBLISH_CHECKLIST.md`, 향후 발행 전 작업 흐름
 - **재검토 조건:** 자동 검수 경고가 실제 발행 품질과 무관한 노이즈를 지속적으로 만들 경우 룰을 조정한다.
 
+## DEC-027: 문틀 단독 교체 불가 및 Phase 5 후반 소재 보정 — 2026-06-15
+- **배경:** 문장군은 기존 문틀만 뜯고 기존 문짝을 그대로 살리는 문틀 단독 교체를 하지 않는다. 새 문틀 시공 시 우레탄 폼과 새 문틀이 들어가며 개구부 사이즈가 달라져 기존 문짝 재사용이 어렵기 때문이다. 또한 `중문파티션`, `비대칭양개형중문`은 이번 신규 작성 대상에서 제외하거나 미취급 제품으로 분류해야 한다.
+- **결정:**
+  1. `화장실문틀교체`, `문틀교체비용` 키워드는 살리되 본문은 `문짝+문틀세트`, `문짝교체+문선마감`, `문짝교체+문틀필름` 범위로 작성한다.
+  2. `문틀만 교체 가능`, `기존 문짝 재사용 가능`처럼 오해될 표현은 신규 글에서 금지한다.
+  3. `중문파티션`은 이번 6개 신규 작성 후보에서 제외한다.
+  4. `비대칭양개형중문`은 문장군 미취급 제품으로 제외한다.
+  5. `살면서리모델링`은 종합 리모델링이 아니라 `살면서 방문교체`, `거주중 중문시공`으로 좁혀 작성한다.
+  6. `접이식중문`은 소비자 검색어로만 활용하고, 본문은 문장군 제품명인 `스윙` 구조로 안내한다.
+- **영향:** `CONTENT_PLAN.md`, `_context.md`, 향후 078번 이후 신규 원고
+- **재검토 조건:** 문장군 시공 정책이 바뀌어 문틀 단독 교체 또는 비대칭양개형중문을 공식 취급하게 될 때.
+
+## DEC-028: 네이버 원본 통계 공개 저장소 커밋 금지 — 2026-06-18
+- **배경:** 외부 감사에서 Public 브랜치에 네이버 통계 XLSX와 관리자 화면 스크린샷이 포함된 점이 지적됨. 삭제 커밋만으로는 과거 Git 이력에 남을 수 있으므로 경로 차단과 이력 정리가 필요함.
+- **결정:**
+  1. `data/naver/daily/`, `data/naver/raw/`, `data/naver/**/*.xlsx`는 Git 추적 금지 경로로 둔다.
+  2. 저장소에는 원본 XLSX/스크린샷 대신 익명화된 일일 요약 리포트만 남긴다.
+  3. 실제 고객 자료는 공개 저장소에 두지 않고, 공개 문서에는 AppSheet 등 비공개 원본을 가리키는 불투명 `evidence_ref`만 남긴다.
+  4. 원본 통계가 Public에 노출된 경우 저장소를 Private으로 전환한 뒤 이력 제거와 강제 갱신을 우선한다.
+- **영향:** `.gitignore`, `docs/operations/DATA_SECURITY_POLICY.md`, `DAILY_SEO_ROUTINE.md`, 일일 관제 운영
+- **재검토 조건:** 비공개 저장소로 운영 정책이 바뀌더라도 고객자료·관리자 원본은 공개 저장소에 올리지 않는 원칙은 유지한다.
+
+## DEC-029: 기존 순위 추적기는 experimental로 격하 — 2026-06-18
+- **배경:** `track_ranking.js`는 특정 게시물 URL 순위가 아니라 문장군 블로그 계정 첫 등장 위치에 가까운 값을 기록한다. 따라서 보호 글, 리라이팅 후보, 신규 글감을 자동 판단하는 근거로 쓰면 잘못된 게시물을 대상으로 삼을 수 있음.
+- **결정:**
+  1. `outputs/reports/ranking_report.md`는 URL 기반 추적이 구현되기 전까지 experimental 참고 자료로만 사용한다.
+  2. 신규 글/리라이팅 판단은 네이버 통계 유입경로, 상세 검색어, 게시글 TOP 20, 등록부 상태를 우선한다.
+  3. `npm run ops:daily`에서 `npm run track`을 제거한다.
+  4. 특정 게시물 URL 기반 추적이 구현되기 전까지 `ranking_report.md`를 자동 의사결정 입력으로 사용하지 않는다.
+- **영향:** `AGENTS.md`, `CONTENT_PLAN.md`, `CONTENT_WORKFLOW_PLAYBOOK.md`, `package.json`, `docs/operations/README.md`
+- **재검토 조건:** 검색 결과 카드 단위로 정확한 게시물 URL/제목을 수집하고 `POSTING_REGISTRY.md` 목표 URL과 매칭하는 추적기가 구현될 때.
+
+## DEC-030: 블로그 P1 발행 하드게이트 도입 — 2026-06-18
+- **배경:** P0 보안 정리 이후 남은 핵심 리스크는 "글을 많이 쓰는 자동화"가 근거 없는 실제 고객 사례, 직접 인용, 강한 성능 주장, 지역 불일치, 미취급 제품 언급을 그대로 발행할 수 있다는 점이다. 감사원은 경고가 아니라 실제 발행 차단 시스템을 요구했다.
+- **결정:**
+  1. `scripts/blog_quality_gate.js`에 Evidence Gate, Quote Gate, Claim Gate, Region Gate, Product Gate, Approval Hash Gate, Hashtag Gate를 하드 FAIL로 추가한다.
+  2. `APPROVAL_LOG.md`에는 승인 당시 본문 SHA-256을 기록하고, 승인 후 본문이 바뀌면 `APPROVAL_HASH_MISMATCH`로 차단한다.
+  3. 실제 사례처럼 보이는 문장, 직접 인용문, 강한 숫자/성능/보장 주장은 `EVIDENCE.json`의 `evidence_refs`, `quote_status`, `claims`로 검증한다.
+  4. `evidence_scope.region`과 본문 지역이 맞지 않으면 발행을 막는다.
+  5. 현관문, 방화문, 비대칭양개형중문, 중문파티션 등 제외/미취급 제품은 가능 제품처럼 언급하지 않는다.
+  6. 068~085 기존 원고는 `scripts/blog_risk_scan.js`로 리스크 스캔 리포트를 생성해 검증기 보완 기준으로 삼는다.
+- **영향:** `scripts/blog_quality_gate.js`, `scripts/blog_risk_scan.js`, `tests/test_blog_quality_gate.js`, `tests/test_blog_risk_scan.js`, `docs/operations/BLOG_QUALITY_GATE.md`, `docs/operations/BLOG_PUBLISH_WORKFLOW.md`
+- **재검토 조건:** 실제 발행 제어 폴더의 `EVIDENCE.json` 운용 과정에서 오탐/누락 패턴이 3회 이상 반복될 때
+
 ---
 
 ## 사용 규칙

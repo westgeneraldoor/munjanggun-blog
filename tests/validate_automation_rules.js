@@ -6,6 +6,7 @@ const root = path.resolve(__dirname, '..');
 
 const requiredScripts = [
   'scripts/validate_post.js',
+  'scripts/blog_quality_gate.js',
   'scripts/validate_data_schema.js',
   'scripts/check_freshness.js',
   'scripts/summarize_ranking_changes.js',
@@ -36,9 +37,22 @@ const validatePost = fs.readFileSync(fromRoot('scripts/validate_post.js'), 'utf8
   if (!validatePost.includes(needle)) throw new Error(`validate_post.js에 필수 룰 문자열이 없습니다: ${needle}`);
 });
 
+const blogQualityGate = fs.readFileSync(fromRoot('scripts/blog_quality_gate.js'), 'utf8');
+[
+  'STATUS_MISSING',
+  'APPROVAL_LOG_MISSING',
+  'POST_ALREADY_PUBLISHED',
+  'POST_VALIDATION_FAILED',
+  'PUBLISH_APPROVAL_MISSING',
+].forEach((needle) => {
+  if (!blogQualityGate.includes(needle)) throw new Error(`blog_quality_gate.js에 필수 게이트 문자열이 없습니다: ${needle}`);
+});
+
 const packageJson = JSON.parse(fs.readFileSync(fromRoot('package.json'), 'utf8'));
 [
   'validate:posts',
+  'gate:blog',
+  'test:blog-gate',
   'validate:data',
   'check:freshness',
   'ranking:summary',
