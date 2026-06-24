@@ -177,6 +177,17 @@
 - **영향:** `AGENTS.md`, `FIELD_STORY_SECTION_STANDARD.md`, `SINGLE_POST_FILE_STANDARD.md`, `APPSHEET_FIELD_STORY_WORKFLOW.md`, `CONTENT_WORKFLOW_PLAYBOOK.md`, `scripts/validate_post.js`
 - **재검토 조건:** AppSheet 후매칭 과정에서 현장명 삽입이 오히려 발행 속도를 반복적으로 늦추거나 개인정보 리스크를 만든다는 증거가 쌓일 때.
 
+## DEC-033: `humanize-korean` 문체 윤문 패스 도입 — 2026-06-24
+- **배경:** 문장군 블로그는 현장형 구조와 제품 정확성이 우선이지만, 초안 작성 후 AI식 접속사, 번역투, 균일한 문장 리듬이 남으면 사장님이 원하는 019/050번대의 쉬운 현장 상담 톤에서 멀어질 수 있다. 개인 스킬 `humanize-korean`이 설치되어 있어 이를 최종 문체 윤문 패스로 활용할 수 있음.
+- **결정:**
+  1. 블로그 신규 작성, 리라이팅, 최종 발행 전 검수에서 초안 완성 후 `humanize-korean` 기준의 문체 윤문 패스를 적용한다.
+  2. 이 패스는 내용 생성이 아니라 AI 티 제거용이다. 번역투, 기계적 병렬, 접속사 남발, 균일한 문장 리듬, AI식 결말 표현을 줄인다.
+  3. 사실, 주장, 수치, 날짜, 고유명사, 직접 인용, 제품명, 서비스 지역, 현장 조건은 변경하지 않는다.
+  4. AppSheet 현장 서사 슬롯, 제품 정확성, 발행 하드게이트 기준이 약해지면 윤문 결과보다 문장군 규칙을 우선한다.
+  5. `humanize-korean`이 만드는 `_workspace/.../final.md`는 임시 참고물이며, 최종 운영 산출물은 `posts/NNN_키워드.md` 단일 발행 MD만 인정한다.
+- **영향:** `AGENTS.md`, `CONTENT_WORKFLOW_PLAYBOOK.md`, `SINGLE_POST_FILE_STANDARD.md`, `PREPUBLISH_CHECKLIST.md`
+- **재검토 조건:** 윤문 패스가 현장감이나 실제 사례 구조를 반복적으로 약화시키거나, 사실·제품·지역 정보를 바꾸는 문제가 발생할 때.
+
 ---
 
 ## 사용 규칙
