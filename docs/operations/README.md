@@ -26,7 +26,7 @@ npm run dashboard          # 순위 대시보드 생성
 - 가공 데이터와 순위 이력: `data/processed/`
 - 리포트: `outputs/reports/`
 - 대시보드: `outputs/dashboards/`
-- 제작 노트: `outputs/drafts/`
+- 제작 노트: 사용하지 않음. 원고는 `posts/NNN_키워드.md` 단일 발행 MD만 작성
 - 자동 검수 결과: `outputs/checks/`
 - 발행 본문: `posts/`
 - 실행 설정: `config/`
@@ -50,7 +50,7 @@ NAVER_AD_CUSTOMER_ID=your_ad_customer_id
 1. 새 글 작성 전 `docs/strategy/BRAND_CONTEXT.md`, `docs/strategy/SEO_KEYWORD_RESEARCH.md`, `docs/strategy/CONTENT_PLAN.md`, `docs/strategy/POSTING_REGISTRY.md`, `outputs/reports/top10_analysis.md`를 확인합니다.
 2. 신규 글 작성인지 리라이팅인지 애매하면 `docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md`의 보호 글/리라이팅 큐를 먼저 확인합니다.
 3. 발행 본문은 `posts/NNN_키워드.md` 규칙으로 저장합니다.
-4. 제목 후보, 검색 의도, 품질 채점, 이미지 지시는 `outputs/drafts/NNN_키워드_note.md`에 저장합니다.
+4. 제작노트는 만들지 않습니다. 사진 큐와 AppSheet 후매칭 방향은 본문 문장 안에 자연스럽게 녹입니다.
 5. 발행 전 `npm run validate:posts`와 `docs/operations/PREPUBLISH_CHECKLIST.md`를 확인합니다.
 6. 발행 후 URL은 `docs/strategy/POSTING_REGISTRY.md`에 등록합니다.
 7. 순위 추적 결과는 `data/processed/tracking_history.json`에 누적되지만, 특정 게시물 URL 기준이 구현되기 전까지 자동 의사결정 근거로 사용하지 않습니다.
