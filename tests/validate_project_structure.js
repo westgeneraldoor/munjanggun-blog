@@ -34,7 +34,6 @@ function readJson(relativePath) {
   'docs/operations',
   'outputs/reports',
   'outputs/dashboards',
-  'outputs/drafts',
   'outputs/checks',
   'posts',
   'scripts/lib',

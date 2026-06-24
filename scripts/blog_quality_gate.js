@@ -337,8 +337,8 @@ function validatePublishContent(postPath) {
     issues.push(makeIssue(FAIL, 'TITLE_NUMBER_MISSING', 'Publish mode requires a number in the title.', postPath));
   }
 
-  if (content.includes('[사진:')) {
-    issues.push(makeIssue(FAIL, 'PHOTO_PLACEHOLDER_IN_POST', 'Photo placeholders must be moved to draft notes before publishing.', postPath));
+  if (/\[(사진|이미지|AppSheet|앱시트|제작자|제작\s*노트|메모)[^\]]*\]/.test(content)) {
+    issues.push(makeIssue(FAIL, 'PHOTO_PLACEHOLDER_IN_POST', 'Internal photo cues, AppSheet checks, and production notes must not remain in the publish post. Express photo direction naturally in the body instead.', postPath));
   }
 
   [
@@ -348,6 +348,8 @@ function validatePublishContent(postPath) {
     '이미지 지시',
     '썸네일 카피',
     '제작 노트',
+    '제작노트',
+    '## 운영 메모',
   ].forEach((marker) => {
     if (content.includes(marker)) {
       issues.push(makeIssue(FAIL, 'PRODUCTION_NOTE_IN_POST', `Production note marker remains in post: ${marker}`, postPath));
