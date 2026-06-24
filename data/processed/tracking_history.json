@@ -2030,6 +2030,412 @@
           "totalFound": 26
         }
       ]
+    },
+    {
+      "date": "2026-06-22",
+      "timestamp": "2026-06-22T05:42:25.140Z",
+      "rankings": [
+        {
+          "keyword": "아파트중문",
+          "hub": "H1",
+          "rank": 3,
+          "title": "",
+          "note": "",
+          "totalFound": 24
+        },
+        {
+          "keyword": "현관중문",
+          "hub": "H1/H3",
+          "rank": 5,
+          "title": "",
+          "note": "",
+          "totalFound": 29
+        },
+        {
+          "keyword": "아파트 현관 중문",
+          "hub": "H1/H3",
+          "rank": 3,
+          "title": "",
+          "note": "",
+          "totalFound": 29
+        },
+        {
+          "keyword": "중문 설치",
+          "hub": "H1",
+          "rank": 8,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "아파트 중문 설치",
+          "hub": "H1",
+          "rank": 8,
+          "title": "",
+          "note": "",
+          "totalFound": 29
+        },
+        {
+          "keyword": "3연동중문",
+          "hub": "H2",
+          "rank": 7,
+          "title": "",
+          "note": "",
+          "totalFound": 25
+        },
+        {
+          "keyword": "3연동 중문 설치",
+          "hub": "H2",
+          "rank": 13,
+          "title": "",
+          "note": "",
+          "totalFound": 23
+        },
+        {
+          "keyword": "3연동중문 설치 비용",
+          "hub": "H2",
+          "rank": 16,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "초슬림 3연동중문",
+          "hub": "H2",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 26
+        },
+        {
+          "keyword": "현관 중문 종류",
+          "hub": "H3",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 30
+        },
+        {
+          "keyword": "좁은 현관 중문",
+          "hub": "H3",
+          "rank": 9,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "방문교체",
+          "hub": "H4",
+          "rank": 3,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "아파트 방문 교체",
+          "hub": "H4",
+          "rank": 5,
+          "title": "",
+          "note": "",
+          "totalFound": 24
+        },
+        {
+          "keyword": "살면서 방문교체",
+          "hub": "H4",
+          "rank": 6,
+          "title": "",
+          "note": "",
+          "totalFound": 29
+        },
+        {
+          "keyword": "ABS도어",
+          "hub": "H5",
+          "rank": 4,
+          "title": "",
+          "note": "",
+          "totalFound": 25
+        },
+        {
+          "keyword": "ABS도어 방문 교체",
+          "hub": "H5",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 23
+        },
+        {
+          "keyword": "멤브레인 도어",
+          "hub": "H5",
+          "rank": 4,
+          "title": "",
+          "note": "",
+          "totalFound": 28
+        },
+        {
+          "keyword": "타공도어",
+          "hub": "H5/022",
+          "rank": 0,
+          "title": "",
+          "note": "TOP 31 밖",
+          "totalFound": 31
+        },
+        {
+          "keyword": "거주중시공",
+          "hub": "006",
+          "rank": 0,
+          "title": "",
+          "note": "TOP 23 밖",
+          "totalFound": 23
+        },
+        {
+          "keyword": "아파트 현관 중문 설치",
+          "hub": "006",
+          "rank": 3,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "살면서 중문",
+          "hub": "006",
+          "rank": 3,
+          "title": "",
+          "note": "",
+          "totalFound": 30
+        },
+        {
+          "keyword": "화장실문교체",
+          "hub": "007",
+          "rank": 6,
+          "title": "",
+          "note": "",
+          "totalFound": 25
+        },
+        {
+          "keyword": "화장실문",
+          "hub": "007/013",
+          "rank": 11,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "문틀교체",
+          "hub": "007",
+          "rank": 7,
+          "title": "",
+          "note": "",
+          "totalFound": 26
+        },
+        {
+          "keyword": "문짝교체비용",
+          "hub": "010",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 17
+        },
+        {
+          "keyword": "방문교체비용",
+          "hub": "010",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 26
+        },
+        {
+          "keyword": "문장군중문",
+          "hub": "011",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 26
+        },
+        {
+          "keyword": "문장군",
+          "hub": "011",
+          "rank": 6,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "중문시공업체",
+          "hub": "011",
+          "rank": 0,
+          "title": "",
+          "note": "TOP 23 밖",
+          "totalFound": 23
+        },
+        {
+          "keyword": "방문실측",
+          "hub": "011",
+          "rank": 20,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "원슬라이딩중문",
+          "hub": "012",
+          "rank": 6,
+          "title": "",
+          "note": "",
+          "totalFound": 28
+        },
+        {
+          "keyword": "슬라이딩도어",
+          "hub": "012",
+          "rank": 0,
+          "title": "",
+          "note": "TOP 29 밖",
+          "totalFound": 29
+        },
+        {
+          "keyword": "중문가격",
+          "hub": "014",
+          "rank": 3,
+          "title": "",
+          "note": "",
+          "totalFound": 25
+        },
+        {
+          "keyword": "중문설치비용",
+          "hub": "014/018",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "셀프중문",
+          "hub": "015",
+          "rank": 8,
+          "title": "",
+          "note": "",
+          "totalFound": 28
+        },
+        {
+          "keyword": "중문셀프시공",
+          "hub": "015",
+          "rank": 7,
+          "title": "",
+          "note": "",
+          "totalFound": 30
+        },
+        {
+          "keyword": "초슬림3연동중문",
+          "hub": "016",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "아파트현관중문",
+          "hub": "016/020",
+          "rank": 3,
+          "title": "",
+          "note": "",
+          "totalFound": 29
+        },
+        {
+          "keyword": "좁은현관중문",
+          "hub": "016/020/021",
+          "rank": 9,
+          "title": "",
+          "note": "",
+          "totalFound": 27
+        },
+        {
+          "keyword": "문짝교체",
+          "hub": "017",
+          "rank": 4,
+          "title": "",
+          "note": "",
+          "totalFound": 22
+        },
+        {
+          "keyword": "도어교체",
+          "hub": "017",
+          "rank": 0,
+          "title": "",
+          "note": "TOP 29 밖",
+          "totalFound": 29
+        },
+        {
+          "keyword": "아파트중문설치비용",
+          "hub": "018",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 26
+        },
+        {
+          "keyword": "아파트중문가격",
+          "hub": "019",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 24
+        },
+        {
+          "keyword": "중문견적",
+          "hub": "019",
+          "rank": 4,
+          "title": "",
+          "note": "",
+          "totalFound": 30
+        },
+        {
+          "keyword": "3연동중문가격",
+          "hub": "019",
+          "rank": 6,
+          "title": "",
+          "note": "",
+          "totalFound": 24
+        },
+        {
+          "keyword": "현관중문비용",
+          "hub": "019",
+          "rank": 0,
+          "title": "",
+          "note": "TOP 30 밖",
+          "totalFound": 30
+        },
+        {
+          "keyword": "천안중문",
+          "hub": "020",
+          "rank": 0,
+          "title": "",
+          "note": "TOP 24 밖",
+          "totalFound": 24
+        },
+        {
+          "keyword": "스윙도어",
+          "hub": "021",
+          "rank": 27,
+          "title": "",
+          "note": "",
+          "totalFound": 30
+        },
+        {
+          "keyword": "스윙도어중문",
+          "hub": "021",
+          "rank": 2,
+          "title": "",
+          "note": "",
+          "totalFound": 28
+        },
+        {
+          "keyword": "욕실문교체",
+          "hub": "022",
+          "rank": 0,
+          "title": "",
+          "note": "TOP 25 밖",
+          "totalFound": 25
+        }
+      ]
     }
   ]
 }

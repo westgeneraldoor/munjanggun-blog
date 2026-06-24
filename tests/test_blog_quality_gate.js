@@ -53,7 +53,7 @@ function writeEvidence(controlDir, evidence = {}) {
 function makeControlDir({
   status = true,
   approval = true,
-  postPath = path.join(root, 'posts', '078_화장실문틀교체.md'),
+  postPath = path.join(root, 'posts', '087_PVC걸레받이단점.md'),
   approvalHash = postPath && fs.existsSync(postPath) ? sha256File(postPath) : null,
   evidence = true,
   evidenceData = {},
@@ -111,7 +111,7 @@ function testValidUrlWaitingPostPasses() {
   const controlDir = makeControlDir();
   const { result, payload } = runGate([
     '--post',
-    'posts/078_화장실문틀교체.md',
+    'posts/087_PVC걸레받이단점.md',
     '--mode',
     'publish',
     '--control-dir',
@@ -128,7 +128,7 @@ function testMissingStatusBlocksPublish() {
   const controlDir = makeControlDir({ status: false });
   const { result, payload } = runGate([
     '--post',
-    'posts/078_화장실문틀교체.md',
+    'posts/087_PVC걸레받이단점.md',
     '--mode',
     'publish',
     '--control-dir',
@@ -156,7 +156,7 @@ function testApprovalLogWithNotApprovedDoesNotPass() {
   );
   const { result, payload } = runGate([
     '--post',
-    'posts/078_화장실문틀교체.md',
+    'posts/087_PVC걸레받이단점.md',
     '--mode',
     'publish',
     '--control-dir',
@@ -188,13 +188,13 @@ function testPlainNaverUrlInRegistryBlocksDuplicatePublish() {
   const original = fs.readFileSync(registry, 'utf8');
   try {
     const patched = original.replace(
-      '| 078 | 078_화장실문틀교체.md | 클러스터(H4) | 화장실문틀교체 | 화장실문틀교체 전 꼭 보는 3가지 세트 기준 | - | - |',
-      '| 078 | 078_화장실문틀교체.md | 클러스터(H4) | 화장실문틀교체 | 화장실문틀교체 전 꼭 보는 3가지 세트 기준 | https://blog.naver.com/doorgeneral/224399999999?tracking=1 | 2026-06-17 |',
+      '| 087 | 087_PVC걸레받이단점.md | 클러스터(H4·H5) | PVC걸레받이단점, 걸레받이몰딩 | PVC 걸레받이 단점 시공 전 보는 3가지 기준 | - | - |',
+      '| 087 | 087_PVC걸레받이단점.md | 클러스터(H4·H5) | PVC걸레받이단점, 걸레받이몰딩 | PVC 걸레받이 단점 시공 전 보는 3가지 기준 | https://blog.naver.com/doorgeneral/224399999999?tracking=1 | 2026-06-22 |',
     );
     fs.writeFileSync(registry, patched, 'utf8');
     const { result, payload } = runGate([
       '--post',
-      'posts/078_화장실문틀교체.md',
+      'posts/087_PVC걸레받이단점.md',
       '--mode',
       'publish',
       '--control-dir',
@@ -258,7 +258,7 @@ function testPublishAllowedNoBlocksPublish() {
   );
   const { result, payload } = runGate([
     '--post',
-    'posts/078_화장실문틀교체.md',
+    'posts/087_PVC걸레받이단점.md',
     '--mode',
     'publish',
     '--control-dir',
@@ -284,7 +284,7 @@ function testPostQaFailBlocksPublish() {
   );
   const { result, payload } = runGate([
     '--post',
-    'posts/078_화장실문틀교체.md',
+    'posts/087_PVC걸레받이단점.md',
     '--mode',
     'publish',
     '--control-dir',

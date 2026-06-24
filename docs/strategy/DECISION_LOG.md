@@ -153,6 +153,30 @@
 - **영향:** `scripts/blog_quality_gate.js`, `scripts/blog_risk_scan.js`, `tests/test_blog_quality_gate.js`, `tests/test_blog_risk_scan.js`, `docs/operations/BLOG_QUALITY_GATE.md`, `docs/operations/BLOG_PUBLISH_WORKFLOW.md`
 - **재검토 조건:** 실제 발행 제어 폴더의 `EVIDENCE.json` 운용 과정에서 오탐/누락 패턴이 3회 이상 반복될 때
 
+## DEC-031: 제작노트 폐기와 단일 발행 MD 원칙 — 2026-06-24
+- **배경:** `posts/본문.md`와 `outputs/drafts/제작노트.md`를 분리하면 사장님과 직원이 보지 않는 파일이 생기고, 실제 운영에서 사진 매칭 기준과 원고 판단이 흩어진다. 파일을 쪼개는 방식은 문장군 블로그의 현장형 글맛 회복에도 맞지 않음.
+- **결정:**
+  1. 문장군 블로그 원고는 `posts/NNN_키워드.md` 단일 발행 MD만 만든다.
+  2. `outputs/drafts/NNN_키워드_note.md` 제작노트 산출물은 폐기한다.
+  3. `posts/` 파일에는 네이버에 그대로 붙여넣을 발행 본문만 남긴다.
+  4. `[사진:]`, `[이미지:]`, `[AppSheet 확인]`, `[제작자 메모]`, `## 운영 메모` 같은 내부 지시문은 발행 원고에 남기지 않는다.
+  5. 사진 매칭 방향은 별도 메모가 아니라 본문 문장 안에서 `현관 전체 → 문제 부위 → 판단 기준 → 시공 후` 흐름으로 자연스럽게 유도한다.
+  6. DEC-024의 제작노트 분리 규칙은 이 결정으로 대체한다.
+- **영향:** `AGENTS.md`, `CONTENT_WORKFLOW_PLAYBOOK.md`, `PREPUBLISH_CHECKLIST.md`, `APPSHEET_FIELD_STORY_WORKFLOW.md`, `FIELD_STORY_SECTION_STANDARD.md`, `scripts/validate_post.js`
+- **재검토 조건:** 직원 발행 공정에서 단일 MD 방식이 반복적으로 사진 누락을 만든다는 운영 증거가 쌓일 때. 단, 내부 메모를 원고 안에 남기는 방식은 재허용하지 않는다.
+
+## DEC-032: AppSheet 현장 서사 슬롯 필수화 — 2026-06-24
+- **배경:** 단일 발행 MD 기준만 적용하면 안전한 정보글은 만들 수 있지만, 문장군의 강점인 AppSheet 실제 시공 사진과 현장 이야기가 원고 안에 들어갈 자리가 약해질 수 있음. 사장님은 104번 검토에서 실제 현장을 끼워 넣을 수 있는 단락이 있어야 문장군식 글맛이 산다고 지적함.
+- **결정:**
+  1. 101번 이후 신규 현장형 원고는 `## 실제 시공 현장에서는 조금 다릅니다` 단락을 반드시 포함한다.
+  2. 이 단락은 `고객 고민 → 현장 확인 요소 → 문장군 판단 기준 → 진행 방향 → 시공 후 변화` 흐름으로 쓴다.
+  3. 직원이 AppSheet에서 실제 지역·아파트명·제품·구조 변수·사진을 찾아 첫 문장과 세부 현장명을 자연스럽게 치환할 수 있어야 한다.
+  4. 대괄호 지시문, 제작자 메모, 사진 큐는 원고에 남기지 않는다.
+  5. 실제 고객 사례처럼 단정하거나 특정 지역·아파트명을 쓰려면 AppSheet 근거와 공개 가능한 익명화 범위를 확인한다.
+  6. 098번 이후 현장형 원고 글자 수는 공백 제외 1,500~2,500자를 합격 범위로 본다.
+- **영향:** `AGENTS.md`, `FIELD_STORY_SECTION_STANDARD.md`, `SINGLE_POST_FILE_STANDARD.md`, `APPSHEET_FIELD_STORY_WORKFLOW.md`, `CONTENT_WORKFLOW_PLAYBOOK.md`, `scripts/validate_post.js`
+- **재검토 조건:** AppSheet 후매칭 과정에서 현장명 삽입이 오히려 발행 속도를 반복적으로 늦추거나 개인정보 리스크를 만든다는 증거가 쌓일 때.
+
 ---
 
 ## 사용 규칙

@@ -4,6 +4,12 @@ const { ROOT_DIR } = require('./lib/paths');
 const { writeTextFile } = require('./lib/file_store');
 
 const DEFAULT_FROM_NUMBER = 68;
+const FIELD_STORY_LENGTH_FROM_NUMBER = 98;
+const FIELD_STORY_REQUIRED_SECTION_FROM_NUMBER = 101;
+const FIELD_STORY_REQUIRED_HEADING = '## 실제 시공 현장에서는 조금 다릅니다';
+const OPERATION_MEMO_HEADING = '## 운영 메모';
+const FIELD_STORY_MIN_CHARS_NO_SPACES = 1500;
+const FIELD_STORY_MAX_CHARS_NO_SPACES = 2500;
 
 const bannedTerms = [
   '물론',
@@ -116,6 +122,21 @@ function extractHashtags(content) {
   return (target.match(/#[^\s#]+/g) || []).map((tag) => tag.trim());
 }
 
+function countPublishBodyChars(content) {
+  const withoutHashtags = content.replace(/\n# 해시태그[\s\S]*$/m, '').trim();
+  const body = withoutHashtags
+    .split(/\r?\n/)
+    .filter((line, index) => !(index === 0 && line.trim().startsWith('# ')))
+    .join('\n')
+    .replace(/https:\/\/blog\.naver\.com\/doorgeneral\/\d+/g, '')
+    .trim();
+
+  return {
+    withSpaces: body.length,
+    noSpaces: body.replace(/\s/g, '').length,
+  };
+}
+
 function classifyTitlePattern(title) {
   if (/비용|가격|견적/.test(title)) return 'cost';
   if (/비교|vs|VS|차이/.test(title)) return 'compare';
@@ -161,6 +182,7 @@ function validateFile(filePath, options) {
   const title = extractTitle(content);
   const hashtags = extractHashtags(content);
   const links = content.match(/https:\/\/blog\.naver\.com\/doorgeneral\/\d+/g) || [];
+  const bodyChars = countPublishBodyChars(content);
   const issues = [];
 
   if (!title) addIssue(issues, 'fail', '제목을 찾을 수 없습니다.');
@@ -212,7 +234,32 @@ function validateFile(filePath, options) {
   if (/현재 발행 예정|기존 \d{3}번|등록된 \d{3}번/.test(content)) {
     addIssue(issues, 'fail', '미완성 내부링크 문구가 남아 있습니다.');
   }
-  if (content.includes('[사진:')) addIssue(issues, 'warn', '사진 플레이스홀더는 제작 노트로 분리하는 편이 좋습니다.');
+  if (content.includes(OPERATION_MEMO_HEADING)) {
+    addIssue(issues, 'fail', '`## 운영 메모`는 발행 원고 파일에 남길 수 없습니다. 문장군 블로그는 제작노트 없는 단일 발행 MD를 기준으로 합니다.');
+  }
+  if (/\[(사진|이미지|AppSheet|앱시트|제작자|제작\s*노트|메모)[^\]]*\]/.test(content)) {
+    addIssue(issues, 'fail', '발행 원고 안에 사진 큐, AppSheet 확인, 제작자 메모 같은 내부 지시문을 넣을 수 없습니다. 사진 방향은 본문 문장 구조 안에 자연스럽게 녹여야 합니다.');
+  }
+
+  if (rel.startsWith('posts/') && number >= FIELD_STORY_LENGTH_FROM_NUMBER) {
+    if (bodyChars.noSpaces < FIELD_STORY_MIN_CHARS_NO_SPACES || bodyChars.noSpaces > FIELD_STORY_MAX_CHARS_NO_SPACES) {
+      addIssue(
+        issues,
+        'warn',
+        `098번 이후 현장형 원고는 본문 공백 제외 ${FIELD_STORY_MIN_CHARS_NO_SPACES}~${FIELD_STORY_MAX_CHARS_NO_SPACES}자를 목표로 합니다. 현재 ${bodyChars.noSpaces}자입니다. 길이는 보강 신호이며 단독 발행 차단 기준은 아닙니다.`
+      );
+    }
+  }
+
+  if (rel.startsWith('posts/') && number >= FIELD_STORY_REQUIRED_SECTION_FROM_NUMBER) {
+    if (!content.includes(FIELD_STORY_REQUIRED_HEADING)) {
+      addIssue(
+        issues,
+        'fail',
+        `101번 이후 신규 현장형 원고는 '${FIELD_STORY_REQUIRED_HEADING}' 단락을 반드시 포함해야 합니다. 설명형으로만 작성하면 발행 불가입니다.`
+      );
+    }
+  }
 
   validateProductScope(content, issues);
 
@@ -220,6 +267,7 @@ function validateFile(filePath, options) {
     file: rel,
     title,
     pattern: classifyTitlePattern(title),
+    bodyChars,
     links: links.length,
     hashtags: hashtags.length,
     issues,
@@ -248,6 +296,7 @@ function renderCheckReport(result) {
   md += `| --- | --- |\n`;
   md += `| 제목 | ${result.title || '-'} |\n`;
   md += `| 제목 패턴 | ${result.pattern} |\n`;
+  md += `| 본문 글자수 | 공백 포함 ${result.bodyChars.withSpaces}자 / 공백 제외 ${result.bodyChars.noSpaces}자 |\n`;
   md += `| 내부링크 | ${result.links}개 |\n`;
   md += `| 해시태그 | ${result.hashtags}개 |\n`;
   md += `| 상태 | ${result.issues.some((issue) => issue.level === 'fail') ? 'FAIL' : (result.issues.length ? 'WARN' : 'PASS')} |\n\n`;
@@ -268,14 +317,14 @@ function writeCheckReports(results, patternWarning) {
   const checksDir = path.join(ROOT_DIR, 'outputs', 'checks');
   let summary = `# 원고 검수 종합 리포트\n\n`;
   summary += `> 생성일: ${new Date().toISOString().split('T')[0]}\n\n`;
-  summary += `| 파일 | 제목 | 링크 | 해시태그 | 상태 |\n`;
-  summary += `| --- | --- | ---: | ---: | --- |\n`;
+  summary += `| 파일 | 제목 | 본문(공백제외) | 링크 | 해시태그 | 상태 |\n`;
+  summary += `| --- | --- | ---: | ---: | ---: | --- |\n`;
 
   results.forEach((result) => {
     const status = result.issues.some((issue) => issue.level === 'fail')
       ? 'FAIL'
       : (result.issues.length ? 'WARN' : 'PASS');
-    summary += `| ${result.file} | ${result.title || '-'} | ${result.links} | ${result.hashtags} | ${status} |\n`;
+    summary += `| ${result.file} | ${result.title || '-'} | ${result.bodyChars.noSpaces} | ${result.links} | ${result.hashtags} | ${status} |\n`;
 
     const baseName = path.basename(result.file, '.md');
     writeTextFile(path.join(checksDir, `${baseName}_check.md`), renderCheckReport(result));
