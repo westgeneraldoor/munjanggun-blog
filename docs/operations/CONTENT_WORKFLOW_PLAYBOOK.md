@@ -1,7 +1,7 @@
 # 문장군 블로그 콘텐츠 작업 플레이북
 
 > 목적: 어떤 세션에서 시작해도 같은 기준으로 신규 글 작성, URL 등록, 순위 점검, 리라이팅 판단을 이어가기 위한 운영 문서.
-> 최종 업데이트: 2026-06-22
+> 최종 업데이트: 2026-06-24
 
 ## 1. 세션 시작 체크
 
@@ -100,13 +100,15 @@
 8-1. `## 실제 시공 현장에서는 조금 다릅니다` 단락은 AppSheet 현장 서사 슬롯으로 쓴다. 고객 고민, 현장 확인 요소, 판단 기준, 진행 방향, 시공 후 변화가 들어가야 하며 직원이 실제 지역·아파트명으로 첫 문장을 치환해도 자연스러워야 한다.
 9. `top10_analysis.md`에서 제목 패턴 확인. `ranking_report.md`는 URL 기반 추적 구현 전까지 자동 판단에서 제외
 10. 글 작성 후 발행 본문은 `posts/NNN_키워드.md` 단일 파일에 저장
-11. 별도 제작노트는 만들지 않는다. 사진 큐, AppSheet 확인, 제작자 메모, 운영 메모는 원고 안에도 남기지 않는다
-12. 실제 사례, 현장 사진, 직접 인용, 강한 성능 주장을 쓰면 `outputs/publish_control/NNN_키워드/EVIDENCE.json`에 근거 범위를 기록
-13. `npm run validate:posts`로 자동 검수하고 결과를 `outputs/checks/`에 저장
-14. `CONTENT_PLAN.md` 상태는 원고완료 기준으로 업데이트
-15. `POSTING_REGISTRY.md`에 파일, 제목, 소재 요약과 상태를 등록
-16. 발행 전 `docs/operations/PREPUBLISH_CHECKLIST.md`를 확인
-17. 발행 후 사용자가 URL을 주면 URL과 발행일 등록
+11. 최종 발행 전 `humanize-korean` 스킬 기준으로 문체 윤문 패스를 적용한다. 이 단계는 내용 생성이 아니라 AI 티 제거용이다.
+12. 윤문 중에도 사실, 수치, 제품명, 지역명, 현장 조건, 직접 인용, CTA는 바꾸지 않는다. 문장군 현장 서사와 AppSheet 현장 슬롯이 약해지면 윤문을 롤백한다.
+13. 별도 제작노트는 만들지 않는다. 사진 큐, AppSheet 확인, 제작자 메모, 운영 메모는 원고 안에도 남기지 않는다
+14. 실제 사례, 현장 사진, 직접 인용, 강한 성능 주장을 쓰면 `outputs/publish_control/NNN_키워드/EVIDENCE.json`에 근거 범위를 기록
+15. `npm run validate:posts`로 자동 검수하고 결과를 `outputs/checks/`에 저장
+16. `CONTENT_PLAN.md` 상태는 원고완료 기준으로 업데이트
+17. `POSTING_REGISTRY.md`에 파일, 제목, 소재 요약과 상태를 등록
+18. 발행 전 `docs/operations/PREPUBLISH_CHECKLIST.md`를 확인
+19. 발행 후 사용자가 URL을 주면 URL과 발행일 등록
 
 ### AppSheet 현장 매칭 기준
 
@@ -155,6 +157,8 @@
 ### 단일 발행 MD 규칙
 
 `posts/` 파일은 네이버 블로그에 그대로 붙여넣을 발행 본문만 담는다.
+
+문체 윤문을 위해 `humanize-korean` 스킬을 사용하더라도 최종 산출물은 `posts/NNN_키워드.md` 하나다. `_workspace/.../final.md`나 윤문 요약 파일은 임시 참고물이며, 운영 산출물로 등록하지 않는다.
 
 `posts/`에 남기는 것:
 - 최종 제목

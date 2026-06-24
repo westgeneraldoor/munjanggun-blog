@@ -28,6 +28,7 @@
 - "일일 SEO 관제" / "유입경로 보내줄게" / "검색어 봐줘" → `docs/operations/DAILY_SEO_ROUTINE.md` 기준으로 일일 관제 기록 작성
 - "통계 기반 글감" / "다음 글감" / "신규 소재" → 누적 일일 관제 리포트와 `POSTING_REGISTRY.md`를 함께 보고 신규 글감 추천
 - "발행 전 검수" / "발행 게이트" / "포스팅 발행해도 돼?" → `scripts/blog_quality_gate.js` 실행. FAIL이면 네이버 발행 금지.
+- "AI 티 없애줘" / "문체 윤문" / "사람이 쓴 것처럼 다듬어줘" → `humanize-korean` 스킬 기준으로 문체만 윤문. 사실·수치·제품명·지역명·현장 조건은 변경 금지.
 
 ---
 
@@ -80,6 +81,15 @@ URL을 채팅으로 받은 날짜는 `URL 등록일`일 뿐이며, `POSTING_REGI
 - **전문가 톤** — 시공/상담/견적 모든 영역에서 전문성 드러내기
 - 구어체 15% 혼합 — "솔직히", "현장에서는", "의외로"
 - 친근하되 가볍지 않게 — 동네 형이 아니라 믿음직한 시공 전문가
+- 초안 작성 후에는 `humanize-korean` 스킬 기준으로 AI 티를 점검한다. 단, 문장군 현장 서사, 제품명, 지역명, 수치, CTA, evidence_ref 범위는 절대 바꾸지 않는다.
+
+### 문체 윤문 패스
+- 블로그 신규 작성, 리라이팅, 최종 발행 전 검수에서는 초안 완성 후 `humanize-korean` 스킬을 후반 윤문 패스로 사용한다.
+- 목적은 글을 새로 쓰는 것이 아니라 번역투, 기계적 병렬, 접속사 남발, 균일한 문장 리듬, AI식 결말 표현을 줄이는 것이다.
+- 윤문 중에도 `의미 불변`이 최우선이다. 사실, 주장, 수치, 날짜, 고유명사, 직접 인용, 제품명, 서비스 지역, 현장 조건은 원문과 같아야 한다.
+- 변경률은 보수적으로 유지한다. 글의 구조와 사례를 갈아엎지 말고 문장 흐름과 말맛만 다듬는다.
+- `humanize-korean`이 생성하는 `_workspace/.../final.md`는 참고 산출물일 뿐이다. 최종 저장 파일은 반드시 `posts/NNN_키워드.md` 단일 발행 MD여야 한다.
+- 윤문 결과가 현장감, AppSheet 현장 슬롯, 제품 정확성, 발행 게이트 기준을 해치면 윤문보다 문장군 규칙을 우선한다.
 
 ### 제목 작성 규칙 (TOP 10 실데이터 기반, 2026-05-08)
 - **숫자 필수** — 상위 글의 50%가 숫자 포함 ("3가지", "5개", "2가지")
@@ -207,22 +217,23 @@ URL을 채팅으로 받은 날짜는 `URL 등록일`일 뿐이며, `POSTING_REGI
 13. 정보글이라도 `문제 제기 → 공감 → 현장 상담 장면/현장 조건 → 해결 기준 → 결론` 흐름을 기본으로 한다.
 14. 098번 이후 통계 기반 신규 글은 본문 공백 제외 1,500~2,500자를 합격 범위로 본다. 예전 019/050번대 스타일처럼 현장 상담을 쉽게 풀어 쓰되, 분량 맞추기 때문에 억지 설명을 늘리지 않는다.
 15. 문장군 전용 규칙 적용 (톤, CTA, 제품 정확성, 제목 규칙, 해시태그 규칙)
-16. ★ 내부링크 삽입: docs/strategy/POSTING_REGISTRY.md의 기존 글 URL로 실제 링크
-17. ★★ 최종 중복 체크: docs/strategy/POSTING_REGISTRY.md의 "다룬 소재"와 겹치면 각도 변경
-18. ★★★ 해시태그 생성: 메인 키워드 3개 + 롱테일 4개 + 브랜드 2개 (+ 시리즈 태그)
+16. ★ `humanize-korean` 문체 윤문 패스 적용: AI 냄새만 줄이고 사실·수치·제품명·지역명·현장 조건은 보존
+17. ★ 내부링크 삽입: docs/strategy/POSTING_REGISTRY.md의 기존 글 URL로 실제 링크
+18. ★★ 최종 중복 체크: docs/strategy/POSTING_REGISTRY.md의 "다룬 소재"와 겹치면 각도 변경
+19. ★★★ 해시태그 생성: 메인 키워드 3개 + 롱테일 4개 + 브랜드 2개 (+ 시리즈 태그)
 
 [저장 단계]
-19. 발행 본문만 posts/ 폴더에 저장
-20. 제목 후보, 검색 의도, 품질 채점, 예상 성능, 이미지 지시, AppSheet 후매칭 조건을 별도 제작노트로 만들지 않는다
-21. 사진 매칭 방향은 발행 본문 안에서 `현관 전체 → 문제 부위 → 판단 기준 → 시공 후` 흐름으로 자연스럽게 드러나야 한다
-22. 실제 현장 사례/사진/인용/강한 주장을 썼으면 `outputs/publish_control/NNN_키워드/EVIDENCE.json`을 함께 기록
-23. `npm run validate:posts`로 발행 전 자동 검수 실행
-24. 검수 결과를 outputs/checks/ 폴더에 저장
-25. `outputs/publish_control/NNN_키워드/STATUS.md`와 `APPROVAL_LOG.md`에 발행 승인 범위를 기록
-26. ★★★ `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` 실행. FAIL이면 발행 금지
-27. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트 (원고완료 기준)
-28. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그와 상태 추가 (다음 글을 위한 중복 방지)
-29. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
+20. 발행 본문만 posts/ 폴더에 저장
+21. 제목 후보, 검색 의도, 품질 채점, 예상 성능, 이미지 지시, AppSheet 후매칭 조건을 별도 제작노트로 만들지 않는다
+22. 사진 매칭 방향은 발행 본문 안에서 `현관 전체 → 문제 부위 → 판단 기준 → 시공 후` 흐름으로 자연스럽게 드러나야 한다
+23. 실제 현장 사례/사진/인용/강한 주장을 썼으면 `outputs/publish_control/NNN_키워드/EVIDENCE.json`을 함께 기록
+24. `npm run validate:posts`로 발행 전 자동 검수 실행
+25. 검수 결과를 outputs/checks/ 폴더에 저장
+26. `outputs/publish_control/NNN_키워드/STATUS.md`와 `APPROVAL_LOG.md`에 발행 승인 범위를 기록
+27. ★★★ `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` 실행. FAIL이면 발행 금지
+28. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트 (원고완료 기준)
+29. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그와 상태 추가 (다음 글을 위한 중복 방지)
+30. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
 ```
 
 ---
