@@ -26,7 +26,7 @@
 - "순위 체크해줘" → `scripts/track_ranking.js`는 experimental 도구임을 먼저 고지하고, 자동 의사결정에는 사용하지 않는다
 - "분석해줘" → scripts/analyze_top10.js 실행
 - "일일 SEO 관제" / "유입경로 보내줄게" / "검색어 봐줘" → `docs/operations/DAILY_SEO_ROUTINE.md` 기준으로 일일 관제 기록 작성
-- "통계 기반 글감" / "다음 글감" / "신규 소재" → 누적 일일 관제 리포트와 `POSTING_REGISTRY.md`를 함께 보고 신규 글감 추천
+- "통계 기반 글감" / "다음 글감" / "신규 소재" → `docs/operations/TOPIC_SELECTION_SCORECARD.md` 기준으로 네이버 광고 API 시장 수요, 누적 일일 관제 리포트, `POSTING_REGISTRY.md`를 함께 보고 신규 글감 추천
 - "발행 전 검수" / "발행 게이트" / "포스팅 발행해도 돼?" → `scripts/blog_quality_gate.js` 실행. FAIL이면 네이버 발행 금지.
 - "AI 티 없애줘" / "문체 윤문" / "사람이 쓴 것처럼 다듬어줘" → `humanize-korean` 스킬 기준으로 문체만 윤문. 사실·수치·제품명·지역명·현장 조건은 변경 금지.
 
@@ -65,9 +65,11 @@
 18. **`docs/strategy/POSTING_EXCLUSION_RULES.md`** — ★ 제외 키워드, 검색어 전환, 현장 변수 가능/불가 기준
 19. **`docs/operations/FIELD_STORY_SECTION_STANDARD.md`** — ★ 101번 이후 신규 현장형 원고 필수 단락: `## 실제 시공 현장에서는 조금 다릅니다`
 20. **`docs/operations/SINGLE_POST_FILE_STANDARD.md`** — ★ 제작노트 없는 단일 발행 MD 원칙: 사진 큐는 본문 문장 안에 녹인다
+21. **`docs/operations/TOPIC_SELECTION_SCORECARD.md`** — ★ 신규 글감 선정 기준: 네이버 광고 API 시장 수요 + 블로그 실제 유입 + TOP20 반응 + 문장군 필터
 
 일일 통계 기반 글감 선정 시에는 `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` 형식의 누적 관제 리포트도 함께 확인한다.
 단일 날짜의 잘 나온 결과만 보고 방향을 고정하지 않고, 7일 이상 반복되는 검색어·게시글 TOP 20·유입경로 흐름을 우선한다.
+신규 글감은 블로그 유입어만으로 선정하지 않는다. 네이버 광고 API로 시장 전체 수요를 먼저 확인하고, 네이버 블로그 통계로 문장군 블로그의 실제 반응을 검증한 뒤, 문장군 서비스 적합성, AppSheet 현장 연결성, 기존 글과의 중복 여부, 발행 안전성을 통과한 주제만 발행 후보로 삼는다.
 
 게시글의 실제 작성일/발행일은 사장님이 아침에 보내는 네이버 통계의 `게시글 조회수 TOP 20` 표에 표시된 `작성일`을 최우선 기준으로 삼는다.
 URL을 채팅으로 받은 날짜는 `URL 등록일`일 뿐이며, `POSTING_REGISTRY.md`의 발행일을 대체하지 않는다.
@@ -211,6 +213,7 @@ URL을 채팅으로 받은 날짜는 `URL 등록일`일 뿐이며, `POSTING_REGI
 2. `docs/brand/BRAND_SOURCE.md`와 `docs/brand/BLOG_BRAND_ADAPTER.md`를 읽어 중앙 원본과 블로그 전용 규칙을 분리한다
 3. docs/strategy/CONTENT_PLAN.md에서 다음 발행 대상 확인
 4. docs/strategy/SEO_KEYWORD_RESEARCH.md에서 해당 키워드의 클러스터·허브 관계 확인
+4-1. `docs/operations/TOPIC_SELECTION_SCORECARD.md` 기준으로 네이버 광고 API 시장 수요, 블로그 실제 유입 반복성, 게시글 TOP20 반응, 문장군 서비스 적합성, AppSheet 현장 연결성, 중복/카니발 위험, 발행 안전성을 점수화한다.
 5. ★ outputs/reports/top10_analysis.md 읽기 — 상위 글의 승리 공식(제목 패턴, 길이, 최신성) 확인
 6. ⚠️ outputs/reports/ranking_report.md는 읽더라도 experimental 참고로만 본다. 특정 게시물 URL 기반 추적이 구현되기 전까지 보호 글/리라이팅 후보/신규 공략 키워드 판단에 사용하지 않는다
 7. ★ docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md 읽기 — 신규 글인지 리라이팅인지 운영 기준 확인
@@ -221,7 +224,7 @@ URL을 채팅으로 받은 날짜는 `URL 등록일`일 뿐이며, `POSTING_REGI
       - 기존 글이 이미 다룬 비교표/선택가이드/사례는 절대 반복 금지
       - 같은 키워드라도 다른 각도(비용, 유지보수, 계절 등)로 차별화
       - 예: 001이 종류 비교를 했으면 → 003은 비용/견적 관점으로 작성
-10. 통계 기반 신규 글이면 outputs/reports/daily/의 최근 관제 리포트를 보고 반복 검색어와 TOP 20 게시글 흐름을 확인
+10. 통계 기반 신규 글이면 outputs/reports/daily/의 최근 관제 리포트를 보고 반복 검색어와 TOP 20 게시글 흐름을 확인한다. 단, 실제 유입어만으로 결정하지 말고 `TOPIC_SELECTION_SCORECARD.md`의 시장수요 + 실전반응 결합 기준을 함께 적용한다.
 11. ★★★ docs/strategy/POSTING_EXCLUSION_RULES.md 기준으로 제외/전환/현장 변수 가능 여부를 먼저 확인한다.
 12. ★★★ docs/operations/APPSHEET_FIELD_STORY_WORKFLOW.md 기준으로 현장 조건과 AppSheet 후매칭 카드를 설계한다.
     - 제품, 구조, 평수, 지역, 사진 라벨, 고객 고민 기준으로 후보 조건을 정한다.
