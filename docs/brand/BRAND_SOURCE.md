@@ -17,6 +17,11 @@ C:\Users\hjh\안티그래비티\문장군_브랜드
 C:\Users\hjh\안티그래비티\문장군_브랜드\BRAND_CONTEXT.md
 C:\Users\hjh\안티그래비티\문장군_브랜드\FIELD_JUDGMENT_RULES.md
 C:\Users\hjh\안티그래비티\문장군_브랜드\DESIGN.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\DESIGN_QUICKSTART.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\PHOTO_TREATMENT.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\ANTI_PATTERNS.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\tokens\brand.tokens.json
+C:\Users\hjh\안티그래비티\문장군_브랜드\tokens\brand.css
 C:\Users\hjh\안티그래비티\문장군_브랜드\PROJECT_ADAPTERS.md
 ```
 
@@ -36,6 +41,9 @@ C:\Users\hjh\안티그래비티\문장군_브랜드\PROJECT_ADAPTERS.md
 3. 중앙 원본과 블로그 규칙이 충돌하면 바로 덮어쓰지 말고 `BRAND_SYNC_AUDIT` 형식으로 분류한다.
 4. 중앙 원본이 오래되었고 블로그 쪽 정보가 최신 인터뷰 기반이면 중앙 원본을 업데이트한다.
 5. 블로그만의 규칙이면 중앙 원본에 섞지 않고 `BLOG_BRAND_ADAPTER.md`에 둔다.
+6. 블로그 썸네일, 본문 사진, Before/After 이미지 기준은 중앙 `PHOTO_TREATMENT.md`를 따른다.
+7. 어두운 판매형 썸네일, AI 카드뉴스형, 특가 전단지형 등은 중앙 `ANTI_PATTERNS.md`로 검수한다.
+8. 토큰 파일은 웹앱/랜딩/템플릿 구현 기준이며, 순수 블로그 원고 작성에는 억지 적용하지 않는다.
 
 ## 외부 경로 접근 실패 시
 

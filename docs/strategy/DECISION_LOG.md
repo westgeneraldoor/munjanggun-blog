@@ -212,6 +212,18 @@
 - **영향:** 중앙 브랜드 폴더, `AGENTS.md`, `docs/brand/*`, 향후 모든 문장군 프로젝트 브랜드 참조 방식
 - **재검토 조건:** 다른 문장군 프로젝트에서도 중앙 원본을 연결하면서 충돌 사례가 발견되거나, 중앙 브랜드 폴더 자체를 별도 Git 저장소로 운영하기로 결정할 때.
 
+## DEC-036: 중앙 디자인/사진 기준을 블로그 브랜드 싱크에 추가 — 2026-06-25
+- **배경:** 중앙 브랜드 폴더가 `DESIGN_QUICKSTART.md`, `PHOTO_TREATMENT.md`, `ANTI_PATTERNS.md`, `tokens/brand.tokens.json`, `tokens/brand.css`까지 포함하는 디자인 시스템으로 확장됐다. 블로그 프로젝트도 글뿐 아니라 썸네일, AppSheet 사진, Before/After 이미지, 카드형 시각물에서 중앙 기준을 따라야 한다.
+- **결정:**
+  1. `AGENTS.md`의 중앙 브랜드 원본 자동 참조 목록에 디자인 빠른 요약, 사진 보정 기준, 금지 시각 패턴, 디자인 토큰 파일을 추가한다.
+  2. `docs/brand/BRAND_SOURCE.md`에 새 중앙 디자인 문서와 토큰 경로를 공식 참조로 추가한다.
+  3. `docs/brand/BLOG_BRAND_ADAPTER.md`에 블로그 썸네일/본문 사진 기준을 추가한다.
+  4. 블로그 썸네일은 `PHOTO_TREATMENT.md`의 `16 / 9`, 텍스트 안전영역, 개인정보, 수직선, 밝기, Before/After 기준을 따른다.
+  5. 어두운 스마트스토어 썸네일 남발형, 빨간 특가 전단지형, 네이비 대기업형, AI 카드뉴스형은 `ANTI_PATTERNS.md` 기준으로 보류 또는 수정한다.
+  6. `tokens/brand.css`와 `tokens/brand.tokens.json`은 웹앱, 랜딩, 템플릿 구현 시 우선 사용한다. 순수 블로그 원고 작성에는 억지 적용하지 않는다.
+- **영향:** `AGENTS.md`, `docs/brand/BRAND_SOURCE.md`, `docs/brand/BLOG_BRAND_ADAPTER.md`, `docs/brand/BRAND_SYNC_AUDIT_2026-06-25.md`
+- **재검토 조건:** 블로그 썸네일 자동 생성, 카드형 이미지 템플릿, 랜딩/대시보드 구현이 시작되어 토큰 적용 범위를 더 구체화해야 할 때.
+
 ---
 
 ## 사용 규칙
