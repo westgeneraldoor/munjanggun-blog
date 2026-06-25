@@ -15,10 +15,11 @@
 6. `docs/operations/APPSHEET_FIELD_STORY_WORKFLOW.md`
 7. `docs/strategy/POSTING_EXCLUSION_RULES.md`
 8. `docs/operations/SINGLE_POST_FILE_STANDARD.md`
-9. `outputs/reports/top10_analysis.md`
-10. `outputs/reports/ranking_report.md`는 experimental 참고로만 읽는다. 특정 게시물 URL 기반 추적 구현 전까지 의사결정 근거로 사용하지 않는다.
-11. 제목/도입부를 새로 쓰는 작업이면 `docs/strategy/HOOKING_FORMULA.md`를 읽는다.
-12. 필요 시 `docs/strategy/BRAND_CONTEXT.md`, `docs/strategy/SEO_KEYWORD_RESEARCH.md`
+9. `docs/operations/TOPIC_SELECTION_SCORECARD.md`
+10. `outputs/reports/top10_analysis.md`
+11. `outputs/reports/ranking_report.md`는 experimental 참고로만 읽는다. 특정 게시물 URL 기반 추적 구현 전까지 의사결정 근거로 사용하지 않는다.
+12. 제목/도입부를 새로 쓰는 작업이면 `docs/strategy/HOOKING_FORMULA.md`를 읽는다.
+13. 필요 시 `docs/strategy/BRAND_CONTEXT.md`, `docs/strategy/SEO_KEYWORD_RESEARCH.md`
 
 읽은 뒤 반드시 아래 4가지를 먼저 판단한다.
 
@@ -40,6 +41,8 @@
 | 운영상태 | 일반, 보호글, 보강후보, 리라이팅후보, 리라이팅발행본 |
 
 운영 기준은 네이버 통계의 유입경로, 상세 검색어, 게시글 TOP 20, 등록부 상태를 우선한다. 기존 순위 추적기는 특정 게시물 URL 순위가 아니라 문장군 블로그 계정 첫 등장 위치에 가까우므로 아래 기준의 자동 근거로 쓰지 않는다.
+
+신규 글감 판단은 네이버 통계만으로 끝내지 않는다. `TOPIC_SELECTION_SCORECARD.md`에 따라 네이버 광고 API 시장 수요를 시장 지도처럼 먼저 확인하고, 블로그 실제 유입어와 게시글 TOP20 반응으로 실전성을 검증한 뒤 문장군 서비스 적합성, AppSheet 현장 연결성, 기존 글과의 중복 여부, 발행 안전성을 함께 본다.
 
 | 구분 | 기준 | 처리 |
 | --- | --- | --- |
@@ -91,7 +94,7 @@
 
 1. `CONTENT_PLAN.md`에서 다음 미작성 슬롯 확인
 2. `POSTING_REGISTRY.md`에서 같은 키워드와 같은 소재가 이미 있는지 확인
-3. 네이버 통계 유입어와 게시글 TOP 20에서 관련 키워드 반응을 확인
+3. `TOPIC_SELECTION_SCORECARD.md` 기준으로 네이버 광고 API 시장 수요와 네이버 통계 유입어, 게시글 TOP 20에서 관련 키워드 반응을 함께 확인
 4. 강한 키워드는 직접 중복 작성하지 말고 롱테일/사례/비용/단점 각도로 분화
 5. `docs/strategy/POSTING_EXCLUSION_RULES.md`에서 완전 제외, 단독 제외, 검색어 전환, 현장 변수 가능 여부를 확인
 6. `docs/operations/APPSHEET_FIELD_STORY_WORKFLOW.md` 기준으로 현장 조건과 AppSheet 후매칭 카드를 설계
