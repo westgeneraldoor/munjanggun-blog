@@ -36,22 +36,30 @@
 
 글을 작성하기 전에 **반드시** 아래 파일들을 읽는다:
 
-1. **`docs/strategy/BRAND_CONTEXT.md`** — 회사 정보, 제품, 타겟, 톤, 차별점
-2. **`docs/strategy/SEO_KEYWORD_RESEARCH.md`** — 3계층 키워드 전략 (허브→클러스터→롱테일) + 실데이터
-3. **`docs/strategy/CONTENT_PLAN.md`** — 월간 발행 계획 (있을 경우)
-4. **`outputs/reports/top10_analysis.md`** — ★ 상위 글 승리 공식 (제목 패턴, 최신성, 키워드별 TOP 10)
-5. **`outputs/reports/ranking_report.md`** — ⚠️ experimental 참고 자료. 특정 게시물 URL 순위가 아니라 블로그 계정 첫 등장 위치에 가까우므로 신규 글/리라이팅 자동 판단 근거로 사용 금지
-6. **`docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md`** — ★ 세션 독립형 신규 글/리라이팅 운영 기준
-7. **`docs/operations/DAILY_SEO_ROUTINE.md`** — ★ 일일 유입경로·검색어·게시글 TOP 20 관제 기준
-8. **`docs/operations/BLOG_PUBLISH_WORKFLOW.md`** — ★ 발행 승인·잠금 파일 운영 기준
-9. **`docs/operations/BLOG_QUALITY_GATE.md`** — ★ CLI 발행 차단 기준
-10. **`docs/operations/DATA_SECURITY_POLICY.md`** — ★ 공개 저장소에 올릴 수 없는 원본 통계·고객 자료 기준
-11. **`docs/strategy/CONTENT_OPERATING_PRINCIPLES.md`** — ★ 문장군 콘텐츠 철학: 제품 설명보다 고객 문제·사건 중심
-12. **`docs/strategy/HOOKING_FORMULA.md`** — ★ 호기심·숫자·타깃·통념반박·손실·결과 기반 후킹 공식
-13. **`docs/operations/APPSHEET_FIELD_STORY_WORKFLOW.md`** — ★ AppSheet 실제 현장 데이터 매칭·비식별 evidence_ref·현장 이야기 구성 기준
-14. **`docs/strategy/POSTING_EXCLUSION_RULES.md`** — ★ 제외 키워드, 검색어 전환, 현장 변수 가능/불가 기준
-15. **`docs/operations/FIELD_STORY_SECTION_STANDARD.md`** — ★ 101번 이후 신규 현장형 원고 필수 단락: `## 실제 시공 현장에서는 조금 다릅니다`
-16. **`docs/operations/SINGLE_POST_FILE_STANDARD.md`** — ★ 제작노트 없는 단일 발행 MD 원칙: 사진 큐는 본문 문장 안에 녹인다
+1. **중앙 브랜드 원본** — 접근 가능하면 먼저 읽는다:
+   - `C:\Users\hjh\안티그래비티\문장군_브랜드\BRAND_CONTEXT.md`
+   - `C:\Users\hjh\안티그래비티\문장군_브랜드\FIELD_JUDGMENT_RULES.md`
+   - `C:\Users\hjh\안티그래비티\문장군_브랜드\DESIGN.md`
+   - `C:\Users\hjh\안티그래비티\문장군_브랜드\PROJECT_ADAPTERS.md`
+2. **`docs/brand/BRAND_SOURCE.md`** — 중앙 브랜드 원본과 블로그 로컬 스냅샷의 관계
+3. **`docs/brand/BLOG_BRAND_ADAPTER.md`** — 중앙 브랜드 지식을 네이버 블로그 원고로 변환하는 규칙
+4. **`docs/brand/BRAND_SYNC_AUDIT_2026-06-25.md`** — 중앙 원본과 블로그 v4.0의 차이, 충돌, 승격 항목
+5. **`docs/strategy/BRAND_CONTEXT.md`** — 블로그 프로젝트용 로컬 브랜드 스냅샷. 중앙 원본 접근이 안 되면 이 문서를 기준으로 한다
+6. **`docs/strategy/SEO_KEYWORD_RESEARCH.md`** — 3계층 키워드 전략 (허브→클러스터→롱테일) + 실데이터
+7. **`docs/strategy/CONTENT_PLAN.md`** — 월간 발행 계획 (있을 경우)
+8. **`outputs/reports/top10_analysis.md`** — ★ 상위 글 승리 공식 (제목 패턴, 최신성, 키워드별 TOP 10)
+9. **`outputs/reports/ranking_report.md`** — ⚠️ experimental 참고 자료. 특정 게시물 URL 순위가 아니라 블로그 계정 첫 등장 위치에 가까우므로 신규 글/리라이팅 자동 판단 근거로 사용 금지
+10. **`docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md`** — ★ 세션 독립형 신규 글/리라이팅 운영 기준
+11. **`docs/operations/DAILY_SEO_ROUTINE.md`** — ★ 일일 유입경로·검색어·게시글 TOP 20 관제 기준
+12. **`docs/operations/BLOG_PUBLISH_WORKFLOW.md`** — ★ 발행 승인·잠금 파일 운영 기준
+13. **`docs/operations/BLOG_QUALITY_GATE.md`** — ★ CLI 발행 차단 기준
+14. **`docs/operations/DATA_SECURITY_POLICY.md`** — ★ 공개 저장소에 올릴 수 없는 원본 통계·고객 자료 기준
+15. **`docs/strategy/CONTENT_OPERATING_PRINCIPLES.md`** — ★ 문장군 콘텐츠 철학: 제품 설명보다 고객 문제·사건 중심
+16. **`docs/strategy/HOOKING_FORMULA.md`** — ★ 호기심·숫자·타깃·통념반박·손실·결과 기반 후킹 공식
+17. **`docs/operations/APPSHEET_FIELD_STORY_WORKFLOW.md`** — ★ AppSheet 실제 현장 데이터 매칭·비식별 evidence_ref·현장 이야기 구성 기준
+18. **`docs/strategy/POSTING_EXCLUSION_RULES.md`** — ★ 제외 키워드, 검색어 전환, 현장 변수 가능/불가 기준
+19. **`docs/operations/FIELD_STORY_SECTION_STANDARD.md`** — ★ 101번 이후 신규 현장형 원고 필수 단락: `## 실제 시공 현장에서는 조금 다릅니다`
+20. **`docs/operations/SINGLE_POST_FILE_STANDARD.md`** — ★ 제작노트 없는 단일 발행 MD 원칙: 사진 큐는 본문 문장 안에 녹인다
 
 일일 통계 기반 글감 선정 시에는 `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` 형식의 누적 관제 리포트도 함께 확인한다.
 단일 날짜의 잘 나온 결과만 보고 방향을 고정하지 않고, 7일 이상 반복되는 검색어·게시글 TOP 20·유입경로 흐름을 우선한다.
@@ -102,8 +110,8 @@ URL을 채팅으로 받은 날짜는 `URL 등록일`일 뿐이며, `POSTING_REGI
 글의 특성에 따라 아래 중 적절한 것을 자연스럽게 녹인다:
 
 - **전 품목 무료 방문실측견적** — 안 해도 비용 0원
-- **리뷰 신뢰도** — 3연동중문 리뷰 15,000개, 플레이스 예약리뷰 4,000개
-- **시공 속도** — 견적 후 결정 시 1주일 내 시공
+- **리뷰 신뢰도** — 중앙 브랜드 원본 기준 `전체 상품 리뷰 3만 개+`, `대표 인기 상품 단일 리뷰 1.4만 개+`를 우선한다. 특정 상품 리뷰/플레이스 리뷰 숫자는 최신 캡처나 근거가 있을 때만 구체화한다
+- **시공 속도** — 중문은 일정 상황에 따라 결정 후 1주일 내 시공을 안내할 수 있고, 도어는 결정 후 약 1주일 후 시공으로 안내한다. 중문 현장 시공 시간은 3연동/원슬라이딩/스윙 모두 대략 2~3시간으로 넉넉히 안내한다
 - **전속 시공팀 3팀 운영** — 전속 교육 이수한 시공프로 직접 시공, 최대 하루 35현장
 
 단, 숫자·성과·보장성 표현은 `BLOG_QUALITY_GATE.md`의 Claim Gate 기준을 통과해야 한다.
@@ -191,49 +199,50 @@ URL을 채팅으로 받은 날짜는 `URL 등록일`일 뿐이며, `POSTING_REGI
 
 ```
 [분석 단계]
-1. docs/strategy/BRAND_CONTEXT.md 읽기
-2. docs/strategy/CONTENT_PLAN.md에서 다음 발행 대상 확인
-3. docs/strategy/SEO_KEYWORD_RESEARCH.md에서 해당 키워드의 클러스터·허브 관계 확인
-4. ★ outputs/reports/top10_analysis.md 읽기 — 상위 글의 승리 공식(제목 패턴, 길이, 최신성) 확인
-5. ⚠️ outputs/reports/ranking_report.md는 읽더라도 experimental 참고로만 본다. 특정 게시물 URL 기반 추적이 구현되기 전까지 보호 글/리라이팅 후보/신규 공략 키워드 판단에 사용하지 않는다
-6. ★ docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md 읽기 — 신규 글인지 리라이팅인지 운영 기준 확인
-7. ★ docs/strategy/CONTENT_OPERATING_PRINCIPLES.md와 docs/strategy/HOOKING_FORMULA.md 읽기 — 사건성·자기 연관성·후킹 공식 확인
-8. ★★ docs/strategy/POSTING_REGISTRY.md 읽기 — 두 가지를 확인:
+1. 중앙 브랜드 원본(`문장군_브랜드`)을 읽고, 접근이 안 되면 `docs/strategy/BRAND_CONTEXT.md`를 로컬 스냅샷으로 사용한다
+2. `docs/brand/BRAND_SOURCE.md`와 `docs/brand/BLOG_BRAND_ADAPTER.md`를 읽어 중앙 원본과 블로그 전용 규칙을 분리한다
+3. docs/strategy/CONTENT_PLAN.md에서 다음 발행 대상 확인
+4. docs/strategy/SEO_KEYWORD_RESEARCH.md에서 해당 키워드의 클러스터·허브 관계 확인
+5. ★ outputs/reports/top10_analysis.md 읽기 — 상위 글의 승리 공식(제목 패턴, 길이, 최신성) 확인
+6. ⚠️ outputs/reports/ranking_report.md는 읽더라도 experimental 참고로만 본다. 특정 게시물 URL 기반 추적이 구현되기 전까지 보호 글/리라이팅 후보/신규 공략 키워드 판단에 사용하지 않는다
+7. ★ docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md 읽기 — 신규 글인지 리라이팅인지 운영 기준 확인
+8. ★ docs/strategy/CONTENT_OPERATING_PRINCIPLES.md와 docs/strategy/HOOKING_FORMULA.md 읽기 — 사건성·자기 연관성·후킹 공식 확인
+9. ★★ docs/strategy/POSTING_REGISTRY.md 읽기 — 두 가지를 확인:
    a) 기존 발행 글 URL → 내부링크용
    b) "다룬 소재" 컬럼 → 중복 방지용
       - 기존 글이 이미 다룬 비교표/선택가이드/사례는 절대 반복 금지
       - 같은 키워드라도 다른 각도(비용, 유지보수, 계절 등)로 차별화
       - 예: 001이 종류 비교를 했으면 → 003은 비용/견적 관점으로 작성
-9. 통계 기반 신규 글이면 outputs/reports/daily/의 최근 관제 리포트를 보고 반복 검색어와 TOP 20 게시글 흐름을 확인
-10. ★★★ docs/strategy/POSTING_EXCLUSION_RULES.md 기준으로 제외/전환/현장 변수 가능 여부를 먼저 확인한다.
-11. ★★★ docs/operations/APPSHEET_FIELD_STORY_WORKFLOW.md 기준으로 현장 조건과 AppSheet 후매칭 카드를 설계한다.
+10. 통계 기반 신규 글이면 outputs/reports/daily/의 최근 관제 리포트를 보고 반복 검색어와 TOP 20 게시글 흐름을 확인
+11. ★★★ docs/strategy/POSTING_EXCLUSION_RULES.md 기준으로 제외/전환/현장 변수 가능 여부를 먼저 확인한다.
+12. ★★★ docs/operations/APPSHEET_FIELD_STORY_WORKFLOW.md 기준으로 현장 조건과 AppSheet 후매칭 카드를 설계한다.
     - 제품, 구조, 평수, 지역, 사진 라벨, 고객 고민 기준으로 후보 조건을 정한다.
     - 실제 사례처럼 쓸 경우 `outputs/publish_control/NNN_키워드/EVIDENCE.json`에 불투명 `evidence_ref`를 남긴다.
     - 원본 후보가 아직 없으면 실제 고객 사례처럼 쓰지 않고 일반 현장 조건형 정보글로 작성한다. 사진 매칭 기준은 별도 제작노트가 아니라 본문 문장 안에 자연스럽게 녹인다.
     - `실제 시공 현장` 단락은 AppSheet 현장으로 치환 가능한 자연문 슬롯이어야 한다. 예: 지역/아파트명, 고객 고민, 가로폭·신발장·스위치·바닥 레일 같은 현장 변수, 진행 방향, 시공 후 변화가 들어갈 수 있어야 한다.
 
 [작성 단계]
-12. 글 유형 판별: 정보글이면 ENGINE 1~7, 시리즈물이면 ENGINE S(시리즈 템플릿) 실행
-13. 정보글이라도 `문제 제기 → 공감 → 현장 상담 장면/현장 조건 → 해결 기준 → 결론` 흐름을 기본으로 한다.
-14. 098번 이후 통계 기반 신규 글은 본문 공백 제외 1,500~2,500자를 합격 범위로 본다. 예전 019/050번대 스타일처럼 현장 상담을 쉽게 풀어 쓰되, 분량 맞추기 때문에 억지 설명을 늘리지 않는다.
-15. 문장군 전용 규칙 적용 (톤, CTA, 제품 정확성, 제목 규칙, 해시태그 규칙)
-16. ★ `humanize-korean` 문체 윤문 패스 적용: AI 냄새만 줄이고 사실·수치·제품명·지역명·현장 조건은 보존
-17. ★ 내부링크 삽입: docs/strategy/POSTING_REGISTRY.md의 기존 글 URL로 실제 링크
-18. ★★ 최종 중복 체크: docs/strategy/POSTING_REGISTRY.md의 "다룬 소재"와 겹치면 각도 변경
-19. ★★★ 해시태그 생성: 메인 키워드 3개 + 롱테일 4개 + 브랜드 2개 (+ 시리즈 태그)
+13. 글 유형 판별: 정보글이면 ENGINE 1~7, 시리즈물이면 ENGINE S(시리즈 템플릿) 실행
+14. 정보글이라도 `문제 제기 → 공감 → 현장 상담 장면/현장 조건 → 해결 기준 → 결론` 흐름을 기본으로 한다.
+15. 098번 이후 통계 기반 신규 글은 본문 공백 제외 1,500~2,500자를 합격 범위로 본다. 예전 019/050번대 스타일처럼 현장 상담을 쉽게 풀어 쓰되, 분량 맞추기 때문에 억지 설명을 늘리지 않는다.
+16. 문장군 전용 규칙 적용 (톤, CTA, 제품 정확성, 제목 규칙, 해시태그 규칙)
+17. ★ `humanize-korean` 문체 윤문 패스 적용: AI 냄새만 줄이고 사실·수치·제품명·지역명·현장 조건은 보존
+18. ★ 내부링크 삽입: docs/strategy/POSTING_REGISTRY.md의 기존 글 URL로 실제 링크
+19. ★★ 최종 중복 체크: docs/strategy/POSTING_REGISTRY.md의 "다룬 소재"와 겹치면 각도 변경
+20. ★★★ 해시태그 생성: 메인 키워드 3개 + 롱테일 4개 + 브랜드 2개 (+ 시리즈 태그)
 
 [저장 단계]
-20. 발행 본문만 posts/ 폴더에 저장
-21. 제목 후보, 검색 의도, 품질 채점, 예상 성능, 이미지 지시, AppSheet 후매칭 조건을 별도 제작노트로 만들지 않는다
-22. 사진 매칭 방향은 발행 본문 안에서 `현관 전체 → 문제 부위 → 판단 기준 → 시공 후` 흐름으로 자연스럽게 드러나야 한다
-23. 실제 현장 사례/사진/인용/강한 주장을 썼으면 `outputs/publish_control/NNN_키워드/EVIDENCE.json`을 함께 기록
-24. `npm run validate:posts`로 발행 전 자동 검수 실행
-25. 검수 결과를 outputs/checks/ 폴더에 저장
-26. `outputs/publish_control/NNN_키워드/STATUS.md`와 `APPROVAL_LOG.md`에 발행 승인 범위를 기록
-27. ★★★ `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` 실행. FAIL이면 발행 금지
-28. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트 (원고완료 기준)
-29. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그와 상태 추가 (다음 글을 위한 중복 방지)
-30. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
+21. 발행 본문만 posts/ 폴더에 저장
+22. 제목 후보, 검색 의도, 품질 채점, 예상 성능, 이미지 지시, AppSheet 후매칭 조건을 별도 제작노트로 만들지 않는다
+23. 사진 매칭 방향은 발행 본문 안에서 `현관 전체 → 문제 부위 → 판단 기준 → 시공 후` 흐름으로 자연스럽게 드러나야 한다
+24. 실제 현장 사례/사진/인용/강한 주장을 썼으면 `outputs/publish_control/NNN_키워드/EVIDENCE.json`을 함께 기록
+25. `npm run validate:posts`로 발행 전 자동 검수 실행
+26. 검수 결과를 outputs/checks/ 폴더에 저장
+27. `outputs/publish_control/NNN_키워드/STATUS.md`와 `APPROVAL_LOG.md`에 발행 승인 범위를 기록
+28. ★★★ `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` 실행. FAIL이면 발행 금지
+29. docs/strategy/CONTENT_PLAN.md 해당 주제 상태를 ✅로 업데이트 (원고완료 기준)
+30. ★★★ docs/strategy/POSTING_REGISTRY.md에 새 글의 "다룬 소재" 태그와 상태 추가 (다음 글을 위한 중복 방지)
+31. 사용자에게 안내: "포스팅 후 URL을 docs/strategy/POSTING_REGISTRY.md에 등록하세요"
 ```
 
 ---
