@@ -21,6 +21,7 @@ npm run dashboard          # 순위 대시보드 생성
 
 - 전략 문서: `docs/strategy/`
 - 콘텐츠 작업 플레이북: `docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md`
+- 주제 선정 스코어카드: `docs/operations/TOPIC_SELECTION_SCORECARD.md`
 - 발행 전 체크리스트: `docs/operations/PREPUBLISH_CHECKLIST.md`
 - 키워드 원본 데이터: `data/raw/`
 - 가공 데이터와 순위 이력: `data/processed/`
@@ -47,7 +48,7 @@ NAVER_AD_CUSTOMER_ID=your_ad_customer_id
 
 ## 운영 규칙
 
-1. 새 글 작성 전 `docs/strategy/BRAND_CONTEXT.md`, `docs/strategy/SEO_KEYWORD_RESEARCH.md`, `docs/strategy/CONTENT_PLAN.md`, `docs/strategy/POSTING_REGISTRY.md`, `outputs/reports/top10_analysis.md`를 확인합니다.
+1. 새 글 작성 전 `docs/strategy/BRAND_CONTEXT.md`, `docs/strategy/SEO_KEYWORD_RESEARCH.md`, `docs/operations/TOPIC_SELECTION_SCORECARD.md`, `docs/strategy/CONTENT_PLAN.md`, `docs/strategy/POSTING_REGISTRY.md`, `outputs/reports/top10_analysis.md`를 확인합니다.
 2. 신규 글 작성인지 리라이팅인지 애매하면 `docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md`의 보호 글/리라이팅 큐를 먼저 확인합니다.
 3. 발행 본문은 `posts/NNN_키워드.md` 규칙으로 저장합니다.
 4. 제작노트는 만들지 않습니다. 사진 큐와 AppSheet 후매칭 방향은 본문 문장 안에 자연스럽게 녹입니다.
@@ -55,3 +56,4 @@ NAVER_AD_CUSTOMER_ID=your_ad_customer_id
 6. 발행 후 URL은 `docs/strategy/POSTING_REGISTRY.md`에 등록합니다.
 7. 순위 추적 결과는 `data/processed/tracking_history.json`에 누적되지만, 특정 게시물 URL 기준이 구현되기 전까지 자동 의사결정 근거로 사용하지 않습니다.
 8. 생성 리포트와 대시보드는 `outputs/` 아래에 저장됩니다.
+9. 신규 글감은 블로그 유입어만으로 정하지 않고, 네이버 광고 API 시장 수요와 블로그 실제 반응을 함께 본 뒤 문장군 필터를 통과한 주제만 후보로 올립니다.
