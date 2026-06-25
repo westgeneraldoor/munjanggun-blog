@@ -17,6 +17,9 @@ data/naver/**/*.jpg
 data/naver/**/*.jpeg
 data/naver/**/*.webp
 
+# Private interviews and internal source notes
+data/private/
+
 # Generated safety backups
 *.bak
 *.tmp
