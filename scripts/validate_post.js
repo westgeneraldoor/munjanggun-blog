@@ -108,6 +108,13 @@ function firstMeaningfulLine(content) {
 
 function extractTitle(content) {
   const first = firstMeaningfulLine(content);
+  if (/^##\s*제목 후보\s*5개/.test(first)) {
+    const publishTitle = content
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .find((line) => line.startsWith('# ') && !/^#\s*제목 후보/.test(line));
+    if (publishTitle) return publishTitle.slice(2).trim();
+  }
   if (first.startsWith('# ')) return first.slice(2).trim();
 
   const recommended = content.match(/추천 제목:\s*(.+)/);
@@ -124,7 +131,8 @@ function extractHashtags(content) {
 
 function countPublishBodyChars(content) {
   const withoutHashtags = content.replace(/\n# 해시태그[\s\S]*$/m, '').trim();
-  const body = withoutHashtags
+  const withoutTitleCandidates = withoutHashtags.replace(/^##\s*제목 후보\s*5개[\s\S]*?(?=\n#\s)/, '').trim();
+  const body = withoutTitleCandidates
     .split(/\r?\n/)
     .filter((line, index) => !(index === 0 && line.trim().startsWith('# ')))
     .join('\n')
