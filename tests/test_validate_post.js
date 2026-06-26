@@ -118,12 +118,69 @@ function testInternalMemoFailsValidation() {
   }
 }
 
+function titleCandidatePostLines(bodyText) {
+  return [
+    '## 제목 후보 5개',
+    '',
+    '1. # 후보 안의 가짜 제목은 발행 제목이 아닙니다',
+    '2. 중문 설치 전 보는 3가지 기준',
+    '3. 현장에서는 중문보다 구조가 먼저입니다',
+    '4. 좁은 현관 중문 설치 전 확인할 점',
+    '5. 무료 실측 전 사진을 이렇게 준비하세요',
+    '',
+    '# 아파트 현관중문 설치 전 확인할 3가지 기준',
+    '',
+    bodyText,
+    '',
+    '무료 방문실측으로 현장 조건을 확인하고 네이버 예약으로 편하게 접수할 수 있습니다.',
+    '',
+    '관련 글',
+    'https://blog.naver.com/doorgeneral/224317511025',
+    'https://blog.naver.com/doorgeneral/224317523524',
+    '',
+    '# 해시태그',
+    '',
+    '#아파트중문 #현관중문 #중문설치 #무료방문실측 #중문종류 #문장군 #문장군중문',
+    '',
+  ];
+}
+
+function testTitleCandidateSectionDoesNotBecomePublishTitle() {
+  const post = writeRootPost('096_title_candidate_probe.md', titleCandidatePostLines('현관 중문은 제품명보다 현장 구조를 먼저 보는 것이 좋습니다.'));
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 0, result.stdout);
+    assert.match(result.stdout, /아파트 현관중문 설치 전 확인할 3가지 기준/);
+    assert.doesNotMatch(result.stdout, /제목:\s*제목 후보 5개/);
+    assert.doesNotMatch(result.stdout, /후보 안의 가짜 제목/);
+  } finally {
+    fs.rmSync(post, { force: true });
+  }
+}
+
+function testTitleCandidateSectionExcludedFromBodyLength() {
+  const longCandidateNoise = '후보문장'.repeat(500);
+  const publishBody = '현장에서는 가로폭과 신발장 간섭, 바닥 레일 위치를 같이 확인해야 합니다. '.repeat(70);
+  const lines = titleCandidatePostLines(publishBody);
+  lines.splice(2, 0, longCandidateNoise);
+  const post = writeRootPost('098_title_candidate_length_probe.md', lines);
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 0, result.stdout);
+    assert.doesNotMatch(result.stdout, /1500~2500|2500/);
+  } finally {
+    fs.rmSync(post, { force: true });
+  }
+}
+
 function main() {
   testUnsupportedProductsFailValidation();
   testDoorFrameOnlyPositiveClaimFailsValidation();
   testShortFieldStoryPostWarnsValidation();
   testMissingFieldStorySectionFailsValidation();
   testInternalMemoFailsValidation();
+  testTitleCandidateSectionDoesNotBecomePublishTitle();
+  testTitleCandidateSectionExcludedFromBodyLength();
   console.log('validate_post product tests passed');
 }
 
