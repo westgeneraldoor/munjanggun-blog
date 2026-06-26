@@ -304,18 +304,20 @@
 > - 기존 글에서 이미 다룬 비교표, 선택가이드, 사례는 반복하지 않는다.
 > - 같은 키워드라도 다른 각도(비용, 유지보수, 계절, 사례 등)로 차별화한다.
 > - 글 완성 후 반드시 이 레지스트리의 "다룬 소재" 컬럼을 업데이트한다.
-### 098-105 신규 현장형 원고 상태 보강
+### 098-107 신규 현장형 원고 상태 보강
 
 > 2026-06-24 기준. 아래 원고는 제작노트 없이 `posts/` 단일 발행 MD로 보관한다.
 > URL은 네이버 발행 후 사장님이 전달하는 링크와 TOP20 표의 실제 작성일 기준으로 갱신한다.
 
 | # | 파일 | 원고상태 | 발행상태 | 운영상태 | 메모 |
 | --- | --- | --- | --- | --- | --- |
-| 098 | 098_3연동중문브론즈유리.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/098_3연동중문브론즈유리` 승인 로그 생성 |
-| 099 | 099_중문셀프시공.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/099_중문셀프시공` 승인 로그 생성 |
-| 100 | 100_문장군도어.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/100_문장군도어` 승인 로그 생성 |
-| 101 | 101_신발장간섭중문.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/101_신발장간섭중문` 승인 로그 생성 |
-| 102 | 102_중문설치소음분진.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/102_중문설치소음분진` 승인 로그 생성 |
+| 098 | 098_3연동중문브론즈유리.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224326641977) 등록. `outputs/publish_control/098_3연동중문브론즈유리` 승인 로그 생성. 작성일은 TOP20 확인 후 보정 |
+| 099 | 099_중문셀프시공.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224326686387) 등록. `outputs/publish_control/099_중문셀프시공` 승인 로그 생성. 작성일은 TOP20 확인 후 보정 |
+| 100 | 100_문장군도어.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224327072148) 등록. `outputs/publish_control/100_문장군도어` 승인 로그 생성. 작성일은 TOP20 확인 후 보정 |
+| 101 | 101_신발장간섭중문.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224327077225) 등록. `outputs/publish_control/101_신발장간섭중문` 승인 로그 생성. 작성일은 TOP20 확인 후 보정 |
+| 102 | 102_중문설치소음분진.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224327117142) 등록. `outputs/publish_control/102_중문설치소음분진` 승인 로그 생성. 작성일은 TOP20 확인 후 보정 |
 | 103 | 103_화장실문타일마감.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/103_화장실문타일마감` 승인 로그 생성 |
 | 104 | 104_좁은현관중문.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/104_좁은현관중문` 승인 로그 생성 |
 | 105 | 105_중문설치시간.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/105_중문설치시간` 승인 로그 생성 |
+| 106 | 106_중문플루트유리.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/106_중문플루트유리` 승인 로그 생성 |
+| 107 | 107_3연동중문단점.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/107_3연동중문단점` 승인 로그 생성 |
