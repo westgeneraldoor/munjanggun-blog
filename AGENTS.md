@@ -47,7 +47,7 @@
 5. AppSheet 현장 사진/사례로 후매칭 가능한지 판단한다.
 6. 발행 안전성과 글맛을 함께 본다.
 
-PR 1 기준으로 주제 선정 근거는 문서화해야 하며, 자동 scorecard 강제화는 후속 PR 범위다.
+신규 글감 후보는 가능하면 `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md`로 남긴다. 현재 `ops:daily`는 scorecard 누락을 WARN으로 보여주며, 바로 발행 하드 FAIL로 연결하지 않는다.
 
 ## 원고 작성 핵심 계약
 
@@ -113,7 +113,8 @@ npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json
 - daily 판단의 기준은 네이버 통계 유입어, 게시글 TOP20, TOP20 작성일, daily seo watch 리포트다.
 - `ranking_report.md`와 `track_ranking.js`는 URL 기반 추적 구현 전까지 weekly/experimental 참고 자료다.
 - ranking 결과만으로 신규 글감, 리라이팅, 보호 글을 결정하지 않는다.
-- `ops:daily`의 실제 daily 강제화는 후속 PR에서 다룬다. 현재 PR에서는 문서 권위와 충돌 정리를 우선한다.
+- `npm run ops:daily`는 최신 daily report 형식, topic scorecard 존재 여부(WARN), 키워드 데이터 최신성을 확인한다.
+- `npm run ops:weekly`는 ranking/top10/tracking history처럼 weekly/experimental 성격의 보조 지표를 확인한다.
 
 ## 저장 규칙
 

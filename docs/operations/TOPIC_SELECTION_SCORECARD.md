@@ -134,6 +134,14 @@ node scripts/fetch_keyword_data_product.js
 
 신규 글감 또는 다음 포스팅 후보를 보고할 때는 아래 형식을 사용한다.
 
+운영 산출물은 아래 위치에 저장한다.
+
+```text
+outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md
+```
+
+템플릿은 `outputs/reports/topic_candidates/TOPIC_SCORECARD_TEMPLATE.md`를 사용한다.
+
 ```text
 후보 1. 주제명
 - 광고 API 시장 수요:
@@ -166,6 +174,7 @@ node scripts/fetch_keyword_data_product.js
 
 - 네이버 블로그 실제 유입어와 게시글 TOP20을 기록한다.
 - 단일 날짜 반짝 검색어만으로 방향을 고정하지 않는다.
+- 신규 글감 후보를 제안했다면 topic scorecard를 남긴다. 현재 `ops:daily`에서는 누락을 WARN으로 표시한다.
 
 매주:
 
