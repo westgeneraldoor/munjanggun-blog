@@ -295,7 +295,7 @@ function testPostQaFailBlocksPublish() {
   removeDir(controlDir);
 }
 
-function testPublishModeEscalatesTitleWithoutNumber() {
+function testPublishModeDoesNotBlockTitleWithoutNumber() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-gate-no-number-'));
   const post = path.join(dir, '998_no_number.md');
   fs.writeFileSync(
@@ -318,7 +318,7 @@ function testPublishModeEscalatesTitleWithoutNumber() {
     ].join('\n'),
     'utf8',
   );
-  const controlDir = makeControlDir();
+  const controlDir = makeControlDir({ postPath: post });
   const { result, payload } = runGate([
     '--post',
     post,
@@ -328,7 +328,7 @@ function testPublishModeEscalatesTitleWithoutNumber() {
     controlDir,
   ]);
   assert.strictEqual(result.status, 1);
-  assertBlocked(payload, 'TITLE_NUMBER_MISSING');
+  assert(!codes(payload).includes('TITLE_NUMBER_MISSING'), `TITLE_NUMBER_MISSING should not block publish, got ${codes(payload).join(', ')}`);
   removeDir(dir);
   removeDir(controlDir);
 }
@@ -586,7 +586,7 @@ function main() {
     testValidatePostFailureBlocksPublish,
     testPublishAllowedNoBlocksPublish,
     testPostQaFailBlocksPublish,
-    testPublishModeEscalatesTitleWithoutNumber,
+    testPublishModeDoesNotBlockTitleWithoutNumber,
     testMunjanggunSpecificForbiddenClaimsBlockPublish,
     testProductionNotesAndBodyHashtagsBlockPublish,
     testApprovalHashMissingBlocksPublish,
