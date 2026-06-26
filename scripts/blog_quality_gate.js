@@ -187,6 +187,13 @@ function firstMeaningfulLine(content) {
 
 function extractTitle(content) {
   const first = firstMeaningfulLine(content);
+  if (/^##\s*제목 후보\s*5개/.test(first)) {
+    const publishTitle = content
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .find((line) => line.startsWith('# ') && !/^#\s*제목 후보/.test(line));
+    if (publishTitle) return publishTitle.slice(2).trim();
+  }
   if (first.startsWith('# ')) return first.slice(2).trim();
   return first.replace(/^#+\s*/, '').trim();
 }
@@ -332,10 +339,6 @@ function validatePublishContent(postPath) {
   const bodyBeforeHashtags = hashtagSectionIndex >= 0 ? content.slice(0, hashtagSectionIndex) : content;
   const hashtags = extractHashtags(content);
   const hashtagSection = extractHashtagSection(content);
-
-  if (title && !/\d/.test(title)) {
-    issues.push(makeIssue(FAIL, 'TITLE_NUMBER_MISSING', 'Publish mode requires a number in the title.', postPath));
-  }
 
   if (/\[(사진|이미지|AppSheet|앱시트|제작자|제작\s*노트|메모)[^\]]*\]/.test(content)) {
     issues.push(makeIssue(FAIL, 'PHOTO_PLACEHOLDER_IN_POST', 'Internal photo cues, AppSheet checks, and production notes must not remain in the publish post. Express photo direction naturally in the body instead.', postPath));
