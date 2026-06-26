@@ -9,6 +9,8 @@ const requiredScripts = [
   'scripts/blog_quality_gate.js',
   'scripts/validate_data_schema.js',
   'scripts/check_freshness.js',
+  'scripts/validate_daily_report.js',
+  'scripts/validate_topic_scorecard.js',
   'scripts/summarize_ranking_changes.js',
 ];
 
@@ -57,10 +59,28 @@ const packageJson = JSON.parse(fs.readFileSync(fromRoot('package.json'), 'utf8')
   'check:freshness',
   'ranking:summary',
   'ops:daily',
+  'ops:weekly',
+  'test:ops-daily',
 ].forEach((scriptName) => {
   if (!packageJson.scripts || !packageJson.scripts[scriptName]) {
     throw new Error(`package.json scripts에 ${scriptName}가 없습니다.`);
   }
+});
+
+const opsDaily = packageJson.scripts['ops:daily'];
+[
+  'validate_daily_report.js',
+  'validate_topic_scorecard.js',
+  'check:freshness',
+].forEach((needle) => {
+  if (!opsDaily.includes(needle)) throw new Error(`ops:daily에 ${needle} 호출이 없습니다.`);
+});
+
+[
+  'track',
+  'ranking:summary',
+].forEach((needle) => {
+  if (opsDaily.includes(needle)) throw new Error(`ops:daily에 weekly/experimental 명령이 섞였습니다: ${needle}`);
 });
 
 console.log('자동화 룰 검증 완료');

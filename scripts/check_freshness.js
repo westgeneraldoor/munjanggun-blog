@@ -5,9 +5,12 @@ const { readJsonFile, writeTextFile } = require('./lib/file_store');
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 function parseArgs(argv) {
+  const weekly = argv.includes('--weekly');
+  const maxAgeArg = argv.find((arg) => arg.startsWith('--max-age-days='));
   return {
     strict: argv.includes('--strict'),
-    maxAgeDays: Number((argv.find((arg) => arg.startsWith('--max-age-days=')) || '').split('=')[1]) || 3,
+    weekly,
+    maxAgeDays: Number(maxAgeArg ? maxAgeArg.split('=')[1] : '') || (weekly ? 7 : 14),
   };
 }
 
@@ -30,14 +33,39 @@ function extractReportDate(filePath, labelPattern) {
   return match ? parseDate(match[1]) : null;
 }
 
+function fileMtimeDate(filePath) {
+  if (!fs.existsSync(filePath)) return null;
+  return fs.statSync(filePath).mtime;
+}
+
 function statusFor(age, maxAgeDays) {
   if (age === null) return 'FAIL';
   if (age > maxAgeDays) return 'WARN';
   return 'PASS';
 }
 
-function main() {
-  const options = parseArgs(process.argv.slice(2));
+function buildCheck(name, filePath, date, maxAgeDays) {
+  const age = date ? daysAgo(date) : null;
+  return {
+    name,
+    path: filePath,
+    date,
+    age,
+    status: statusFor(age, maxAgeDays),
+  };
+}
+
+function dailyKeywordChecks(maxAgeDays) {
+  return [
+    ['keyword_data.json', paths.dataRaw('keyword_data.json')],
+    ['keyword_data_product.json', paths.dataRaw('keyword_data_product.json')],
+    ['keyword_data_지역.json', paths.dataRaw('keyword_data_지역.json')],
+    ['keyword_data_product_relevant.json', paths.dataProcessed('keyword_data_product_relevant.json')],
+    ['keyword_data_지역_30이상.md', paths.dataProcessed('keyword_data_지역_30이상.md')],
+  ].map(([name, filePath]) => buildCheck(name, filePath, fileMtimeDate(filePath), maxAgeDays));
+}
+
+function weeklyRankingChecks(maxAgeDays) {
   const rankingReport = paths.outputReport('ranking_report.md');
   const top10Report = paths.outputReport('top10_analysis.md');
   const dashboard = paths.outputDashboard('ranking_dashboard.html');
@@ -48,44 +76,67 @@ function main() {
     : null;
 
   const checks = [
-    {
-      name: 'ranking_report.md',
-      path: rankingReport,
-      date: extractReportDate(rankingReport, /> 조회일:\s*(\d{4}-\d{2}-\d{2})/),
-    },
-    {
-      name: 'top10_analysis.md',
-      path: top10Report,
-      date: extractReportDate(top10Report, /> 분석일:\s*(\d{4}-\d{2}-\d{2})/),
-    },
-    {
-      name: 'tracking_history.json',
-      path: historyPath,
-      date: parseDate(latestHistory && latestHistory.date),
-    },
-  ].map((check) => {
-    const age = check.date ? daysAgo(check.date) : null;
-    return { ...check, age, status: statusFor(age, options.maxAgeDays) };
+    buildCheck(
+      'ranking_report.md',
+      rankingReport,
+      extractReportDate(rankingReport, /> 조회일:\s*(\d{4}-\d{2}-\d{2})/),
+      maxAgeDays
+    ),
+    buildCheck(
+      'top10_analysis.md',
+      top10Report,
+      extractReportDate(top10Report, /> 분석일:\s*(\d{4}-\d{2}-\d{2})/),
+      maxAgeDays
+    ),
+    buildCheck(
+      'tracking_history.json',
+      historyPath,
+      parseDate(latestHistory && latestHistory.date),
+      maxAgeDays
+    ),
+  ];
+
+  checks.push({
+    name: 'ranking_dashboard.html',
+    path: dashboard,
+    date: null,
+    age: null,
+    status: fs.existsSync(dashboard) ? 'PASS' : 'FAIL',
   });
 
-  const dashboardStatus = fs.existsSync(dashboard) ? 'PASS' : 'FAIL';
+  return checks;
+}
+
+function renderMarkdown({ checks, options }) {
+  const modeLabel = options.weekly ? 'weekly ranking/analysis' : 'daily keyword data';
   let md = `# 운영 산출물 최신성 점검\n\n`;
   md += `> 점검일: ${new Date().toISOString().split('T')[0]}\n`;
+  md += `> 모드: ${modeLabel}\n`;
   md += `> 기준: ${options.maxAgeDays}일 초과 시 경고\n\n`;
   md += `| 산출물 | 기준일 | 경과 | 상태 |\n`;
   md += `| --- | --- | --- | --- |\n`;
   checks.forEach((check) => {
-    md += `| ${check.name} | ${check.date ? check.date.toISOString().slice(0, 10) : '-'} | ${check.age === null ? '-' : `${check.age}일`} | ${check.status} |\n`;
+    const dateText = check.date ? check.date.toISOString().slice(0, 10) : check.status === 'PASS' ? '파일 존재' : '-';
+    const ageText = check.age === null ? '-' : `${check.age}일`;
+    md += `| ${check.name} | ${dateText} | ${ageText} | ${check.status} |\n`;
   });
-  md += `| ranking_dashboard.html | 파일 존재 | - | ${dashboardStatus} |\n`;
+  return md;
+}
 
+function main() {
+  const options = parseArgs(process.argv.slice(2));
+  const checks = options.weekly
+    ? weeklyRankingChecks(options.maxAgeDays)
+    : dailyKeywordChecks(options.maxAgeDays);
+
+  const md = renderMarkdown({ checks, options });
   const outputPath = paths.outputReport('freshness_check.md');
   writeTextFile(outputPath, md);
 
   console.log(md);
   console.log(`저장: ${outputPath}`);
 
-  const hasFail = checks.some((check) => check.status === 'FAIL') || dashboardStatus === 'FAIL';
+  const hasFail = checks.some((check) => check.status === 'FAIL');
   const hasWarn = checks.some((check) => check.status === 'WARN');
   if (hasFail || (options.strict && hasWarn)) process.exit(1);
 }

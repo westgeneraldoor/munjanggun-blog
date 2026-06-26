@@ -31,6 +31,7 @@
 | `docs/operations/DAILY_SEO_ROUTINE.md` | ACTIVE_ROUTINE | 일일 유입경로, 검색어, 게시글 TOP20 기록 방식 |
 | `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` | GENERATED | 실제 유입어, TOP20, 작성일, 다음 액션 |
 | `docs/operations/TOPIC_SELECTION_SCORECARD.md` | ACTIVE_ROUTINE | 광고 API 시장 수요 + 블로그 실제 반응 + 문장군 필터 기준 |
+| `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | GENERATED | 신규 글감 후보별 scorecard. 현재 누락 시 `ops:daily` WARN |
 | `docs/strategy/POSTING_REGISTRY.md` | ACTIVE_ROUTINE | 기존 글 URL, 다룬 소재, 중복/카니발 위험 |
 | `docs/strategy/CONTENT_PLAN.md` | ACTIVE_ROUTINE | 현재 큐와 미작성/원고완료 상태 |
 | `docs/strategy/POSTING_EXCLUSION_RULES.md` | ACTIVE_STANDARD | 제외 키워드, 검색어 전환, 취급 가능/불가 |
@@ -61,6 +62,7 @@
 | `docs/operations/BLOG_QUALITY_GATE.md` | ACTIVE_CORE | CLI가 막아야 하는 하드 FAIL 기준 |
 | `npm run validate:posts` | 실행 | 포스트 단위 자동 검수 |
 | `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` | 실행 | 발행 제어 하드게이트 |
+| `npm run ops:daily` | 실행 | daily report, topic scorecard, keyword data freshness 확인 |
 
 ## 6. 주간/보조 분석
 
@@ -71,6 +73,7 @@
 | `outputs/reports/ranking_report.md` | GENERATED | experimental 순위 참고 자료 |
 | `npm run track` | 실행 | experimental 순위 추적 |
 | `npm run ranking:summary` | 실행 | experimental 순위 변화 요약 |
+| `npm run ops:weekly` | 실행 | ranking/top10/tracking history 보조 지표 주간 점검 |
 
 주의: ranking 산출물은 보호 글, 리라이팅, 신규 글감의 단독 근거가 아니다.
 
@@ -97,10 +100,9 @@
 
 이번 색인 정리 범위에서는 아래를 구현하지 않는다.
 
-- `ops:daily`를 실제 daily report 검증 명령으로 바꾸기
-- topic scorecard 산출물 자동 검증
-- ranking freshness를 weekly/experimental로 분리하는 스크립트 수정
+- topic scorecard 누락을 WARN에서 hard fail로 올릴지 판단
+- 날짜별 topic scorecard 자동 생성
 - `POSTING_REGISTRY.md` 구조 분리
 - archive 후보 문서 실제 이동
 
-이 항목들은 운영 루틴 강제화 PR에서 처리한다.
+이 항목들은 운영 루틴 고도화 후속 PR에서 처리한다.

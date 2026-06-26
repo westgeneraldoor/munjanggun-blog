@@ -82,6 +82,7 @@ YYYY-MM-DD 문장군 데일리 현황 보고
 
 ```text
 outputs/reports/daily/2026-06-15_seo_watch.md
+outputs/reports/topic_candidates/2026-06-15_topic_scorecard.md
 data/naver/daily/2026-06-15/  # 로컬 전용, Git 커밋 금지
 ```
 
@@ -124,6 +125,28 @@ data/naver/daily/2026-06-15/  # 로컬 전용, Git 커밋 금지
 | 중복소재 | 이미 같은 비교/체크리스트를 다뤘으면 감점 |
 
 상세 점수표와 후보 보고 형식은 `docs/operations/TOPIC_SELECTION_SCORECARD.md`를 따른다.
+
+## 운영 명령어
+
+매일 통계 정리 후 아래 명령어를 실행한다.
+
+```powershell
+npm run ops:daily
+```
+
+`ops:daily`는 아래를 확인한다.
+
+| 항목 | 처리 |
+| --- | --- |
+| daily report 존재/필수 섹션 | 누락 시 FAIL |
+| topic scorecard 산출물 | 1차 운영에서는 누락 시 WARN |
+| 키워드 데이터 최신성 | 누락 시 FAIL, 오래되면 WARN |
+
+순위 리포트와 TOP10 분석은 daily 필수에서 제외하고 주간 보조 점검으로 분리한다.
+
+```powershell
+npm run ops:weekly
+```
 
 ## 판단 등급
 
