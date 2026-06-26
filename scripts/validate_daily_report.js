@@ -33,6 +33,18 @@ const REQUIRED_SECTIONS = [
   },
 ];
 
+const PLACEHOLDER_VALUES = new Set([
+  '-',
+  'todo',
+  'TODO',
+  '작성 예정',
+  '추후 작성',
+  '미정',
+  '없음',
+  'N/A',
+  'n/a',
+]);
+
 function parseArgs(argv) {
   const args = {
     reportsDir: path.join(paths.outputReport('daily')),
@@ -116,17 +128,30 @@ function sectionBody(lines, headingIndex) {
   return body.join('\n');
 }
 
-function hasMeaningfulBody(body) {
-  const cleaned = body
+function normalizeContentLines(body) {
+  return body
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line)
+    .filter((line) => !/^#{1,6}\s+/.test(line))
     .filter((line) => !/^[-|:\s]+$/.test(line))
     .filter((line) => !/^\|\s*-+/.test(line))
     .filter((line) => !/^>\s*$/.test(line))
-    .join('\n')
-    .trim();
-  return cleaned.length > 0;
+    .map((line) => line.replace(/^[-*]\s+/, '').trim())
+    .filter((line) => line);
+}
+
+function isPlaceholderText(value) {
+  const normalized = String(value || '').trim();
+  if (!normalized) return true;
+  if (PLACEHOLDER_VALUES.has(normalized)) return true;
+  return /^(todo|작성 예정|추후 작성|미정|n\/a)$/i.test(normalized);
+}
+
+function hasMeaningfulBody(body) {
+  const lines = normalizeContentLines(body);
+  if (lines.length === 0) return false;
+  return lines.some((line) => !isPlaceholderText(line));
 }
 
 function validateDailyReport(filePath, options = {}) {
@@ -169,7 +194,7 @@ function validateDailyReport(filePath, options = {}) {
 
     const body = sectionBody(lines, headingIndex);
     if (!hasMeaningfulBody(body)) {
-      result.fails.push(`${section.label} 섹션이 비어 있습니다.`);
+      result.fails.push(`${section.label} 섹션이 비어 있거나 placeholder만 있습니다. 실제 내용을 입력해야 합니다.`);
     }
   });
 
