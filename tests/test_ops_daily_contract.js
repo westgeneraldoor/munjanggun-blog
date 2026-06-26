@@ -149,6 +149,27 @@ function testDailyReportEmptySectionFails() {
   }
 }
 
+function testDailyReportPlaceholderSectionFails() {
+  const dir = makeTempDir('daily-report-placeholder-');
+  try {
+    writeFile(
+      path.join(dir, '2026-06-24_seo_watch.md'),
+      validDailyReport().replace(
+        '## 6. 다음 액션\n\n1. 091 유리 비교 글 보호 관찰\n2. 094 거주중 중문시공 TOP20 유지 여부 확인',
+        '## 6. 다음 액션\n\n- 작성 예정'
+      )
+    );
+
+    const result = runNode([dailyCli, '--reports-dir', dir, '--date', '2026-06-24']);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /다음 액션/);
+    assert.match(result.stdout, /placeholder|작성 예정|실제 내용/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
 function testValidTopicScorecardPasses() {
   const dir = makeTempDir('topic-scorecard-');
   try {
@@ -162,6 +183,36 @@ function testValidTopicScorecardPasses() {
   } finally {
     removeDir(dir);
   }
+}
+
+function testTopicScorecardEmptyFieldFails() {
+  const dir = makeTempDir('topic-scorecard-empty-');
+  try {
+    writeFile(
+      path.join(dir, '2026-06-25_topic_scorecard.md'),
+      validScorecard().replace(
+        '- 광고 API 시장 수요: 상',
+        '- 광고 API 시장 수요:'
+      )
+    );
+
+    const result = runNode([scorecardCli, '--dir', dir, '--latest']);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /광고 API 시장 수요/);
+    assert.match(result.stdout, /비어|empty/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testTopicScorecardTemplateFileFails() {
+  const templatePath = path.join(root, 'outputs', 'reports', 'topic_candidates', 'TOPIC_SCORECARD_TEMPLATE.md');
+
+  const result = runNode([scorecardCli, '--file', templatePath]);
+
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /template|템플릿/i);
 }
 
 function testTopicScorecardMissingFieldFails() {
@@ -210,7 +261,10 @@ function main() {
   testValidDailyReportPasses();
   testDailyReportMissingTop20Fails();
   testDailyReportEmptySectionFails();
+  testDailyReportPlaceholderSectionFails();
   testValidTopicScorecardPasses();
+  testTopicScorecardEmptyFieldFails();
+  testTopicScorecardTemplateFileFails();
   testTopicScorecardMissingFieldFails();
   testOpsDailyScriptUsesDailyContract();
   testFreshnessDefaultExcludesRanking();

@@ -14,6 +14,21 @@ const REQUIRED_FIELDS = [
   '최종 판정',
 ];
 
+const PLACEHOLDER_VALUES = new Set([
+  '',
+  '-',
+  'TODO',
+  'todo',
+  '작성 예정',
+  '추후 작성',
+  '미정',
+  '없음',
+  'N/A',
+  'n/a',
+  '주제명',
+  'YYYY-MM-DD',
+]);
+
 function parseArgs(argv) {
   const args = {
     dir: paths.outputReport(path.join('topic_candidates')),
@@ -62,6 +77,31 @@ function resolveScorecard(args) {
   return scorecards.length > 0 ? path.join(args.dir, scorecards[0]) : null;
 }
 
+function escapeRegExp(value) {
+  return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function isTemplateFile(filePath) {
+  return /TOPIC_SCORECARD_TEMPLATE\.md$/i.test(path.basename(filePath || ''));
+}
+
+function isPlaceholderValue(value) {
+  const normalized = String(value || '').trim();
+  if (PLACEHOLDER_VALUES.has(normalized)) return true;
+  return /^(todo|작성 예정|추후 작성|미정|n\/a)$/i.test(normalized);
+}
+
+function fieldValues(content, field) {
+  const pattern = new RegExp(`^\\s*-\\s*${escapeRegExp(field)}\\s*:[ \\t]*(.*)$`, 'gm');
+  const values = [];
+  let match = pattern.exec(content);
+  while (match) {
+    values.push(match[1].trim());
+    match = pattern.exec(content);
+  }
+  return values;
+}
+
 function validateTopicScorecard(filePath, options = {}) {
   const result = {
     status: 'ALLOW',
@@ -81,10 +121,27 @@ function validateTopicScorecard(filePath, options = {}) {
     return result;
   }
 
+  if (isTemplateFile(filePath)) {
+    result.status = 'BLOCK';
+    result.fails.push('TOPIC_SCORECARD_TEMPLATE.md는 실제 scorecard로 인정하지 않습니다.');
+    return result;
+  }
+
   const content = fs.readFileSync(filePath, 'utf8');
   REQUIRED_FIELDS.forEach((field) => {
-    const pattern = new RegExp(`${field}\\s*:`);
-    if (!pattern.test(content)) result.fails.push(`${field} 항목이 없습니다.`);
+    const values = fieldValues(content, field);
+    if (values.length === 0) {
+      result.fails.push(`${field} 항목이 없습니다.`);
+      return;
+    }
+
+    values.forEach((value, index) => {
+      if (value === '') {
+        result.fails.push(`${field} 항목 ${index + 1}의 값이 비어 있습니다.`);
+      } else if (isPlaceholderValue(value)) {
+        result.fails.push(`${field} 항목 ${index + 1}의 값이 placeholder입니다: ${value}`);
+      }
+    });
   });
 
   if (!/^##\s+후보\s+/m.test(content)) {
