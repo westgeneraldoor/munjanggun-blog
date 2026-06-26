@@ -279,9 +279,10 @@ posts/3연동중문_리라이팅.md   # 번호 없음
 | `npm run validate:posts` | 068번 이후 원고 품질 게이트. fail은 발행 전 수정 |
 | `npm run validate:posts:strict` | warning까지 실패 처리하는 강한 검수 |
 | `npm run validate:data` | config, 순위 이력, 등록부 형식 검증 |
-| `npm run check:freshness` | 순위/TOP10/대시보드 최신성 점검 |
+| `npm run check:freshness` | daily 키워드 데이터 최신성 점검 |
 | `npm run ranking:summary` | experimental 순위 변화 요약. URL 기반 추적 전까지 자동 의사결정 금지 |
-| `npm run ops:daily` | 일일 운영 점검. URL 기반 순위 추적은 포함하지 않음 |
+| `npm run ops:daily` | daily report, topic scorecard(WARN), 키워드 데이터 최신성 점검. URL 기반 순위 추적은 포함하지 않음 |
+| `npm run ops:weekly` | ranking/top10/tracking history 보조 지표 주간 점검 |
 
 ## 10. 다음 작업 추천
 
