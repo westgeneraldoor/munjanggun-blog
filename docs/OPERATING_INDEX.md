@@ -32,9 +32,9 @@
 | `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` | GENERATED | 실제 유입어, TOP20, 작성일, 다음 액션 |
 | `docs/operations/TOPIC_SELECTION_SCORECARD.md` | ACTIVE_ROUTINE | 광고 API 시장 수요 + 블로그 실제 반응 + 문장군 필터 기준 |
 | `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | GENERATED | 신규 글감 후보별 scorecard. 현재 누락 시 `ops:daily` WARN |
-| `docs/strategy/ACTIVE_TOPIC_QUEUE.md` | ACTIVE_ROUTINE | daily 다음 액션을 보호/발행대기/scorecard필요/관찰/제외 상태로 닫는 실행판 |
+| `docs/strategy/ACTIVE_TOPIC_QUEUE.md` | ACTIVE_ROUTINE | daily 다음 액션을 Q-ID, lane, status로 닫는 실행판 |
 | `docs/strategy/POSTING_REGISTRY.md` | ACTIVE_ROUTINE | 기존 글 URL, 다룬 소재, 중복/카니발 위험 |
-| `docs/strategy/CONTENT_PLAN.md` | ACTIVE_ROUTINE | 현재 큐와 미작성/원고완료 상태 |
+| `docs/strategy/CONTENT_PLAN.md` | ACTIVE_ROUTINE | 장기 전략, 슬롯 이력, 실행판 링크 |
 | `docs/strategy/POSTING_EXCLUSION_RULES.md` | ACTIVE_STANDARD | 제외 키워드, 검색어 전환, 취급 가능/불가 |
 | `data/raw/keyword_data_product.md` | GENERATED | 네이버 광고 API 제품/서비스 키워드 수요 |
 | `data/raw/keyword_data_지역.md` | GENERATED | 네이버 광고 API 지역 키워드 수요 |
