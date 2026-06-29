@@ -27,3 +27,6 @@ data/private/
 # Operating System files
 .DS_Store
 Thumbs.db
+
+# Local editor workspaces
+.obsidian/
