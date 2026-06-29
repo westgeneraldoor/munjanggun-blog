@@ -7,6 +7,7 @@ const { spawnSync } = require('child_process');
 const root = path.resolve(__dirname, '..');
 const dailyCli = path.join(root, 'scripts', 'validate_daily_report.js');
 const scorecardCli = path.join(root, 'scripts', 'validate_topic_scorecard.js');
+const freshnessReport = path.join(root, 'outputs', 'reports', 'freshness_check.md');
 
 function makeTempDir(prefix) {
   return fs.mkdtempSync(path.join(os.tmpdir(), prefix));
@@ -170,6 +171,24 @@ function testDailyReportPlaceholderSectionFails() {
   }
 }
 
+function testDailyReportContradictoryMissingFileFails() {
+  const dir = makeTempDir('daily-report-contradiction-');
+  try {
+    writeFile(path.join(dir, '2026-06-23_seo_watch.md'), validDailyReport());
+    writeFile(
+      path.join(dir, '2026-06-24_seo_watch.md'),
+      `${validDailyReport()}\n\n## 7. 23일 자료 상태\n\n파일 \`outputs/reports/daily/2026-06-23_seo_watch.md\`도 아직 없다.\n`
+    );
+
+    const result = runNode([dailyCli, '--reports-dir', dir, '--date', '2026-06-24']);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /claims missing file that exists/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
 function testValidTopicScorecardPasses() {
   const dir = makeTempDir('topic-scorecard-');
   try {
@@ -238,16 +257,27 @@ function testOpsDailyScriptUsesDailyContract() {
   assert(opsDaily.includes('validate_daily_report.js'), opsDaily);
   assert(opsDaily.includes('validate_topic_scorecard.js'), opsDaily);
   assert(opsDaily.includes('check:freshness'), opsDaily);
+  assert(opsDaily.includes('validate_active_queue.js'), opsDaily);
   assert(!opsDaily.includes('track'), opsDaily);
   assert(!opsDaily.includes('ranking:summary'), opsDaily);
+
+  const opsDailyCheck = packageJson.scripts['ops:daily:check'];
+  assert(opsDailyCheck.includes('ops:daily'), opsDailyCheck);
 }
 
 function testFreshnessDefaultExcludesRanking() {
+  const before = fs.existsSync(freshnessReport) ? fs.readFileSync(freshnessReport, 'utf8') : null;
+  const beforeMtime = fs.existsSync(freshnessReport) ? fs.statSync(freshnessReport).mtimeMs : null;
   const result = runNode([path.join(root, 'scripts', 'check_freshness.js')]);
   assert.strictEqual(result.status, 0, result.stderr || result.stdout);
   assert(!result.stdout.includes('ranking_report.md'), result.stdout);
   assert(!result.stdout.includes('tracking_history.json'), result.stdout);
   assert.match(result.stdout, /keyword_data/);
+  assert.match(result.stdout, /report not written/);
+  const after = fs.existsSync(freshnessReport) ? fs.readFileSync(freshnessReport, 'utf8') : null;
+  const afterMtime = fs.existsSync(freshnessReport) ? fs.statSync(freshnessReport).mtimeMs : null;
+  assert.strictEqual(after, before, 'check_freshness.js should not write by default');
+  assert.strictEqual(afterMtime, beforeMtime, 'check_freshness.js should not touch mtime by default');
 }
 
 function testFreshnessWeeklyIncludesRanking() {
@@ -262,6 +292,7 @@ function main() {
   testDailyReportMissingTop20Fails();
   testDailyReportEmptySectionFails();
   testDailyReportPlaceholderSectionFails();
+  testDailyReportContradictoryMissingFileFails();
   testValidTopicScorecardPasses();
   testTopicScorecardEmptyFieldFails();
   testTopicScorecardTemplateFileFails();

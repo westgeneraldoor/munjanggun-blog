@@ -234,7 +234,7 @@ outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md
 
 - 네이버 블로그 실제 유입어와 게시글 TOP20을 기록한다.
 - 단일 날짜 반짝 검색어만으로 방향을 고정하지 않는다.
-- 신규 글감 후보를 제안했다면 topic scorecard를 남긴다. 현재 `ops:daily`에서는 누락을 WARN으로 표시한다.
+- 신규 글감 후보를 제안했다면 topic scorecard를 남긴다. daily의 다음 액션은 `docs/strategy/ACTIVE_TOPIC_QUEUE.md`에 먼저 반영하고, scorecard가 필요한 후보는 `scorecard_needed`로 표시한다. 현재 `ops:daily`에서는 scorecard 누락을 WARN으로 표시한다.
 
 매주:
 
