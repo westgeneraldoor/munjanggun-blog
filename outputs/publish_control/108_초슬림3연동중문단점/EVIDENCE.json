@@ -1,0 +1,21 @@
+{
+  "source_type": "appsheet_field_story_slot",
+  "evidence_refs": [
+    "APPSHEET_FIELD_SLOT_108_SLIM_THREE_PANEL_LIMITATIONS"
+  ],
+  "quote_status": "none",
+  "privacy_status": "anonymized",
+  "evidence_scope": {
+    "product": "초슬림3연동중문",
+    "case_type": "slim_three_panel_limitations",
+    "field_conditions": [
+      "중문틀 고정면",
+      "신발장 간섭",
+      "유리 면적과 시선 차단",
+      "바닥 레일과 수평",
+      "현관 조도"
+    ]
+  },
+  "notes": "본문은 특정 고객 원문 인용이 아니라 실제 AppSheet 현장 사진으로 후매칭 가능한 현장 조건형 서사 슬롯이다. 발행 전 직원이 실제 지역, 아파트명, Before/After 사진을 근거 있는 범위에서 치환할 수 있다."
+}
+

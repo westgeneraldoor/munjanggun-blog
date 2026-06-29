@@ -1,0 +1,21 @@
+{
+  "source_type": "appsheet_field_story_slot",
+  "evidence_refs": [
+    "APPSHEET_FIELD_SLOT_109_AUTO_DOOR_LIMITATIONS"
+  ],
+  "quote_status": "none",
+  "privacy_status": "anonymized",
+  "evidence_scope": {
+    "product": "자동중문",
+    "case_type": "auto_door_limitations_and_fault_concerns",
+    "field_conditions": [
+      "전기선 위치",
+      "센서 위치",
+      "구동부와 프레임 상부",
+      "신발장 문 열림",
+      "바닥 레일과 수평"
+    ]
+  },
+  "notes": "본문은 특정 고객 원문 인용이 아니라 실제 AppSheet 현장 사진으로 후매칭 가능한 현장 조건형 서사 슬롯이다. 발행 전 직원이 실제 지역, 아파트명, Before/After 사진을 근거 있는 범위에서 치환할 수 있다."
+}
+

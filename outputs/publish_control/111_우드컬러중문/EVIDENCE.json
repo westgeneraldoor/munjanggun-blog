@@ -1,0 +1,21 @@
+{
+  "source_type": "appsheet_field_story_slot",
+  "evidence_refs": [
+    "APPSHEET_FIELD_SLOT_111_WOOD_TONE_DOOR_MATCHING"
+  ],
+  "quote_status": "none",
+  "privacy_status": "anonymized",
+  "evidence_scope": {
+    "product": "우드 컬러 중문",
+    "case_type": "wood_tone_door_color_matching",
+    "field_conditions": [
+      "신발장 색상",
+      "바닥 타일",
+      "현관 조명",
+      "유리 종류",
+      "간살과 프레임 조합",
+      "실제 원목 중문이 아닌 우드톤 컬러 또는 프레임 조합 안내"
+    ]
+  },
+  "notes": "본문은 특정 고객 원문 인용이 아니라 실제 AppSheet 현장 사진으로 후매칭 가능한 현장 조건형 서사 슬롯이다. 발행 전 직원이 실제 지역, 아파트명, Before/After 사진을 근거 있는 범위에서 치환할 수 있다."
+}
