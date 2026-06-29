@@ -10,6 +10,15 @@
 > ⛔ **현관문 제외:** 현관문 관련 키워드 일체 CONTENT_PLAN 포함 금지 (DEC-017)
 > ⛔ **9mm 문선 제한:** 9mm 문선은 검색어 대응·비교 설명만 가능하다. 문장군 시공 가능 서비스로 쓰지 않는다. 문장군 기준은 12mm슬림문선 세트다.
 
+## 0. 현재 실행판
+
+최신 키워드 실행판은 `docs/strategy/ACTIVE_TOPIC_QUEUE.md`를 기준으로 한다.
+
+- daily report는 증거 로그다.
+- ACTIVE_TOPIC_QUEUE.md는 실행판이다.
+- CONTENT_PLAN.md는 장기 전략/슬롯 이력이다.
+- POSTING_REGISTRY.md는 발행/URL/중복 원장이다.
+
 ---
 
 ## 1. 4대 핵심 시리즈 구조

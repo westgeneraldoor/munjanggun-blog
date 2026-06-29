@@ -200,7 +200,7 @@ function validateFile(filePath, options) {
 
   if (title && !/\d/.test(title)) addIssue(issues, 'warn', '제목에 숫자가 없습니다.');
   if (title && /[?？]|할까|인가|일까|는지|뭘까|어떨까/.test(title)) {
-    addIssue(issues, 'fail', '질문형 제목은 금지입니다.');
+    addIssue(issues, 'warn', '질문형 제목입니다. 핵심 키워드와 고객 불안/의심이 살아 있는 고객불안형 제목인지 확인하세요.');
   }
   if (title && title.replace(/\s/g, '') === '중문') {
     addIssue(issues, 'fail', '`중문` 단독 제목은 금지입니다.');

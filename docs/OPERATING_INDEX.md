@@ -32,13 +32,16 @@
 | `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` | GENERATED | 실제 유입어, TOP20, 작성일, 다음 액션 |
 | `docs/operations/TOPIC_SELECTION_SCORECARD.md` | ACTIVE_ROUTINE | 광고 API 시장 수요 + 블로그 실제 반응 + 문장군 필터 기준 |
 | `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | GENERATED | 신규 글감 후보별 scorecard. 현재 누락 시 `ops:daily` WARN |
+| `docs/strategy/ACTIVE_TOPIC_QUEUE.md` | ACTIVE_ROUTINE | daily 다음 액션을 Q-ID, lane, status로 닫는 실행판 |
 | `docs/strategy/POSTING_REGISTRY.md` | ACTIVE_ROUTINE | 기존 글 URL, 다룬 소재, 중복/카니발 위험 |
-| `docs/strategy/CONTENT_PLAN.md` | ACTIVE_ROUTINE | 현재 큐와 미작성/원고완료 상태 |
+| `docs/strategy/CONTENT_PLAN.md` | ACTIVE_ROUTINE | 장기 전략, 슬롯 이력, 실행판 링크 |
 | `docs/strategy/POSTING_EXCLUSION_RULES.md` | ACTIVE_STANDARD | 제외 키워드, 검색어 전환, 취급 가능/불가 |
 | `data/raw/keyword_data_product.md` | GENERATED | 네이버 광고 API 제품/서비스 키워드 수요 |
 | `data/raw/keyword_data_지역.md` | GENERATED | 네이버 광고 API 지역 키워드 수요 |
 
 주의: `outputs/reports/ranking_report.md`는 daily 글감 선정의 자동 근거가 아니다. URL 기반 추적 구현 전까지 weekly/experimental 참고로만 쓴다.
+
+글감 선정의 기본 순서는 `키워드 → 고객 상황 → 고객 불안 문장 → 제목 후보 → 문장군 필터`다. 광고 API와 daily 유입어는 검색 수요를 확인하는 뼈대이고, 최종 제목은 고객이 검색창에 치기 직전의 말에 가깝게 만든다.
 
 ## 4. 원고 작성 시 필수
 
@@ -62,7 +65,7 @@
 | `docs/operations/BLOG_QUALITY_GATE.md` | ACTIVE_CORE | CLI가 막아야 하는 하드 FAIL 기준 |
 | `npm run validate:posts` | 실행 | 포스트 단위 자동 검수 |
 | `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` | 실행 | 발행 제어 하드게이트 |
-| `npm run ops:daily` | 실행 | daily report, topic scorecard, keyword data freshness 확인 |
+| `npm run ops:daily` | 실행 | daily report, topic scorecard, keyword data freshness, active topic queue 확인 |
 
 ## 6. 주간/보조 분석
 
