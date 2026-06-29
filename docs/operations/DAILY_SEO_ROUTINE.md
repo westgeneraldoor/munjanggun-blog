@@ -11,6 +11,7 @@
 - 하루 데이터로 결론을 확정하지 않고, 7일 누적과 14일 누적을 우선 판단 기준으로 본다.
 - 현관문/방화문처럼 제외 결정된 소재는 유입이 있어도 글감으로 확장하지 않는다.
 - 신규 글감은 일일 유입어만으로 확정하지 않는다. `docs/operations/TOPIC_SELECTION_SCORECARD.md`에 따라 네이버 광고 API 시장 수요와 블로그 실제 반응을 함께 본다.
+- daily report는 증거 로그다. 보고서의 다음 액션은 `docs/strategy/ACTIVE_TOPIC_QUEUE.md`에서 보호, 발행대기, scorecard 필요, 관찰, 제외 중 하나로 닫는다.
 
 ## 매일 받으면 좋은 정보
 
@@ -141,6 +142,7 @@ npm run ops:daily
 | daily report 존재/필수 섹션 | 누락 시 FAIL |
 | topic scorecard 산출물 | 1차 운영에서는 누락 시 WARN |
 | 키워드 데이터 최신성 | 누락 시 FAIL, 오래되면 WARN |
+| active topic queue | 컬럼/상태/금지 키워드/발행대기 링크 누락 시 FAIL |
 
 순위 리포트와 TOP10 분석은 daily 필수에서 제외하고 주간 보조 점검으로 분리한다.
 

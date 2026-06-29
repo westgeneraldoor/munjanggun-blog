@@ -19,7 +19,7 @@
 3. 중앙 브랜드 연결 기준: `docs/brand/BRAND_SOURCE.md`, `docs/brand/BLOG_BRAND_ADAPTER.md`
 4. 발행 안전 기준: `docs/operations/BLOG_QUALITY_GATE.md`, `docs/operations/BLOG_PUBLISH_WORKFLOW.md`
 5. 원고 작성 기준: `docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md`, `docs/operations/SINGLE_POST_FILE_STANDARD.md`, `docs/operations/FIELD_STORY_SECTION_STANDARD.md`
-6. 전략/운영 데이터: `docs/strategy/POSTING_REGISTRY.md`, `docs/strategy/CONTENT_PLAN.md`, `outputs/reports/daily/`
+6. 전략/운영 데이터: `docs/strategy/ACTIVE_TOPIC_QUEUE.md`, `docs/strategy/POSTING_REGISTRY.md`, `docs/strategy/CONTENT_PLAN.md`, `outputs/reports/daily/`
 7. 참고/과거 문서: 감사 리포트, 날짜형 분석 문서, experimental 리포트
 
 문서별 역할과 읽는 순서는 `docs/OPERATING_INDEX.md`를 따른다.
@@ -49,7 +49,7 @@
 
 중요: 키워드는 검색 유입의 근본이다. 다만 키워드명을 그대로 제목으로 쓰는 것이 글감은 아니다. 신규 글감은 `시장 키워드/실제 유입어 → 고객 상황 → 고객 불안/의심 문장 → 제목 후보 → 문장군 취급 가능성/중복/게이트 검증` 순서로 만든다. 검색 키워드는 반드시 제목과 본문 앞부분에 자연스럽게 반영하되, 제목은 고객이 검색창에 치기 직전의 말에 가깝게 만든다.
 
-신규 글감 후보는 가능하면 `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md`로 남긴다. 현재 `ops:daily`는 scorecard 누락을 WARN으로 보여주며, 바로 발행 하드 FAIL로 연결하지 않는다.
+신규 글감 후보는 가능하면 `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md`로 남긴다. daily의 다음 액션은 `docs/strategy/ACTIVE_TOPIC_QUEUE.md`의 기존 항목 갱신 또는 신규 행 추가로 닫는다. 현재 `ops:daily`는 scorecard 누락을 WARN으로 보여주며, 바로 발행 하드 FAIL로 연결하지 않는다.
 
 ## 원고 작성 핵심 계약
 
@@ -116,7 +116,7 @@ npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json
 - daily 판단의 기준은 네이버 통계 유입어, 게시글 TOP20, TOP20 작성일, daily seo watch 리포트다.
 - `ranking_report.md`와 `track_ranking.js`는 URL 기반 추적 구현 전까지 weekly/experimental 참고 자료다.
 - ranking 결과만으로 신규 글감, 리라이팅, 보호 글을 결정하지 않는다.
-- `npm run ops:daily`는 최신 daily report 형식, topic scorecard 존재 여부(WARN), 키워드 데이터 최신성을 확인한다.
+- `npm run ops:daily`는 최신 daily report 형식, topic scorecard 존재 여부(WARN), 키워드 데이터 최신성, active topic queue 계약을 확인한다.
 - `npm run ops:weekly`는 ranking/top10/tracking history처럼 weekly/experimental 성격의 보조 지표를 확인한다.
 
 ## 저장 규칙
@@ -126,5 +126,6 @@ npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json
 - 검수 결과: `outputs/checks/NNN_키워드_check.md`
 - 발행 제어: `outputs/publish_control/NNN_키워드/STATUS.md`, `APPROVAL_LOG.md`, 필요 시 `EVIDENCE.json`
 - daily report: `outputs/reports/daily/YYYY-MM-DD_seo_watch.md`
+- active topic queue: `docs/strategy/ACTIVE_TOPIC_QUEUE.md`
 
 원본 통계 파일, 관리자 화면 스크린샷, 고객 개인정보, AppSheet 원본, 비공개 리뷰/사진 원본은 공개 저장소에 커밋하지 않는다. 보안 기준은 `docs/operations/DATA_SECURITY_POLICY.md`를 따른다.

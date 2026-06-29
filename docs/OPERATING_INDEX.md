@@ -32,6 +32,7 @@
 | `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` | GENERATED | 실제 유입어, TOP20, 작성일, 다음 액션 |
 | `docs/operations/TOPIC_SELECTION_SCORECARD.md` | ACTIVE_ROUTINE | 광고 API 시장 수요 + 블로그 실제 반응 + 문장군 필터 기준 |
 | `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | GENERATED | 신규 글감 후보별 scorecard. 현재 누락 시 `ops:daily` WARN |
+| `docs/strategy/ACTIVE_TOPIC_QUEUE.md` | ACTIVE_ROUTINE | daily 다음 액션을 보호/발행대기/scorecard필요/관찰/제외 상태로 닫는 실행판 |
 | `docs/strategy/POSTING_REGISTRY.md` | ACTIVE_ROUTINE | 기존 글 URL, 다룬 소재, 중복/카니발 위험 |
 | `docs/strategy/CONTENT_PLAN.md` | ACTIVE_ROUTINE | 현재 큐와 미작성/원고완료 상태 |
 | `docs/strategy/POSTING_EXCLUSION_RULES.md` | ACTIVE_STANDARD | 제외 키워드, 검색어 전환, 취급 가능/불가 |
@@ -64,7 +65,7 @@
 | `docs/operations/BLOG_QUALITY_GATE.md` | ACTIVE_CORE | CLI가 막아야 하는 하드 FAIL 기준 |
 | `npm run validate:posts` | 실행 | 포스트 단위 자동 검수 |
 | `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` | 실행 | 발행 제어 하드게이트 |
-| `npm run ops:daily` | 실행 | daily report, topic scorecard, keyword data freshness 확인 |
+| `npm run ops:daily` | 실행 | daily report, topic scorecard, keyword data freshness, active topic queue 확인 |
 
 ## 6. 주간/보조 분석
 
