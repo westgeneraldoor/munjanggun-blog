@@ -258,11 +258,16 @@ function testOpsDailyScriptUsesDailyContract() {
   assert(opsDaily.includes('validate_topic_scorecard.js'), opsDaily);
   assert(opsDaily.includes('check:freshness'), opsDaily);
   assert(opsDaily.includes('validate_active_queue.js'), opsDaily);
+  assert(opsDaily.includes('--latest-daily'), opsDaily);
   assert(!opsDaily.includes('track'), opsDaily);
   assert(!opsDaily.includes('ranking:summary'), opsDaily);
 
   const opsDailyCheck = packageJson.scripts['ops:daily:check'];
   assert(opsDailyCheck.includes('ops:daily'), opsDailyCheck);
+
+  const opsDailyWrite = packageJson.scripts['ops:daily:write'];
+  assert(opsDailyWrite.includes('ops:daily'), opsDailyWrite);
+  assert(opsDailyWrite.includes('--write-report'), opsDailyWrite);
 }
 
 function testFreshnessDefaultExcludesRanking() {

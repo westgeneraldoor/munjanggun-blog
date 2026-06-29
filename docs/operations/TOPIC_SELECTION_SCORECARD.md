@@ -184,6 +184,17 @@ node scripts/fetch_keyword_data_product.js
 | 블로그 유입 있음 + AppSheet 사진 연결 어려움 | 보류 또는 일반 정보글로 축소 |
 | 기존 글과 거의 겹침 | 제목만 바꾸지 말고 관점 재설계 |
 
+## 포트폴리오 역할
+
+후보마다 `portfolio_lane`과 `expected_role`을 명시한다. 이것은 글감의 좋고 나쁨만 보는 항목이 아니라, 일 2,000 조회수 목표 안에서 어떤 임무를 맡는지 판단하는 항목이다.
+
+| portfolio_lane | expected_role | 판단 |
+| --- | --- | --- |
+| protect | 조회수 방어 | 이미 성과가 있는 키워드를 보호하고 내부링크/후속 글로 확장 |
+| attack | 신규 유입 확대 | 시장 수요가 크지만 현재 블로그 성과가 약한 키워드 공략 |
+| experiment | 전환 롱테일 | 검색량은 작아도 견적, 하자, 현장 불안, 교체 의도가 강한 키워드 실험 |
+| exclude | 위험 차단 | 문장군 미취급, 오해 유발, 서비스 범위 밖 키워드 확장 금지 |
+
 ## 후보 보고 형식
 
 신규 글감 또는 다음 포스팅 후보를 보고할 때는 아래 형식을 사용한다.
@@ -198,6 +209,8 @@ outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md
 
 ```text
 후보 1. 주제명
+- portfolio_lane:
+- expected_role:
 - 광고 API 시장 수요:
 - 블로그 실제 유입:
 - TOP20 관련 반응:
@@ -215,6 +228,8 @@ outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md
 
 ```text
 후보 1. 중문 유리 종류
+- portfolio_lane: attack
+- expected_role: 신규 유입 확대
 - 광고 API 시장 수요: 중문/3연동중문/중문 유리종류 계열 확장 가능
 - 블로그 실제 유입: 플루트유리, 모루유리 중문, 3연동 중문 유리종류 반복
 - TOP20 관련 반응: 091_3연동중문모루유리 진입

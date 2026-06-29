@@ -20,8 +20,8 @@ function writeFile(filePath, content) {
   fs.writeFileSync(filePath, content, 'utf8');
 }
 
-function runQueue(filePath) {
-  return spawnSync(process.execPath, [queueCli, '--file', filePath], {
+function runQueue(filePath, extraArgs = []) {
+  return spawnSync(process.execPath, [queueCli, '--file', filePath, '--today', '2026-06-29', ...extraArgs], {
     cwd: root,
     encoding: 'utf8',
   });
@@ -31,8 +31,8 @@ function queueTable(rows) {
   return [
     '# Active Queue Fixture',
     '',
-    '| id | status | priority | portfolio_class | topic | primary_keyword | intent | action | linked_post | market_volume | 3d_signal | evidence_refs | risk | next_decision_date |',
-    '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |',
+    '| id | lane | status | topic | primary_keyword | market_volume | current_signal | linked_asset | next_action | due | risk | updated_at |',
+    '| --- | --- | --- | --- | --- | ---: | --- | --- | --- | --- | --- | --- |',
     ...rows,
     '',
   ].join('\n');
@@ -40,172 +40,276 @@ function queueTable(rows) {
 
 function validRows() {
   return [
-    '| Q-001 | protect | P0 | defense | 걸레받이 보호 | 걸레받이몰딩 | 비용 확인 | 기존 글 보호 | - | 대형 | 2026-06-26~28 반복 | daily 2026-06-26, 2026-06-27, 2026-06-28 | 셀프 과장 주의 | 2026-07-01 |',
-    '| Q-002 | scorecard_needed | P0 | attack | 방문 비용 공격 | 방문교체비용 | 비용 확인 | scorecard 작성 후 판단 | - | 중형 | 2026-06-26~28 반복 | daily 2026-06-26 | 문틀 단독 교체 주장 금지 | 2026-07-02 |',
-    '| Q-003 | excluded | P0 | excluded | 싱크대 문짝교체 | 싱크대 문짝교체 비용 | 주방가구 비용 | 신규 글감 제외 | - | 반복 유입 | 2026-06-26~28 반복 | daily 2026-06-28 | 문장군 서비스 오해 | 2026-07-05 |',
+    '| Q-001 | protect | internal_link | 걸레받이몰딩 보호 | 걸레받이몰딩 | 6430 | TOP20 강함 | posts/051_걸레받이몰딩.md | 내부링크 보강 | 2026-07-01 | 과장 금지 | 2026-06-29 |',
+    '| Q-002 | protect | publish_waiting | 9mm/12mm 문선 정리 | 12mm 슬림문선 | 4430 | 문선 검색 반복 | posts/118_9mm문선12mm슬림문선.md | 발행 후 관찰 | 2026-07-01 | 9mm 서비스 오해 금지 | 2026-06-29 |',
+    '| Q-003 | attack | scorecard_needed | 중문설치 과정 | 중문설치 | 2650 | 시장 큼, 현재 성과 약함 | posts/047_중문설치.md | scorecard 작성 | 2026-07-02 | 기존 글 중복 | 2026-06-29 |',
+    '| Q-004 | attack | rewrite_candidate | 현관중문 허브 보강 | 현관중문 | 11750 | 시장 큼, 회복 필요 | posts/003_현관중문.md | 허브 보강안 검토 | 2026-07-03 | 카니발 위험 | 2026-06-29 |',
+    '| Q-005 | attack | scorecard_needed | ABS도어 방문교체 연결 | ABS도어 | 6910 | 방문교체 축 반복 | posts/005_ABS도어.md | scorecard 작성 | 2026-07-04 | 문틀만 단독 교체 가능 주장 금지 | 2026-06-29 |',
+    '| Q-006 | experiment | monitor_7d | 화장실문 아래쪽 썩음 | 화장실문 아래쪽 썩음 | 0 | 롱테일 전환 의도 | posts/117_화장실문아래썩음.md | 7일 반복 관찰 | 2026-07-06 | 원인 단정 금지 | 2026-06-29 |',
+    '| Q-007 | exclude | excluded | 싱크대문짝교체 확장 금지 | 싱크대 문짝교체 비용 | 3450 | 유입 가능성 있음 | - | 확장 금지 | 2026-07-05 | 주방가구 오해 | 2026-06-29 |',
+    '| Q-008 | exclude | excluded | 현관문/방화문 영구 제외 | 현관문교체 | 12000 | 검색량 큼 | - | 영구 제외 | 2026-07-05 | 서비스 범위 밖 | 2026-06-29 |',
   ];
 }
 
+function validDaily(ids = ['Q-001', 'Q-003', 'Q-007']) {
+  return [
+    '# 2026-06-28 daily fixture',
+    '',
+    '## 다음 액션',
+    '',
+    '- queue 반영 필요',
+    '',
+    '## 오늘 보드 반영',
+    '',
+    '| queue_id | 처리 | 판단 |',
+    '| --- | --- | --- |',
+    ...ids.map((id) => `| ${id} | 유지 | ${id} 판단 유지 |`),
+    '',
+  ].join('\n');
+}
+
+function runWithTempQueue(testName, mutateRows, extraArgs = []) {
+  const dir = makeTempDir(`active-queue-${testName}-`);
+  try {
+    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
+    const rows = validRows();
+    writeFile(filePath, queueTable(mutateRows ? mutateRows(rows, dir) : rows));
+    return runQueue(filePath, extraArgs);
+  } finally {
+    removeDir(dir);
+  }
+}
+
 function testValidQueuePasses() {
-  const dir = makeTempDir('active-queue-valid-');
-  try {
-    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
-    writeFile(filePath, queueTable(validRows()));
-
-    const result = runQueue(filePath);
-
-    assert.strictEqual(result.status, 0, result.stderr || result.stdout);
-    assert.match(result.stdout, /ALLOW/);
-  } finally {
-    removeDir(dir);
-  }
+  const result = runWithTempQueue('valid');
+  assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /ALLOW/);
 }
 
-function testMissingColumnFails() {
-  const dir = makeTempDir('active-queue-missing-column-');
-  try {
-    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
-    writeFile(
-      filePath,
-      queueTable(validRows()).replace(' | risk | next_decision_date |', ' | next_decision_date |')
-    );
-
-    const result = runQueue(filePath);
-
-    assert.strictEqual(result.status, 1, result.stdout);
-    assert.match(result.stdout, /required columns|queue table/i);
-  } finally {
-    removeDir(dir);
-  }
-}
-
-function testForbiddenActiveTermFails() {
-  const dir = makeTempDir('active-queue-forbidden-');
-  try {
-    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
-    const rows = validRows();
-    rows[0] = rows[0].replace('걸레받이 보호', '싱크대 문짝교체 발행');
-    writeFile(filePath, queueTable(rows));
-
-    const result = runQueue(filePath);
-
-    assert.strictEqual(result.status, 1, result.stdout);
-    assert.match(result.stdout, /forbidden term/);
-  } finally {
-    removeDir(dir);
-  }
-}
-
-function testForbiddenSpacingVariantFails() {
-  const dir = makeTempDir('active-queue-forbidden-variant-');
-  try {
-    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
-    const rows = validRows();
-    rows[0] = rows[0].replace('걸레받이 보호', '무타공중문 발행');
-    writeFile(filePath, queueTable(rows));
-
-    const result = runQueue(filePath);
-
-    assert.strictEqual(result.status, 1, result.stdout);
-    assert.match(result.stdout, /무타공중문/);
-  } finally {
-    removeDir(dir);
-  }
-}
-
-function testRestrictedRiskTextCanPass() {
-  const dir = makeTempDir('active-queue-risk-text-');
-  try {
-    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
-    const rows = validRows();
-    rows[0] = rows[0].replace('셀프 과장 주의', '문틀만 단독 교체 가능 주장 금지');
-    writeFile(filePath, queueTable(rows));
-
-    const result = runQueue(filePath);
-
-    assert.strictEqual(result.status, 0, result.stderr || result.stdout);
-  } finally {
-    removeDir(dir);
-  }
-}
-
-function testForbiddenExcludedTermPasses() {
-  const dir = makeTempDir('active-queue-excluded-');
-  try {
-    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
-    writeFile(filePath, queueTable(validRows()));
-
-    const result = runQueue(filePath);
-
-    assert.strictEqual(result.status, 0, result.stderr || result.stdout);
-  } finally {
-    removeDir(dir);
-  }
+function testTooFewRowsFails() {
+  const result = runWithTempQueue('too-few', (rows) => rows.slice(0, 7));
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /too few rows/);
 }
 
 function testTooManyRowsFails() {
-  const dir = makeTempDir('active-queue-too-many-');
-  try {
-    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
-    const rows = validRows();
-    for (let index = 4; index <= 16; index += 1) {
-      rows.push(`| Q-${String(index).padStart(3, '0')} | monitor_3d | P2 | experiment | 실험 ${index} | 중문 실험 ${index} | 관찰 | 3일 관찰 | - | 롱테일 | 관찰 | daily 2026-06-28 | 과장 금지 | 2026-07-05 |`);
+  const result = runWithTempQueue('too-many', (rows) => {
+    for (let index = 9; index <= 16; index += 1) {
+      rows.push(`| Q-${String(index).padStart(3, '0')} | experiment | monitor_7d | 실험 ${index} | 중문 실험 ${index} | 0 | 관찰 | posts/020_좁은현관중문.md | 7일 반복 관찰 | 2026-07-06 | 과장 금지 | 2026-06-29 |`);
     }
-    writeFile(filePath, queueTable(rows));
+    return rows;
+  });
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /too many rows/);
+}
 
-    const result = runQueue(filePath);
+function testInvalidLaneFails() {
+  const result = runWithTempQueue('invalid-lane', (rows) => {
+    rows[0] = rows[0].replace('| protect |', '| publish_waiting |');
+    return rows;
+  });
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /invalid lane/);
+}
+
+function testInvalidStatusFails() {
+  const result = runWithTempQueue('invalid-status', (rows) => {
+    rows[0] = rows[0].replace('| internal_link |', '| protect |');
+    return rows;
+  });
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /invalid status/);
+}
+
+function testAttackMarketVolumeRequired() {
+  const result = runWithTempQueue('attack-volume', (rows) => {
+    rows[2] = rows[2].replace('| 2650 |', '| - |');
+    return rows;
+  });
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /attack lane needs numeric market_volume/);
+}
+
+function testExcludeScorecardFails() {
+  const result = runWithTempQueue('exclude-scorecard', (rows) => {
+    rows[6] = rows[6]
+      .replace('| excluded |', '| scorecard_needed |')
+      .replace('| 확장 금지 |', '| scorecard 작성 |');
+    return rows;
+  });
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /exclude lane/);
+}
+
+function testPublishWaitingNeedsLinkedAsset() {
+  const result = runWithTempQueue('publish-waiting-link', (rows) => {
+    rows[1] = rows[1].replace('| posts/118_9mm문선12mm슬림문선.md |', '| - |');
+    return rows;
+  });
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /publish_waiting needs linked_asset/);
+}
+
+function testDailyUnknownQueueIdFails() {
+  const dir = makeTempDir('active-queue-daily-unknown-');
+  try {
+    const queuePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
+    const dailyPath = path.join(dir, '2026-06-28_seo_watch.md');
+    writeFile(queuePath, queueTable(validRows()));
+    writeFile(dailyPath, validDaily(['Q-999']));
+
+    const result = runQueue(queuePath, ['--daily-file', dailyPath]);
 
     assert.strictEqual(result.status, 1, result.stdout);
-    assert.match(result.stdout, /too many rows/);
+    assert.match(result.stdout, /queue_id not found/);
   } finally {
     removeDir(dir);
   }
 }
 
-function testPublishWaitingNeedsLinkedPost() {
-  const dir = makeTempDir('active-queue-publish-waiting-');
+function testDailyLaneStatusConflictFails() {
+  const dir = makeTempDir('active-queue-daily-conflict-');
   try {
-    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
-    const rows = validRows();
-    rows.push('| Q-004 | publish_waiting | P1 | attack | 자동중문 단점 | 자동중문 단점 | 단점 확인 | 발행 후 관찰 | - | 소형 | 3일 반복 | daily 2026-06-28 | 과장 금지 | 2026-07-03 |');
-    writeFile(filePath, queueTable(rows));
+    const queuePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
+    const dailyPath = path.join(dir, '2026-06-28_seo_watch.md');
+    writeFile(queuePath, queueTable(validRows()));
+    writeFile(
+      dailyPath,
+      [
+        '# 2026-06-28 daily fixture',
+        '',
+        '## 오늘 보드 반영',
+        '',
+        '| queue_id | 처리 | 판단 |',
+        '| --- | --- | --- |',
+        '| Q-003 | 제외 | 중문설치 exclude / excluded 처리 |',
+        '',
+      ].join('\n')
+    );
 
-    const result = runQueue(filePath);
+    const result = runQueue(queuePath, ['--daily-file', dailyPath]);
 
     assert.strictEqual(result.status, 1, result.stdout);
-    assert.match(result.stdout, /publish_waiting needs linked_post/);
+    assert.match(result.stdout, /daily lane exclude conflicts with queue lane attack/);
+    assert.match(result.stdout, /daily status excluded conflicts with queue status scorecard_needed/);
   } finally {
     removeDir(dir);
   }
+}
+
+function testDailyMissingReflectionFails() {
+  const dir = makeTempDir('active-queue-daily-missing-');
+  try {
+    const queuePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
+    const dailyPath = path.join(dir, '2026-06-28_seo_watch.md');
+    writeFile(queuePath, queueTable(validRows()));
+    writeFile(dailyPath, '# daily\n\n## 다음 액션\n\n- Q-001 유지\n');
+
+    const result = runQueue(queuePath, ['--daily-file', dailyPath]);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /오늘 보드 반영/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyReflectionPasses() {
+  const dir = makeTempDir('active-queue-daily-valid-');
+  try {
+    const queuePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
+    const dailyPath = path.join(dir, '2026-06-28_seo_watch.md');
+    writeFile(queuePath, queueTable(validRows()));
+    writeFile(dailyPath, validDaily());
+
+    const result = runQueue(queuePath, ['--daily-file', dailyPath]);
+
+    assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+    assert.match(result.stdout, /daily:/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testAttackMinimumWarnsButPasses() {
+  const result = runWithTempQueue('attack-warn', (rows) => {
+    rows[4] = rows[4]
+      .replace('| attack | scorecard_needed |', '| experiment | monitor_7d |')
+      .replace('| scorecard 작성 |', '| 7일 반복 관찰 |');
+    return rows;
+  });
+  assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /WARN: attack lane has fewer than 3 rows/);
+}
+
+function testProtectShareWarnsButPasses() {
+  const result = runWithTempQueue('protect-share', (rows) => {
+    rows[2] = rows[2]
+      .replace('| attack | scorecard_needed |', '| protect | internal_link |')
+      .replace('| scorecard 작성 |', '| 내부링크 보강 |');
+    rows[3] = rows[3]
+      .replace('| attack | rewrite_candidate |', '| protect | internal_link |')
+      .replace('| 허브 보강안 검토 |', '| 내부링크 보강 |');
+    rows[4] = rows[4]
+      .replace('| attack | scorecard_needed |', '| protect | internal_link |')
+      .replace('| scorecard 작성 |', '| 내부링크 보강 |');
+    return rows;
+  });
+  assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+  assert.match(result.stdout, /WARN: protect lane exceeds 50%/);
+}
+
+function testForbiddenActiveTermFails() {
+  const result = runWithTempQueue('forbidden-active', (rows) => {
+    rows[0] = rows[0].replace('걸레받이몰딩 보호', '싱크대문짝교체 작성');
+    return rows;
+  });
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /forbidden term in active row/);
+}
+
+function testForbiddenTermInExcludedPasses() {
+  const result = runWithTempQueue('forbidden-excluded');
+  assert.strictEqual(result.status, 0, result.stderr || result.stdout);
 }
 
 function testScorecardNeededActionMustMentionScorecard() {
-  const dir = makeTempDir('active-queue-scorecard-action-');
-  try {
-    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
-    const rows = validRows();
-    rows[1] = rows[1].replace('scorecard 작성 후 판단', '바로 작성');
-    writeFile(filePath, queueTable(rows));
+  const result = runWithTempQueue('scorecard-action', (rows) => {
+    rows[2] = rows[2].replace('scorecard 작성', '바로 원고 작성');
+    return rows;
+  });
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /scorecard_needed next_action/);
+}
 
-    const result = runQueue(filePath);
-
-    assert.strictEqual(result.status, 1, result.stdout);
-    assert.match(result.stdout, /scorecard_needed action/);
-  } finally {
-    removeDir(dir);
-  }
+function testDuplicateIdFails() {
+  const result = runWithTempQueue('duplicate-id', (rows) => {
+    rows[1] = rows[1].replace('Q-002', 'Q-001');
+    return rows;
+  });
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /duplicate id/);
 }
 
 function main() {
   testValidQueuePasses();
-  testMissingColumnFails();
-  testForbiddenActiveTermFails();
-  testForbiddenSpacingVariantFails();
-  testRestrictedRiskTextCanPass();
-  testForbiddenExcludedTermPasses();
+  testTooFewRowsFails();
   testTooManyRowsFails();
-  testPublishWaitingNeedsLinkedPost();
+  testInvalidLaneFails();
+  testInvalidStatusFails();
+  testAttackMarketVolumeRequired();
+  testExcludeScorecardFails();
+  testPublishWaitingNeedsLinkedAsset();
+  testDailyUnknownQueueIdFails();
+  testDailyLaneStatusConflictFails();
+  testDailyMissingReflectionFails();
+  testDailyReflectionPasses();
+  testAttackMinimumWarnsButPasses();
+  testProtectShareWarnsButPasses();
+  testForbiddenActiveTermFails();
+  testForbiddenTermInExcludedPasses();
   testScorecardNeededActionMustMentionScorecard();
+  testDuplicateIdFails();
   console.log('active queue validation tests passed');
 }
 

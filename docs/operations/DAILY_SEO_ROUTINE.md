@@ -11,7 +11,7 @@
 - 하루 데이터로 결론을 확정하지 않고, 7일 누적과 14일 누적을 우선 판단 기준으로 본다.
 - 현관문/방화문처럼 제외 결정된 소재는 유입이 있어도 글감으로 확장하지 않는다.
 - 신규 글감은 일일 유입어만으로 확정하지 않는다. `docs/operations/TOPIC_SELECTION_SCORECARD.md`에 따라 네이버 광고 API 시장 수요와 블로그 실제 반응을 함께 본다.
-- daily report는 증거 로그다. 보고서의 다음 액션은 `docs/strategy/ACTIVE_TOPIC_QUEUE.md`에서 보호, 발행대기, scorecard 필요, 관찰, 제외 중 하나로 닫는다.
+- daily report는 증거 로그다. 보고서의 다음 액션은 `docs/strategy/ACTIVE_TOPIC_QUEUE.md`의 Q-ID로 닫고, lane/status 충돌이 없게 관리한다.
 
 ## 매일 받으면 좋은 정보
 
@@ -87,7 +87,7 @@ outputs/reports/topic_candidates/2026-06-15_topic_scorecard.md
 data/naver/daily/2026-06-15/  # 로컬 전용, Git 커밋 금지
 ```
 
-일일 리포트에는 아래 4개만 남긴다.
+일일 리포트에는 아래 5개만 남긴다.
 
 | 구분 | 내용 |
 | --- | --- |
@@ -95,6 +95,28 @@ data/naver/daily/2026-06-15/  # 로컬 전용, Git 커밋 금지
 | 검색어 원본 | 주요 검색어와 비율 |
 | 총괄 해석 | 강한 키워드군, 새로 뜬 키워드, 제외 키워드 |
 | 다음 액션 | 발행 우선순위, 리라이팅 후보, 신규 글감 후보 |
+| 오늘 보드 반영 | 다음 액션을 ACTIVE_TOPIC_QUEUE Q-ID로 닫은 결과 |
+
+### 오늘 보드 반영 표준
+
+daily report 마지막에는 아래 표를 둔다. 이 표가 있어야 `npm run ops:daily`에서 최신 daily와 실행판이 연결됐는지 확인할 수 있다.
+
+```md
+## 오늘 보드 반영
+
+| queue_id | 처리 | 판단 |
+| --- | --- | --- |
+| Q-001 | 유지 | 걸레받이몰딩 protect 유지, 내부링크 보강 |
+| Q-003 | 유지 | 중문설치 attack / scorecard_needed 유지 |
+| Q-007 | 유지 | 화장실문 아래쪽 썩음 monitor_7d 유지 |
+| Q-010 | 제외 | 싱크대문짝교체 excluded 유지 |
+```
+
+주의:
+
+- `queue_id`는 `docs/strategy/ACTIVE_TOPIC_QUEUE.md`에 실제 존재해야 한다.
+- daily는 긴 컨설팅 문서가 아니라 증거 로그다. 전략 판단은 queue와 scorecard에서 닫는다.
+- 새로운 공격 후보가 생기면 daily에만 남기지 말고 queue의 `attack` 또는 `experiment` lane으로 올린다.
 
 ## 키워드 점수 알고리즘
 
@@ -142,7 +164,7 @@ npm run ops:daily
 | daily report 존재/필수 섹션 | 누락 시 FAIL |
 | topic scorecard 산출물 | 1차 운영에서는 누락 시 WARN |
 | 키워드 데이터 최신성 | 누락 시 FAIL, 오래되면 WARN |
-| active topic queue | 컬럼/상태/금지 키워드/발행대기 링크 누락 시 FAIL |
+| active topic queue | lane/status, attack 최소 유지, 금지 키워드, daily Q-ID 누락을 검증 |
 
 순위 리포트와 TOP10 분석은 daily 필수에서 제외하고 주간 보조 점검으로 분리한다.
 

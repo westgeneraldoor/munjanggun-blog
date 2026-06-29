@@ -61,6 +61,7 @@ const packageJson = JSON.parse(fs.readFileSync(fromRoot('package.json'), 'utf8')
   'ranking:summary',
   'ops:daily',
   'ops:daily:check',
+  'ops:daily:write',
   'ops:weekly',
   'test:ops-daily',
   'test:active-queue',
@@ -76,9 +77,14 @@ const opsDaily = packageJson.scripts['ops:daily'];
   'validate_topic_scorecard.js',
   'check:freshness',
   'validate_active_queue.js',
+  '--latest-daily',
 ].forEach((needle) => {
   if (!opsDaily.includes(needle)) throw new Error(`ops:daily에 ${needle} 호출이 없습니다.`);
 });
+
+if (!packageJson.scripts['ops:daily:write'].includes('--write-report')) {
+  throw new Error('ops:daily:write는 check_freshness.js --write-report를 호출해야 합니다.');
+}
 
 [
   'track',
