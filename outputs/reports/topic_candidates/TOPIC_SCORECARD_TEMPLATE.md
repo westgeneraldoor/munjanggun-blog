@@ -6,6 +6,8 @@
 ## 후보 1. 주제명
 
 - 후보 키워드/원고 번호:
+- portfolio_lane: protect / attack / experiment / exclude
+- expected_role: 조회수 방어 / 신규 유입 확대 / 전환 롱테일 / 위험 차단
 - 광고 API 시장 수요:
 - 블로그 실제 유입 반복성:
 - TOP20 관련 반응:
@@ -18,6 +20,8 @@
 ## 후보 2. 주제명
 
 - 후보 키워드/원고 번호:
+- portfolio_lane: protect / attack / experiment / exclude
+- expected_role: 조회수 방어 / 신규 유입 확대 / 전환 롱테일 / 위험 차단
 - 광고 API 시장 수요:
 - 블로그 실제 유입 반복성:
 - TOP20 관련 반응:

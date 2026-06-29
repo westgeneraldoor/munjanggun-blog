@@ -7,8 +7,8 @@ const { spawnSync } = require('child_process');
 const root = path.resolve(__dirname, '..');
 const cli = path.join(root, 'scripts', 'validate_post.js');
 
-function runValidate(postPath) {
-  return spawnSync(process.execPath, [cli, postPath, '--no-write-report'], {
+function runValidate(postPath, extraArgs = []) {
+  return spawnSync(process.execPath, [cli, postPath, ...extraArgs, '--no-write-report'], {
     cwd: root,
     encoding: 'utf8',
   });
@@ -173,6 +173,74 @@ function testTitleCandidateSectionExcludedFromBodyLength() {
   }
 }
 
+function testQuestionTitleWarnsButDoesNotFailValidation() {
+  const { dir, post } = writeTempPost(basePostLines([], '#아파트중문 #현관중문 #중문설치 #무료방문실측 #중문종류 #문장군 #문장군중문'));
+  fs.writeFileSync(
+    post,
+    `${[
+      '# 아파트 중문 설치 3가지, 우리 집에는 어떨까',
+      '',
+      '아파트 중문 설치는 현장 구조와 사용 동선을 먼저 확인해야 합니다.',
+      '',
+      '무료 방문실측으로 현장 조건을 확인하고 네이버 예약으로 편하게 접수할 수 있습니다.',
+      '',
+      '관련 글',
+      'https://blog.naver.com/doorgeneral/224317511025',
+      'https://blog.naver.com/doorgeneral/224317523524',
+      '',
+      '# 해시태그',
+      '',
+      '#아파트중문 #현관중문 #중문설치 #무료방문실측 #중문종류 #문장군 #문장군중문',
+      '',
+    ].join('\n')}\n`,
+    'utf8',
+  );
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 0, result.stdout);
+    assert.match(result.stdout, /질문형 제목/);
+    assert.match(result.stdout, /fail 0개, warn 1개/);
+
+    const strictResult = runValidate(post, ['--strict']);
+    assert.strictEqual(strictResult.status, 1, strictResult.stdout);
+    assert.match(strictResult.stdout, /질문형 제목/);
+    assert.match(strictResult.stdout, /fail 0개, warn 1개/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testStandaloneJungmunTitleStillFailsValidation() {
+  const { dir, post } = writeTempPost(basePostLines());
+  fs.writeFileSync(
+    post,
+    `${[
+      '# 중문',
+      '',
+      '아파트 중문 설치는 현장 구조와 사용 동선을 먼저 확인해야 합니다.',
+      '',
+      '무료 방문실측으로 현장 조건을 확인하고 네이버 예약으로 편하게 접수할 수 있습니다.',
+      '',
+      '관련 글',
+      'https://blog.naver.com/doorgeneral/224317511025',
+      'https://blog.naver.com/doorgeneral/224317523524',
+      '',
+      '# 해시태그',
+      '',
+      '#아파트중문 #현관중문 #중문설치 #무료방문실측 #중문종류 #문장군 #문장군중문',
+      '',
+    ].join('\n')}\n`,
+    'utf8',
+  );
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /`중문` 단독 제목은 금지/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
 function main() {
   testUnsupportedProductsFailValidation();
   testDoorFrameOnlyPositiveClaimFailsValidation();
@@ -181,6 +249,8 @@ function main() {
   testInternalMemoFailsValidation();
   testTitleCandidateSectionDoesNotBecomePublishTitle();
   testTitleCandidateSectionExcludedFromBodyLength();
+  testQuestionTitleWarnsButDoesNotFailValidation();
+  testStandaloneJungmunTitleStillFailsValidation();
   console.log('validate_post product tests passed');
 }
 

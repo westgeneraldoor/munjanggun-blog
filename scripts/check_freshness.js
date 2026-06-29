@@ -10,6 +10,7 @@ function parseArgs(argv) {
   return {
     strict: argv.includes('--strict'),
     weekly,
+    writeReport: argv.includes('--write-report'),
     maxAgeDays: Number(maxAgeArg ? maxAgeArg.split('=')[1] : '') || (weekly ? 7 : 14),
   };
 }
@@ -131,10 +132,16 @@ function main() {
 
   const md = renderMarkdown({ checks, options });
   const outputPath = paths.outputReport('freshness_check.md');
-  writeTextFile(outputPath, md);
+  if (options.writeReport) {
+    writeTextFile(outputPath, md);
+  }
 
   console.log(md);
-  console.log(`저장: ${outputPath}`);
+  if (options.writeReport) {
+    console.log(`저장: ${outputPath}`);
+  } else {
+    console.log(`report not written (use --write-report to save): ${outputPath}`);
+  }
 
   const hasFail = checks.some((check) => check.status === 'FAIL');
   const hasWarn = checks.some((check) => check.status === 'WARN');

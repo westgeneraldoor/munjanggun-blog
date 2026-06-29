@@ -154,6 +154,29 @@ function hasMeaningfulBody(body) {
   return lines.some((line) => !isPlaceholderText(line));
 }
 
+function contradictoryMissingReportClaims(content, reportsDir) {
+  const fails = [];
+  const pattern = /outputs\/reports\/daily\/(\d{4}-\d{2}-\d{2})_seo_watch\.md/g;
+  let match = pattern.exec(content);
+
+  while (match) {
+    const date = match[1];
+    const linkedPath = path.join(reportsDir, `${date}_seo_watch.md`);
+    const start = Math.max(0, match.index - 140);
+    const end = Math.min(content.length, match.index + match[0].length + 140);
+    const context = content.slice(start, end);
+    const claimsMissing = /(없|확인되지 않았다|아직 없다|missing|not found|does not exist)/i.test(context);
+
+    if (claimsMissing && fs.existsSync(linkedPath)) {
+      fails.push(`report claims missing file that exists: outputs/reports/daily/${date}_seo_watch.md`);
+    }
+
+    match = pattern.exec(content);
+  }
+
+  return fails;
+}
+
 function validateDailyReport(filePath, options = {}) {
   const result = {
     status: 'ALLOW',
@@ -177,6 +200,7 @@ function validateDailyReport(filePath, options = {}) {
 
   const content = fs.readFileSync(filePath, 'utf8');
   const lines = content.split(/\r?\n/);
+  const reportsDir = options.reportsDir || path.dirname(filePath);
 
   REQUIRED_SECTIONS.forEach((section) => {
     if (section.type === 'date') {
@@ -197,6 +221,8 @@ function validateDailyReport(filePath, options = {}) {
       result.fails.push(`${section.label} 섹션이 비어 있거나 placeholder만 있습니다. 실제 내용을 입력해야 합니다.`);
     }
   });
+
+  result.fails.push(...contradictoryMissingReportClaims(content, reportsDir));
 
   if (result.fails.length > 0) result.status = 'BLOCK';
   return result;
@@ -225,4 +251,5 @@ if (require.main === module) {
 module.exports = {
   validateDailyReport,
   resolveReport,
+  contradictoryMissingReportClaims,
 };
