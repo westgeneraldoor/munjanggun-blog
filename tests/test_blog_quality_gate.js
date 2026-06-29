@@ -333,6 +333,62 @@ function testPublishModeDoesNotBlockTitleWithoutNumber() {
   removeDir(controlDir);
 }
 
+function testPublishModeAllowsQuestionTitleWarningWhenOtherwiseValid() {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-gate-question-title-'));
+  const post = path.join(dir, '980_question_title_gate_probe.md');
+  const registry = path.join(root, 'docs', 'strategy', 'POSTING_REGISTRY.md');
+  const originalRegistry = fs.readFileSync(registry, 'utf8');
+  const body = '아파트 중문 설치는 현관 폭, 신발장 간섭, 바닥 수평, 생활 동선을 함께 확인해야 합니다. '.repeat(26);
+  fs.writeFileSync(
+    post,
+    [
+      '# 아파트 중문 설치 3가지, 우리 집에는 어떨까',
+      '',
+      body,
+      '',
+      '## 실제 시공 현장에서는 조금 다릅니다',
+      '',
+      '실제로 현장 상담에서는 제품 사진보다 현관 구조를 먼저 보는 경우가 많습니다.',
+      '',
+      body,
+      '',
+      '무료 방문실측으로 현장 조건을 먼저 확인하고 결정하셔도 됩니다.',
+      '',
+      '관련 글',
+      'https://blog.naver.com/doorgeneral/224317511025',
+      'https://blog.naver.com/doorgeneral/224317523524',
+      '',
+      '# 해시태그',
+      '',
+      '#아파트중문 #현관중문 #중문설치 #무료방문실측 #중문종류 #문장군 #문장군중문',
+      '',
+    ].join('\n'),
+    'utf8',
+  );
+  const controlDir = makeControlDir({ postPath: post });
+  try {
+    fs.writeFileSync(
+      registry,
+      `${originalRegistry}\n| 980 | 980_question_title_gate_probe.md | 테스트 | 아파트중문, 현관중문 | 아파트 중문 설치 3가지, 우리 집에는 어떨까 | - | - | 질문형 제목 gate 회귀 테스트 |\n`,
+      'utf8',
+    );
+
+    const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+    assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+    assert.strictEqual(payload.ok, true);
+    assert.strictEqual(payload.decision, 'ALLOW');
+    assert.strictEqual(payload.summary.fail, 0);
+
+    const strict = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir, '--strict']);
+    assert.strictEqual(strict.result.status, 1);
+    assertBlocked(strict.payload, 'POST_VALIDATION_FAILED');
+  } finally {
+    fs.writeFileSync(registry, originalRegistry, 'utf8');
+    removeDir(dir);
+    removeDir(controlDir);
+  }
+}
+
 function testMunjanggunSpecificForbiddenClaimsBlockPublish() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-gate-scope-'));
   const post = path.join(dir, '997_scope.md');
@@ -587,6 +643,7 @@ function main() {
     testPublishAllowedNoBlocksPublish,
     testPostQaFailBlocksPublish,
     testPublishModeDoesNotBlockTitleWithoutNumber,
+    testPublishModeAllowsQuestionTitleWarningWhenOtherwiseValid,
     testMunjanggunSpecificForbiddenClaimsBlockPublish,
     testProductionNotesAndBodyHashtagsBlockPublish,
     testApprovalHashMissingBlocksPublish,
