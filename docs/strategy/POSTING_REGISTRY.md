@@ -333,14 +333,14 @@
 | 106 | 106_중문플루트유리.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224327785183) 등록. `outputs/publish_control/106_중문플루트유리` 승인 로그 생성 |
 | 107 | 107_3연동중문단점.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224327786406) 등록. `outputs/publish_control/107_3연동중문단점` 승인 로그 생성 |
 | 108 | 108_초슬림3연동중문단점.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224330235894) 등록. `outputs/publish_control/108_초슬림3연동중문단점` 승인 로그 생성 |
-| 109 | 109_자동중문단점고장.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/109_자동중문단점고장` 승인 로그 생성 |
+| 109 | 109_자동중문단점고장.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224330695645) 등록. 발행 제목: 자동중문 단점, 고장 걱정 전에 꼭 확인해 보세요! |
 | 110 | - | 제외 | 미발행 | 제외 | 패브릭중문/패브릭유리는 문장군 취급 제품처럼 보일 위험이 있어 발행 제외 |
-| 111 | 111_우드컬러중문.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/111_우드컬러중문` 승인 로그 생성 |
+| 111 | 111_우드컬러중문.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224330733803) 등록. 발행 제목: 우드 컬러 중문 선택 전 확인해야 할 3가지!! |
 | 112 | 112_전세집중문설치.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/112_전세집중문설치` 승인 로그 생성 |
 | 113 | 113_문짝만교체.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/113_문짝만교체` 승인 로그 생성 |
 | 114 | 114_중문효과.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/114_중문효과` 승인 로그 생성 |
 | 115 | 115_몰딩시공타이밍.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/115_몰딩시공타이밍` 승인 로그 생성 |
 | 116 | 116_중문설치시점.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/116_중문설치시점` 승인 로그 생성 |
-| 117 | 117_화장실문아래썩음.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/117_화장실문아래썩음` 승인 로그 생성 |
-| 118 | 118_9mm문선12mm슬림문선.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/118_9mm문선12mm슬림문선` 승인 로그 생성 |
-| 119 | 119_방문손잡이문짝교체.md | 검수완료 | URL대기 | 현장형 | `outputs/publish_control/119_방문손잡이문짝교체` 승인 로그 생성 |
+| 117 | 117_화장실문아래썩음.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224330759936) 등록. 발행 제목: 화장실문교체 전 문틀까지 봐야 하는 3가지 신호 |
+| 118 | 118_9mm문선12mm슬림문선.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224330868644) 등록. 발행 제목: 9mm 문선 12mm 문선 차이, 얇기보다 먼저 볼 것! |
+| 119 | 119_방문손잡이문짝교체.md | 검수완료 | 발행완료 | 현장형 | [URL](https://blog.naver.com/doorgeneral/224331459354) 등록. 발행 제목: 방문손잡이교체 전 문짝 상태를 먼저 봐야 하는 이유 |
