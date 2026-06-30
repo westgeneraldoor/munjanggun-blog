@@ -8,3 +8,8 @@
 - Not approved: Changing title, deleting CTA, adding unsupported products, adding unverified field details, or publishing a different file.
 - Notes: Keep the article framed as a 방문교체 range check. Do not present 방문 손잡이 교체 as a standalone 문장군 service.
 
+## 2026-06-30 - URL Registered
+
+- Published URL: https://blog.naver.com/doorgeneral/224331459354
+- Published title: 방문손잡이교체 전 문짝 상태를 먼저 봐야 하는 이유
+

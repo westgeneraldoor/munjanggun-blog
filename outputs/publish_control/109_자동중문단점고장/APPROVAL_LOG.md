@@ -8,3 +8,8 @@
 - Not approved: Changing title, deleting CTA, adding unsupported products, adding unverified field details, or publishing a different file.
 - Notes: Keep 자동중문 limitations tied to field conditions such as power location, wire finishing, sensor angle, shoe-cabinet clearance, rail line, and level.
 
+## 2026-06-30 - URL Registered
+
+- Published URL: https://blog.naver.com/doorgeneral/224330695645
+- Published title: 자동중문 단점, 고장 걱정 전에 꼭 확인해 보세요!
+

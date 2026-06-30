@@ -2,8 +2,9 @@
 
 - Publish allowed: `YES`
 - Post QA: `PASS`
-- Registry status: `URL대기`
+- Registry status: `발행완료`
 - Evidence status: `field-story-slot`
+- Published URL: https://blog.naver.com/doorgeneral/224330759936
 
 | Check | Status | Note |
 | --- | --- | --- |
@@ -12,4 +13,5 @@
 | Title candidates | pass | 5개 후보 포함 |
 | Field story slot | pass | 화장실문 하단 습기와 타일 경계로 후매칭 가능 |
 | Exclusion check | pass | 문틀만 단독 교체 가능 주장 없음 |
+| Published URL | pass | https://blog.naver.com/doorgeneral/224330759936 |
 

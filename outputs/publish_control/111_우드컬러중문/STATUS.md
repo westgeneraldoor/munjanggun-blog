@@ -2,6 +2,8 @@
 
 - Publish allowed: `YES`
 - Post QA: `PASS`
+- Registry status: `발행완료`
+- Published URL: https://blog.naver.com/doorgeneral/224330733803
 
 | Gate | Status | Notes |
 | --- | --- | --- |
@@ -10,3 +12,4 @@
 | Registry entry | pass | `POSTING_REGISTRY.md` row added |
 | Evidence scope | pass | Field-story slot is documented in `EVIDENCE.json` |
 | Publish allowed | pass | Ready for Naver paste after final human review |
+| Published URL | pass | https://blog.naver.com/doorgeneral/224330733803 |
