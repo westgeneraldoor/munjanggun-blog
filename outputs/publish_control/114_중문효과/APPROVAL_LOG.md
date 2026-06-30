@@ -8,3 +8,8 @@
 - Not approved: Changing title, deleting CTA, adding unsupported products, adding unverified field details, or publishing a different file.
 - Notes: Keep the effect language conditional. Do not add guarantees about insulation, sound reduction, dust blocking, or privacy performance.
 
+## 2026-07-01 - URL Registered
+
+- Published URL: https://blog.naver.com/doorgeneral/224331794174
+- Published title: 현관 중문 설치 효과 없을까 봐 걱정될 때 보는 3가지!
+

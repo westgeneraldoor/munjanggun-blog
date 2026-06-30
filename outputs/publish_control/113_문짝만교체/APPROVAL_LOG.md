@@ -8,3 +8,8 @@
 - Not approved: Changing title, deleting CTA, adding unsupported products, adding unverified field details, or publishing a different file.
 - Notes: Keep the conclusion conditional. Do not imply that every old frame can be reused or that door slab replacement always looks clean.
 - Warn reviewed: The validator warning `제목에 숫자가 없습니다` is intentionally accepted because this post uses a customer-anxiety question title under the current title policy.
+
+## 2026-07-01 - URL Registered
+
+- Published URL: https://blog.naver.com/doorgeneral/224331725355
+- Published title: 방문교체 고민, 문짝만 바꿔도 집 분위기가 달라질까?

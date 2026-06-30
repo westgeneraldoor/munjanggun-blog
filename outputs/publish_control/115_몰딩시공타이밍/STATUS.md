@@ -2,8 +2,9 @@
 
 - Publish allowed: `YES`
 - Post QA: `PASS`
-- Registry status: `URL대기`
+- Registry status: `발행완료`
 - Evidence status: `field-story-slot`
+- Published URL: https://blog.naver.com/doorgeneral/224331990485
 
 | Check | Status | Note |
 | --- | --- | --- |
@@ -12,4 +13,5 @@
 | Title candidates | pass | 5개 후보 포함 |
 | Field story slot | pass | 몰딩 시공 순서와 재작업 변수로 후매칭 가능 |
 | Exclusion check | pass | 전체 인테리어 일반론으로 과장하지 않음 |
+| Published URL | pass | https://blog.naver.com/doorgeneral/224331990485 |
 
