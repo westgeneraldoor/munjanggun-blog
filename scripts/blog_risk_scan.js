@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { ROOT_DIR } = require('./lib/paths');
 const { writeTextFile } = require('./lib/file_store');
+const { findBrandClaimIssues } = require('./lib/brand_claim_rules');
 
 const DEFAULT_FROM = 68;
 const DEFAULT_TO = 85;
@@ -63,6 +64,7 @@ function scanContent(content, file = '-') {
   const performanceClaims = lines.filter((line) => lineHasAny(line, performanceTerms));
   const ctas = lines.filter((line) => lineHasAny(line, ctaTerms));
   const hashtags = extractHashtags(content);
+  const brandClaimIssues = findBrandClaimIssues(content);
   const riskItems = [];
 
   caseLikeSentences.forEach((sentence) => {
@@ -114,6 +116,15 @@ function scanContent(content, file = '-') {
       });
     });
 
+  brandClaimIssues.forEach((issue) => {
+    riskItems.push({
+      status: issue.code === 'UNAVAILABLE_REGION_CLAIM' ? 'FAIL' : 'FIX',
+      type: issue.code,
+      text: issue.message,
+      reason: '중앙 브랜드 v4.0 claim gate 기준에 맞게 수정해야 합니다.',
+    });
+  });
+
   if (riskItems.length === 0) {
     riskItems.push({
       status: 'PASS',
@@ -131,6 +142,7 @@ function scanContent(content, file = '-') {
     products,
     numeric_claims: unique(numericClaims),
     performance_claims: unique(performanceClaims),
+    brand_claim_issues: brandClaimIssues,
     ctas: unique(ctas),
     hashtags,
     risk_items: riskItems,

@@ -12,6 +12,9 @@
 - 블로그 실제 유입 반복성:
 - TOP20 관련 반응:
 - 문장군 서비스 적합성:
+- 상품 위키/선택 가이드 확인:
+- EVIDENCE_REGISTER claim 상태:
+- OPEN_QUESTIONS_REGISTER 미해결 여부:
 - AppSheet 현장 연결성:
 - 기존 글 중복/카니발 위험:
 - 발행 안전성:
@@ -26,6 +29,9 @@
 - 블로그 실제 유입 반복성:
 - TOP20 관련 반응:
 - 문장군 서비스 적합성:
+- 상품 위키/선택 가이드 확인:
+- EVIDENCE_REGISTER claim 상태:
+- OPEN_QUESTIONS_REGISTER 미해결 여부:
 - AppSheet 현장 연결성:
 - 기존 글 중복/카니발 위험:
 - 발행 안전성:

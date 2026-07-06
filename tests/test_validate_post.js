@@ -241,6 +241,41 @@ function testStandaloneJungmunTitleStillFailsValidation() {
   }
 }
 
+function testCentralBrandClaimGateFailsValidation() {
+  const { dir, post } = writeTempPost(basePostLines([
+    '결정 후 3~4일 안에 시공됩니다.',
+    '리뷰 15,000개와 4,000개를 전체 브랜드 리뷰처럼 씁니다.',
+    '영종도도 무료 방문 실측이 가능합니다.',
+  ]));
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /BRAND_SCHEDULE_CLAIM_INVALID/);
+    assert.match(result.stdout, /BRAND_REVIEW_CLAIM_INVALID/);
+    assert.match(result.stdout, /UNAVAILABLE_REGION_CLAIM/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testCentralBrandClaimGateAllowsSafeClaims() {
+  const { dir, post } = writeTempPost(basePostLines([
+    '네이버 상품 리뷰 3.5만 개 이상이라는 범위 안에서만 리뷰 표현을 사용합니다.',
+    '중문은 결정 후 보통 3~6일 범위에서 일정이 잡히는 경우가 많습니다.',
+    '영종도는 현재 무료 방문 실측이 어렵습니다.',
+    '문 상태를 보여주는 신호를 함께 확인합니다.',
+  ]));
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 0, result.stdout);
+    assert.doesNotMatch(result.stdout, /BRAND_REVIEW_CLAIM_INVALID/);
+    assert.doesNotMatch(result.stdout, /BRAND_SCHEDULE_CLAIM_INVALID/);
+    assert.doesNotMatch(result.stdout, /UNAVAILABLE_REGION_CLAIM/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
 function main() {
   testUnsupportedProductsFailValidation();
   testDoorFrameOnlyPositiveClaimFailsValidation();
@@ -251,6 +286,8 @@ function main() {
   testTitleCandidateSectionExcludedFromBodyLength();
   testQuestionTitleWarnsButDoesNotFailValidation();
   testStandaloneJungmunTitleStillFailsValidation();
+  testCentralBrandClaimGateFailsValidation();
+  testCentralBrandClaimGateAllowsSafeClaims();
   console.log('validate_post product tests passed');
 }
 

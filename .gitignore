@@ -20,6 +20,11 @@ data/naver/**/*.webp
 # Private interviews and internal source notes
 data/private/
 
+# Local-only blog post bodies and pre-publish artifacts
+posts/
+outputs/checks/
+outputs/publish_control/
+
 # Generated safety backups
 *.bak
 *.tmp

@@ -2,6 +2,8 @@
 
 > 목적: 신규 포스팅 주제를 "좋아 보이는 감"이 아니라 시장 수요, 실제 반응, 고객 불안, 문장군 현장성, 발행 안전성을 함께 본 운영 판단으로 선정한다.
 
+> 2026-07-01 claim gate: 상품 위키는 구조/선택 기준/이미지 연결을 보는 문서이고, 가격·리뷰 수·A/S·일정·지역·이벤트·배송/반품·패키지 구성 claim은 중앙 `EVIDENCE_REGISTER.md`와 `OPEN_QUESTIONS_REGISTER.md` 상태를 함께 확인해야 한다. `candidate`, `open`, `in_review` 상태는 발행 문장으로 단정하지 않는다.
+
 ## 핵심 원칙
 
 포스팅 주제는 블로그 유입어만으로 선정하지 않는다.
@@ -198,6 +200,14 @@ node scripts/fetch_keyword_data_product.js
 ## 후보 보고 형식
 
 신규 글감 또는 다음 포스팅 후보를 보고할 때는 아래 형식을 사용한다.
+
+### 중앙 브랜드 확인 항목
+
+각 후보는 아래 3가지를 함께 적는다.
+
+- 상품 위키/선택 가이드 확인: 구조, 옵션, 이미지/GIF, 고객 선택 기준 확인 여부
+- EVIDENCE_REGISTER claim 상태: 가격, 리뷰 수, A/S, 일정, 지역, 패키지 claim의 publishable/vetted 여부
+- OPEN_QUESTIONS_REGISTER 미해결 여부: open/in_review claim이 제목이나 본문 단정으로 들어가지 않았는지
 
 운영 산출물은 아래 위치에 저장한다.
 

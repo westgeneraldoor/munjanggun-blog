@@ -24,6 +24,30 @@
 
 문서별 역할과 읽는 순서는 `docs/OPERATING_INDEX.md`를 따른다.
 
+## GitHub 저장 정책
+
+GitHub에는 문장군 블로그 운영 OS만 올린다. `posts/` 원고 본문은 로컬 전용이며 GitHub에 커밋하지 않는다.
+
+로컬 전용:
+
+- `posts/NNN_키워드.md`
+- `posts/NNN_키워드_리라이팅.md`
+- `outputs/checks/`
+- `outputs/publish_control/`
+- 원본 통계 파일, 관리자 화면 스크린샷, AppSheet 원본, 비공개 리뷰/사진 원본
+
+GitHub 운영 OS:
+
+- 운영 문서와 전략 문서
+- 검증 스크립트와 테스트
+- `docs/strategy/ACTIVE_TOPIC_QUEUE.md`
+- `docs/strategy/POSTING_REGISTRY.md`
+- `outputs/reports/daily/`
+- `outputs/reports/topic_candidates/`
+- 비식별·요약된 키워드/랭킹/운영 지표
+
+원고 본문은 네이버 발행과 로컬 검수에만 쓴다. 발행 후 URL, 제목, 상태, 운영 판단은 `POSTING_REGISTRY.md`에 남긴다.
+
 ## 실행 트리거
 
 | 사용자 요청 | 우선 문서/실행 |
@@ -31,7 +55,7 @@
 | 블로그 써줘, 포스팅 작성 | `docs/OPERATING_INDEX.md`의 원고 작성 경로 |
 | 다음 글감, 통계 기반 소재 | `docs/operations/TOPIC_SELECTION_SCORECARD.md` + 최근 daily report + 광고 API 데이터 |
 | 유입경로/검색어/일일 SEO 관제 | `docs/operations/DAILY_SEO_ROUTINE.md` |
-| 발행 전 검수 | `npm run validate:posts`, `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` |
+| 발행 전 검수 | 로컬에서 `npm run validate:posts`, `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` |
 | 순위 체크 | `scripts/track_ranking.js`는 experimental/weekly 참고임을 먼저 고지 |
 | AI 티 제거/문체 윤문 | `humanize-korean` 스킬 기준으로 문체만 윤문 |
 | URL 등록 | `docs/strategy/POSTING_REGISTRY.md` |
@@ -47,6 +71,8 @@
 5. AppSheet 현장 사진/사례로 후매칭 가능한지 판단한다.
 6. 발행 안전성과 글맛을 함께 본다.
 
+중앙 브랜드 프로젝트 v4.0 이후 상품 위키는 구조/선택 기준 참고 자료로 본다. 리뷰 수, 가격, A/S, 일정, 지역, 이벤트, 배송/반품, 패키지 구성 claim은 중앙 `EVIDENCE_REGISTER.md`와 `OPEN_QUESTIONS_REGISTER.md` 상태를 다시 확인해야 하며, open/in_review/candidate claim은 발행 문장으로 단정하지 않는다.
+
 중요: 키워드는 검색 유입의 근본이다. 다만 키워드명을 그대로 제목으로 쓰는 것이 글감은 아니다. 신규 글감은 `시장 키워드/실제 유입어 → 고객 상황 → 고객 불안/의심 문장 → 제목 후보 → 문장군 취급 가능성/중복/게이트 검증` 순서로 만든다. 검색 키워드는 반드시 제목과 본문 앞부분에 자연스럽게 반영하되, 제목은 고객이 검색창에 치기 직전의 말에 가깝게 만든다.
 
 신규 글감 후보는 가능하면 `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md`로 남긴다. daily의 다음 액션은 `docs/strategy/ACTIVE_TOPIC_QUEUE.md`의 기존 항목 갱신 또는 신규 행 추가로 닫는다. 현재 `ops:daily`는 scorecard 누락을 WARN으로 보여주며, 바로 발행 하드 FAIL로 연결하지 않는다.
@@ -54,6 +80,7 @@
 ## 원고 작성 핵심 계약
 
 - `posts/NNN_키워드.md` 단일 발행 MD만 만든다.
+- `posts/` 원고 본문은 로컬 전용 작업물이며 GitHub에 커밋하지 않는다.
 - 별도 제작노트, 사진 큐, 내부 메모 파일을 만들지 않는다.
 - `posts/` 파일에는 네이버에 붙여넣을 발행 본문만 둔다.
 - 원고 상단에는 `## 제목 후보 5개` 섹션을 둘 수 있으며, 실제 발행 제목은 그 아래 첫 `# 제목`이다.
@@ -62,7 +89,7 @@
 - 모든 제목을 `3가지` 구조로 반복하지 않는다.
 - 질문형 제목은 남발하지 않는다. 다만 핵심 키워드가 들어가고 고객 불안/의심을 직접 건드리는 제목은 고객불안형 후보로 허용할 수 있다. `중문` 단독 제목은 금지한다.
 - 098번 이후 통계 기반 신규 글은 공백 제외 본문 1,500~2,500자를 합격 범위로 본다. 길이는 보조 기준이며 글 방향은 고객 문제와 현장 서사가 우선이다.
-- `## 실제 시공 현장에서는 조금 다릅니다` 단락은 AppSheet 현장으로 치환 가능한 자연문 슬롯이어야 한다.
+- `## 실제 시공 현장에서는 조금 다릅니다` 단락은 AppSheet 현장으로 후매칭 가능한 자연문 슬롯이어야 한다.
 - 발행 본문에 `[사진:]`, `[AppSheet 확인]`, `[제작자 메모]`, `## 운영 메모` 같은 내부 지시문을 남기지 않는다.
 
 ## 글맛 게이트
@@ -91,7 +118,7 @@
 
 ## 발행 하드게이트
 
-문장군 블로그는 좋아 보이면 발행하지 않는다. 발행 전 CLI 결과가 통과해야 한다.
+문장군 블로그는 좋아 보이면 발행하지 않는다. 발행 전 로컬 CLI 결과가 통과해야 한다.
 
 ```powershell
 npm run validate:posts
@@ -121,11 +148,12 @@ npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json
 
 ## 저장 규칙
 
-- 정보글: `posts/NNN_키워드.md`
-- 리라이팅 발행본: `posts/NNN_키워드_리라이팅.md`
-- 검수 결과: `outputs/checks/NNN_키워드_check.md`
-- 발행 제어: `outputs/publish_control/NNN_키워드/STATUS.md`, `APPROVAL_LOG.md`, 필요 시 `EVIDENCE.json`
-- daily report: `outputs/reports/daily/YYYY-MM-DD_seo_watch.md`
-- active topic queue: `docs/strategy/ACTIVE_TOPIC_QUEUE.md`
+- 로컬 전용 정보글: `posts/NNN_키워드.md`
+- 로컬 전용 리라이팅 발행본: `posts/NNN_키워드_리라이팅.md`
+- 로컬 전용 검수 결과: `outputs/checks/NNN_키워드_check.md`
+- 로컬 전용 발행 제어: `outputs/publish_control/NNN_키워드/STATUS.md`, `APPROVAL_LOG.md`, 필요 시 `EVIDENCE.json`
+- GitHub 운영 OS daily report: `outputs/reports/daily/YYYY-MM-DD_seo_watch.md`
+- GitHub 운영 OS active topic queue: `docs/strategy/ACTIVE_TOPIC_QUEUE.md`
+- GitHub 운영 OS 발행 원장: `docs/strategy/POSTING_REGISTRY.md`
 
-원본 통계 파일, 관리자 화면 스크린샷, 고객 개인정보, AppSheet 원본, 비공개 리뷰/사진 원본은 공개 저장소에 커밋하지 않는다. 보안 기준은 `docs/operations/DATA_SECURITY_POLICY.md`를 따른다.
+원고 본문, 원본 통계 파일, 관리자 화면 스크린샷, 고객 개인정보, AppSheet 원본, 비공개 리뷰/사진 원본은 공개 저장소에 커밋하지 않는다. 보안 기준은 `docs/operations/DATA_SECURITY_POLICY.md`를 따른다.

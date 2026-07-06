@@ -2,6 +2,8 @@
 
 > 목적: 문서가 많아진 상태에서도 작업자가 어떤 상황에서 어떤 문서를 먼저 봐야 하는지 헷갈리지 않게 하는 단일 입구다. 이 문서는 문서를 줄이는 문서가 아니라, 문서 권위와 참조 경로를 정리하는 색인이다.
 
+> 2026-07-01 업데이트: 중앙 브랜드 프로젝트 v4.0 이후 리뷰 수, A/S, 일정, 가격, 할부, 지역, 이벤트, 패키지 구성 claim은 `docs/brand/BRAND_SOURCE.md`와 `docs/brand/BLOG_BRAND_ADAPTER.md`를 먼저 보고, 중앙 `EVIDENCE_REGISTER.md` + `OPEN_QUESTIONS_REGISTER.md` 상태를 최종 기준으로 확인한다.
+
 ## 1. 문서 권위 등급
 
 | 등급 | 의미 | 처리 |
