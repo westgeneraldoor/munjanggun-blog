@@ -30,6 +30,44 @@ function sha256File(filePath) {
   return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
 }
 
+const VALID_FIXTURE_BODY = [
+  '## 제목 후보 5개',
+  '',
+  '- PVC 걸레받이 단점, 시공 전 먼저 볼 기준',
+  '- 걸레받이 교체 전 벽과 바닥 상태를 같이 봐야 하는 이유',
+  '- 걸레받이몰딩 고를 때 색상보다 먼저 확인할 것',
+  '- 걸레받이 시공 후 들뜸이 걱정될 때 보는 체크포인트',
+  '- 문장군 걸레받이몰딩 상담 전 준비하면 좋은 기준',
+  '',
+  '# PVC 걸레받이 단점, 시공 전 먼저 볼 기준',
+  '',
+  '걸레받이는 작은 마감처럼 보여도 집 전체 분위기를 꽤 크게 바꿉니다. 바닥과 벽이 만나는 자리라서 색상만 보고 고르면 나중에 틈, 들뜸, 오염이 더 잘 보일 수 있습니다.',
+  '',
+  '특히 기존 몰딩을 철거한 자리, 장판이 말려 올라온 자리, 벽지가 살짝 떠 있는 자리는 같은 걸레받이를 붙여도 결과가 다르게 보입니다. 그래서 제품 이름보다 현장 상태를 먼저 보는 것이 좋습니다.',
+  '',
+  'PVC 걸레받이는 관리가 편하고 비용 부담이 비교적 낮은 편이지만, 모든 집에 똑같이 맞는 선택은 아닙니다. 벽이 많이 휘었거나 바닥 수평이 크게 어긋난 곳에서는 마감선이 더 눈에 띌 수 있습니다.',
+  '',
+  '첫째, 벽면 평탄도를 봐야 합니다. 벽이 고르지 않으면 걸레받이가 벽에 딱 붙지 않고 부분적으로 뜬 것처럼 보일 수 있습니다. 이때는 자재보다 바탕면 정리가 먼저입니다.',
+  '',
+  '둘째, 바닥 마감과 만나는 선을 봐야 합니다. 장판, 마루, 데코타일처럼 바닥재가 다르면 걸레받이 하단 마감도 달라집니다. 바닥 끝이 비어 있거나 벌어진 집은 단순 교체보다 보강 범위를 같이 봐야 합니다.',
+  '',
+  '셋째, 색상 연결을 봐야 합니다. 벽지와 바닥 사이에서 걸레받이가 선처럼 보일지, 자연스럽게 이어질지에 따라 집의 인상이 달라집니다. 흰색이 늘 정답은 아니고 바닥 톤과 방문 색상까지 함께 보는 편이 안전합니다.',
+  '',
+  '실제 시공 현장에서는 조금 다릅니다. 같은 아파트라도 기존 몰딩을 떼어낸 자리의 벽지 상태, 바닥 끝단의 높이, 코너가 만나는 각도에 따라 마감 방법이 달라집니다. 그래서 사진 한 장보다 벽과 바닥이 만나는 선을 함께 확인해야 견적 차이를 줄일 수 있습니다.',
+  '',
+  '걸레받이 교체를 고민한다면 자재명만 비교하기보다 기존 몰딩 상태, 바닥 마감, 벽지 들뜸 여부를 먼저 확인해 보세요. 이 세 가지가 정리되면 어떤 걸레받이를 선택해야 할지도 훨씬 분명해집니다.',
+  '',
+  '#걸레받이 #걸레받이교체 #걸레받이몰딩 #PVC걸레받이 #문장군 #문장군중문',
+  '',
+].join('\n');
+
+function makePostFixture(fileName = '087_PVC걸레받이단점.md', content = VALID_FIXTURE_BODY) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-gate-post-'));
+  const postPath = path.join(dir, fileName);
+  fs.writeFileSync(postPath, content, 'utf8');
+  return { dir, postPath };
+}
+
 function writeEvidence(controlDir, evidence = {}) {
   fs.writeFileSync(
     path.join(controlDir, 'EVIDENCE.json'),
@@ -108,78 +146,98 @@ function assertBlocked(payload, expectedCode) {
 }
 
 function testValidUrlWaitingPostPasses() {
-  const controlDir = makeControlDir();
-  const { result, payload } = runGate([
-    '--post',
-    'posts/087_PVC걸레받이단점.md',
-    '--mode',
-    'publish',
-    '--control-dir',
-    controlDir,
-  ]);
-  assert.strictEqual(result.status, 0, result.stderr || result.stdout);
-  assert.strictEqual(payload.ok, true);
-  assert.strictEqual(payload.decision, 'ALLOW');
-  assert.strictEqual(payload.summary.fail, 0);
-  removeDir(controlDir);
+  const fixture = makePostFixture();
+  const controlDir = makeControlDir({ postPath: fixture.postPath });
+  try {
+    const { result, payload } = runGate([
+      '--post',
+      fixture.postPath,
+      '--mode',
+      'publish',
+      '--control-dir',
+      controlDir,
+    ]);
+    assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+    assert.strictEqual(payload.ok, true);
+    assert.strictEqual(payload.decision, 'ALLOW');
+    assert.strictEqual(payload.summary.fail, 0);
+  } finally {
+    removeDir(controlDir);
+    removeDir(fixture.dir);
+  }
 }
 
 function testMissingStatusBlocksPublish() {
-  const controlDir = makeControlDir({ status: false });
-  const { result, payload } = runGate([
-    '--post',
-    'posts/087_PVC걸레받이단점.md',
-    '--mode',
-    'publish',
-    '--control-dir',
-    controlDir,
-  ]);
-  assert.strictEqual(result.status, 1);
-  assertBlocked(payload, 'STATUS_MISSING');
-  removeDir(controlDir);
+  const fixture = makePostFixture();
+  const controlDir = makeControlDir({ status: false, postPath: fixture.postPath });
+  try {
+    const { result, payload } = runGate([
+      '--post',
+      fixture.postPath,
+      '--mode',
+      'publish',
+      '--control-dir',
+      controlDir,
+    ]);
+    assert.strictEqual(result.status, 1);
+    assertBlocked(payload, 'STATUS_MISSING');
+  } finally {
+    removeDir(controlDir);
+    removeDir(fixture.dir);
+  }
 }
 
 function testApprovalLogWithNotApprovedDoesNotPass() {
-  const controlDir = makeControlDir();
-  fs.writeFileSync(
-    path.join(controlDir, 'APPROVAL_LOG.md'),
-    [
-      '# APPROVAL_LOG - blog publish gate',
-      '',
-      '## 2026-06-17 - Publish Hold',
-      '',
-      '- Decision: Blog publish is not approved.',
-      '- Approved scope: Review only.',
-      '',
-    ].join('\n'),
-    'utf8',
-  );
-  const { result, payload } = runGate([
-    '--post',
-    'posts/087_PVC걸레받이단점.md',
-    '--mode',
-    'publish',
-    '--control-dir',
-    controlDir,
-  ]);
-  assert.strictEqual(result.status, 1);
-  assertBlocked(payload, 'PUBLISH_APPROVAL_MISSING');
-  removeDir(controlDir);
+  const fixture = makePostFixture();
+  const controlDir = makeControlDir({ postPath: fixture.postPath });
+  try {
+    fs.writeFileSync(
+      path.join(controlDir, 'APPROVAL_LOG.md'),
+      [
+        '# APPROVAL_LOG - blog publish gate',
+        '',
+        '## 2026-06-17 - Publish Hold',
+        '',
+        '- Decision: Blog publish is not approved.',
+        '- Approved scope: Review only.',
+        '',
+      ].join('\n'),
+      'utf8',
+    );
+    const { result, payload } = runGate([
+      '--post',
+      fixture.postPath,
+      '--mode',
+      'publish',
+      '--control-dir',
+      controlDir,
+    ]);
+    assert.strictEqual(result.status, 1);
+    assertBlocked(payload, 'PUBLISH_APPROVAL_MISSING');
+  } finally {
+    removeDir(controlDir);
+    removeDir(fixture.dir);
+  }
 }
 
 function testAlreadyPublishedRegistryEntryBlocksDuplicatePublish() {
-  const controlDir = makeControlDir();
-  const { result, payload } = runGate([
-    '--post',
-    'posts/069_3연동중문_리라이팅.md',
-    '--mode',
-    'publish',
-    '--control-dir',
-    controlDir,
-  ]);
-  assert.strictEqual(result.status, 1);
-  assertBlocked(payload, 'POST_ALREADY_PUBLISHED');
-  removeDir(controlDir);
+  const fixture = makePostFixture('069_3연동중문_리라이팅.md');
+  const controlDir = makeControlDir({ postPath: fixture.postPath });
+  try {
+    const { result, payload } = runGate([
+      '--post',
+      fixture.postPath,
+      '--mode',
+      'publish',
+      '--control-dir',
+      controlDir,
+    ]);
+    assert.strictEqual(result.status, 1);
+    assertBlocked(payload, 'POST_ALREADY_PUBLISHED');
+  } finally {
+    removeDir(controlDir);
+    removeDir(fixture.dir);
+  }
 }
 
 function testPlainNaverUrlInRegistryBlocksDuplicatePublish() {
@@ -209,8 +267,8 @@ function testPlainNaverUrlInRegistryBlocksDuplicatePublish() {
 }
 
 function testPlainNaverUrlInCurrentRegistryBlocksDuplicatePublish() {
-  const postPath = path.join(root, 'posts', '087_PVC걸레받이단점.md');
-  const controlDir = makeControlDir({ postPath });
+  const fixture = makePostFixture();
+  const controlDir = makeControlDir({ postPath: fixture.postPath });
   const registry = path.join(root, 'docs', 'strategy', 'POSTING_REGISTRY.md');
   const original = fs.readFileSync(registry, 'utf8');
   try {
@@ -225,7 +283,7 @@ function testPlainNaverUrlInCurrentRegistryBlocksDuplicatePublish() {
     fs.writeFileSync(registry, patched, 'utf8');
     const { result, payload } = runGate([
       '--post',
-      'posts/087_PVC걸레받이단점.md',
+      fixture.postPath,
       '--mode',
       'publish',
       '--control-dir',
@@ -236,6 +294,7 @@ function testPlainNaverUrlInCurrentRegistryBlocksDuplicatePublish() {
   } finally {
     fs.writeFileSync(registry, original, 'utf8');
     removeDir(controlDir);
+    removeDir(fixture.dir);
   }
 }
 
@@ -275,55 +334,65 @@ function testValidatePostFailureBlocksPublish() {
 }
 
 function testPublishAllowedNoBlocksPublish() {
-  const controlDir = makeControlDir();
-  fs.writeFileSync(
-    path.join(controlDir, 'STATUS.md'),
-    [
-      '# STATUS - blog publish gate',
-      '',
-      '- Publish allowed: `NO`',
-      '- Post QA: `PASS`',
-      '',
-    ].join('\n'),
-    'utf8',
-  );
-  const { result, payload } = runGate([
-    '--post',
-    'posts/087_PVC걸레받이단점.md',
-    '--mode',
-    'publish',
-    '--control-dir',
-    controlDir,
-  ]);
-  assert.strictEqual(result.status, 1);
-  assertBlocked(payload, 'PUBLISH_NOT_ALLOWED');
-  removeDir(controlDir);
+  const fixture = makePostFixture();
+  const controlDir = makeControlDir({ postPath: fixture.postPath });
+  try {
+    fs.writeFileSync(
+      path.join(controlDir, 'STATUS.md'),
+      [
+        '# STATUS - blog publish gate',
+        '',
+        '- Publish allowed: `NO`',
+        '- Post QA: `PASS`',
+        '',
+      ].join('\n'),
+      'utf8',
+    );
+    const { result, payload } = runGate([
+      '--post',
+      fixture.postPath,
+      '--mode',
+      'publish',
+      '--control-dir',
+      controlDir,
+    ]);
+    assert.strictEqual(result.status, 1);
+    assertBlocked(payload, 'PUBLISH_NOT_ALLOWED');
+  } finally {
+    removeDir(controlDir);
+    removeDir(fixture.dir);
+  }
 }
 
 function testPostQaFailBlocksPublish() {
-  const controlDir = makeControlDir();
-  fs.writeFileSync(
-    path.join(controlDir, 'STATUS.md'),
-    [
-      '# STATUS - blog publish gate',
-      '',
-      '- Publish allowed: `YES`',
-      '- Post QA: `FAIL`',
-      '',
-    ].join('\n'),
-    'utf8',
-  );
-  const { result, payload } = runGate([
-    '--post',
-    'posts/087_PVC걸레받이단점.md',
-    '--mode',
-    'publish',
-    '--control-dir',
-    controlDir,
-  ]);
-  assert.strictEqual(result.status, 1);
-  assertBlocked(payload, 'POST_QA_NOT_PASS');
-  removeDir(controlDir);
+  const fixture = makePostFixture();
+  const controlDir = makeControlDir({ postPath: fixture.postPath });
+  try {
+    fs.writeFileSync(
+      path.join(controlDir, 'STATUS.md'),
+      [
+        '# STATUS - blog publish gate',
+        '',
+        '- Publish allowed: `YES`',
+        '- Post QA: `FAIL`',
+        '',
+      ].join('\n'),
+      'utf8',
+    );
+    const { result, payload } = runGate([
+      '--post',
+      fixture.postPath,
+      '--mode',
+      'publish',
+      '--control-dir',
+      controlDir,
+    ]);
+    assert.strictEqual(result.status, 1);
+    assertBlocked(payload, 'POST_QA_NOT_PASS');
+  } finally {
+    removeDir(controlDir);
+    removeDir(fixture.dir);
+  }
 }
 
 function testPublishModeDoesNotBlockTitleWithoutNumber() {
