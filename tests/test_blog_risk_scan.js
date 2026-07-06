@@ -30,8 +30,47 @@ function testScanContentExtractsEditorialRisks() {
   assert(result.risk_items.some((item) => item.status === 'FIX'));
 }
 
+function testScanContentExtractsBrandClaimRisks() {
+  const content = [
+    '# 중문 일정과 리뷰 claim 점검',
+    '',
+    '결정 후 3~4일 안에 시공됩니다.',
+    '리뷰 15,000개와 4,000개를 전체 브랜드 리뷰처럼 씁니다.',
+    '영종도도 무료 방문 실측이 가능합니다.',
+    '',
+  ].join('\n');
+
+  const result = scanContent(content, 'posts/998_brand_claim.md');
+  const codes = result.brand_claim_issues.map((issue) => issue.code);
+
+  assert(codes.includes('BRAND_SCHEDULE_CLAIM_INVALID'));
+  assert(codes.includes('BRAND_REVIEW_CLAIM_INVALID'));
+  assert(codes.includes('UNAVAILABLE_REGION_CLAIM'));
+  assert(result.risk_items.some((item) => item.type === 'BRAND_SCHEDULE_CLAIM_INVALID'));
+}
+
+function testScanContentAllowsSafeBrandClaims() {
+  const content = [
+    '# 안전한 중앙 claim 점검',
+    '',
+    '네이버 상품 리뷰 3.5만 개 이상이라는 범위 안에서만 리뷰 표현을 사용합니다.',
+    '중문은 결정 후 보통 3~6일 범위에서 시공 일정이 잡히는 경우가 많습니다.',
+    '영종도는 현재 무료 방문 실측이 어렵습니다.',
+    '',
+  ].join('\n');
+
+  const result = scanContent(content, 'posts/997_brand_safe.md');
+  const codes = result.brand_claim_issues.map((issue) => issue.code);
+
+  assert(!codes.includes('BRAND_SCHEDULE_CLAIM_INVALID'));
+  assert(!codes.includes('BRAND_REVIEW_CLAIM_INVALID'));
+  assert(!codes.includes('UNAVAILABLE_REGION_CLAIM'));
+}
+
 function main() {
   testScanContentExtractsEditorialRisks();
+  testScanContentExtractsBrandClaimRisks();
+  testScanContentAllowsSafeBrandClaims();
   console.log('blog risk scan tests passed');
 }
 

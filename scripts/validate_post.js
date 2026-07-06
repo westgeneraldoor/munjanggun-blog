@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { ROOT_DIR } = require('./lib/paths');
 const { writeTextFile } = require('./lib/file_store');
+const { findBrandClaimIssues } = require('./lib/brand_claim_rules');
 
 const DEFAULT_FROM_NUMBER = 68;
 const FIELD_STORY_LENGTH_FROM_NUMBER = 98;
@@ -60,8 +61,6 @@ const unsupportedProducts = [
   { term: '중문파티션', reason: '문장군 공식 중문 제품군에서 제외된 소재입니다.' },
 ];
 
-const unavailableRegions = ['영종도', '연천', '동두천', '포천', '양평', '가평', '여주'];
-
 function parseArgs(argv) {
   const options = {
     strict: false,
@@ -95,6 +94,10 @@ function listPostFiles(options) {
   }
 
   const postsDir = path.join(ROOT_DIR, 'posts');
+  if (!fs.existsSync(postsDir)) {
+    return [];
+  }
+
   return fs.readdirSync(postsDir)
     .filter((name) => name.endsWith('.md'))
     .map((name) => path.join(postsDir, name))
@@ -213,11 +216,8 @@ function validateFile(filePath, options) {
     if (content.includes(term)) addIssue(issues, isV2Target ? 'fail' : 'warn', `금지/주의 표현 포함: ${term}`);
   });
 
-  unavailableRegions.forEach((region) => {
-    const possiblePattern = new RegExp(`${region}.{0,12}(가능|시공|방문|실측|견적)`);
-    if (possiblePattern.test(content)) {
-      addIssue(issues, 'fail', `불가 지역을 가능 지역처럼 표현했을 수 있습니다: ${region}`);
-    }
+  findBrandClaimIssues(content).forEach((issue) => {
+    addIssue(issues, 'fail', `${issue.code}: ${issue.message}`);
   });
 
   if (content.includes('프렌치중문') && !/정확한 제품명|제품명이라기보다|스타일|디자인 취향/.test(content)) {

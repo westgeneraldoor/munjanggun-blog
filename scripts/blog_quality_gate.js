@@ -3,6 +3,7 @@ const crypto = require('crypto');
 const path = require('path');
 const { spawnSync } = require('child_process');
 const { ROOT_DIR } = require('./lib/paths');
+const { findBrandClaimIssues } = require('./lib/brand_claim_rules');
 
 const FAIL = 'fail';
 const WARN = 'warn';
@@ -339,6 +340,10 @@ function validatePublishContent(postPath) {
   const bodyBeforeHashtags = hashtagSectionIndex >= 0 ? content.slice(0, hashtagSectionIndex) : content;
   const hashtags = extractHashtags(content);
   const hashtagSection = extractHashtagSection(content);
+
+  findBrandClaimIssues(content).forEach((issue) => {
+    issues.push(makeIssue(FAIL, issue.code, issue.message, postPath));
+  });
 
   if (/\[(사진|이미지|AppSheet|앱시트|제작자|제작\s*노트|메모)[^\]]*\]/.test(content)) {
     issues.push(makeIssue(FAIL, 'PHOTO_PLACEHOLDER_IN_POST', 'Internal photo cues, AppSheet checks, and production notes must not remain in the publish post. Express photo direction naturally in the body instead.', postPath));

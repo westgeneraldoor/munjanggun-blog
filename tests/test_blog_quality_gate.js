@@ -208,6 +208,37 @@ function testPlainNaverUrlInRegistryBlocksDuplicatePublish() {
   }
 }
 
+function testPlainNaverUrlInCurrentRegistryBlocksDuplicatePublish() {
+  const postPath = path.join(root, 'posts', '087_PVC걸레받이단점.md');
+  const controlDir = makeControlDir({ postPath });
+  const registry = path.join(root, 'docs', 'strategy', 'POSTING_REGISTRY.md');
+  const original = fs.readFileSync(registry, 'utf8');
+  try {
+    const rowPattern = /^\|\s*087\s*\|\s*087_PVC걸레받이단점\.md\s*\|.*$/m;
+    assert(rowPattern.test(original), 'expected registry row for 087_PVC걸레받이단점.md');
+    const patched = original.replace(rowPattern, (row) => {
+      const cells = row.split('|');
+      cells[6] = ' https://blog.naver.com/doorgeneral/224399999999?tracking=1 ';
+      cells[7] = ' 2026-06-22 ';
+      return cells.join('|');
+    });
+    fs.writeFileSync(registry, patched, 'utf8');
+    const { result, payload } = runGate([
+      '--post',
+      'posts/087_PVC걸레받이단점.md',
+      '--mode',
+      'publish',
+      '--control-dir',
+      controlDir,
+    ]);
+    assert.strictEqual(result.status, 1);
+    assertBlocked(payload, 'POST_ALREADY_PUBLISHED');
+  } finally {
+    fs.writeFileSync(registry, original, 'utf8');
+    removeDir(controlDir);
+  }
+}
+
 function testValidatePostFailureBlocksPublish() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'blog-gate-bad-post-'));
   const post = path.join(dir, '999_bad.md');
@@ -632,13 +663,65 @@ function testHashtagSpacingBlocksPublish() {
   removeDir(controlDir);
 }
 
+function testCentralBrandClaimCodesBlockPublish() {
+  const { dir, post } = writeTempPost(
+    '981_brand_claim_gate.md',
+    basePostLines([
+      '결정 후 3~4일 안에 시공됩니다.',
+      '리뷰 15,000개와 전체 5만 리뷰를 확정 문장으로 씁니다.',
+      '영종도도 무료 방문 실측이 가능합니다.',
+    ]),
+  );
+  const controlDir = makeControlDir({ postPath: post });
+  const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+  assert.strictEqual(result.status, 1);
+  const actualCodes = codes(payload);
+  assert(actualCodes.includes('BRAND_SCHEDULE_CLAIM_INVALID'));
+  assert(actualCodes.includes('BRAND_REVIEW_CLAIM_INVALID'));
+  assert(actualCodes.includes('UNAVAILABLE_REGION_CLAIM'));
+  removeDir(dir);
+  removeDir(controlDir);
+}
+
+function testCentralBrandSafeClaimCodesAllowPublish() {
+  const { dir, post } = writeTempPost(
+    '980_brand_claim_safe.md',
+    basePostLines([
+      '네이버 상품 리뷰 3.5만 개 이상이라는 범위 안에서만 리뷰 표현을 사용합니다.',
+      '중문은 결정 후 보통 3~6일 범위에서 시공 일정이 잡히는 경우가 많습니다.',
+      '영종도는 현재 무료 방문 실측이 어렵습니다.',
+    ]),
+  );
+  const registry = path.join(root, 'docs', 'strategy', 'POSTING_REGISTRY.md');
+  const originalRegistry = fs.readFileSync(registry, 'utf8');
+  const controlDir = makeControlDir({ postPath: post });
+  try {
+    fs.writeFileSync(
+      registry,
+      `${originalRegistry}\n| 980 | 980_brand_claim_safe.md | 테스트 | 브랜드 claim safe | 브랜드 claim safe | - | - | 중앙 브랜드 claim gate 회귀 테스트 |\n`,
+      'utf8',
+    );
+
+    const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+    assert.strictEqual(result.status, 0, payload.issues.map((issue) => `${issue.code}: ${issue.message}`).join('\n'));
+    const actualCodes = codes(payload);
+    assert(!actualCodes.includes('BRAND_SCHEDULE_CLAIM_INVALID'));
+    assert(!actualCodes.includes('BRAND_REVIEW_CLAIM_INVALID'));
+    assert(!actualCodes.includes('UNAVAILABLE_REGION_CLAIM'));
+  } finally {
+    fs.writeFileSync(registry, originalRegistry, 'utf8');
+    removeDir(dir);
+    removeDir(controlDir);
+  }
+}
+
 function main() {
   [
     testValidUrlWaitingPostPasses,
     testMissingStatusBlocksPublish,
     testApprovalLogWithNotApprovedDoesNotPass,
     testAlreadyPublishedRegistryEntryBlocksDuplicatePublish,
-    testPlainNaverUrlInRegistryBlocksDuplicatePublish,
+    testPlainNaverUrlInCurrentRegistryBlocksDuplicatePublish,
     testValidatePostFailureBlocksPublish,
     testPublishAllowedNoBlocksPublish,
     testPostQaFailBlocksPublish,
@@ -655,6 +738,8 @@ function main() {
     testStrongClaimWithoutEvidenceBlocksPublish,
     testUnsupportedProductBlocksPublish,
     testHashtagSpacingBlocksPublish,
+    testCentralBrandClaimCodesBlockPublish,
+    testCentralBrandSafeClaimCodesAllowPublish,
   ].forEach((test) => test());
   console.log('blog quality gate tests passed');
 }

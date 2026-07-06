@@ -1,6 +1,6 @@
 ﻿# BRAND_SOURCE - 문장군 블로그 브랜드 원본 연결
 
-> 최종 업데이트: 2026-06-25
+> 최종 업데이트: 2026-07-01
 > 목적: 문장군 블로그 프로젝트가 중앙 브랜드 원본을 어떻게 참조하는지 고정한다.
 
 ## 공식 중앙 원본
@@ -16,14 +16,38 @@ C:\Users\hjh\안티그래비티\문장군_브랜드
 ```text
 C:\Users\hjh\안티그래비티\문장군_브랜드\BRAND_CONTEXT.md
 C:\Users\hjh\안티그래비티\문장군_브랜드\FIELD_JUDGMENT_RULES.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\EVIDENCE_REGISTER.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\OPEN_QUESTIONS_REGISTER.md
 C:\Users\hjh\안티그래비티\문장군_브랜드\DESIGN.md
 C:\Users\hjh\안티그래비티\문장군_브랜드\DESIGN_QUICKSTART.md
 C:\Users\hjh\안티그래비티\문장군_브랜드\PHOTO_TREATMENT.md
 C:\Users\hjh\안티그래비티\문장군_브랜드\ANTI_PATTERNS.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\BRAND_WIKI_ARCHITECTURE.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\SOURCE_REGISTRY.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\PRODUCT_WIKI_INDEX.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\ASSET_SEMANTIC_INDEX.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\BRAND_MATERIAL_INDEX.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\PRODUCT_SELECTION_GUIDE.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\FIELD_STORY_BANK.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\REVIEW_PROOF_BANK.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\PROOF_ASSET_INDEX.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\FAQ_OBJECTION_BANK.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\COPY_ASSET_BANK.md
 C:\Users\hjh\안티그래비티\문장군_브랜드\tokens\brand.tokens.json
 C:\Users\hjh\안티그래비티\문장군_브랜드\tokens\brand.css
 C:\Users\hjh\안티그래비티\문장군_브랜드\PROJECT_ADAPTERS.md
+C:\Users\hjh\안티그래비티\문장군_브랜드\CHANGELOG.md
 ```
+
+## 중앙 v4.0 claim gate
+
+2026-07-01 중앙 브랜드 v4.0부터 블로그는 아래 기준을 따른다.
+
+- 리뷰 수, 가격, 월 납입, 무이자 할부, A/S, 일정, 서비스 지역, 이벤트, 배송/반품, 패키지 구성 같은 변동 claim은 중앙 `EVIDENCE_REGISTER.md`의 상태와 사용 기준을 우선한다.
+- `OPEN_QUESTIONS_REGISTER.md`에서 `open`, `in_review`인 항목은 외부 발행 본문에서 확정 표현으로 쓰지 않는다.
+- `PRODUCT_WIKI_INDEX.md`에서 `vetted`인 상품 위키는 상품 구조, 고객 고민, 선택 기준, 이미지/GIF 탐색에 사용할 수 있다.
+- 상품 위키가 `vetted`여도 가격, 할인, 월 납입, 리뷰 수, 이벤트, 배송/반품, A/S, 일정, 옵션 운영 여부는 반드시 `EVIDENCE_REGISTER.md`를 다시 본다.
+- 현관문/방화문은 중앙에서 `candidate` 또는 확인 필요로 보이더라도 블로그 프로젝트에서는 `POSTING_EXCLUSION_RULES.md`와 AGENTS.md의 영구 제외 기준을 유지한다.
 
 ## 블로그 프로젝트 안의 역할 분리
 
@@ -44,6 +68,7 @@ C:\Users\hjh\안티그래비티\문장군_브랜드\PROJECT_ADAPTERS.md
 6. 블로그 썸네일, 본문 사진, Before/After 이미지 기준은 중앙 `PHOTO_TREATMENT.md`를 따른다.
 7. 어두운 판매형 썸네일, AI 카드뉴스형, 특가 전단지형 등은 중앙 `ANTI_PATTERNS.md`로 검수한다.
 8. 토큰 파일은 웹앱/랜딩/템플릿 구현 기준이며, 순수 블로그 원고 작성에는 억지 적용하지 않는다.
+9. 로컬 `docs/strategy/BRAND_CONTEXT.md`는 중앙 원본 접근 실패 시 임시 스냅샷이다. 변동 claim은 로컬 스냅샷보다 중앙 `EVIDENCE_REGISTER.md`를 우선한다.
 
 ## 외부 경로 접근 실패 시
 

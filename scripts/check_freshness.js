@@ -58,7 +58,6 @@ function buildCheck(name, filePath, date, maxAgeDays) {
 
 function dailyKeywordChecks(maxAgeDays) {
   return [
-    ['keyword_data.json', paths.dataRaw('keyword_data.json')],
     ['keyword_data_product.json', paths.dataRaw('keyword_data_product.json')],
     ['keyword_data_지역.json', paths.dataRaw('keyword_data_지역.json')],
     ['keyword_data_product_relevant.json', paths.dataProcessed('keyword_data_product_relevant.json')],

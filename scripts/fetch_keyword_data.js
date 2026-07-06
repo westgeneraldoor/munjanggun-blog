@@ -186,6 +186,21 @@ function formatResults(results) {
   return { markdown: md, data: enriched };
 }
 
+function renderMinVolumeMarkdown(data, minVolume = 30) {
+  const today = new Date().toISOString().split('T')[0];
+  const filtered = data.filter((item) => item.total >= minVolume);
+  let md = `# 지역 키워드 ${minVolume}이상\n\n`;
+  md += `> 조회일: ${today}\n`;
+  md += `> 기준: PC+모바일 합계 ${minVolume} 이상\n`;
+  md += `> 총 ${filtered.length}개\n\n`;
+  md += `| 순위 | 키워드 | PC | 모바일 | 합계(추정) | 경쟁도 |\n`;
+  md += `| --- | --- | ---: | ---: | ---: | --- |\n`;
+  filtered.forEach((item, i) => {
+    md += `| ${i + 1} | ${item.keyword} | ${item.pc} | ${item.mobile} | ${item.total} | ${item.competition} |\n`;
+  });
+  return md;
+}
+
 // ── 메인 실행 ───────────────────────────────────────
 async function main() {
   if (!API_KEY || !SECRET_KEY || !CUSTOMER_ID) {
@@ -223,6 +238,10 @@ async function main() {
   const mdPath = paths.dataRaw('keyword_data_지역.md');
   writeTextFile(mdPath, markdown);
   console.log(`✅ 마크다운 저장: ${mdPath}`);
+
+  const regional30Path = paths.dataProcessed('keyword_data_지역_30이상.md');
+  writeTextFile(regional30Path, renderMinVolumeMarkdown(data, 30));
+  console.log(`✅ 지역 30이상 마크다운 저장: ${regional30Path}`);
 
   console.log(`\n📊 총 ${data.length}개 키워드 발굴 완료!`);
   console.log('👉 이 결과를 기반으로 docs/strategy/SEO_KEYWORD_RESEARCH.md와 docs/strategy/CONTENT_PLAN.md를 재수립합니다.');

@@ -50,6 +50,10 @@ node scripts/blog_quality_gate.js --post "posts/085_문틀교체비용.md" --mod
 - `DOOR_FRAME_ONLY_CLAIM`
 - `EXCLUDED_PRODUCT_CLAIM`
 - `SERVICE_SCOPE_OVERREACH`
+- `UNAVAILABLE_REGION_CLAIM`
+- `BRAND_REVIEW_CLAIM_INVALID`
+- `BRAND_SCHEDULE_CLAIM_INVALID`
+- `BRAND_OVERCLAIM`
 - 질문형 제목 남발. 단, 핵심 키워드가 있고 고객 불안/의심을 직접 건드리는 고객불안형 제목은 하드 FAIL이 아니라 WARN/사람 검수로 본다.
 - `중문` 단독 제목
 - 금지 표현 포함
@@ -130,6 +134,10 @@ npm run test:blog-gate
 - `CLAIM_EVIDENCE_REQUIRED`: 숫자, 성능, 보장, 확신 표현에 claim evidence가 없음
 - `UNSUPPORTED_PRODUCT_CLAIM`: 문장군 미취급/제외 제품을 가능 제품처럼 언급함
 - `HASHTAG_SPACING_INVALID`: 태그란용 해시태그에 공백이 들어감
+- `UNAVAILABLE_REGION_CLAIM`: 중앙 브랜드 기준 불가 지역을 가능 지역처럼 씀
+- `BRAND_REVIEW_CLAIM_INVALID`: 리뷰 수를 중앙 `EVIDENCE_REGISTER.md` 범위 밖으로 씀. `네이버 상품 리뷰 3.5만 개 이상`처럼 범위 한정 필요
+- `BRAND_SCHEDULE_CLAIM_INVALID`: 중문 일정을 과거 `3~4일` 기준으로 씀. 중앙 기준은 보통 3~6일
+- `BRAND_OVERCLAIM`: `무조건 무상`, `평생 A/S`, `절대 추가금 없음` 같은 보장성 표현을 씀
 
 근거 파일은 각 발행 제어 폴더에 둔다.
 
