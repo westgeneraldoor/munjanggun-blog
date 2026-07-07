@@ -94,6 +94,10 @@ const agents = fs.readFileSync(fromRoot('AGENTS.md'), 'utf8');
   '최종 글감 3개',
   'POSTING_REGISTRY 중복/카니발 확인',
   'POSTING_EXCLUSION_RULES 제외 키워드 확인',
+  'Markdown pipe table',
+  '제목 후보 최소 3개',
+  '추천 상태',
+  '근접 경고',
 ].forEach((needle) => {
   if (!agents.includes(needle)) throw new Error(`AGENTS.md에 오늘 글감 응답 계약 문자열이 없습니다: ${needle}`);
 });
@@ -105,6 +109,10 @@ const operatingIndex = fs.readFileSync(fromRoot('docs/OPERATING_INDEX.md'), 'utf
   '오늘의 글감 포트폴리오',
   '최종 글감 3개',
   '| 역할 | queue_id | 후보/처리 | 기존 글 중복 여부 | 왜 오늘 봐야 하는지 | 다음 액션 |',
+  '| --- | --- | --- | --- | --- | --- |',
+  '제목 후보 최소 3개',
+  '추천 상태',
+  '근접 경고',
 ].forEach((needle) => {
   if (!operatingIndex.includes(needle)) throw new Error(`OPERATING_INDEX.md에 오늘 글감 응답 계약 문자열이 없습니다: ${needle}`);
 });
