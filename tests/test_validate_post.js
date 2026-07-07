@@ -22,7 +22,9 @@ function writeTempPost(lines) {
 }
 
 function writeRootPost(fileName, lines) {
-  const post = path.join(root, 'posts', fileName);
+  const postsDir = path.join(root, 'posts');
+  fs.mkdirSync(postsDir, { recursive: true });
+  const post = path.join(postsDir, fileName);
   fs.writeFileSync(post, `${lines.join('\n')}\n`, 'utf8');
   return post;
 }

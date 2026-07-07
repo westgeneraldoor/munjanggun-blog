@@ -29,6 +29,20 @@ function runNode(args) {
   });
 }
 
+function topicPortfolioSection() {
+  return [
+    '## 오늘의 글감 포트폴리오 요약',
+    '',
+    '| 역할 | queue_id | 후보/처리 | 기존 글 중복 여부 | 왜 오늘 봐야 하는지 | 다음 액션 |',
+    '| --- | --- | --- | --- | --- | --- |',
+    '| 탈락 후보 | Q-010 | 싱크대문짝교체 | POSTING_REGISTRY와 제외 기준상 서비스 오해 위험 | 유입은 있으나 문장군 취급 범위 밖 | 확장 차단, 관찰만 |',
+    '| 보호글 | Q-002 | 아파트 중문 설치 비용 | 기존 비용 글 보호, 신규 비용 글 남발 금지 | 모바일/PC 모두 반복 유입 | 내부링크 보강 |',
+    '| 공격글 | Q-006 | ABS도어 방문교체 | 기존 방문교체 글과 비용/방법 각도 분리 | 방문교체비용 유입 반복 | scorecard 유지 |',
+    '| 실험글 | Q-008 | 좁은 현관 3연동중문 | 기존 신발장 간섭 글과 최소폭 관점 분리 | TOP20 관찰권과 롱테일 유입 확인 | 7일 관찰 |',
+    '',
+  ].join('\n');
+}
+
 function validDailyReport() {
   return [
     '# 2026-06-24 문장군 데일리 현황 보고',
@@ -69,6 +83,7 @@ function validDailyReport() {
     '',
     '- 중문 유리 비교 후속',
     '',
+    topicPortfolioSection(),
     '## 6. 다음 액션',
     '',
     '1. 091 유리 비교 글 보호 관찰',
@@ -189,6 +204,174 @@ function testDailyReportContradictoryMissingFileFails() {
   }
 }
 
+function testDailyReportTopicPortfolioRequiredFlagFailsWhenMissing() {
+  const dir = makeTempDir('daily-report-portfolio-missing-');
+  try {
+    writeFile(
+      path.join(dir, '2026-06-24_seo_watch.md'),
+      validDailyReport().replace(`${topicPortfolioSection()}`, '')
+    );
+
+    const result = runNode([
+      dailyCli,
+      '--reports-dir',
+      dir,
+      '--date',
+      '2026-06-24',
+      '--require-topic-portfolio',
+    ]);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /오늘의 글감 포트폴리오/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyReportTopicPortfolioRejectsExcludedWritingAction() {
+  const dir = makeTempDir('daily-report-portfolio-invalid-');
+  try {
+    writeFile(
+      path.join(dir, '2026-06-24_seo_watch.md'),
+      validDailyReport().replace(
+        '| 탈락 후보 | Q-010 | 싱크대문짝교체 | POSTING_REGISTRY와 제외 기준상 서비스 오해 위험 | 유입은 있으나 문장군 취급 범위 밖 | 확장 차단, 관찰만 |',
+        '| 탈락 후보 | Q-010 | 싱크대문짝교체 | POSTING_REGISTRY와 제외 기준상 서비스 오해 위험 | 유입은 있으나 문장군 취급 범위 밖 | 신규 원고 작성 |'
+      )
+    );
+
+    const result = runNode([
+      dailyCli,
+      '--reports-dir',
+      dir,
+      '--date',
+      '2026-06-24',
+      '--require-topic-portfolio',
+    ]);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /탈락 후보/);
+    assert.match(result.stdout, /작성\/발행\/scorecard/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyReportTopicPortfolioRequiresTableRows() {
+  const dir = makeTempDir('daily-report-portfolio-prose-');
+  try {
+    writeFile(
+      path.join(dir, '2026-06-24_seo_watch.md'),
+      validDailyReport().replace(
+        topicPortfolioSection(),
+        [
+          '## 오늘의 글감 포트폴리오 요약',
+          '',
+          '- 탈락 후보, 보호글, 공격글, 실험글을 모두 봤다.',
+          '- 왜 오늘 봐야 하는지와 기존 글 중복도 확인했다.',
+          '',
+        ].join('\n')
+      )
+    );
+
+    const result = runNode([
+      dailyCli,
+      '--reports-dir',
+      dir,
+      '--date',
+      '2026-06-24',
+      '--require-topic-portfolio',
+    ]);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /Markdown 표/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyReportTopicPortfolioRequiresPerRowWhyToday() {
+  const dir = makeTempDir('daily-report-portfolio-cell-');
+  try {
+    writeFile(
+      path.join(dir, '2026-06-24_seo_watch.md'),
+      validDailyReport().replace(
+        '| 공격글 | Q-006 | ABS도어 방문교체 | 기존 방문교체 글과 비용/방법 각도 분리 | 방문교체비용 유입 반복 | scorecard 유지 |',
+        '| 공격글 | Q-006 | ABS도어 방문교체 | 기존 방문교체 글과 비용/방법 각도 분리 | - | scorecard 유지 |'
+      )
+    );
+
+    const result = runNode([
+      dailyCli,
+      '--reports-dir',
+      dir,
+      '--date',
+      '2026-06-24',
+      '--require-topic-portfolio',
+    ]);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /공격글/);
+    assert.match(result.stdout, /왜 오늘/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyReportTopicPortfolioRequiresQueueIdPerRow() {
+  const dir = makeTempDir('daily-report-portfolio-queue-');
+  try {
+    writeFile(
+      path.join(dir, '2026-06-24_seo_watch.md'),
+      validDailyReport().replace(
+        '| 공격글 | Q-006 | ABS도어 방문교체 | 기존 방문교체 글과 비용/방법 각도 분리 | 방문교체비용 유입 반복 | scorecard 유지 |',
+        '| 공격글 | - | ABS도어 방문교체 | 기존 방문교체 글과 비용/방법 각도 분리 | 방문교체비용 유입 반복 | scorecard 유지 |'
+      )
+    );
+
+    const result = runNode([
+      dailyCli,
+      '--reports-dir',
+      dir,
+      '--date',
+      '2026-06-24',
+      '--require-topic-portfolio',
+    ]);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /공격글/);
+    assert.match(result.stdout, /queue_id/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyReportTopicPortfolioAllowsExcludedBanPhrase() {
+  const dir = makeTempDir('daily-report-portfolio-ban-');
+  try {
+    writeFile(
+      path.join(dir, '2026-06-24_seo_watch.md'),
+      validDailyReport().replace(
+        '| 탈락 후보 | Q-010 | 싱크대문짝교체 | POSTING_REGISTRY와 제외 기준상 서비스 오해 위험 | 유입은 있으나 문장군 취급 범위 밖 | 확장 차단, 관찰만 |',
+        '| 탈락 후보 | Q-010 | 싱크대문짝교체 | POSTING_REGISTRY와 제외 기준상 서비스 오해 위험 | 유입은 있으나 문장군 취급 범위 밖 | 신규 원고 작성 금지 |'
+      )
+    );
+
+    const result = runNode([
+      dailyCli,
+      '--reports-dir',
+      dir,
+      '--date',
+      '2026-06-24',
+      '--require-topic-portfolio',
+    ]);
+
+    assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+    assert.match(result.stdout, /ALLOW/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
 function testValidTopicScorecardPasses() {
   const dir = makeTempDir('topic-scorecard-');
   try {
@@ -259,6 +442,7 @@ function testOpsDailyScriptUsesDailyContract() {
   assert(opsDaily.includes('check:freshness'), opsDaily);
   assert(opsDaily.includes('validate_active_queue.js'), opsDaily);
   assert(opsDaily.includes('--latest-daily'), opsDaily);
+  assert(opsDaily.includes('--require-topic-portfolio'), opsDaily);
   assert(!opsDaily.includes('track'), opsDaily);
   assert(!opsDaily.includes('ranking:summary'), opsDaily);
 
@@ -298,6 +482,12 @@ function main() {
   testDailyReportEmptySectionFails();
   testDailyReportPlaceholderSectionFails();
   testDailyReportContradictoryMissingFileFails();
+  testDailyReportTopicPortfolioRequiredFlagFailsWhenMissing();
+  testDailyReportTopicPortfolioRejectsExcludedWritingAction();
+  testDailyReportTopicPortfolioRequiresTableRows();
+  testDailyReportTopicPortfolioRequiresPerRowWhyToday();
+  testDailyReportTopicPortfolioRequiresQueueIdPerRow();
+  testDailyReportTopicPortfolioAllowsExcludedBanPhrase();
   testValidTopicScorecardPasses();
   testTopicScorecardEmptyFieldFails();
   testTopicScorecardTemplateFileFails();
