@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const { paths } = require('./lib/paths');
 const { readJsonFile, writeTextFile } = require('./lib/file_store');
 
@@ -22,6 +23,12 @@ function parseDate(value) {
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
+function dateInfoFromLabel(value) {
+  const label = String(value || '').trim();
+  const date = parseDate(label);
+  return date ? { date, label } : null;
+}
+
 function daysAgo(date) {
   const now = new Date();
   return Math.floor((now.getTime() - date.getTime()) / DAY_MS);
@@ -31,12 +38,30 @@ function extractReportDate(filePath, labelPattern) {
   if (!fs.existsSync(filePath)) return null;
   const content = fs.readFileSync(filePath, 'utf8');
   const match = content.match(labelPattern);
-  return match ? parseDate(match[1]) : null;
+  return match ? match[1] : null;
 }
 
 function fileMtimeDate(filePath) {
   if (!fs.existsSync(filePath)) return null;
-  return fs.statSync(filePath).mtime;
+  const date = fs.statSync(filePath).mtime;
+  return { date, label: date.toISOString().slice(0, 10) };
+}
+
+function sidecarMetaPath(filePath) {
+  const ext = path.extname(filePath);
+  return `${filePath.slice(0, -ext.length)}.meta.json`;
+}
+
+function metadataDate(filePath) {
+  const metaPath = sidecarMetaPath(filePath);
+  const meta = readJsonFile(metaPath, null);
+  if (!meta || typeof meta !== 'object') return null;
+  return dateInfoFromLabel(meta.data_date)
+    || (meta.generated_at ? { date: new Date(meta.generated_at), label: String(meta.generated_at).slice(0, 10) } : null);
+}
+
+function generatedDate(filePath) {
+  return metadataDate(filePath) || fileMtimeDate(filePath);
 }
 
 function statusFor(age, maxAgeDays) {
@@ -46,11 +71,13 @@ function statusFor(age, maxAgeDays) {
 }
 
 function buildCheck(name, filePath, date, maxAgeDays) {
-  const age = date ? daysAgo(date) : null;
+  const dateInfo = date && date.date ? date : { date, label: date ? date.toISOString().slice(0, 10) : null };
+  const age = dateInfo.date ? daysAgo(dateInfo.date) : null;
   return {
     name,
     path: filePath,
-    date,
+    date: dateInfo.date,
+    dateLabel: dateInfo.label,
     age,
     status: statusFor(age, maxAgeDays),
   };
@@ -62,7 +89,7 @@ function dailyKeywordChecks(maxAgeDays) {
     ['keyword_data_지역.json', paths.dataRaw('keyword_data_지역.json')],
     ['keyword_data_product_relevant.json', paths.dataProcessed('keyword_data_product_relevant.json')],
     ['keyword_data_지역_30이상.md', paths.dataProcessed('keyword_data_지역_30이상.md')],
-  ].map(([name, filePath]) => buildCheck(name, filePath, fileMtimeDate(filePath), maxAgeDays));
+  ].map(([name, filePath]) => buildCheck(name, filePath, generatedDate(filePath), maxAgeDays));
 }
 
 function weeklyRankingChecks(maxAgeDays) {
@@ -79,19 +106,19 @@ function weeklyRankingChecks(maxAgeDays) {
     buildCheck(
       'ranking_report.md',
       rankingReport,
-      extractReportDate(rankingReport, /> 조회일:\s*(\d{4}-\d{2}-\d{2})/),
+      dateInfoFromLabel(extractReportDate(rankingReport, /> 조회일:\s*(\d{4}-\d{2}-\d{2})/)),
       maxAgeDays
     ),
     buildCheck(
       'top10_analysis.md',
       top10Report,
-      extractReportDate(top10Report, /> 분석일:\s*(\d{4}-\d{2}-\d{2})/),
+      dateInfoFromLabel(extractReportDate(top10Report, /> 분석일:\s*(\d{4}-\d{2}-\d{2})/)),
       maxAgeDays
     ),
     buildCheck(
       'tracking_history.json',
       historyPath,
-      parseDate(latestHistory && latestHistory.date),
+      dateInfoFromLabel(latestHistory && latestHistory.date),
       maxAgeDays
     ),
   ];
@@ -116,7 +143,7 @@ function renderMarkdown({ checks, options }) {
   md += `| 산출물 | 기준일 | 경과 | 상태 |\n`;
   md += `| --- | --- | --- | --- |\n`;
   checks.forEach((check) => {
-    const dateText = check.date ? check.date.toISOString().slice(0, 10) : check.status === 'PASS' ? '파일 존재' : '-';
+    const dateText = check.dateLabel || (check.status === 'PASS' ? '파일 존재' : '-');
     const ageText = check.age === null ? '-' : `${check.age}일`;
     md += `| ${check.name} | ${dateText} | ${ageText} | ${check.status} |\n`;
   });

@@ -1,0 +1,24 @@
+{
+  "default_from_number": 68,
+  "field_story_length_from_number": 98,
+  "field_story_required_section_from_number": 101,
+  "field_story_required_heading": "## 실제 시공 현장에서는 조금 다릅니다",
+  "operation_memo_heading": "## 운영 메모",
+  "field_story_body_chars_no_spaces": {
+    "min": 1500,
+    "max": 2500
+  },
+  "title_length": {
+    "min": 24,
+    "max": 40
+  },
+  "hashtag_count": {
+    "min": 5,
+    "max": 10
+  },
+  "internal_links_min": 2,
+  "pattern_quota": {
+    "recent_count": 5,
+    "max_same_pattern": 3
+  }
+}

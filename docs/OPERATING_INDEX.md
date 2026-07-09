@@ -31,11 +31,16 @@
 | 문서/산출물 | 등급 | 확인할 것 |
 | --- | --- | --- |
 | `docs/operations/DAILY_SEO_ROUTINE.md` | ACTIVE_ROUTINE | 일일 유입경로, 검색어, 게시글 TOP20 기록 방식 |
+| `docs/operations/BLOG_STATS_COLLECTION_WORKFLOW.md` | ACTIVE_ROUTINE | `블로그 통계자료 수집해` 명령의 브라우저 직접 수집, L0~L4 수집 강도, 다운로드/보안 기준 |
+| `outputs/reports/REPORT_INDEX.md` | ACTIVE_ROUTINE | daily, scorecard, ranking, channel diagnosis 최신 산출물 지도 |
+| `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | ACTIVE_ROUTINE | 블로그 상태/목표/전략 분석 시 최신 장기 진단으로 들어가는 포인터 |
 | `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` | GENERATED | 실제 유입어, TOP20, 작성일, 다음 액션 |
 | `docs/operations/TOPIC_SELECTION_SCORECARD.md` | ACTIVE_ROUTINE | 광고 API 시장 수요 + 블로그 실제 반응 + 문장군 필터 기준 |
 | `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | GENERATED | 신규 글감 후보별 scorecard. 현재 누락 시 `ops:daily` WARN |
-| `docs/strategy/ACTIVE_TOPIC_QUEUE.md` | ACTIVE_ROUTINE | daily 다음 액션을 Q-ID, lane, status로 닫는 실행판 |
-| `docs/strategy/POSTING_REGISTRY.md` | ACTIVE_ROUTINE | 기존 글 URL, 다룬 소재, 중복/카니발 위험 |
+| `docs/strategy/ACTIVE_TOPIC_QUEUE.json` | ACTIVE_ROUTINE | daily 다음 액션을 Q-ID, lane, status로 닫는 원본 실행판 |
+| `docs/strategy/ACTIVE_TOPIC_QUEUE.md` | GENERATED | active topic queue의 사람이 읽는 렌더링본. 직접 수정하지 않고 `npm run render:strategy`로 갱신 |
+| `docs/strategy/POSTING_REGISTRY.json` | ACTIVE_ROUTINE | 기존 글 URL, 다룬 소재, 중복/카니발 위험의 원본 |
+| `docs/strategy/POSTING_REGISTRY.md` | GENERATED | posting registry의 사람이 읽는 렌더링본. 직접 수정하지 않고 `npm run render:strategy`로 갱신 |
 | `docs/strategy/CONTENT_PLAN.md` | ACTIVE_ROUTINE | 장기 전략, 슬롯 이력, 실행판 링크 |
 | `docs/strategy/POSTING_EXCLUSION_RULES.md` | ACTIVE_STANDARD | 제외 키워드, 검색어 전환, 취급 가능/불가 |
 | `data/raw/keyword_data_product.md` | GENERATED | 네이버 광고 API 제품/서비스 키워드 수요 |
@@ -85,6 +90,23 @@
 최종 글감이 `136~138 URL대기`, 최근 발행글, 보호글과 가까우면 `근접 경고:`를 반드시 붙인다. 이 경고에는 겹치는 글 번호와 분리 각도를 함께 적는다.
 
 이 출력 계약을 지키지 않고 제목만 제시하면 글감 선정 업무를 완료한 것으로 보지 않는다.
+
+### 3-2. 채널 진단/목표 분석 시 필수
+
+사용자가 `블로그 상태`, `목표`, `2,000뷰`, `전략 분석`, `앞으로 어떻게`, `채널 진단`처럼 장기 판단을 요청하면 daily만 보지 않고 아래 순서로 읽는다.
+
+| 순서 | 문서/산출물 | 확인할 것 |
+| ---: | --- | --- |
+| 1 | `outputs/reports/REPORT_INDEX.md` | 최신 channel diagnosis, daily, scorecard, ranking 위치 |
+| 2 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 최신 장기 진단 결론과 다음 읽을 파일 |
+| 3 | `outputs/reports/channel_diagnosis_YYYY-MM-DD.md` | 목표 갭, 병목, 7/14/30일 전략 |
+| 4 | 최신 `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` | 진단 이후 바뀐 최신 유입/게시글 반응 |
+| 5 | `docs/strategy/ACTIVE_TOPIC_QUEUE.md` | 진단 결과가 실행판 Q-ID에 반영됐는지 |
+| 6 | `outputs/reports/ranking_report.md`, `outputs/reports/ranking_changes_summary.md` | weekly/experimental 보조 신호. 단독 판단 금지 |
+
+채널 진단 보고서는 `outputs/reports/channel_diagnosis_YYYY-MM-DD.md`로 남기고, 새 보고서를 만들 때는 반드시 `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md`와 `outputs/reports/REPORT_INDEX.md`를 함께 갱신한다.
+
+daily report는 증거, channel diagnosis는 해석, ACTIVE_TOPIC_QUEUE는 실행판이다. 장기 전략을 말할 때 이 셋이 서로 어긋나면 최신 daily와 queue를 기준으로 보정한다.
 
 ## 4. 원고 작성 시 필수
 
@@ -148,7 +170,6 @@
 
 - topic scorecard 누락을 WARN에서 hard fail로 올릴지 판단
 - 날짜별 topic scorecard 자동 생성
-- `POSTING_REGISTRY.md` 구조 분리
 - archive 후보 문서 실제 이동
 
 이 항목들은 운영 루틴 고도화 후속 PR에서 처리한다.

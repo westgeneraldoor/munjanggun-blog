@@ -1,52 +1,47 @@
 /**
- * EXPERIMENTAL: 네이버 블로그 탭 순위 추적 v3.0
+ * Naver Blog URL-based ranking tracker v4.
  *
- * 현재 결과는 특정 게시물 URL 순위가 아니라 문장군 블로그 계정 첫 등장 위치에 가깝다.
- * URL 기반 추적 구현 전까지 신규 글/리라이팅 자동 판단 근거로 사용하지 않는다.
- * 
- * Puppeteer(헤드리스 Chrome)로 실제 브라우저 렌더링 후 파싱
- * → 시크릿 모드에서 직접 검색한 것과 동일한 결과
- * 
- * 실행: node scripts/track_ranking.js
+ * The primary rank is the position of the exact POSTING_REGISTRY post URL/logNo
+ * in Naver blog search results. accountRank is only a secondary signal for the
+ * first Moonjanggun account post that appears in the same result set.
  */
 
-// 환경변수 로드
 require('./lib/env_loader');
 
-const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const path = require('path');
+const puppeteer = require('puppeteer-core');
 const { paths } = require('./lib/paths');
 const { readJsonFile, writeJsonFile, writeTextFile } = require('./lib/file_store');
+const { buildTrackingTargets } = require('./lib/posting_registry');
+const { collectUniquePostResults, findAccountRank } = require('./lib/naver_blog_results');
 
-// 플랫폼별 기본 크롬 실행 파일 경로 자동 탐색 함수
 function getPlatformDefaultChromePath() {
   const platform = process.platform;
-  
+
   if (platform === 'win32') {
     const commonPaths = [
       'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
       'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-      path.join(process.env.USERPROFILE || 'C:\\Users\\Default', 'AppData\\Local\\Google\\Chrome\\Application\\chrome.exe')
+      path.join(process.env.USERPROFILE || 'C:\\Users\\Default', 'AppData\\Local\\Google\\Chrome\\Application\\chrome.exe'),
     ];
-    for (const p of commonPaths) {
-      if (fs.existsSync(p)) return p;
-    }
-  } else if (platform === 'darwin') {
-    const macPath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-    if (fs.existsSync(macPath)) return macPath;
-  } else if (platform === 'linux') {
-    const linuxPaths = [
-      '/usr/bin/google-chrome',
-      '/usr/bin/chromium',
-      '/usr/bin/chromium-browser'
-    ];
-    for (const p of linuxPaths) {
-      if (fs.existsSync(p)) return p;
+    for (const candidate of commonPaths) {
+      if (fs.existsSync(candidate)) return candidate;
     }
   }
-  
-  // 찾지 못한 경우 기본 윈도우 설치 경로 폴백
+
+  if (platform === 'darwin') {
+    const macPath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+    if (fs.existsSync(macPath)) return macPath;
+  }
+
+  if (platform === 'linux') {
+    const linuxPaths = ['/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser'];
+    for (const candidate of linuxPaths) {
+      if (fs.existsSync(candidate)) return candidate;
+    }
+  }
+
   return 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 }
 
@@ -54,127 +49,137 @@ const appConfig = readJsonFile(paths.config('app.json'), {});
 const BLOG_ID = process.env.NAVER_BLOG_ID || appConfig.defaultBlogId || 'doorgeneral';
 const CHROME_PATH = process.env.CHROME_PATH || getPlatformDefaultChromePath();
 const DELAY_MS = Number(process.env.TRACKING_DELAY_MS || appConfig.trackingDelayMs || 2000);
-
-// ── 추적 대상 키워드 (POSTING_REGISTRY 전체 — 중복제거 53개) ──────
+const NAVIGATION_TIMEOUT_MS = Number(process.env.TRACKING_NAVIGATION_TIMEOUT_MS || appConfig.trackingNavigationTimeoutMs || 30000);
 const TRACKING_KEYWORDS = readJsonFile(paths.config('tracking_keywords.json'), []);
+const TRACKING_TARGETS = buildTrackingTargets(TRACKING_KEYWORDS);
+const HISTORY_PATH = paths.dataProcessed('tracking_history.json');
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// ── Puppeteer로 블로그 탭 순위 조회 ──────────────────────
-async function findRanking(page, keyword) {
+async function findRanking(page, target) {
   try {
+    const { keyword, postId } = target;
     const url = `https://search.naver.com/search.naver?ssc=tab.blog.all&sm=tab_jum&query=${encodeURIComponent(keyword)}`;
-    await page.goto(url, { waitUntil: 'networkidle2', timeout: 15000 });
-    await sleep(1500); // JS 렌더링 대기
 
-    // 렌더링된 DOM에서 블로그 링크 추출
-    const blogIds = await page.evaluate((targetBlogId) => {
-      const results = [];
-      const seen = new Set();
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: NAVIGATION_TIMEOUT_MS });
+    await sleep(1500);
 
-      // 모든 a 태그에서 blog.naver.com 링크 찾기
-      const links = document.querySelectorAll('a[href*="blog.naver.com"]');
-      for (const link of links) {
-        const href = link.getAttribute('href') || '';
-        const match = href.match(/blog\.naver\.com\/([a-zA-Z0-9_]+)/);
-        if (match) {
-          const blogId = match[1];
-          if (['PostView', 'PostList', 'NBlogTop', 'prologue'].includes(blogId)) continue;
-          if (blogId.length < 3) continue;
-          if (!seen.has(blogId)) {
-            seen.add(blogId);
-            // 제목도 함께 추출 시도
-            const parentItem = link.closest('.lst, .api_txt_lines, [class*="item"], [class*="card"]');
-            const titleEl = parentItem ? parentItem.querySelector('a.api_txt_lines, .title_link, .sub_txt') : null;
-            results.push({
-              blogId,
-              title: titleEl ? titleEl.textContent.trim().substring(0, 60) : '',
-            });
-          }
+    const links = await page.$$eval('a[href*="blog.naver.com"]', (anchors) => anchors.map((link) => {
+      const parentItem = link.closest('.lst, .api_txt_lines, [class*="item"], [class*="card"]');
+      const titleEl = parentItem ? parentItem.querySelector('a.api_txt_lines, .title_link, .sub_txt') : null;
+      return {
+        href: link.href || link.getAttribute('href') || '',
+        title: titleEl ? titleEl.textContent.trim() : link.textContent.trim(),
+      };
+    }));
+
+    const searchResults = collectUniquePostResults(links);
+    const accountRank = findAccountRank(searchResults, BLOG_ID);
+
+    if (postId) {
+      for (let index = 0; index < searchResults.length; index += 1) {
+        const item = searchResults[index];
+        if (item.blogId === BLOG_ID && item.postId === postId) {
+          return {
+            rank: index + 1,
+            accountRank,
+            title: item.title,
+            matchedTitle: item.title,
+            matchedUrl: item.href,
+            matchType: 'url',
+            totalFound: searchResults.length,
+          };
         }
-      }
-      return results;
-    }, BLOG_ID);
-
-    // 우리 블로그 찾기
-    for (let i = 0; i < blogIds.length; i++) {
-      if (blogIds[i].blogId === BLOG_ID) {
-        return { rank: i + 1, title: blogIds[i].title, totalFound: blogIds.length };
       }
     }
 
-    return { rank: 0, totalFound: blogIds.length, note: `TOP ${blogIds.length} 밖` };
+    return {
+      rank: 0,
+      accountRank,
+      totalFound: searchResults.length,
+      matchType: postId ? 'url_not_found' : 'account_fallback',
+      note: postId ? `target URL not found in TOP ${searchResults.length}` : `TOP ${searchResults.length} account fallback`,
+    };
   } catch (err) {
     return { rank: -1, error: err.message };
   }
 }
 
-// ── 이력 & 리포트 ──────────────────────────────────────
-const HISTORY_PATH = paths.dataProcessed('tracking_history.json');
-
 function loadHistory() {
-  const version = appConfig.rankingHistoryVersion || 3;
+  const version = appConfig.rankingHistoryVersion || 4;
   const data = readJsonFile(HISTORY_PATH, { version, records: [] });
-  if (data.version === version && Array.isArray(data.records)) return data;
+  if (Array.isArray(data.records)) return { ...data, version };
   return { version, records: [] };
 }
 
+function displayRank(rank) {
+  if (rank > 0) return `${rank}위`;
+  if (rank === 0) return 'TOP 밖';
+  return '오류';
+}
+
 function generateReport(results, today, history) {
-  let md = `# 📊 순위 추적 리포트 (v3 — Puppeteer 실제 렌더링)\n\n`;
+  let md = '# URL 기반 순위 추적 리포트\n\n';
   md += `> 조회일: ${today}\n`;
   md += `> 블로그: https://blog.naver.com/${BLOG_ID}\n`;
-  md += `> 방식: 헤드리스 Chrome으로 실제 블로그 탭 렌더링 → 시크릿 모드와 동일\n\n`;
+  md += '> 상태: URL 기반 v4. POSTING_REGISTRY의 게시물 URL/logNo와 검색 결과 URL을 매칭합니다.\n';
+  md += '> 보조값: accountRank는 문장군 블로그 계정의 첫 게시글 등장 위치입니다. URL rank가 0이면 단독 의사결정 근거로 쓰지 않습니다.\n';
+  md += '> 방식: Puppeteer headless Chrome으로 네이버 블로그 탭을 렌더링해 고유 게시글 URL 순서를 수집합니다.\n\n';
 
-  const ranked = results.filter(r => r.rank > 0);
-  const top5 = results.filter(r => r.rank > 0 && r.rank <= 5);
-  const top10 = results.filter(r => r.rank > 0 && r.rank <= 10);
+  const ranked = results.filter((result) => result.rank > 0);
+  const top5 = results.filter((result) => result.rank > 0 && result.rank <= 5);
+  const top10 = results.filter((result) => result.rank > 0 && result.rank <= 10);
 
-  md += `## 요약\n`;
-  md += `| 항목 | 수치 |\n|------|------|\n`;
+  md += '## 요약\n';
+  md += '| 항목 | 수치 |\n| --- | ---: |\n';
   md += `| 추적 키워드 | ${results.length}개 |\n`;
-  md += `| 노출 중 | ${ranked.length}개 |\n`;
+  md += `| URL 노출 중 | ${ranked.length}개 |\n`;
   md += `| TOP 5 | ${top5.length}개 |\n`;
   md += `| TOP 10 | ${top10.length}개 |\n\n`;
 
-  md += `## 키워드별 순위\n\n`;
-  md += `| 허브 | 키워드 | 순위 | 비고 |\n`;
-  md += `|------|--------|------|------|\n`;
-  results.forEach(r => {
-    const rankStr = r.rank > 0 ? `${r.rank}위` : (r.rank === 0 ? r.note || 'TOP30밖' : '오류');
-    md += `| ${r.hub} | ${r.keyword} | **${rankStr}** | ${r.title || ''} |\n`;
+  md += '## 키워드별 순위\n\n';
+  md += '| 글 | 허브 | 키워드 | URL 순위 | 계정 순위 | 매칭 | 비고 |\n';
+  md += '| --- | --- | --- | --- | --- | --- | --- |\n';
+  results.forEach((result) => {
+    const rankCell = result.rank > 0 ? displayRank(result.rank) : (result.note || displayRank(result.rank));
+    const accountRank = result.accountRank > 0 ? displayRank(result.accountRank) : '-';
+    const postCell = result.postUrl ? `[${result.postNo || '-'}](${result.postUrl})` : (result.postNo || '-');
+    md += `| ${postCell} | ${result.hub} | ${result.keyword} | **${rankCell}** | ${accountRank} | ${result.matchType || '-'} | ${result.matchedTitle || result.title || ''} |\n`;
   });
 
-  // 추이
-  if (history.records.length > 1) {
-    const recent = history.records.slice(-7);
-    const keywords = [...new Set(results.map(r => r.keyword))];
+  const recent = history.records.slice(-7);
+  if (recent.length > 1) {
+    const keys = [...new Set(results.map((result) => result.trackingId || result.keyword))];
     md += `\n## 순위 추이 (최근 ${recent.length}회)\n\n| 키워드 |`;
-    recent.forEach(rec => { md += ` ${rec.date} |`; });
-    md += `\n|--------|`;
-    recent.forEach(() => { md += `------|`; });
-    md += `\n`;
-    keywords.forEach(kw => {
-      md += `| ${kw} |`;
-      recent.forEach(rec => {
-        const f = rec.rankings.find(r => r.keyword === kw);
-        md += f && f.rank > 0 ? ` ${f.rank}위 |` : ` - |`;
+    recent.forEach((record) => { md += ` ${record.date} |`; });
+    md += '\n| --- |';
+    recent.forEach(() => { md += ' --- |'; });
+    md += '\n';
+
+    keys.forEach((key) => {
+      const label = results.find((result) => (result.trackingId || result.keyword) === key);
+      md += `| ${label ? label.keyword : key} |`;
+      recent.forEach((record) => {
+        const found = (record.rankings || []).find((item) => (item.trackingId || item.keyword) === key);
+        md += found && found.rank > 0 ? ` ${displayRank(found.rank)} |` : ' - |';
       });
-      md += `\n`;
+      md += '\n';
     });
   }
 
   const reportPath = paths.outputReport('ranking_report.md');
   writeTextFile(reportPath, md);
-  console.log(`\n✅ 리포트 저장: ${reportPath}`);
+  console.log(`\n리포트 저장: ${reportPath}`);
 }
 
-// ── 메인 ────────────────────────────────────────────
 async function main() {
   const today = new Date().toISOString().split('T')[0];
-  console.log(`\n🔍 문장군 블로그 순위 추적 v3.0 — ${today}`);
+  console.log(`\n문장군 블로그 순위 추적 v4.0 - ${today}`);
   console.log(`블로그: https://blog.naver.com/${BLOG_ID}`);
-  console.log(`방식: Puppeteer 헤드리스 Chrome (시크릿 모드 동일)`);
-  console.log(`추적 키워드: ${TRACKING_KEYWORDS.length}개\n${'─'.repeat(70)}`);
+  console.log('상태: URL 기반 - POSTING_REGISTRY의 게시물 URL/logNo와 검색 결과 URL을 매칭합니다.');
+  console.log('방식: Puppeteer headless Chrome URL 순위 수집');
+  console.log(`추적 키워드: ${TRACKING_TARGETS.length}개`);
+  console.log('-'.repeat(70));
 
   const browser = await puppeteer.launch({
     executablePath: CHROME_PATH,
@@ -191,53 +196,59 @@ async function main() {
   const history = loadHistory();
   const lastRecord = history.records[history.records.length - 1] || null;
 
-  for (let i = 0; i < TRACKING_KEYWORDS.length; i++) {
-    const { keyword, hub } = TRACKING_KEYWORDS[i];
-    process.stdout.write(`  [${i + 1}/${TRACKING_KEYWORDS.length}] "${keyword}" (${hub}) → `);
+  for (let index = 0; index < TRACKING_TARGETS.length; index += 1) {
+    const target = TRACKING_TARGETS[index];
+    const { keyword, hub } = target;
+    process.stdout.write(`  [${index + 1}/${TRACKING_TARGETS.length}] "${keyword}" (${hub}, ${target.postNo || 'no-url'}) -> `);
 
-    const ranking = await findRanking(page, keyword);
-
+    const ranking = await findRanking(page, target);
     let change = '';
     if (lastRecord) {
-      const prev = lastRecord.rankings.find(r => r.keyword === keyword);
-      if (prev && prev.rank > 0 && ranking.rank > 0) {
-        const diff = prev.rank - ranking.rank;
-        if (diff > 0) change = ` (↑${diff})`;
-        else if (diff < 0) change = ` (↓${Math.abs(diff)})`;
-        else change = ' (→)';
-      } else if (!prev && ranking.rank > 0) {
+      const previous = (lastRecord.rankings || []).find((item) => (item.trackingId || item.keyword) === target.trackingId);
+      if (previous && previous.rank > 0 && ranking.rank > 0) {
+        const diff = previous.rank - ranking.rank;
+        if (diff > 0) change = ` (+${diff})`;
+        else if (diff < 0) change = ` (-${Math.abs(diff)})`;
+        else change = ' (=)';
+      } else if (!previous && ranking.rank > 0) {
         change = ' (NEW)';
       }
     }
 
-    if (ranking.rank > 0) {
-      console.log(`${ranking.rank}위${change}`);
-    } else if (ranking.rank === 0) {
-      console.log(ranking.note || 'TOP 밖');
-    } else {
-      console.log(`❌ ${ranking.error}`);
-    }
+    if (ranking.rank > 0) console.log(`${displayRank(ranking.rank)}${change}`);
+    else if (ranking.rank === 0) console.log(ranking.note || 'TOP 밖');
+    else console.log(`오류: ${ranking.error}`);
 
     results.push({
-      keyword, hub,
+      trackingId: target.trackingId,
+      keyword,
+      hub,
+      postNo: target.postNo || '',
+      postUrl: target.postUrl || '',
+      postId: target.postId || '',
       rank: ranking.rank,
+      accountRank: ranking.accountRank || 0,
       title: ranking.title || '',
+      matchedTitle: ranking.matchedTitle || '',
+      matchedUrl: ranking.matchedUrl || '',
+      matchType: ranking.matchType || target.matchMode || '',
       note: ranking.note || '',
       totalFound: ranking.totalFound || 0,
     });
 
-    if (i < TRACKING_KEYWORDS.length - 1) await sleep(DELAY_MS);
+    if (index < TRACKING_TARGETS.length - 1) await sleep(DELAY_MS);
   }
 
-  console.log('─'.repeat(70));
-
+  console.log('-'.repeat(70));
   history.records.push({ date: today, timestamp: new Date().toISOString(), rankings: results });
   writeJsonFile(HISTORY_PATH, history);
-  console.log(`✅ 이력 저장: tracking_history.json (v3, ${history.records.length}회 누적)`);
+  console.log(`이력 저장: tracking_history.json (v${history.version}, ${history.records.length}회 누적)`);
 
   generateReport(results, today, history);
-
   await browser.close();
 }
 
-main().catch(err => { console.error('❌ 실행 오류:', err.message); process.exit(1); });
+main().catch((err) => {
+  console.error('실행 오류:', err.message);
+  process.exit(1);
+});

@@ -2,15 +2,24 @@
   "name": "munjanggun-blog",
   "version": "1.0.0",
   "description": "문장군 블로그 SEO 콘텐츠 운영 파이프라인",
+  "engines": {
+    "node": ">=20 <21"
+  },
   "scripts": {
-    "check": "node --check scripts/track_ranking.js && node --check scripts/analyze_top10.js && node --check scripts/fetch_keyword_data.js && node --check scripts/fetch_keyword_data_product.js && node --check scripts/generate_dashboard.js && node --check scripts/generate_mock_history.js && node --check scripts/lib/brand_claim_rules.js && node --check scripts/validate_post.js && node --check scripts/blog_quality_gate.js && node --check scripts/blog_risk_scan.js && node --check scripts/validate_data_schema.js && node --check scripts/check_freshness.js && node --check scripts/validate_daily_report.js && node --check scripts/validate_topic_scorecard.js && node --check scripts/validate_active_queue.js && node --check scripts/summarize_ranking_changes.js && node --check tests/validate_project_structure.js && node --check tests/validate_automation_rules.js && node --check tests/test_validate_post.js && node --check tests/test_blog_quality_gate.js && node --check tests/test_blog_risk_scan.js && node --check tests/test_ops_daily_contract.js && node --check tests/test_validate_active_queue.js",
-    "validate": "npm run check && node tests/validate_project_structure.js && node tests/validate_automation_rules.js && npm run validate:data && npm run check:freshness && npm run test:validate-post && npm run test:blog-gate && npm run test:blog-risk && npm run test:ops-daily && npm run test:active-queue",
+    "check": "node --check scripts/track_ranking.js && node --check scripts/analyze_top10.js && node --check scripts/fetch_keyword_data.js && node --check scripts/fetch_keyword_data_product.js && node --check scripts/generate_dashboard.js && node --check scripts/generate_mock_history.js && node --check scripts/normalize_keyword_outputs.js && node --check scripts/render_strategy_docs.js && node --check scripts/lib/brand_claim_rules.js && node --check scripts/lib/public_safety.js && node --check scripts/lib/post_validation_policy.js && node --check scripts/lib/posting_registry.js && node --check scripts/lib/naver_blog_results.js && node --check scripts/validate_post.js && node --check scripts/blog_quality_gate.js && node --check scripts/blog_risk_scan.js && node --check scripts/validate_data_schema.js && node --check scripts/check_freshness.js && node --check scripts/validate_daily_report.js && node --check scripts/validate_topic_scorecard.js && node --check scripts/validate_active_queue.js && node --check scripts/summarize_ranking_changes.js && node --check tests/validate_project_structure.js && node --check tests/validate_automation_rules.js && node --check tests/test_env_loader.js && node --check tests/test_naver_blog_results.js && node --check tests/test_posting_registry.js && node --check tests/test_public_safety.js && node --check tests/test_validate_post.js && node --check tests/test_blog_quality_gate.js && node --check tests/test_blog_risk_scan.js && node --check tests/test_ops_daily_contract.js && node --check tests/test_validate_active_queue.js",
+    "validate": "npm run check && node tests/validate_project_structure.js && node tests/validate_automation_rules.js && npm run render:strategy:check && npm run validate:data && npm run check:freshness && npm run test:env-loader && npm run test:ranking-url && npm run test:posting-registry && npm run test:public-safety && npm run test:validate-post && npm run test:blog-gate && npm run test:blog-risk && npm run test:ops-daily && npm run test:active-queue",
     "validate:local": "npm run validate && npm run validate:posts",
-    "validate:posts": "node scripts/validate_post.js --from=68",
-    "validate:posts:strict": "node scripts/validate_post.js --from=68 --strict",
+    "validate:posts": "node scripts/validate_post.js",
+    "validate:posts:strict": "node scripts/validate_post.js --strict",
     "validate:posts:all": "node scripts/validate_post.js --all",
     "gate:blog": "node scripts/blog_quality_gate.js",
+    "render:strategy": "node scripts/render_strategy_docs.js --write",
+    "render:strategy:check": "node scripts/render_strategy_docs.js --check",
+    "test:env-loader": "node tests/test_env_loader.js",
+    "test:ranking-url": "node tests/test_naver_blog_results.js",
+    "test:posting-registry": "node tests/test_posting_registry.js",
     "test:validate-post": "node tests/test_validate_post.js",
+    "test:public-safety": "node tests/test_public_safety.js",
     "test:blog-gate": "node tests/test_blog_quality_gate.js",
     "test:blog-risk": "node tests/test_blog_risk_scan.js",
     "test:ops-daily": "node tests/test_ops_daily_contract.js",
@@ -31,6 +40,7 @@
     "mock-history": "node scripts/generate_mock_history.js"
   },
   "dependencies": {
+    "chart.js": "^4.5.1",
     "puppeteer": "^24.43.1",
     "puppeteer-core": "^24.43.1"
   }

@@ -4,6 +4,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 const { ROOT_DIR } = require('./lib/paths');
 const { findBrandClaimIssues } = require('./lib/brand_claim_rules');
+const { postingEntries } = require('./lib/posting_registry');
 
 const FAIL = 'fail';
 const WARN = 'warn';
@@ -415,7 +416,7 @@ function runPostValidator(postPath, strict) {
   ];
 }
 
-function parseRegistryRows() {
+function parseMarkdownRegistryRows() {
   const registryPath = path.join(ROOT_DIR, 'docs', 'strategy', 'POSTING_REGISTRY.md');
   const text = fs.readFileSync(registryPath, 'utf8');
   return text
@@ -430,6 +431,31 @@ function parseRegistryRows() {
       publishDate: cells[7],
       raw: cells,
     }));
+}
+
+function parseRegistryRows() {
+  const byFile = new Map();
+
+  try {
+    postingEntries().forEach((entry) => {
+      byFile.set(entry.file, {
+        number: entry.postNo,
+        file: entry.file,
+        title: entry.title,
+        url: entry.url,
+        publishDate: entry.publishedAt,
+        raw: entry,
+      });
+    });
+  } catch (err) {
+    // Fall through to the rendered Markdown registry for older local checkouts.
+  }
+
+  parseMarkdownRegistryRows().forEach((row) => {
+    if (!byFile.has(row.file)) byFile.set(row.file, row);
+  });
+
+  return [...byFile.values()];
 }
 
 function validateRegistry(postPath, mode) {

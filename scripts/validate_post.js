@@ -3,14 +3,24 @@ const path = require('path');
 const { ROOT_DIR } = require('./lib/paths');
 const { writeTextFile } = require('./lib/file_store');
 const { findBrandClaimIssues } = require('./lib/brand_claim_rules');
+const { loadPostValidationPolicy } = require('./lib/post_validation_policy');
 
-const DEFAULT_FROM_NUMBER = 68;
-const FIELD_STORY_LENGTH_FROM_NUMBER = 98;
-const FIELD_STORY_REQUIRED_SECTION_FROM_NUMBER = 101;
-const FIELD_STORY_REQUIRED_HEADING = '## 실제 시공 현장에서는 조금 다릅니다';
-const OPERATION_MEMO_HEADING = '## 운영 메모';
-const FIELD_STORY_MIN_CHARS_NO_SPACES = 1500;
-const FIELD_STORY_MAX_CHARS_NO_SPACES = 2500;
+const policy = loadPostValidationPolicy();
+
+const DEFAULT_FROM_NUMBER = policy.defaultFromNumber;
+const FIELD_STORY_LENGTH_FROM_NUMBER = policy.fieldStoryLengthFromNumber;
+const FIELD_STORY_REQUIRED_SECTION_FROM_NUMBER = policy.fieldStoryRequiredSectionFromNumber;
+const FIELD_STORY_REQUIRED_HEADING = policy.fieldStoryRequiredHeading;
+const OPERATION_MEMO_HEADING = policy.operationMemoHeading;
+const FIELD_STORY_MIN_CHARS_NO_SPACES = policy.fieldStoryMinCharsNoSpaces;
+const FIELD_STORY_MAX_CHARS_NO_SPACES = policy.fieldStoryMaxCharsNoSpaces;
+const TITLE_MIN_LENGTH = policy.titleMinLength;
+const TITLE_MAX_LENGTH = policy.titleMaxLength;
+const HASHTAG_MIN_COUNT = policy.hashtagMinCount;
+const HASHTAG_MAX_COUNT = policy.hashtagMaxCount;
+const INTERNAL_LINKS_MIN = policy.internalLinksMin;
+const RECENT_PATTERN_COUNT = policy.recentPatternCount;
+const MAX_SAME_PATTERN = policy.maxSamePattern;
 
 const bannedTerms = [
   '물론',
@@ -208,7 +218,7 @@ function validateFile(filePath, options) {
   if (title && title.replace(/\s/g, '') === '중문') {
     addIssue(issues, 'fail', '`중문` 단독 제목은 금지입니다.');
   }
-  if (title && (title.length < 24 || title.length > 40)) {
+  if (title && (title.length < TITLE_MIN_LENGTH || title.length > TITLE_MAX_LENGTH)) {
     addIssue(issues, 'warn', `제목 길이가 권장 범위 밖입니다: ${title.length}자`);
   }
 
@@ -228,7 +238,7 @@ function validateFile(filePath, options) {
     addIssue(issues, 'warn', '무료 방문실측 또는 네이버 예약 CTA가 없습니다.');
   }
 
-  if (hashtags.length < 5 || hashtags.length > 10) {
+  if (hashtags.length < HASHTAG_MIN_COUNT || hashtags.length > HASHTAG_MAX_COUNT) {
     addIssue(issues, 'warn', `해시태그 개수가 권장 범위 밖입니다: ${hashtags.length}개`);
   }
   if (!hashtags.includes('#문장군') || !hashtags.includes('#문장군중문')) {
@@ -238,7 +248,7 @@ function validateFile(filePath, options) {
     if (/\s/.test(tag.slice(1))) addIssue(issues, 'fail', `해시태그에 띄어쓰기가 있습니다: ${tag}`);
   });
 
-  if (links.length < 2) addIssue(issues, 'warn', `내부링크가 2개 미만입니다: ${links.length}개`);
+  if (links.length < INTERNAL_LINKS_MIN) addIssue(issues, 'warn', `내부링크가 ${INTERNAL_LINKS_MIN}개 미만입니다: ${links.length}개`);
   if (/현재 발행 예정|기존 \d{3}번|등록된 \d{3}번/.test(content)) {
     addIssue(issues, 'fail', '미완성 내부링크 문구가 남아 있습니다.');
   }
@@ -286,16 +296,16 @@ function summarizePatternQuota(results) {
   const recent = results
     .filter((result) => postNumber(result.file) > 0)
     .sort((a, b) => postNumber(a.file) - postNumber(b.file))
-    .slice(-5);
+    .slice(-RECENT_PATTERN_COUNT);
 
   const counts = {};
   recent.forEach((result) => {
     counts[result.pattern] = (counts[result.pattern] || 0) + 1;
   });
 
-  const repeated = Object.entries(counts).find(([, count]) => count >= 4);
+  const repeated = Object.entries(counts).find(([, count]) => count > MAX_SAME_PATTERN);
   if (!repeated) return null;
-  return `최근 5편 중 ${repeated[1]}편이 같은 제목 패턴(${repeated[0]})입니다. 다음 글은 다른 패턴을 권장합니다.`;
+  return `최근 ${RECENT_PATTERN_COUNT}편 중 ${repeated[1]}편이 같은 제목 패턴(${repeated[0]})입니다. 다음 글은 다른 패턴을 권장합니다.`;
 }
 
 function renderCheckReport(result) {
