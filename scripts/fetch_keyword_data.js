@@ -13,6 +13,7 @@ const crypto = require('crypto');
 const https = require('https');
 const { paths } = require('./lib/paths');
 const { readJsonFile, writeJsonFile, writeTextFile } = require('./lib/file_store');
+const { hasReplacementChar } = require('./lib/public_safety');
 
 // ── 설정 ──────────────────────────────────────────
 const API_KEY = process.env.NAVER_AD_API_KEY;
@@ -121,12 +122,26 @@ async function discoverAllKeywords() {
 
 // ── 검색량 파싱 (< 10 처리) ─────────────────────────
 function parseVolume(val) {
-  if (typeof val === 'number') return val;
+  if (typeof val === 'number') return { value: val, estimated: false };
   if (typeof val === 'string') {
-    if (val.includes('<')) return 5; // "< 10" → 5로 추정
-    return parseInt(val, 10) || 0;
+    if (val.includes('<')) return { value: 5, estimated: true }; // "< 10" → 5로 추정
+    return { value: parseInt(val, 10) || 0, estimated: false };
   }
-  return 0;
+  return { value: 0, estimated: false };
+}
+
+function keywordIsUsable(item) {
+  return item && item.relKeyword && !hasReplacementChar(JSON.stringify(item));
+}
+
+function buildMetadata(rowCount, generatedAt = new Date()) {
+  return {
+    generated_at: generatedAt.toISOString(),
+    data_date: generatedAt.toISOString().slice(0, 10),
+    source: 'naver-searchad-keywordstool',
+    row_count: rowCount,
+    estimate_policy: 'lt10_as_5',
+  };
 }
 
 // ── 결과 포맷팅 ─────────────────────────────────────
@@ -134,18 +149,21 @@ function formatResults(results) {
   const today = new Date().toISOString().split('T')[0];
 
   // 검색량 합계 계산 + 정렬
-  const enriched = results.map(item => {
+  const enriched = results.filter(keywordIsUsable).map(item => {
     const pc = parseVolume(item.monthlyPcQcCnt);
     const mobile = parseVolume(item.monthlyMobileQcCnt);
     return {
       keyword: item.relKeyword,
       pcRaw: item.monthlyPcQcCnt,
       mobileRaw: item.monthlyMobileQcCnt,
-      pc: pc,
-      mobile: mobile,
-      pcNum: pc,
-      mobileNum: mobile,
-      total: pc + mobile,
+      pc: pc.value,
+      mobile: mobile.value,
+      pcNum: pc.value,
+      mobileNum: mobile.value,
+      total: pc.value + mobile.value,
+      pcEstimated: pc.estimated,
+      mobileEstimated: mobile.estimated,
+      totalEstimated: pc.estimated || mobile.estimated,
       competition: item.compIdx || '-',
     };
   });
@@ -233,14 +251,17 @@ async function main() {
   // 저장
   const jsonPath = paths.dataRaw('keyword_data_지역.json');
   writeJsonFile(jsonPath, data);
+  writeJsonFile(paths.dataRaw('keyword_data_지역.meta.json'), buildMetadata(data.length));
   console.log(`\n✅ JSON 저장: ${jsonPath}`);
 
   const mdPath = paths.dataRaw('keyword_data_지역.md');
   writeTextFile(mdPath, markdown);
+  writeJsonFile(paths.dataRaw('keyword_data_지역.meta.json'), buildMetadata(data.length));
   console.log(`✅ 마크다운 저장: ${mdPath}`);
 
   const regional30Path = paths.dataProcessed('keyword_data_지역_30이상.md');
   writeTextFile(regional30Path, renderMinVolumeMarkdown(data, 30));
+  writeJsonFile(paths.dataProcessed('keyword_data_지역_30이상.meta.json'), buildMetadata(data.filter((item) => item.total >= 30).length));
   console.log(`✅ 지역 30이상 마크다운 저장: ${regional30Path}`);
 
   console.log(`\n📊 총 ${data.length}개 키워드 발굴 완료!`);

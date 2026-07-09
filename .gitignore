@@ -12,6 +12,8 @@ data/processed/tracking_history_mock.json
 data/naver/daily/
 data/naver/raw/
 data/naver/**/*.xlsx
+data/naver/**/*.xls
+data/naver/**/*.csv
 data/naver/**/*.png
 data/naver/**/*.jpg
 data/naver/**/*.jpeg
@@ -28,6 +30,9 @@ outputs/publish_control/
 # Generated safety backups
 *.bak
 *.tmp
+
+# Project recovery quarantine
+.project-recovery-trash/
 
 # Operating System files
 .DS_Store

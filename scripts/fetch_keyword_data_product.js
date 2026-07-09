@@ -14,6 +14,7 @@ const crypto = require('crypto');
 const https = require('https');
 const { paths } = require('./lib/paths');
 const { readJsonFile, writeJsonFile, writeTextFile } = require('./lib/file_store');
+const { hasReplacementChar } = require('./lib/public_safety');
 
 // ── 설정 ──────────────────────────────────────────
 const API_KEY = process.env.NAVER_AD_API_KEY;
@@ -122,12 +123,26 @@ async function discoverAllKeywords() {
 
 // ── 검색량 파싱 (< 10 처리) ─────────────────────────
 function parseVolume(val) {
-  if (typeof val === 'number') return val;
+  if (typeof val === 'number') return { value: val, estimated: false };
   if (typeof val === 'string') {
-    if (val.includes('<')) return 5;
-    return parseInt(val, 10) || 0;
+    if (val.includes('<')) return { value: 5, estimated: true };
+    return { value: parseInt(val, 10) || 0, estimated: false };
   }
-  return 0;
+  return { value: 0, estimated: false };
+}
+
+function keywordIsUsable(item) {
+  return item && item.relKeyword && !hasReplacementChar(JSON.stringify(item));
+}
+
+function buildMetadata(rowCount, generatedAt = new Date()) {
+  return {
+    generated_at: generatedAt.toISOString(),
+    data_date: generatedAt.toISOString().slice(0, 10),
+    source: 'naver-searchad-keywordstool',
+    row_count: rowCount,
+    estimate_policy: 'lt10_as_5',
+  };
 }
 
 // ── 문장군 관련 키워드 필터링 ─────────────────────────
@@ -151,16 +166,19 @@ function isRelevantKeyword(keyword) {
 function formatResults(results) {
   const today = new Date().toISOString().split('T')[0];
 
-  const enriched = results.map(item => {
+  const enriched = results.filter(keywordIsUsable).map(item => {
     const pc = parseVolume(item.monthlyPcQcCnt);
     const mobile = parseVolume(item.monthlyMobileQcCnt);
     return {
       keyword: item.relKeyword,
       pcRaw: item.monthlyPcQcCnt,
       mobileRaw: item.monthlyMobileQcCnt,
-      pc: pc,
-      mobile: mobile,
-      total: pc + mobile,
+      pc: pc.value,
+      mobile: mobile.value,
+      total: pc.value + mobile.value,
+      pcEstimated: pc.estimated,
+      mobileEstimated: mobile.estimated,
+      totalEstimated: pc.estimated || mobile.estimated,
       competition: item.compIdx || '-',
     };
   });
@@ -240,14 +258,17 @@ async function main() {
   // 저장
   const jsonPath = paths.dataRaw('keyword_data_product.json');
   writeJsonFile(jsonPath, data);
+  writeJsonFile(paths.dataRaw('keyword_data_product.meta.json'), buildMetadata(data.length));
   console.log(`\n✅ JSON 저장 (전체): ${jsonPath}`);
 
   const relevantJsonPath = paths.dataProcessed('keyword_data_product_relevant.json');
   writeJsonFile(relevantJsonPath, relevant);
+  writeJsonFile(paths.dataProcessed('keyword_data_product_relevant.meta.json'), buildMetadata(relevant.length));
   console.log(`✅ JSON 저장 (관련만): ${relevantJsonPath}`);
 
   const mdPath = paths.dataRaw('keyword_data_product.md');
   writeTextFile(mdPath, markdown);
+  writeJsonFile(paths.dataRaw('keyword_data_product.meta.json'), buildMetadata(data.length));
   console.log(`✅ 마크다운 저장: ${mdPath}`);
 
   console.log(`\n📊 총 ${data.length}개 발굴 → 문장군 관련 ${relevant.length}개 필터링 완료!`);

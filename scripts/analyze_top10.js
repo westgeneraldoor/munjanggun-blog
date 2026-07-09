@@ -18,6 +18,7 @@ const https = require('https');
 require('./lib/env_loader');
 const { paths } = require('./lib/paths');
 const { readJsonFile, writeTextFile } = require('./lib/file_store');
+const { sanitizeMarkdownCell, sanitizePublicText } = require('./lib/public_safety');
 
 const CLIENT_ID = process.env.NAVER_CLIENT_ID;
 const CLIENT_SECRET = process.env.NAVER_CLIENT_SECRET;
@@ -52,7 +53,7 @@ function searchBlog(query) {
 
 // ── 제목 패턴 분석 ──────────────────────────────────
 function analyzeTitle(rawTitle) {
-  const title = rawTitle.replace(/<[^>]*>/g, ''); // HTML 태그 제거
+  const title = sanitizePublicText(rawTitle.replace(/<[^>]*>/g, '')); // HTML 태그 제거
   return {
     title,
     length: title.length,
@@ -114,7 +115,7 @@ async function main() {
       const titleInfo = analyzeTitle(item.title);
       const freshInfo = analyzeFreshness(item.postdate);
       const isOurs = (item.link || '').includes(BLOG_ID);
-      return { rank: idx + 1, ...titleInfo, ...freshInfo, bloggername: item.bloggername, isOurs };
+      return { rank: idx + 1, ...titleInfo, ...freshInfo, bloggername: sanitizePublicText(item.bloggername), isOurs };
     });
 
     allResults.push({ keyword, hub, total: result.total, items: analyzed });
@@ -154,13 +155,13 @@ async function main() {
   md += `> 분석 키워드: ${KEYWORDS.length}개\n\n`;
 
   // 승리 공식 요약
-  md += `## 🏆 상위 글의 승리 공식\n\n`;
+  md += `## 상위 글 관찰 패턴\n\n`;
   md += `### 제목 패턴 (상위 ${patterns.total}개 글 기준)\n\n`;
   md += `| 패턴 | 비율 | 해석 |\n`;
   md += `|------|------|------|\n`;
-  md += `| 숫자 포함 ("3가지", "5개") | **${Math.round(patterns.number / patterns.total * 100)}%** | ${patterns.number / patterns.total > 0.4 ? '✅ 숫자 제목이 유리' : '보통'} |\n`;
-  md += `| 질문형 ("~할까?") | **${Math.round(patterns.question / patterns.total * 100)}%** | ${patterns.question / patterns.total > 0.3 ? '✅ 질문형이 유리' : '보통'} |\n`;
-  md += `| 리스트형 ("N가지/N선") | **${Math.round(patterns.list / patterns.total * 100)}%** | ${patterns.list / patterns.total > 0.3 ? '✅ 리스트형이 유리' : '보통'} |\n`;
+  md += `| 숫자 포함 ("3가지", "5개") | **${Math.round(patterns.number / patterns.total * 100)}%** | ${patterns.number / patterns.total > 0.4 ? '관찰 비중 높음' : '보통'} |\n`;
+  md += `| 질문형 ("~할까?") | **${Math.round(patterns.question / patterns.total * 100)}%** | ${patterns.question / patterns.total > 0.3 ? '관찰 비중 높음' : '보통'} |\n`;
+  md += `| 리스트형 ("N가지/N선") | **${Math.round(patterns.list / patterns.total * 100)}%** | ${patterns.list / patterns.total > 0.3 ? '관찰 비중 높음' : '보통'} |\n`;
   md += `| 하우투 ("방법/노하우") | **${Math.round(patterns.howto / patterns.total * 100)}%** | - |\n`;
   md += `| 가격/비용 언급 | **${Math.round(patterns.price / patterns.total * 100)}%** | - |\n`;
   md += `| 비교형 ("비교/vs") | **${Math.round(patterns.comparison / patterns.total * 100)}%** | - |\n`;
@@ -180,32 +181,32 @@ async function main() {
   md += `---\n\n## 키워드별 TOP 10 상세\n\n`;
 
   allResults.forEach(kw => {
-    md += `### "${kw.keyword}" (${kw.hub}) — 전체 ${kw.total?.toLocaleString()}개 글\n\n`;
+    md += `### "${sanitizeMarkdownCell(kw.keyword)}" (${sanitizeMarkdownCell(kw.hub)}) — 전체 ${kw.total?.toLocaleString()}개 글\n\n`;
     md += `| 순위 | 제목 | 블로거 | 발행 | 우리글 |\n`;
     md += `|------|------|--------|------|--------|\n`;
     kw.items.forEach(item => {
       const ours = item.isOurs ? '⭐' : '';
-      md += `| ${item.rank} | ${item.title} | ${item.bloggername} | ${item.freshness} (${item.daysAgo}일전) | ${ours} |\n`;
+      md += `| ${item.rank} | ${sanitizeMarkdownCell(item.title)} | ${sanitizeMarkdownCell(item.bloggername)} | ${item.freshness} (${item.daysAgo}일전) | ${ours} |\n`;
     });
     md += `\n`;
   });
 
   // 액션 제안
-  md += `---\n\n## 💡 블로그엔진 튜닝 제안\n\n`;
+  md += `---\n\n## 블로그엔진 튜닝 참고 신호\n\n`;
   if (patterns.number / patterns.total > 0.4) {
-    md += `- ✅ **제목에 숫자 넣기** — 상위 글의 ${Math.round(patterns.number / patterns.total * 100)}%가 숫자 포함\n`;
+    md += `- **숫자형 제목 관찰** — 상위 글의 ${Math.round(patterns.number / patterns.total * 100)}%가 숫자 포함. 단독 규칙이 아니라 글감별 후보 판단에만 사용\n`;
   }
   if (patterns.question / patterns.total > 0.3) {
-    md += `- ✅ **질문형 제목** — 상위 글의 ${Math.round(patterns.question / patterns.total * 100)}%가 질문형\n`;
+    md += `- **질문형 제목 관찰** — 상위 글의 ${Math.round(patterns.question / patterns.total * 100)}%가 질문형. 고객 불안과 핵심 키워드가 살아 있을 때만 검토\n`;
   }
   if (avgLength > 20 && avgLength < 35) {
-    md += `- ✅ **제목 ${avgLength}자 내외** — 상위 글 평균 길이\n`;
+    md += `- **제목 길이 참고** — 상위 글 평균 ${avgLength}자. 발행 기준이 아니라 후보 비교 신호\n`;
   }
   const freshPercent = Math.round((freshCounts['🟢 1주 이내'] + freshCounts['🟡 1달 이내']) / patterns.total * 100);
   if (freshPercent > 50) {
-    md += `- ⚠️ **최신성 중요** — 상위 글의 ${freshPercent}%가 1달 이내 발행. 주기적 리라이팅 필요\n`;
+    md += `- **최신성 관찰** — 상위 글의 ${freshPercent}%가 1달 이내 발행. 리라이팅은 daily와 registry 근거를 함께 보고 판단\n`;
   } else {
-    md += `- 📌 **품질 우선** — 오래된 글도 상위에 있음. 한 번 잘 쓰면 오래 간다\n`;
+    md += `- **품질 지속성 관찰** — 오래된 글도 상위에 있음. 단정이 아니라 품질/내부링크/검색 의도 점검 신호로만 사용\n`;
   }
 
   const reportPath = paths.outputReport('top10_analysis.md');

@@ -13,6 +13,16 @@ const requiredScripts = [
   'scripts/validate_topic_scorecard.js',
   'scripts/validate_active_queue.js',
   'scripts/summarize_ranking_changes.js',
+  'scripts/normalize_keyword_outputs.js',
+  'scripts/render_strategy_docs.js',
+  'scripts/lib/public_safety.js',
+  'scripts/lib/post_validation_policy.js',
+  'scripts/lib/posting_registry.js',
+  'scripts/lib/naver_blog_results.js',
+  'scripts/lib/env_loader.js',
+  'tests/test_env_loader.js',
+  'tests/test_naver_blog_results.js',
+  'tests/test_posting_registry.js',
 ];
 
 function fromRoot(relativePath) {
@@ -55,7 +65,13 @@ const packageJson = JSON.parse(fs.readFileSync(fromRoot('package.json'), 'utf8')
 [
   'validate:posts',
   'gate:blog',
+  'render:strategy',
+  'render:strategy:check',
+  'test:env-loader',
+  'test:ranking-url',
+  'test:posting-registry',
   'test:blog-gate',
+  'test:public-safety',
   'validate:data',
   'check:freshness',
   'ranking:summary',
@@ -115,6 +131,28 @@ const operatingIndex = fs.readFileSync(fromRoot('docs/OPERATING_INDEX.md'), 'utf
   '근접 경고',
 ].forEach((needle) => {
   if (!operatingIndex.includes(needle)) throw new Error(`OPERATING_INDEX.md에 오늘 글감 응답 계약 문자열이 없습니다: ${needle}`);
+});
+
+if (packageJson.scripts['validate:posts'].includes('--from=') || packageJson.scripts['validate:posts:strict'].includes('--from=')) {
+  throw new Error('validate:posts scripts must read the default post range from config/post_validation_policy.json.');
+}
+
+const dashboard = fs.readFileSync(fromRoot('scripts/generate_dashboard.js'), 'utf8');
+if (dashboard.includes('cdn.jsdelivr.net') || dashboard.includes('https://cdn')) {
+  throw new Error('generate_dashboard.js must use the local Chart.js vendor file, not a CDN URL.');
+}
+if (!dashboard.includes('trackingId') || !dashboard.includes('chart.umd.js')) {
+  throw new Error('generate_dashboard.js must support ranking v4 trackingId data and local Chart.js.');
+}
+
+const policy = JSON.parse(fs.readFileSync(fromRoot('config/post_validation_policy.json'), 'utf8'));
+[
+  'default_from_number',
+  'field_story_length_from_number',
+  'field_story_required_section_from_number',
+  'field_story_required_heading',
+].forEach((key) => {
+  if (!(key in policy)) throw new Error(`post_validation_policy.json missing key: ${key}`);
 });
 
 [
