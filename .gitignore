@@ -34,6 +34,9 @@ outputs/publish_control/
 # Project recovery quarantine
 .project-recovery-trash/
 
+# Local Git worktrees
+.worktrees/
+
 # Operating System files
 .DS_Store
 Thumbs.db
