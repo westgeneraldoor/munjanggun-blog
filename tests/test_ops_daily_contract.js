@@ -92,10 +92,26 @@ function validDailyReport() {
   ].join('\n');
 }
 
+function coreHubRotationSection() {
+  return [
+    '## 핵심 허브 순환 점검',
+    '',
+    '| 핵심 허브 | 상태 | 근거 글/Q-ID | 판단 근거 | 다음 액션 |',
+    '| --- | --- | --- | --- | --- |',
+    '| 중문 | 작성 후보 | 155 / Q-020 | 중문 상부 마감 신규 각도 | URL 등록 후 3일 확인 |',
+    '| 3연동중문 | 보호 | 052 / Q-003 | 기존 허브 성과 유지 | 다음 daily 재확인 |',
+    '| 현관중문 | 관찰 | 146 / Q-004 | 최근 발행글 관찰 | 7일 잔존 확인 |',
+    '| 방문교체 | 관찰 | 152 / Q-016 | URL등록대기 글과 근접 | URL 등록 후 7일 확인 |',
+    '| ABS도어 | 관찰 | 143 / Q-006 | 최근 ABS도어 범위 글과 근접 | 2026-07-15 3일 잔존 확인 |',
+    '',
+  ].join('\n');
+}
+
 function validScorecard() {
   return [
     '# 2026-06-25 topic scorecard',
     '',
+    coreHubRotationSection(),
     '## 후보 1. 중문 유리 종류',
     '',
     '- 후보 키워드/원고 번호: 중문 유리 종류 / 106',
@@ -387,6 +403,118 @@ function testValidTopicScorecardPasses() {
   }
 }
 
+function runScorecardContent(content) {
+  const dir = makeTempDir('topic-scorecard-rotation-');
+  try {
+    writeFile(path.join(dir, '2026-06-25_topic_scorecard.md'), content);
+    return runNode([scorecardCli, '--dir', dir, '--latest']);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testTopicScorecardCoreHubRotationPassesWithoutWarn() {
+  const result = runScorecardContent(validScorecard());
+  assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+  assert.doesNotMatch(result.stdout, /WARN:/);
+}
+
+function testTopicScorecardMissingAbsDoorWarns() {
+  const content = validScorecard().replace(
+    '| ABS도어 | 관찰 | 143 / Q-006 | 최근 ABS도어 범위 글과 근접 | 2026-07-15 3일 잔존 확인 |\n',
+    ''
+  );
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: core hub rotation missing hub: ABS도어/);
+}
+
+function testTopicScorecardAbsDoorNeedsEvidence() {
+  const content = validScorecard().replace(
+    '| ABS도어 | 관찰 | 143 / Q-006 | 최근 ABS도어 범위 글과 근접 | 2026-07-15 3일 잔존 확인 |',
+    '| ABS도어 | 중복 보류 | - | 최근 ABS도어 범위 글과 근접 | 2026-07-15 3일 잔존 확인 |'
+  );
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: ABS도어: 중복 보류 needs evidence post or Q-ID/);
+}
+
+function testTopicScorecardObservationNeedsPostOrQidEvidence() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const content = validScorecard().replace(absDoorRow, absDoorRow.replace('143 / Q-006', '근접 글 있음'));
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: ABS도어: 관찰 needs evidence post or Q-ID/);
+}
+
+function testTopicScorecardObservationNeedsThreeOrSevenDayReviewPoint() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const content = validScorecard().replace(absDoorRow, absDoorRow.replace(/[^|]*3일[^|]*/, '추후 확인'));
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: ABS도어: 관찰 needs next action or review point/);
+  assert.match(result.stdout, /WARN: ABS도어: 관찰 needs 3일 or 7일 review point/);
+}
+
+function testTopicScorecardObservationRejectsThirteenDayReviewPoint() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const content = validScorecard().replace(absDoorRow, absDoorRow.replace(/[^|]*3일[^|]*/, '13일 확인'));
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: ABS도어: 관찰 needs 3일 or 7일 review point/);
+}
+
+function testTopicScorecardDuplicateHoldRejectsSeventeenDayReviewPoint() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const invalidRow = absDoorRow
+    .replace('| 관찰 |', '| 중복 보류 |')
+    .replace(/[^|]*3일[^|]*/, '17일 확인');
+  const content = validScorecard().replace(absDoorRow, invalidRow);
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: ABS도어: 중복 보류 needs 3일 or 7일 review point/);
+}
+
+function testTopicScorecardUnknownHubWarns() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const unknownHubRow = '| 기타 | 관찰 | 143 / Q-006 | 범위 밖 허브 | 3일 확인 |';
+  const content = validScorecard().replace(absDoorRow, `${absDoorRow}\n${unknownHubRow}`);
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: core hub rotation unknown hub: 기타/);
+}
+
+function testTopicScorecardInvalidRotationColumnsWarn() {
+  const content = validScorecard().replace('근거 글/Q-ID', '근거');
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: core hub rotation table is missing or has invalid columns/);
+}
+
+function testTopicScorecardDuplicateAbsDoorHubWarns() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const content = validScorecard().replace(absDoorRow, `${absDoorRow}\n${absDoorRow}`);
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: core hub rotation duplicate hub: ABS도어/);
+}
+
+function testTopicScorecardUnknownRotationStateWarns() {
+  const content = validScorecard().replace(
+    '| ABS도어 | 관찰 | 143 / Q-006 | 최근 ABS도어 범위 글과 근접 | 2026-07-15 3일 잔존 확인 |',
+    '| ABS도어 | 대기 | 143 / Q-006 | 최근 ABS도어 범위 글과 근접 | 2026-07-15 3일 잔존 확인 |'
+  );
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: ABS도어: invalid core hub rotation state: 대기/);
+}
+
+function testTopicScorecardMissingRotationSectionOnlyWarns() {
+  const result = runScorecardContent(validScorecard().replace(coreHubRotationSection(), ''));
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: core hub rotation section is missing/);
+}
+
 function testTopicScorecardEmptyFieldFails() {
   const dir = makeTempDir('topic-scorecard-empty-');
   try {
@@ -489,6 +617,18 @@ function main() {
   testDailyReportTopicPortfolioRequiresQueueIdPerRow();
   testDailyReportTopicPortfolioAllowsExcludedBanPhrase();
   testValidTopicScorecardPasses();
+  testTopicScorecardCoreHubRotationPassesWithoutWarn();
+  testTopicScorecardMissingAbsDoorWarns();
+  testTopicScorecardAbsDoorNeedsEvidence();
+  testTopicScorecardObservationNeedsPostOrQidEvidence();
+  testTopicScorecardObservationNeedsThreeOrSevenDayReviewPoint();
+  testTopicScorecardObservationRejectsThirteenDayReviewPoint();
+  testTopicScorecardDuplicateHoldRejectsSeventeenDayReviewPoint();
+  testTopicScorecardUnknownHubWarns();
+  testTopicScorecardInvalidRotationColumnsWarn();
+  testTopicScorecardDuplicateAbsDoorHubWarns();
+  testTopicScorecardUnknownRotationStateWarns();
+  testTopicScorecardMissingRotationSectionOnlyWarns();
   testTopicScorecardEmptyFieldFails();
   testTopicScorecardTemplateFileFails();
   testTopicScorecardMissingFieldFails();
