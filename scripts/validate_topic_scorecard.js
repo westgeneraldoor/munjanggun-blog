@@ -14,6 +14,10 @@ const REQUIRED_FIELDS = [
   '최종 판정',
 ];
 
+const CORE_HUBS = ['중문', '3연동중문', '현관중문', '방문교체', 'ABS도어'];
+const CORE_HUB_COLUMNS = ['핵심 허브', '상태', '근거 글/Q-ID', '판단 근거', '다음 액션'];
+const ALLOWED_ROTATION_STATES = new Set(['작성 후보', '보호', '관찰', '중복 보류']);
+
 const PLACEHOLDER_VALUES = new Set([
   '',
   '-',
@@ -102,6 +106,88 @@ function fieldValues(content, field) {
   return values;
 }
 
+function splitTableLine(line) {
+  const trimmed = String(line || '').trim();
+  if (!trimmed.startsWith('|') || !trimmed.endsWith('|')) return null;
+  return trimmed.slice(1, -1).split('|').map((cell) => cell.trim());
+}
+
+function isSeparatorLine(line) {
+  const cells = splitTableLine(line);
+  return Boolean(cells && cells.length > 0 && cells.every((cell) => /^:?-{3,}:?$/.test(cell)));
+}
+
+function findCoreHubRotationRows(content) {
+  const lines = content.split(/\r?\n/);
+  const start = lines.findIndex((line) => /^##\s+핵심 허브 순환 점검\s*$/.test(line));
+  if (start === -1) return { found: false, tableFound: false, rows: [] };
+
+  let end = lines.length;
+  for (let index = start + 1; index < lines.length; index += 1) {
+    if (/^##\s+/.test(lines[index])) {
+      end = index;
+      break;
+    }
+  }
+
+  const section = lines.slice(start + 1, end);
+  const headerIndex = section.findIndex((line) => {
+    const cells = splitTableLine(line);
+    return cells && CORE_HUB_COLUMNS.every((column) => cells.includes(column));
+  });
+  if (headerIndex === -1) return { found: true, tableFound: false, rows: [] };
+
+  const header = splitTableLine(section[headerIndex]);
+  const rows = [];
+  let cursor = headerIndex + 1;
+  if (isSeparatorLine(section[cursor])) cursor += 1;
+
+  for (; cursor < section.length; cursor += 1) {
+    const cells = splitTableLine(section[cursor]);
+    if (!cells) break;
+    if (isSeparatorLine(section[cursor])) continue;
+    const row = {};
+    header.forEach((column, index) => {
+      row[column] = cells[index] || '';
+    });
+    rows.push(row);
+  }
+
+  return { found: true, tableFound: true, rows };
+}
+
+function validateCoreHubRotation(content) {
+  const parsed = findCoreHubRotationRows(content);
+  if (!parsed.found) return ['core hub rotation section is missing'];
+  if (!parsed.tableFound) return ['core hub rotation table is missing or has invalid columns'];
+
+  const warns = [];
+  const rowsByHub = new Map(parsed.rows.map((row) => [row['핵심 허브'], row]));
+  CORE_HUBS.forEach((hub) => {
+    const row = rowsByHub.get(hub);
+    if (!row) {
+      warns.push(`core hub rotation missing hub: ${hub}`);
+      return;
+    }
+
+    const state = row['상태'];
+    if (!ALLOWED_ROTATION_STATES.has(state)) {
+      warns.push(`${hub}: invalid core hub rotation state: ${state || '(empty)'}`);
+    }
+    if (isPlaceholderValue(row['근거 글/Q-ID'])) {
+      warns.push(`${hub}: ${state || '(empty)'} needs evidence post or Q-ID`);
+    }
+    if (isPlaceholderValue(row['판단 근거'])) {
+      warns.push(`${hub}: ${state || '(empty)'} needs decision evidence`);
+    }
+    if (isPlaceholderValue(row['다음 액션'])) {
+      warns.push(`${hub}: ${state || '(empty)'} needs next action or review point`);
+    }
+  });
+
+  return warns;
+}
+
 function validateTopicScorecard(filePath, options = {}) {
   const result = {
     status: 'ALLOW',
@@ -148,6 +234,8 @@ function validateTopicScorecard(filePath, options = {}) {
     result.fails.push('후보별 섹션(## 후보 N.)이 없습니다.');
   }
 
+  result.warns.push(...validateCoreHubRotation(content));
+
   if (result.fails.length > 0) result.status = 'BLOCK';
   return result;
 }
@@ -173,6 +261,8 @@ if (require.main === module) {
 }
 
 module.exports = {
+  findCoreHubRotationRows,
   validateTopicScorecard,
+  validateCoreHubRotation,
   resolveScorecard,
 };
