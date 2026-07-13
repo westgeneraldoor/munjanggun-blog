@@ -439,6 +439,38 @@ function testTopicScorecardAbsDoorNeedsEvidence() {
   assert.match(result.stdout, /WARN: ABS도어: 중복 보류 needs evidence post or Q-ID/);
 }
 
+function testTopicScorecardObservationNeedsPostOrQidEvidence() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const content = validScorecard().replace(absDoorRow, absDoorRow.replace('143 / Q-006', '근접 글 있음'));
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: ABS도어: 관찰 needs evidence post or Q-ID/);
+}
+
+function testTopicScorecardObservationNeedsThreeOrSevenDayReviewPoint() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const content = validScorecard().replace(absDoorRow, absDoorRow.replace(/[^|]*3일[^|]*/, '추후 확인'));
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: ABS도어: 관찰 needs next action or review point/);
+  assert.match(result.stdout, /WARN: ABS도어: 관찰 needs 3일 or 7일 review point/);
+}
+
+function testTopicScorecardInvalidRotationColumnsWarn() {
+  const content = validScorecard().replace('근거 글/Q-ID', '근거');
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: core hub rotation table is missing or has invalid columns/);
+}
+
+function testTopicScorecardDuplicateAbsDoorHubWarns() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const content = validScorecard().replace(absDoorRow, `${absDoorRow}\n${absDoorRow}`);
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: core hub rotation duplicate hub: ABS도어/);
+}
+
 function testTopicScorecardUnknownRotationStateWarns() {
   const content = validScorecard().replace(
     '| ABS도어 | 관찰 | 143 / Q-006 | 최근 ABS도어 범위 글과 근접 | 2026-07-15 3일 잔존 확인 |',
@@ -560,6 +592,10 @@ function main() {
   testTopicScorecardCoreHubRotationPassesWithoutWarn();
   testTopicScorecardMissingAbsDoorWarns();
   testTopicScorecardAbsDoorNeedsEvidence();
+  testTopicScorecardObservationNeedsPostOrQidEvidence();
+  testTopicScorecardObservationNeedsThreeOrSevenDayReviewPoint();
+  testTopicScorecardInvalidRotationColumnsWarn();
+  testTopicScorecardDuplicateAbsDoorHubWarns();
   testTopicScorecardUnknownRotationStateWarns();
   testTopicScorecardMissingRotationSectionOnlyWarns();
   testTopicScorecardEmptyFieldFails();

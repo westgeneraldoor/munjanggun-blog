@@ -17,6 +17,7 @@ const REQUIRED_FIELDS = [
 const CORE_HUBS = ['중문', '3연동중문', '현관중문', '방문교체', 'ABS도어'];
 const CORE_HUB_COLUMNS = ['핵심 허브', '상태', '근거 글/Q-ID', '판단 근거', '다음 액션'];
 const ALLOWED_ROTATION_STATES = new Set(['작성 후보', '보호', '관찰', '중복 보류']);
+const RECHECK_ROTATION_STATES = new Set(['관찰', '중복 보류']);
 
 const PLACEHOLDER_VALUES = new Set([
   '',
@@ -25,6 +26,7 @@ const PLACEHOLDER_VALUES = new Set([
   'todo',
   '작성 예정',
   '추후 작성',
+  '추후 확인',
   '미정',
   '없음',
   'N/A',
@@ -162,13 +164,25 @@ function validateCoreHubRotation(content) {
   if (!parsed.tableFound) return ['core hub rotation table is missing or has invalid columns'];
 
   const warns = [];
-  const rowsByHub = new Map(parsed.rows.map((row) => [row['핵심 허브'], row]));
+  const rowsByHub = new Map();
+  parsed.rows.forEach((row) => {
+    const hub = row['핵심 허브'];
+    const rows = rowsByHub.get(hub) || [];
+    rows.push(row);
+    rowsByHub.set(hub, rows);
+  });
   CORE_HUBS.forEach((hub) => {
-    const row = rowsByHub.get(hub);
-    if (!row) {
+    const rows = rowsByHub.get(hub) || [];
+    if (rows.length === 0) {
       warns.push(`core hub rotation missing hub: ${hub}`);
       return;
     }
+
+    if (rows.length > 1) {
+      warns.push(`core hub rotation duplicate hub: ${hub}`);
+    }
+
+    const row = rows[0];
 
     const state = row['상태'];
     if (!ALLOWED_ROTATION_STATES.has(state)) {
@@ -182,6 +196,14 @@ function validateCoreHubRotation(content) {
     }
     if (isPlaceholderValue(row['다음 액션'])) {
       warns.push(`${hub}: ${state || '(empty)'} needs next action or review point`);
+    }
+    if (RECHECK_ROTATION_STATES.has(state)) {
+      if (!/(?:\bQ-\d{3}\b|\b\d{3}\b)/.test(row['근거 글/Q-ID'])) {
+        warns.push(`${hub}: ${state} needs evidence post or Q-ID`);
+      }
+      if (!/(?:3일|7일)/.test(row['다음 액션'])) {
+        warns.push(`${hub}: ${state} needs 3일 or 7일 review point`);
+      }
     }
   });
 
