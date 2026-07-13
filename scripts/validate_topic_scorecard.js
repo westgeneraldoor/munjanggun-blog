@@ -171,6 +171,11 @@ function validateCoreHubRotation(content) {
     rows.push(row);
     rowsByHub.set(hub, rows);
   });
+  rowsByHub.forEach((_rows, hub) => {
+    if (!CORE_HUBS.includes(hub)) {
+      warns.push(`core hub rotation unknown hub: ${hub}`);
+    }
+  });
   CORE_HUBS.forEach((hub) => {
     const rows = rowsByHub.get(hub) || [];
     if (rows.length === 0) {
@@ -201,7 +206,7 @@ function validateCoreHubRotation(content) {
       if (!/(?:\bQ-\d{3}\b|\b\d{3}\b)/.test(row['근거 글/Q-ID'])) {
         warns.push(`${hub}: ${state} needs evidence post or Q-ID`);
       }
-      if (!/(?:3일|7일)/.test(row['다음 액션'])) {
+      if (!/(^|[^\d])(?:3일|7일)/.test(row['다음 액션'])) {
         warns.push(`${hub}: ${state} needs 3일 or 7일 review point`);
       }
     }

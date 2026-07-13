@@ -456,6 +456,34 @@ function testTopicScorecardObservationNeedsThreeOrSevenDayReviewPoint() {
   assert.match(result.stdout, /WARN: ABS도어: 관찰 needs 3일 or 7일 review point/);
 }
 
+function testTopicScorecardObservationRejectsThirteenDayReviewPoint() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const content = validScorecard().replace(absDoorRow, absDoorRow.replace(/[^|]*3일[^|]*/, '13일 확인'));
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: ABS도어: 관찰 needs 3일 or 7일 review point/);
+}
+
+function testTopicScorecardDuplicateHoldRejectsSeventeenDayReviewPoint() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const invalidRow = absDoorRow
+    .replace('| 관찰 |', '| 중복 보류 |')
+    .replace(/[^|]*3일[^|]*/, '17일 확인');
+  const content = validScorecard().replace(absDoorRow, invalidRow);
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: ABS도어: 중복 보류 needs 3일 or 7일 review point/);
+}
+
+function testTopicScorecardUnknownHubWarns() {
+  const absDoorRow = coreHubRotationSection().split('\n').find((line) => line.startsWith('| ABS도어 |'));
+  const unknownHubRow = '| 기타 | 관찰 | 143 / Q-006 | 범위 밖 허브 | 3일 확인 |';
+  const content = validScorecard().replace(absDoorRow, `${absDoorRow}\n${unknownHubRow}`);
+  const result = runScorecardContent(content);
+  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /WARN: core hub rotation unknown hub: 기타/);
+}
+
 function testTopicScorecardInvalidRotationColumnsWarn() {
   const content = validScorecard().replace('근거 글/Q-ID', '근거');
   const result = runScorecardContent(content);
@@ -594,6 +622,9 @@ function main() {
   testTopicScorecardAbsDoorNeedsEvidence();
   testTopicScorecardObservationNeedsPostOrQidEvidence();
   testTopicScorecardObservationNeedsThreeOrSevenDayReviewPoint();
+  testTopicScorecardObservationRejectsThirteenDayReviewPoint();
+  testTopicScorecardDuplicateHoldRejectsSeventeenDayReviewPoint();
+  testTopicScorecardUnknownHubWarns();
   testTopicScorecardInvalidRotationColumnsWarn();
   testTopicScorecardDuplicateAbsDoorHubWarns();
   testTopicScorecardUnknownRotationStateWarns();
