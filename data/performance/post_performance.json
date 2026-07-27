@@ -3333,8 +3333,8 @@
     {
       "post_no": "163",
       "title": "3연동 자동중문, 현관 동선부터 봐야 편합니다",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-21",
+      "published_at_source": "registry",
       "queue_id": "Q-031",
       "hub_ids": [
         "H2",
@@ -3344,16 +3344,16 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 4,
       "verdict": "unobserved",
-      "verdict_at": "2026-07-27",
-      "verdict_reason": "발행일 미상"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
+      "verdict_at": "2026-07-27"
     },
     {
       "post_no": "164",
       "title": "방문교체 후 걸레받이 색상이 어색하지 않게 고르는 기준",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-22",
+      "published_at_source": "registry",
       "queue_id": "Q-028",
       "hub_ids": [
         "H4",
@@ -3363,16 +3363,16 @@
         "C-H4-H5-TRIM-FINISH"
       ],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 3,
       "verdict": "unobserved",
-      "verdict_at": "2026-07-27",
-      "verdict_reason": "발행일 미상"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 3일",
+      "verdict_at": "2026-07-27"
     },
     {
       "post_no": "165",
       "title": "방문교체와 도배, 어떤 공사를 먼저 해야 자국이 덜 남을까요?",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-23",
+      "published_at_source": "registry",
       "queue_id": "Q-029",
       "hub_ids": [
         "H4",
@@ -3382,16 +3382,16 @@
         "C-H4-H5-TRIM-FINISH"
       ],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 2,
       "verdict": "unobserved",
-      "verdict_at": "2026-07-27",
-      "verdict_reason": "발행일 미상"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 2일",
+      "verdict_at": "2026-07-27"
     },
     {
       "post_no": "166",
       "title": "3연동중문 최대한 넓게 쓰고 싶다면? 신발장 옆을 확인해 보세요",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-24",
+      "published_at_source": "registry",
       "queue_id": "Q-030",
       "hub_ids": [
         "H2",
@@ -3401,16 +3401,16 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 1,
       "verdict": "unobserved",
-      "verdict_at": "2026-07-27",
-      "verdict_reason": "발행일 미상"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
+      "verdict_at": "2026-07-27"
     },
     {
       "post_no": "167",
       "title": "중문 설치 전 확인! 현관 폭만 보면 스위치가 가려질 수 있습니다",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-25",
+      "published_at_source": "registry",
       "queue_id": "Q-032",
       "hub_ids": [
         "H2",
@@ -3420,16 +3420,16 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-07-27",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 1,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-07-27"
     },
     {
       "post_no": "168",
       "title": "방문교체할 때, 열리는 방향까지 바꾸고 싶다면 문틀을 확인하세요",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-26",
+      "published_at_source": "registry",
       "queue_id": "Q-023",
       "hub_ids": [
         "H4",
@@ -3439,16 +3439,16 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-07-27",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 1,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-07-27"
     },
     {
       "post_no": "169",
-      "title": "화장실 문짝만 바꾸려다, 방문 전체를 다시 보게 된 이유",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "화장실 문짝만 바꾸려다, 방문 전체를 교체하게 된 이유",
+      "published_at": "2026-07-27",
+      "published_at_source": "registry",
       "queue_id": "Q-022",
       "hub_ids": [
         "H4",
@@ -3458,10 +3458,10 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-07-27",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 1,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-07-27"
     },
     {
       "post_no": "170",

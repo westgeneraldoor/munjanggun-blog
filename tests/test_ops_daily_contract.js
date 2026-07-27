@@ -92,6 +92,26 @@ function validDailyReport() {
   ].join('\n');
 }
 
+function dailyContractV2Report() {
+  return [
+    validDailyReport()
+      .replace('| 순위 | 제목 | 조회수 | 작성일 |', '| 순위 | 글번호 | 제목 | 조회수 | 작성일 |')
+      .replace('| 1 | 걸레받이몰딩 시공 전 꼭 봐야 할 3가지 체크리스트 | 53 | 2026-06-09 |', '| 1 | 091 | 걸레받이몰딩 시공 전 꼭 봐야 할 3가지 체크리스트 | 53 | 2026-06-09 |'),
+    '## 관측 품질',
+    '',
+    '| 항목 | 값 |',
+    '| --- | --- |',
+    '| 수집 레벨 | L3 |',
+    '| TOP20 확보 행수 | 1 |',
+    '| 수집 제약 | 없음 |',
+    '',
+    '## 실행 로그',
+    '',
+    '- 없음',
+    '',
+  ].join('\n');
+}
+
 function coreHubRotationSection() {
   return [
     '## 핵심 허브 순환 점검',
@@ -197,6 +217,94 @@ function testDailyReportPlaceholderSectionFails() {
     assert.strictEqual(result.status, 1, result.stdout);
     assert.match(result.stdout, /다음 액션/);
     assert.match(result.stdout, /placeholder|작성 예정|실제 내용/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyContractV2RequiresObservationQualitySection() {
+  const dir = makeTempDir('daily-contract-v2-quality-');
+  try {
+    writeFile(
+      path.join(dir, '2026-07-28_seo_watch.md'),
+      dailyContractV2Report().replace(/## 관측 품질[\s\S]*?(?=## 실행 로그)/, '')
+    );
+
+    const result = runNode([dailyCli, '--reports-dir', dir, '--date', '2026-07-28']);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /관측 품질/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyContractV2RequiresExecutionLogSection() {
+  const dir = makeTempDir('daily-contract-v2-log-');
+  try {
+    writeFile(
+      path.join(dir, '2026-07-28_seo_watch.md'),
+      dailyContractV2Report().replace(/## 실행 로그[\s\S]*$/, '')
+    );
+
+    const result = runNode([dailyCli, '--reports-dir', dir, '--date', '2026-07-28']);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /실행 로그/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyContractV2RequiresPostNumberTop20Header() {
+  const dir = makeTempDir('daily-contract-v2-post-number-');
+  try {
+    writeFile(
+      path.join(dir, '2026-07-28_seo_watch.md'),
+      dailyContractV2Report()
+        .replace('| 순위 | 글번호 | 제목 | 조회수 | 작성일 |', '| 순위 | 제목 | 조회수 | 작성일 |')
+        .replace('| 1 | 091 | 걸레받이몰딩 시공 전 꼭 봐야 할 3가지 체크리스트 | 53 | 2026-06-09 |', '| 1 | 걸레받이몰딩 시공 전 꼭 봐야 할 3가지 체크리스트 | 53 | 2026-06-09 |')
+    );
+
+    const result = runNode([dailyCli, '--reports-dir', dir, '--date', '2026-07-28']);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /글번호/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyContractV2DoesNotApplyBeforeCutover() {
+  const dir = makeTempDir('daily-contract-v2-legacy-');
+  try {
+    writeFile(path.join(dir, '2026-07-27_seo_watch.md'), validDailyReport());
+
+    const result = runNode([dailyCli, '--reports-dir', dir, '--date', '2026-07-27']);
+
+    assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+    assert.match(result.stdout, /ALLOW/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyContractV2FindsRequiredRowsWithoutFixedQualityHeaders() {
+  const dir = makeTempDir('daily-contract-v2-quality-columns-');
+  try {
+    writeFile(
+      path.join(dir, '2026-07-28_seo_watch.md'),
+      dailyContractV2Report()
+        .replace(
+          '| 항목 | 값 |\n| --- | --- |\n| 수집 레벨 | L3 |',
+          '| 구분 | 내용 |\n| --- | --- |\n| 수집 레벨 | L3 |'
+        )
+    );
+
+    const result = runNode([dailyCli, '--reports-dir', dir, '--date', '2026-07-28']);
+
+    assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+    assert.match(result.stdout, /ALLOW/);
   } finally {
     removeDir(dir);
   }
@@ -634,6 +742,11 @@ function main() {
   testDailyReportMissingTop20Fails();
   testDailyReportEmptySectionFails();
   testDailyReportPlaceholderSectionFails();
+  testDailyContractV2RequiresObservationQualitySection();
+  testDailyContractV2RequiresExecutionLogSection();
+  testDailyContractV2RequiresPostNumberTop20Header();
+  testDailyContractV2DoesNotApplyBeforeCutover();
+  testDailyContractV2FindsRequiredRowsWithoutFixedQualityHeaders();
   testDailyReportContradictoryMissingFileFails();
   testDailyReportTopicPortfolioRequiredFlagFailsWhenMissing();
   testDailyReportTopicPortfolioRejectsExcludedWritingAction();

@@ -5,8 +5,15 @@ const { findPublicTextIssues, walkFiles } = require('./lib/public_safety');
 const { assertNoDrift } = require('./render_strategy_docs');
 const { validateTaxonomy } = require('./validate_seo_taxonomy');
 
+const warnings = [];
+const PUBLISHING_STATUS_HEADER = ['#', '파일', '발행상태', '발행일', 'URL'];
+
 function fail(message) {
   throw new Error(message);
+}
+
+function warn(message) {
+  warnings.push(message);
 }
 
 function assertArrayConfig(filePath, fields = []) {
@@ -144,6 +151,27 @@ function assertRecentRegistryRows(content) {
     if (/발행완료/.test(dateOrStatus) && !url) {
       fail(`최근 등록부 발행완료 행에는 네이버 URL이 필요합니다: ${number}`);
     }
+  });
+}
+
+function assertRegisteredUrlPublicationDates() {
+  const registryPath = paths.docsStrategy('POSTING_REGISTRY.json');
+  const registry = readJsonFile(registryPath, null);
+  const statusTable = (registry && Array.isArray(registry.blocks))
+    ? registry.blocks.find((block) => (
+      block.type === 'table'
+      && JSON.stringify(block.header) === JSON.stringify(PUBLISHING_STATUS_HEADER)
+    ))
+    : null;
+
+  if (!statusTable || !Array.isArray(statusTable.rows)) return;
+
+  statusTable.rows.forEach((row) => {
+    const postNo = String(row[0] || '').trim();
+    const publishedAt = String(row[3] || '').trim();
+    const url = String(row[4] || '').trim();
+    if (!url || url === '-' || /^\d{4}-\d{2}-\d{2}$/.test(publishedAt)) return;
+    warn(`발행일 미등록: ${postNo}`);
   });
 }
 
@@ -291,6 +319,7 @@ function main() {
   assertArrayConfig(paths.config('product_seed_keywords.json'));
   assertHistory();
   assertPostingRegistry();
+  assertRegisteredUrlPublicationDates();
   assertKeywordMetadata();
   assertKeywordEstimateFlags();
   assertLegacyKeywordMetadata();
@@ -299,6 +328,7 @@ function main() {
   assertStrategySources();
   assertSeoTaxonomy();
   assertPublicGeneratedOutputs();
+  warnings.forEach((message) => console.log(`WARN: ${message}`));
   console.log('데이터 스키마 검증 완료');
 }
 

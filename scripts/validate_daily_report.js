@@ -1,9 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const { paths } = require('./lib/paths');
+const { loadPostValidationPolicy } = require('./lib/post_validation_policy');
 
 const DEFAULT_MAX_AGE_DAYS = 2;
 const DAY_MS = 24 * 60 * 60 * 1000;
+const policy = loadPostValidationPolicy();
 
 const REQUIRED_SECTIONS = [
   {
@@ -221,6 +223,77 @@ function findTopicPortfolioTable(body) {
   ));
 }
 
+function isOnOrAfterDate(date, threshold) {
+  return /^\d{4}-\d{2}-\d{2}$/.test(date)
+    && /^\d{4}-\d{2}-\d{2}$/.test(threshold)
+    && date >= threshold;
+}
+
+function validateObservationQualitySection(lines) {
+  const issues = [];
+  const headingIndex = findHeadingLine(lines, [/^##\s+관측\s*품질\s*$/]);
+  if (headingIndex < 0) {
+    issues.push('관측 품질 섹션이 없습니다.');
+    return issues;
+  }
+
+  const table = extractMarkdownTables(sectionBody(lines, headingIndex)).find((candidate) => (
+    candidate.rows.some((row) => String(row[0] || '').trim() === 'TOP20 확보 행수')
+    || candidate.rows.some((row) => String(row[0] || '').trim() === '수집 제약')
+  ));
+  if (!table) {
+    issues.push('관측 품질 섹션에 TOP20 확보 행수 또는 수집 제약 행이 있는 Markdown 표가 없습니다.');
+    return issues;
+  }
+
+  const rowFor = (label) => table.rows.find((row) => String(row[0] || '').trim() === label);
+  const top20Row = rowFor('TOP20 확보 행수');
+  const constraintRow = rowFor('수집 제약');
+
+  if (!top20Row) {
+    issues.push('관측 품질 표에 TOP20 확보 행수 행이 없습니다.');
+  } else if (!/^\d+$/.test(String(top20Row[1] || '').trim())) {
+    issues.push('관측 품질 표의 TOP20 확보 행수 값은 정수여야 합니다.');
+  }
+
+  if (!constraintRow) {
+    issues.push('관측 품질 표에 수집 제약 행이 없습니다.');
+  } else if (!String(constraintRow[1] || '').trim() || String(constraintRow[1] || '').trim() === '-') {
+    issues.push('관측 품질 표의 수집 제약 값이 비어 있습니다. 제약이 없으면 없음으로 기록해야 합니다.');
+  }
+
+  return issues;
+}
+
+function validateExecutionLogSection(lines) {
+  const headingIndex = findHeadingLine(lines, [/^##\s+실행\s*로그\s*$/]);
+  if (headingIndex < 0) return ['실행 로그 섹션이 없습니다.'];
+
+  const hasLogItem = sectionBody(lines, headingIndex)
+    .split('\n')
+    .some((line) => /^-\s+\S/.test(line.trim()));
+  return hasLogItem ? [] : ['실행 로그 섹션에 최소 1개의 - 항목이 필요합니다. 실행이 없으면 - 없음으로 기록해야 합니다.'];
+}
+
+function validateTop20V2Headers(lines) {
+  const headingIndex = findHeadingLine(lines, [/게시글\s*TOP\s*20/, /게시글\s*TOP20/]);
+  if (headingIndex < 0) return ['게시글 TOP20 섹션이 없습니다.'];
+
+  const table = extractMarkdownTables(sectionBody(lines, headingIndex)).find((candidate) => (
+    candidate.headers.includes('글번호') && candidate.headers.includes('작성일')
+  ));
+  return table ? [] : ['게시글 TOP20 표 헤더에 글번호와 작성일 열이 모두 필요합니다.'];
+}
+
+function validateDailyContractV2(lines, fileDate) {
+  if (!isOnOrAfterDate(fileDate, policy.dailyContractV2From)) return [];
+  return [
+    ...validateObservationQualitySection(lines),
+    ...validateExecutionLogSection(lines),
+    ...validateTop20V2Headers(lines),
+  ];
+}
+
 function contradictoryMissingReportClaims(content, reportsDir) {
   const fails = [];
   const pattern = /outputs\/reports\/daily\/(\d{4}-\d{2}-\d{2})_seo_watch\.md/g;
@@ -376,6 +449,7 @@ function validateDailyReport(filePath, options = {}) {
 
   result.fails.push(...contradictoryMissingReportClaims(content, reportsDir));
   result.fails.push(...validateTopicPortfolioSection(lines, Boolean(options.requireTopicPortfolio)));
+  result.fails.push(...validateDailyContractV2(lines, fileDate));
 
   if (result.fails.length > 0) result.status = 'BLOCK';
   return result;
@@ -406,4 +480,5 @@ module.exports = {
   resolveReport,
   contradictoryMissingReportClaims,
   validateTopicPortfolioSection,
+  validateDailyContractV2,
 };

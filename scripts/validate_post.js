@@ -186,6 +186,15 @@ function addIssue(issues, level, message) {
   issues.push({ level, message });
 }
 
+function acceptedBrandClaimException(postNo, code) {
+  const normalizedPostNo = String(postNo).padStart(3, '0');
+  return policy.acceptedBrandClaimExceptions.find((exception) => (
+    String(exception.post_no || '').padStart(3, '0') === normalizedPostNo
+    && Array.isArray(exception.codes)
+    && exception.codes.includes(code)
+  )) || null;
+}
+
 function validateProductScope(content, issues) {
   const unsupportedHits = unsupportedProducts
     .filter(({ term }) => content.includes(term))
@@ -277,6 +286,11 @@ function validateFile(filePath, options) {
   });
 
   findBrandClaimIssues(content).forEach((issue) => {
+    const exception = acceptedBrandClaimException(number, issue.code);
+    if (exception) {
+      addIssue(issues, 'warn', `${issue.code}: ${issue.message} (수용된 예외: ${exception.accepted_at})`);
+      return;
+    }
     addIssue(issues, 'fail', `${issue.code}: ${issue.message}`);
   });
 

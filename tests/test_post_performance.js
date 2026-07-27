@@ -277,6 +277,109 @@ function testRecordsUnmappedTitlesInsteadOfGuessing() {
   }
 }
 
+function testUsesPostNumberColumnBeforeTitleMapping() {
+  const fixture = writeFixture({
+    registryRows: [
+      ['152', '등록부 제목과 다른 값', '2026-07-05'],
+      ['153', '채움 글 하나', '2026-07-01'],
+      ['154', '채움 글 둘', '2026-07-01'],
+      ['155', '채움 글 셋', '2026-07-01'],
+      ['156', '채움 글 넷', '2026-07-01'],
+    ],
+    postNos: ['152', '153', '154', '155', '156'],
+    files: {
+      '2026-07-10': topTable(
+        ['순위', '글번호', '게시글', '조회수', '작성일'],
+        [
+          ['1', '152', '제목 매핑에 없는 실제 제목', '10', '7/5'],
+          ['2', '153', '채움 글 하나', '9', '7/1'],
+          ['3', '154', '채움 글 둘', '8', '7/1'],
+          ['4', '155', '채움 글 셋', '7', '7/1'],
+          ['5', '156', '채움 글 넷', '6', '7/1'],
+        ]
+      ),
+    },
+  });
+
+  try {
+    const ledger = collect(fixture);
+    const post = postByNo(ledger, '152');
+    assert.deepStrictEqual(post.observations, [
+      { date: '2026-07-10', day: 5, rank: 1, views: 10 },
+    ]);
+    assert(!ledger.unmapped_titles.some((item) => item.title === '제목 매핑에 없는 실제 제목'));
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
+function testRecordsReviewReelsIdentifierFromPostNumberColumn() {
+  const fixture = writeFixture({
+    registryRows: [
+      ['152', '채움 글 하나', '2026-07-01'],
+      ['153', '채움 글 둘', '2026-07-01'],
+      ['154', '채움 글 셋', '2026-07-01'],
+      ['155', '채움 글 넷', '2026-07-01'],
+    ],
+    postNos: ['152', '153', '154', '155'],
+    files: {
+      '2026-07-10': topTable(
+        ['순위', '글번호', '게시글', '조회수', '작성일'],
+        [
+          ['1', '리뷰릴스-005', '리뷰 제목이 바뀌어도 식별자로 기록', '10', '7/5'],
+          ['2', '152', '채움 글 하나', '9', '7/1'],
+          ['3', '153', '채움 글 둘', '8', '7/1'],
+          ['4', '154', '채움 글 셋', '7', '7/1'],
+          ['5', '155', '채움 글 넷', '6', '7/1'],
+        ]
+      ),
+    },
+  });
+
+  try {
+    const review = postByNo(collect(fixture), '리뷰릴스-005');
+    assert.deepStrictEqual(review.observations, [
+      { date: '2026-07-10', day: 5, rank: 1, views: 10 },
+    ]);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
+function testFallsBackToTitleMappingWhenPostNumberIsDash() {
+  const fixture = writeFixture({
+    registryRows: [
+      ['152', '제목으로 연결할 글', '2026-07-05'],
+      ['153', '채움 글 하나', '2026-07-01'],
+      ['154', '채움 글 둘', '2026-07-01'],
+      ['155', '채움 글 셋', '2026-07-01'],
+      ['156', '채움 글 넷', '2026-07-01'],
+    ],
+    postNos: ['152', '153', '154', '155', '156'],
+    files: {
+      '2026-07-10': topTable(
+        ['순위', '글번호', '게시글', '조회수', '작성일'],
+        [
+          ['1', '-', '제목으로 연결할 글', '10', '7/5'],
+          ['2', '153', '채움 글 하나', '9', '7/1'],
+          ['3', '154', '채움 글 둘', '8', '7/1'],
+          ['4', '155', '채움 글 셋', '7', '7/1'],
+          ['5', '156', '채움 글 넷', '6', '7/1'],
+        ]
+      ),
+    },
+  });
+
+  try {
+    const post = postByNo(collect(fixture), '152');
+    assert.deepStrictEqual(post.observations, [
+      { date: '2026-07-10', day: 5, rank: 1, views: 10 },
+    ]);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
 function testIncludesRegistryPostsWithoutTop20Appearances() {
   const fixture = writeFixture({
     registryRows: [
@@ -539,6 +642,9 @@ function main() {
   testMarksFewerThanFiveValidDaysUnobserved();
   testExcludesDaysZeroThroughTwoFromVerdict();
   testRecordsUnmappedTitlesInsteadOfGuessing();
+  testUsesPostNumberColumnBeforeTitleMapping();
+  testRecordsReviewReelsIdentifierFromPostNumberColumn();
+  testFallsBackToTitleMappingWhenPostNumberIsDash();
   testIncludesRegistryPostsWithoutTop20Appearances();
   testMapsMemoPublishedTitleAlias();
   testMapsConfirmedTitleHistoryAlias();
