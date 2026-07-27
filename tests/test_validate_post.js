@@ -14,9 +14,9 @@ function runValidate(postPath, extraArgs = []) {
   });
 }
 
-function writeTempPost(lines) {
+function writeTempPost(lines, fileName = '999_unsupported_product.md') {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'validate-post-'));
-  const post = path.join(dir, '999_unsupported_product.md');
+  const post = path.join(dir, fileName);
   fs.writeFileSync(post, `${lines.join('\n')}\n`, 'utf8');
   return { dir, post };
 }
@@ -278,6 +278,51 @@ function testCentralBrandClaimGateAllowsSafeClaims() {
   }
 }
 
+function testAcceptedBrandClaimExceptionDowngradesPost068ToWarn() {
+  const { dir, post } = writeTempPost(basePostLines([
+    '결정 후 3~4일 안에 시공됩니다.',
+    '리뷰 15,000개와 4,000개를 전체 브랜드 리뷰처럼 씁니다.',
+  ]), '068_accepted_brand_claim.md');
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 0, result.stdout);
+    assert.match(result.stdout, /WARN: .*수용된 예외.*2026-07-27/);
+    assert.match(result.stdout, /BRAND_SCHEDULE_CLAIM_INVALID/);
+    assert.match(result.stdout, /BRAND_REVIEW_CLAIM_INVALID/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testUnacceptedBrandClaimRemainsFail() {
+  const { dir, post } = writeTempPost(basePostLines([
+    '결정 후 3~4일 안에 시공됩니다.',
+  ]), '069_unaccepted_brand_claim.md');
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /FAIL: BRAND_SCHEDULE_CLAIM_INVALID/);
+    assert.doesNotMatch(result.stdout, /수용된 예외/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testUnlistedCodeOnAcceptedPostRemainsFail() {
+  const { dir, post } = writeTempPost(basePostLines([
+    '결정 후 3~4일 안에 시공됩니다.',
+    '영종도도 무료 방문 실측이 가능합니다.',
+  ]), '068_unlisted_brand_claim.md');
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /WARN: BRAND_SCHEDULE_CLAIM_INVALID: .*수용된 예외.*2026-07-27/);
+    assert.match(result.stdout, /FAIL: UNAVAILABLE_REGION_CLAIM/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
 function winningFormatPostLines(extraLines = []) {
   return [
     '# 방문교체 전에 문틀 상태부터 나눠야 하는 이유',
@@ -407,6 +452,9 @@ function main() {
   testStandaloneJungmunTitleStillFailsValidation();
   testCentralBrandClaimGateFailsValidation();
   testCentralBrandClaimGateAllowsSafeClaims();
+  testAcceptedBrandClaimExceptionDowngradesPost068ToWarn();
+  testUnacceptedBrandClaimRemainsFail();
+  testUnlistedCodeOnAcceptedPostRemainsFail();
   console.log('validate_post product tests passed');
 }
 

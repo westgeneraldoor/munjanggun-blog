@@ -22,6 +22,16 @@ function normalizePostNo(value) {
   return `${match[1].padStart(3, '0')}${match[2] || ''}`;
 }
 
+function normalizeTopPostIdentifier(value) {
+  const text = String(value || '').trim();
+  if (!text || text === '-') return '';
+
+  const reviewReels = text.match(/^리뷰릴스\s*-\s*(\d{1,3})$/);
+  if (reviewReels) return `리뷰릴스-${reviewReels[1].padStart(3, '0')}`;
+
+  return normalizePostNo(text);
+}
+
 function normalizeTitle(value) {
   return String(value || '')
     .normalize('NFC')
@@ -83,6 +93,7 @@ function topSection(content) {
 
 function topTableColumns(headers) {
   const normalized = headers.map(normalizeHeader);
+  const postNoIndex = normalized.findIndex((header) => header === '글번호');
   const titleIndex = normalized.findIndex((header) => header === '제목' || header === '게시글');
   const viewsIndex = normalized.findIndex((header) => header === '조회수');
   const publishedAtIndex = normalized.findIndex((header) => header === '작성일');
@@ -90,6 +101,7 @@ function topTableColumns(headers) {
 
   if (titleIndex < 0 || viewsIndex < 0 || rankIndex < 0) return null;
   return {
+    postNoIndex,
     titleIndex,
     viewsIndex,
     publishedAtIndex,
@@ -151,6 +163,7 @@ function metricValue(value) {
 
 function tableRowsToObjects(table, columns, reportDate) {
   return table.rows.map((row) => ({
+    postNo: columns.postNoIndex < 0 ? '' : normalizeTopPostIdentifier(row[columns.postNoIndex]),
     title: String(row[columns.titleIndex] || '').trim(),
     views: metricValue(row[columns.viewsIndex]),
     rank: metricValue(row[columns.rankIndex]),
@@ -259,6 +272,10 @@ function collectDailyEvidence(reportsDir, titleMap) {
       if (table.rows.length >= 5) validDates.add(date);
 
       tableRowsToObjects(table, columns, date).forEach((row) => {
+        if (row.postNo) {
+          appearances.push({ postNo: row.postNo, date, ...row });
+          return;
+        }
         const matches = [...(titleMap.get(normalizeTitle(row.title)) || [])];
         if (matches.length !== 1) {
           const key = normalizeTitle(row.title);
@@ -271,12 +288,26 @@ function collectDailyEvidence(reportsDir, titleMap) {
           unmapped.set(key, existing);
           return;
         }
-        appearances.push({ postNo: matches[0], date, ...row });
+        appearances.push({ ...row, postNo: matches[0], date });
       });
     });
   });
 
   return { appearances, validDates, allReportDates, unmapped };
+}
+
+function addDirectIdentifierEntries(byPostNo, appearances) {
+  appearances.forEach((appearance) => {
+    if (byPostNo.has(appearance.postNo) || !/^리뷰릴스-\d{3}$/.test(appearance.postNo)) return;
+    byPostNo.set(appearance.postNo, {
+      post_no: appearance.postNo,
+      title: appearance.title,
+      published_at: null,
+      published_at_source: 'unknown',
+      title_keys: new Set(),
+      retired: false,
+    });
+  });
 }
 
 function taxonomyInfo(postNo, taxonomy) {
@@ -340,6 +371,7 @@ function collectPostPerformance({
   const { byPostNo, titleMap } = registryEntries(readJson(registryPath));
   const taxonomy = readJson(taxonomyPath);
   const evidence = collectDailyEvidence(reportsDir, titleMap);
+  addDirectIdentifierEntries(byPostNo, evidence.appearances);
 
   // daily는 파일 날짜 순으로 읽으므로, 발행일이 없는 글에는 가장 이른 TOP20 작성일만 쓴다.
   evidence.appearances.forEach((appearance) => {
