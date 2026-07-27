@@ -591,6 +591,22 @@ function testOpsDailyScriptUsesDailyContract() {
   assert(opsDailyWrite.includes('--write-report'), opsDailyWrite);
 }
 
+function testWeeklyChainIncludesPostPerformanceLedger() {
+  const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+  assert.strictEqual(
+    packageJson.scripts['performance:collect'],
+    'node scripts/collect_post_performance.js --write'
+  );
+  assert.strictEqual(
+    packageJson.scripts['performance:report'],
+    'node scripts/report_post_performance.js'
+  );
+  assert.match(
+    packageJson.scripts['ops:weekly'],
+    /npm run performance:collect && npm run performance:report$/
+  );
+}
+
 function testFreshnessDefaultExcludesRanking() {
   const before = fs.existsSync(freshnessReport) ? fs.readFileSync(freshnessReport, 'utf8') : null;
   const beforeMtime = fs.existsSync(freshnessReport) ? fs.statSync(freshnessReport).mtimeMs : null;
@@ -643,6 +659,7 @@ function main() {
   testTopicScorecardTemplateFileFails();
   testTopicScorecardMissingFieldFails();
   testOpsDailyScriptUsesDailyContract();
+  testWeeklyChainIncludesPostPerformanceLedger();
   testFreshnessDefaultExcludesRanking();
   testFreshnessWeeklyIncludesRanking();
   console.log('ops daily contract tests passed');
