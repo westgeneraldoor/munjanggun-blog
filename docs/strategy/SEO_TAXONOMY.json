@@ -321,38 +321,6 @@
       ],
       "classification_status": "classified"
     },
-    "queue:Q-026": {
-      "entity_type": "queue",
-      "source_refs": [],
-      "hub_ids": [
-        "H1",
-        "H3"
-      ],
-      "cluster_ids": [
-        "C-H1-H3-COST"
-      ],
-      "intent_ids": [
-        "I-COST-SCOPE",
-        "I-REPLACEMENT-SCOPE"
-      ],
-      "classification_status": "classified"
-    },
-    "queue:Q-027": {
-      "entity_type": "queue",
-      "source_refs": [],
-      "hub_ids": [
-        "H4"
-      ],
-      "cluster_ids": [
-        "C-H4-MOISTURE-RISK"
-      ],
-      "intent_ids": [
-        "I-FAILURE-RISK",
-        "I-REPLACEMENT-SCOPE",
-        "I-LIVING-SAFETY"
-      ],
-      "classification_status": "classified"
-    },
     "queue:Q-028": {
       "entity_type": "queue",
       "source_refs": [],
@@ -582,7 +550,7 @@
     "post:161": {
       "entity_type": "post",
       "source_refs": [
-        "queue:Q-026"
+        "queue:Q-023"
       ],
       "hub_ids": [
         "H1",
@@ -595,12 +563,13 @@
         "I-COST-SCOPE",
         "I-REPLACEMENT-SCOPE"
       ],
-      "classification_status": "classified"
+      "classification_status": "classified",
+      "taxonomy_change_note": "Q-026 관찰 종료 후 중문 철거·재설치 글은 Q-023 교체 범위 판단의 하위 근거로 보존한다. 기존 중문이 항상 재사용 가능하다고 단정하지 않는다"
     },
     "post:162": {
       "entity_type": "post",
       "source_refs": [
-        "queue:Q-027"
+        "queue:Q-023"
       ],
       "hub_ids": [
         "H4"
@@ -613,7 +582,8 @@
         "I-REPLACEMENT-SCOPE",
         "I-LIVING-SAFETY"
       ],
-      "classification_status": "classified"
+      "classification_status": "classified",
+      "taxonomy_change_note": "Q-027 관찰 종료 후 화장실 문턱 글은 Q-023 교체 범위 판단의 하위 근거로 보존한다. 문턱 제거를 단독 서비스처럼 권하지 않는다"
     },
     "post:163": {
       "entity_type": "post",
@@ -846,6 +816,74 @@
       ],
       "intent_ids": [
         "I-SERVICE-BOUNDARY"
+      ],
+      "classification_status": "classified"
+    },
+    "queue:Q-038": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-HARDWARE-RANGE"
+      ],
+      "intent_ids": [
+        "I-FAILURE-RISK",
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified"
+    },
+    "post:174": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-038"
+      ],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-HARDWARE-RANGE"
+      ],
+      "intent_ids": [
+        "I-FAILURE-RISK",
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified"
+    },
+    "queue:Q-039": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-REPLACEMENT"
+      ],
+      "intent_ids": [
+        "I-REPLACEMENT-SCOPE",
+        "I-FAILURE-RISK"
+      ],
+      "classification_status": "classified"
+    },
+    "post:175": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-039"
+      ],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-REPLACEMENT"
+      ],
+      "intent_ids": [
+        "I-REPLACEMENT-SCOPE",
+        "I-FAILURE-RISK"
       ],
       "classification_status": "classified"
     }

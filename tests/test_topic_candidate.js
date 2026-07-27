@@ -100,7 +100,8 @@ function testCliBlocksOnUnhandledProduct() {
 }
 
 function testCliPassesOnCleanKeyword() {
-  const result = run(['--check', '방문잠겼을때']);
+  // 라이브 등록부를 읽으므로 등록되지 않은 키워드를 쓴다.
+  const result = run(['--check', '코너몰딩']);
   assert.strictEqual(result.status, 0, result.stdout);
 }
 
@@ -188,6 +189,14 @@ function testPendingPostsMarkedUnpublished() {
   assert.strictEqual(byNo.get('170').published, false);
 }
 
+// 원고를 쓰고 등록부에 넣지 않으면 다음 글감 선정에서 같은 소재가 다시 올라온다.
+// 2026-07-27 174·175 가 미등록 상태였고 검증기가 근접 없음으로 답했다.
+function testRegisteredDraftBlocksSameKeyword() {
+  const result = run(['--check', '방문잠겼을때']);
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /174/);
+}
+
 function main() {
   testUnhandledProductsBlocked();
   testPermanentExclusionsBlocked();
@@ -201,6 +210,7 @@ function main() {
   testLandedResetsStreak();
   testCliBlocksOnUnhandledProduct();
   testCliPassesOnCleanKeyword();
+  testRegisteredDraftBlocksSameKeyword();
   testExploreExcludesOutOfDomain();
   testSynonymDuplicateDetected();
   testNearSortedByRecency();
