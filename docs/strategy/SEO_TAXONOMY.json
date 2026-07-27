@@ -321,21 +321,6 @@
       ],
       "classification_status": "classified"
     },
-    "queue:Q-028": {
-      "entity_type": "queue",
-      "source_refs": [],
-      "hub_ids": [
-        "H4",
-        "H5"
-      ],
-      "cluster_ids": [
-        "C-H4-H5-TRIM-FINISH"
-      ],
-      "intent_ids": [
-        "I-FINISH-COORDINATION"
-      ],
-      "classification_status": "classified"
-    },
     "queue:Q-029": {
       "entity_type": "queue",
       "source_refs": [],
@@ -606,7 +591,7 @@
     "post:164": {
       "entity_type": "post",
       "source_refs": [
-        "queue:Q-028"
+        "queue:Q-029"
       ],
       "hub_ids": [
         "H4",
@@ -618,7 +603,8 @@
       "intent_ids": [
         "I-FINISH-COORDINATION"
       ],
-      "classification_status": "classified"
+      "classification_status": "classified",
+      "taxonomy_change_note": "Q-028 관찰 종료 후 걸레받이 색상 글은 Q-029 문선·마감 축의 하위 근거로 보존한다. 걸레받이 단독 시공 글로 확장하지 않는다"
     },
     "post:165": {
       "entity_type": "post",
@@ -870,6 +856,91 @@
       "classification_status": "classified"
     },
     "post:175": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-039"
+      ],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-REPLACEMENT"
+      ],
+      "intent_ids": [
+        "I-REPLACEMENT-SCOPE",
+        "I-FAILURE-RISK"
+      ],
+      "classification_status": "classified"
+    },
+    "queue:Q-040": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [
+        "H4"
+      ],
+      "cluster_ids": [
+        "C-H4-MOISTURE-RISK"
+      ],
+      "intent_ids": [
+        "I-FAILURE-RISK",
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified"
+    },
+    "post:176": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-038"
+      ],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-HARDWARE-RANGE"
+      ],
+      "intent_ids": [
+        "I-FAILURE-RISK",
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified"
+    },
+    "post:177": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-040"
+      ],
+      "hub_ids": [
+        "H4"
+      ],
+      "cluster_ids": [
+        "C-H4-MOISTURE-RISK"
+      ],
+      "intent_ids": [
+        "I-FAILURE-RISK",
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified"
+    },
+    "post:178": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-040"
+      ],
+      "hub_ids": [
+        "H4"
+      ],
+      "cluster_ids": [
+        "C-H4-MOISTURE-RISK"
+      ],
+      "intent_ids": [
+        "I-FAILURE-RISK",
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified"
+    },
+    "post:179": {
       "entity_type": "post",
       "source_refs": [
         "queue:Q-039"
