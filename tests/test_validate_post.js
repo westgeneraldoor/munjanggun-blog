@@ -376,7 +376,7 @@ function testWinningFormatCompliantPostPasses() {
 }
 
 function testWinningFormatNotAppliedBeforeCutover() {
-  const post = writeRootPost('172_winning_format_legacy.md', winningFormatPostLines([
+  const post = writeRootPost('169_winning_format_legacy.md', winningFormatPostLines([
     '## 문틀 상태를 봅니다',
     '',
     '컷오버 이전 번호는 승리 포맷 하드 FAIL 대상이 아닙니다.',

@@ -119,7 +119,7 @@ daily report는 증거, channel diagnosis는 해석, ACTIVE_TOPIC_QUEUE는 실�
 | --- | --- | --- |
 | `docs/operations/POST_WRITING_WORK_ORDER.md` | ACTIVE_ROUTINE | 원고 1편만 쓰는 작업자 세션의 단독 진입 문서. 읽을 문서 4개, 절차, 자가 검수, 멈춤 조건 |
 | `docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md` | ACTIVE_ROUTINE | 신규/리라이팅/URL 등록/분석 작업 흐름 |
-| `docs/operations/SINGLE_POST_FILE_STANDARD.md` | ACTIVE_STANDARD | 제작노트 없는 단일 발행 MD 원칙. 4-1절은 173번 이후 승리 포맷 하드 기준 |
+| `docs/operations/SINGLE_POST_FILE_STANDARD.md` | ACTIVE_STANDARD | 제작노트 없는 단일 발행 MD 원칙. 4-1절은 170번 이후 승리 포맷 하드 기준 |
 | `posts/171_방문턱제거.md` | REFERENCE | 승리 포맷 레퍼런스 원고. 새 원고 작성 전 반드시 대조 (로컬 전용) |
 | `docs/operations/FIELD_STORY_SECTION_STANDARD.md` | ACTIVE_STANDARD | 실제 시공 현장 단락 구조와 AppSheet 후매칭 슬롯 |
 | `docs/operations/APPSHEET_FIELD_STORY_WORKFLOW.md` | ACTIVE_STANDARD | 실제 현장 데이터, evidence_ref, 비식별 기준 |
