@@ -87,7 +87,18 @@ function renderPerformanceReport(ledger) {
 }
 
 function parseArgs(argv) {
-  return { writeReport: argv.includes('--write-report') };
+  return {
+    writeReport: argv.includes('--write-report'),
+    // 재설계 클러스터가 있어도 종료 코드 0으로 두고 싶을 때만 쓴다.
+    // 리포트를 눈으로 보려는 경우이며, 자동화 체인에서는 쓰지 않는다.
+    noFail: argv.includes('--no-fail'),
+  };
+}
+
+// faded 5연속 클러스터는 신규 발행을 멈춰야 하는 상태다.
+// 문자열로 FAIL만 출력하고 종료 코드가 0이면 아무것도 막지 못한다.
+function redesignClusters(ledger) {
+  return clusterRows(ledger.posts || []).filter((row) => row.status === 'FAIL');
 }
 
 function writeReport(content, reportPath = DEFAULT_REPORT_PATH) {
@@ -102,12 +113,24 @@ function main() {
   if (options.writeReport) writeReport(report);
   process.stdout.write(report);
   if (options.writeReport) console.log(`written: ${DEFAULT_REPORT_PATH}`);
+
+  const blocked = redesignClusters(ledger);
+  if (blocked.length > 0 && !options.noFail) {
+    console.error('');
+    console.error('FAIL: 전술 재설계가 필요한 클러스터가 있습니다.');
+    blocked.forEach((row) => {
+      console.error(`- ${row.cluster_id}: faded ${row.faded_streak}연속. 이 클러스터의 신규 글감을 승격하지 않는다.`);
+    });
+    console.error('POST_PERFORMANCE_LEDGER.md 5장 기준입니다. 확인만 하려면 --no-fail 을 붙이세요.');
+    process.exitCode = 1;
+  }
 }
 
 if (require.main === module) main();
 
 module.exports = {
   clusterRows,
+  redesignClusters,
   renderPerformanceReport,
   writeReport,
 };

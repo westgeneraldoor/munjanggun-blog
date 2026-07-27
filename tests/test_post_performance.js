@@ -637,6 +637,34 @@ function testReportsClusterWinRatesAndFadedStreakWarnings() {
   assert.match(report, /WARN: C-ONE 같은 클러스터에서 faded 3연속/);
 }
 
+function fadedPosts(clusterId, count, prefix) {
+  const posts = [];
+  for (let i = 1; i <= count; i += 1) {
+    posts.push({
+      post_no: prefix + i,
+      verdict: 'faded',
+      cluster_ids: [clusterId],
+      published_at: '2026-07-0' + i,
+    });
+  }
+  return posts;
+}
+
+// faded 5연속은 문자열 경고로 끝나면 안 된다. 종료 코드로 막아야 한다.
+function testRedesignClusterBlocks() {
+  const { redesignClusters } = require('../scripts/report_post_performance');
+  const blocked = redesignClusters({ posts: fadedPosts('C-TEST-BLOCK', 5, '9') });
+  assert.strictEqual(blocked.length, 1, JSON.stringify(blocked));
+  assert.strictEqual(blocked[0].cluster_id, 'C-TEST-BLOCK');
+  assert.strictEqual(blocked[0].faded_streak, 5);
+}
+
+// 3연속은 WARN 이므로 막지 않는다.
+function testThreeStreakDoesNotBlock() {
+  const { redesignClusters } = require('../scripts/report_post_performance');
+  assert.strictEqual(redesignClusters({ posts: fadedPosts('C-TEST-WARN', 3, '8') }).length, 0);
+}
+
 function main() {
   testParsesHeaderOrderedTablesByColumnName();
   testMarksFewerThanFiveValidDaysUnobserved();
@@ -651,6 +679,8 @@ function main() {
   testUsesEarliestDailyWrittenDateWhenRegistryDateIsMissing();
   testPreservesObservationsWhenPublishedDateIsUnknown();
   testReportsClusterWinRatesAndFadedStreakWarnings();
+  testRedesignClusterBlocks();
+  testThreeStreakDoesNotBlock();
   console.log('post performance tests passed');
 }
 
