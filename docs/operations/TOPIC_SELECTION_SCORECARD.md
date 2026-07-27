@@ -231,6 +231,8 @@ outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md
 
 템플릿은 `outputs/reports/topic_candidates/TOPIC_SCORECARD_TEMPLATE.md`를 사용한다.
 
+핵심 허브의 정규 이름과 분류 기준은 `docs/strategy/SEO_TAXONOMY.json`을 따른다. scorecard의 순환 점검 표는 이 파일의 `rotation_hub_ids`를 모두 써야 한다. `POSTING_REGISTRY`의 기존 `허브` 열은 H-ID, Q-ID, 편집 분류가 섞인 표시용 레거시 값이므로 새 후보의 분류 근거로 자동 해석하지 않는다. cutover 이후 새 Q-ID와 원고는 taxonomy의 `hub_ids`, `cluster_ids`, `intent_ids` 분류가 없으면 운영 검증에서 BLOCK이다.
+
 ## 핵심 허브 순환 점검
 
 신규 글감 후보를 확정할 때 아래 다섯 허브를 모두 검토한다. 특정 허브의 발행을 강제하지 않으며, 작성하지 않을 때도 보호·관찰·중복 보류 근거를 남긴다.
@@ -251,6 +253,8 @@ outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md
 - `중복 보류`: 기존 글과 카니발 위험이 높아 같은 허브의 신규 글을 미룬다. 반드시 가까운 글 번호/Q-ID와 다음 3일 또는 7일 재판단 시점을 적는다.
 
 모든 행은 `근거 글/Q-ID`, `판단 근거`, `다음 액션`에 실제 값만 적는다. 빈칸, `추후 확인`, 포괄 문장으로 넘기지 않는다.
+
+실제 `YYYY-MM-DD_topic_scorecard.md` 파일은 위 순환 점검 섹션과 정확한 표 헤더를 반드시 포함해야 한다. 섹션 또는 표 헤더가 없으면 scorecard 자체가 BLOCK이다. 다만 daily 작업일에 scorecard 파일 자체가 아직 없는 경우는 기존처럼 `ops:daily`에서 WARN으로만 보고한다.
 
 ```text
 후보 1. 주제명

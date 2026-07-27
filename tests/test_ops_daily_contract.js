@@ -484,11 +484,11 @@ function testTopicScorecardUnknownHubWarns() {
   assert.match(result.stdout, /WARN: core hub rotation unknown hub: 기타/);
 }
 
-function testTopicScorecardInvalidRotationColumnsWarn() {
+function testTopicScorecardInvalidRotationColumnsBlock() {
   const content = validScorecard().replace('근거 글/Q-ID', '근거');
   const result = runScorecardContent(content);
-  assert.strictEqual(result.status, 0, result.stdout);
-  assert.match(result.stdout, /WARN: core hub rotation table is missing or has invalid columns/);
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /FAIL: core hub rotation table is missing or has invalid columns/);
 }
 
 function testTopicScorecardDuplicateAbsDoorHubWarns() {
@@ -509,10 +509,18 @@ function testTopicScorecardUnknownRotationStateWarns() {
   assert.match(result.stdout, /WARN: ABS도어: invalid core hub rotation state: 대기/);
 }
 
-function testTopicScorecardMissingRotationSectionOnlyWarns() {
+function testTopicScorecardMissingRotationSectionBlocks() {
   const result = runScorecardContent(validScorecard().replace(coreHubRotationSection(), ''));
-  assert.strictEqual(result.status, 0, result.stdout);
-  assert.match(result.stdout, /WARN: core hub rotation section is missing/);
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /FAIL: core hub rotation section is missing/);
+}
+
+function testTopicScorecardTemplateIncludesCoreHubRotationTable() {
+  const templatePath = path.join(root, 'outputs', 'reports', 'topic_candidates', 'TOPIC_SCORECARD_TEMPLATE.md');
+  const content = fs.readFileSync(templatePath, 'utf8');
+
+  assert.match(content, /^## 핵심 허브 순환 점검$/m);
+  assert.match(content, /^\| 핵심 허브 \| 상태 \| 근거 글\/Q-ID \| 판단 근거 \| 다음 액션 \|$/m);
 }
 
 function testTopicScorecardEmptyFieldFails() {
@@ -569,6 +577,7 @@ function testOpsDailyScriptUsesDailyContract() {
   assert(opsDaily.includes('validate_topic_scorecard.js'), opsDaily);
   assert(opsDaily.includes('check:freshness'), opsDaily);
   assert(opsDaily.includes('validate_active_queue.js'), opsDaily);
+  assert(opsDaily.includes('validate:taxonomy'), opsDaily);
   assert(opsDaily.includes('--latest-daily'), opsDaily);
   assert(opsDaily.includes('--require-topic-portfolio'), opsDaily);
   assert(!opsDaily.includes('track'), opsDaily);
@@ -625,10 +634,11 @@ function main() {
   testTopicScorecardObservationRejectsThirteenDayReviewPoint();
   testTopicScorecardDuplicateHoldRejectsSeventeenDayReviewPoint();
   testTopicScorecardUnknownHubWarns();
-  testTopicScorecardInvalidRotationColumnsWarn();
+  testTopicScorecardInvalidRotationColumnsBlock();
   testTopicScorecardDuplicateAbsDoorHubWarns();
   testTopicScorecardUnknownRotationStateWarns();
-  testTopicScorecardMissingRotationSectionOnlyWarns();
+  testTopicScorecardMissingRotationSectionBlocks();
+  testTopicScorecardTemplateIncludesCoreHubRotationTable();
   testTopicScorecardEmptyFieldFails();
   testTopicScorecardTemplateFileFails();
   testTopicScorecardMissingFieldFails();

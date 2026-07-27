@@ -150,6 +150,25 @@ function testPublishWaitingNeedsLinkedAsset() {
   assert.match(result.stdout, /publish_waiting needs linked_asset/);
 }
 
+function testUrlRegistrationPendingPasses() {
+  const result = runWithTempQueue('url-registration-pending', (rows) => {
+    rows[1] = rows[1].replace('| publish_waiting |', '| url_registration_pending |');
+    return rows;
+  });
+  assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+}
+
+function testUrlRegistrationPendingNeedsLinkedAsset() {
+  const result = runWithTempQueue('url-registration-pending-link', (rows) => {
+    rows[1] = rows[1]
+      .replace('| publish_waiting |', '| url_registration_pending |')
+      .replace('| posts/118_9mm문선12mm슬림문선.md |', '| - |');
+    return rows;
+  });
+  assert.strictEqual(result.status, 1, result.stdout);
+  assert.match(result.stdout, /url_registration_pending needs linked_asset/);
+}
+
 function testDailyUnknownQueueIdFails() {
   const dir = makeTempDir('active-queue-daily-unknown-');
   try {
@@ -192,6 +211,35 @@ function testDailyLaneStatusConflictFails() {
     assert.strictEqual(result.status, 1, result.stdout);
     assert.match(result.stdout, /daily lane exclude conflicts with queue lane attack/);
     assert.match(result.stdout, /daily status excluded conflicts with queue status scorecard_needed/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testDailyUrlRegistrationPendingConflictsWithPublishWaiting() {
+  const dir = makeTempDir('active-queue-daily-url-registration-pending-');
+  try {
+    const queuePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
+    const dailyPath = path.join(dir, '2026-06-28_seo_watch.md');
+    writeFile(queuePath, queueTable(validRows()));
+    writeFile(
+      dailyPath,
+      [
+        '# 2026-06-28 daily fixture',
+        '',
+        '## 오늘 보드 반영',
+        '',
+        '| queue_id | 처리 | 판단 |',
+        '| --- | --- | --- |',
+        '| Q-002 | 유지 | 145번은 작성완료·URL등록대기다 |',
+        '',
+      ].join('\n')
+    );
+
+    const result = runQueue(queuePath, ['--daily-file', dailyPath]);
+
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /daily status url_registration_pending conflicts with queue status publish_waiting/);
   } finally {
     removeDir(dir);
   }
@@ -300,8 +348,11 @@ function main() {
   testAttackMarketVolumeRequired();
   testExcludeScorecardFails();
   testPublishWaitingNeedsLinkedAsset();
+  testUrlRegistrationPendingPasses();
+  testUrlRegistrationPendingNeedsLinkedAsset();
   testDailyUnknownQueueIdFails();
   testDailyLaneStatusConflictFails();
+  testDailyUrlRegistrationPendingConflictsWithPublishWaiting();
   testDailyMissingReflectionFails();
   testDailyReflectionPasses();
   testAttackMinimumWarnsButPasses();

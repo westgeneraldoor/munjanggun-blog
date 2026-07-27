@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { paths } = require('./lib/paths');
+const { CORE_HUB_LABELS } = require('./validate_seo_taxonomy');
 
 const REQUIRED_FIELDS = [
   '후보 키워드/원고 번호',
@@ -14,7 +15,7 @@ const REQUIRED_FIELDS = [
   '최종 판정',
 ];
 
-const CORE_HUBS = ['중문', '3연동중문', '현관중문', '방문교체', 'ABS도어'];
+const CORE_HUBS = CORE_HUB_LABELS;
 const CORE_HUB_COLUMNS = ['핵심 허브', '상태', '근거 글/Q-ID', '판단 근거', '다음 액션'];
 const ALLOWED_ROTATION_STATES = new Set(['작성 후보', '보호', '관찰', '중복 보류']);
 const RECHECK_ROTATION_STATES = new Set(['관찰', '중복 보류']);
@@ -160,8 +161,7 @@ function findCoreHubRotationRows(content) {
 
 function validateCoreHubRotation(content) {
   const parsed = findCoreHubRotationRows(content);
-  if (!parsed.found) return ['core hub rotation section is missing'];
-  if (!parsed.tableFound) return ['core hub rotation table is missing or has invalid columns'];
+  if (!parsed.found || !parsed.tableFound) return [];
 
   const warns = [];
   const rowsByHub = new Map();
@@ -261,7 +261,14 @@ function validateTopicScorecard(filePath, options = {}) {
     result.fails.push('후보별 섹션(## 후보 N.)이 없습니다.');
   }
 
-  result.warns.push(...validateCoreHubRotation(content));
+  const coreHubRotation = findCoreHubRotationRows(content);
+  if (!coreHubRotation.found) {
+    result.fails.push('core hub rotation section is missing');
+  } else if (!coreHubRotation.tableFound) {
+    result.fails.push('core hub rotation table is missing or has invalid columns');
+  } else {
+    result.warns.push(...validateCoreHubRotation(content));
+  }
 
   if (result.fails.length > 0) result.status = 'BLOCK';
   return result;

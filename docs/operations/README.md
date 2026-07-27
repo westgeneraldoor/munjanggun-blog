@@ -57,6 +57,6 @@ NAVER_AD_CUSTOMER_ID=your_ad_customer_id
 4. 발행 본문은 `posts/NNN_키워드.md` 규칙으로 저장합니다.
 5. 제작노트는 만들지 않습니다. 사진 큐와 AppSheet 후매칭 방향은 본문 문장 안에 자연스럽게 녹입니다.
 6. 발행 전 `npm run validate:posts`와 `docs/operations/PREPUBLISH_CHECKLIST.md`를 확인합니다.
-7. 발행 후 URL은 `docs/strategy/POSTING_REGISTRY.md`에 등록합니다.
+7. 원고 작성완료 시 `docs/strategy/POSTING_REGISTRY`에 `작성완료·URL등록대기`로 먼저 등록해 중복을 잠그고, 직원 발행 후 URL을 받으면 URL·발행 확인을 갱신합니다.
 8. 순위 추적 결과는 `data/processed/tracking_history.json`에 누적되지만, 특정 게시물 URL 기준이 구현되기 전까지 자동 의사결정 근거로 사용하지 않습니다. daily는 `npm run ops:daily`, ranking/top10 보조 점검은 `npm run ops:weekly`로 분리합니다.
 9. 생성 리포트와 대시보드는 `outputs/` 아래에 저장됩니다.

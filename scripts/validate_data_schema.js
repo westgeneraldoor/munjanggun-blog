@@ -3,6 +3,7 @@ const { paths } = require('./lib/paths');
 const { readJsonFile } = require('./lib/file_store');
 const { findPublicTextIssues, walkFiles } = require('./lib/public_safety');
 const { assertNoDrift } = require('./render_strategy_docs');
+const { validateTaxonomy } = require('./validate_seo_taxonomy');
 
 function fail(message) {
   throw new Error(message);
@@ -278,6 +279,11 @@ function assertStrategySources() {
   });
 }
 
+function assertSeoTaxonomy() {
+  const errors = validateTaxonomy();
+  if (errors.length > 0) fail(`SEO taxonomy contract failed:\n${errors.map((error) => `- ${error}`).join('\n')}`);
+}
+
 function main() {
   assertArrayConfig(paths.config('tracking_keywords.json'), ['keyword', 'hub', 'postNo']);
   assertArrayConfig(paths.config('top10_keywords.json'), ['keyword', 'hub']);
@@ -291,6 +297,7 @@ function main() {
   assertTop10TableShape();
   assertPostValidationPolicy();
   assertStrategySources();
+  assertSeoTaxonomy();
   assertPublicGeneratedOutputs();
   console.log('데이터 스키마 검증 완료');
 }
