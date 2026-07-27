@@ -1821,7 +1821,7 @@
       "post_no": "092",
       "title": "문장군 간살중문 디자인 완성하는 3가지 조합",
       "published_at": "2026-06-23",
-      "published_at_source": "daily",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
@@ -1841,16 +1841,16 @@
     {
       "post_no": "093",
       "title": "중문 견적 받기 전 확인할 3가지 실측 기준",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-06-23",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-07-27",
-      "verdict_reason": "발행일 미상"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
+      "verdict_at": "2026-07-27"
     },
     {
       "post_no": "094",
