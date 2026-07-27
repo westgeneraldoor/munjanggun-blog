@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "post_performance",
+  "updated_at": "2026-07-27",
+  "generated_notice": "docs/operations/POST_PERFORMANCE_LEDGER.md 기준. 백필 전 초기 파일이며 posts 배열은 수집기가 채운다.",
+  "posts": [],
+  "unmapped_titles": []
+}
