@@ -68,7 +68,7 @@ GitHub 운영 OS:
 | 원고 1편만 작성 (작업자 세션) | `docs/operations/POST_WRITING_WORK_ORDER.md` 단독 진입. 레퍼런스 원고는 `posts/171_방문턱제거.md` |
 | 리뷰릴스 기반 포스팅, 네이버 클립용 블로그 글 | `docs/operations/REVIEW_REELS_CLIP_BLOG_WORKFLOW.md` 기준으로 `C:\Users\hjh\안티그래비티\문장군 컨텐츠`의 승인 완료 리뷰·숏폼 패키지를 근거로 작성 |
 | 블로그 통계자료 수집해 | `docs/operations/BLOG_STATS_COLLECTION_WORKFLOW.md` 기준으로 **인앱 브라우저**의 네이버 관리자 통계창을 직접 수집한다. 인앱 브라우저 로그인·권한 문제가 해결되지 않을 때만 사용자 승인 후 Chrome을 보조 수단으로 쓴다. |
-| 다음 글감, 통계 기반 소재 | `docs/operations/TOPIC_SELECTION_SCORECARD.md` + 최근 daily report + 광고 API 데이터 |
+| 다음 글감, 통계 기반 소재 | **먼저 `npm run topic:explore`와 `npm run topic:check -- --check "키워드"`를 돌린다.** 그 다음 `docs/operations/TOPIC_SELECTION_SCORECARD.md` + 최근 daily report + 광고 API 데이터 |
 | 유입경로/검색어/일일 SEO 관제 | `docs/operations/DAILY_SEO_ROUTINE.md` |
 | 블로그 상태/목표/전략 분석, 2,000뷰 달성 계획, 채널 진단 | `outputs/reports/REPORT_INDEX.md` + `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` + 최신 daily report + `docs/strategy/ACTIVE_TOPIC_QUEUE.md` |
 | 발행 전 검수 | 로컬에서 `npm run validate:posts`, `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` |
@@ -140,6 +140,39 @@ GitHub 운영 OS:
 ## 신규 글감 선정 원칙
 
 신규 글감은 블로그 유입어만으로 정하지 않는다.
+
+### 0. 먼저 검증기를 돌린다 (필수)
+
+```powershell
+npm run topic:explore
+npm run topic:check -- --check "키워드1,키워드2"
+```
+
+`scripts/topic_candidate.js`가 아래를 기계로 판정한다. 손으로 등록부를 훑지 않는다.
+
+| 검사 | 판정 |
+| --- | --- |
+| 문·중문 도메인 밖 (도어락, 타일, 리모델링 등) | BLOCK |
+| 미취급 제품 (폴딩도어, 터닝도어, 도어클로저, 펫도어, 포켓도어 등) | BLOCK |
+| 영구 제외 (현관문, 방화문, 비대칭양개형중문) | BLOCK |
+| 등록부 키워드 완전 중복 | BLOCK |
+| 클러스터 faded 5연속 | BLOCK |
+| 전환 필요 (9mm문선, 문틀만교체, 시트지, 셀프중문 등) | WARN |
+| 경쟁 브랜드 (영림, 한샘, LX 등) | WARN |
+| 서브토큰 근접 글 목록 | WARN |
+| 관찰 잠금 중인 Q-ID | WARN |
+
+BLOCK이 하나라도 있으면 그 후보를 글감으로 올리지 않는다. 종료 코드 1이다.
+
+취급 범위 원본은 `config/product_scope.json`이다. 검색량이 아무리 커도 이 파일에서 미취급이면 글감이 아니다. 실제로 도어클로저 21,240회, 폴딩도어 12,200회, 터닝도어 10,840회가 전부 미취급이다.
+
+검증기가 통과시켜도 아래 셋은 사람이 본다.
+
+- 고객 상황과 불안 문장이 실제 사람 말인가
+- 근접 글과 각도가 정말 갈리는가
+- 제목이 증상형인가 (`docs/operations/SINGLE_POST_FILE_STANDARD.md`)
+
+### 그 다음 판단 순서
 
 1. 네이버 광고 API로 시장 전체 수요를 확인한다.
 2. 최근 daily report에서 실제 유입어와 게시글 TOP20 반복성을 본다.
