@@ -23,5 +23,33 @@
   },
   "winning_format_from_number": 170,
   "numbered_section_min": 3,
-  "customer_quote_min": 1
+  "customer_quote_min": 1,
+  "daily_contract_v2_from": "2026-07-28",
+  "accepted_brand_claim_exceptions": [
+    {
+      "post_no": "068",
+      "accepted_at": "2026-07-27",
+      "reason": "2026-06 발행 리라이팅 글. 네이버 본문 정정 대신 리스크 수용을 선택했다. 신규 원고에는 동일 표현을 쓰지 않는다.",
+      "codes": [
+        "BRAND_REVIEW_CLAIM_INVALID",
+        "BRAND_SCHEDULE_CLAIM_INVALID"
+      ]
+    },
+    {
+      "post_no": "083",
+      "accepted_at": "2026-07-27",
+      "reason": "2026-06 발행 글. 중문 일정 3~4일 표현이 남아 있으나 정정하지 않는다.",
+      "codes": [
+        "BRAND_SCHEDULE_CLAIM_INVALID"
+      ]
+    },
+    {
+      "post_no": "102",
+      "accepted_at": "2026-07-27",
+      "reason": "2026-06 발행 글. 중문 일정 3~4일 표현이 남아 있으나 정정하지 않는다.",
+      "codes": [
+        "BRAND_SCHEDULE_CLAIM_INVALID"
+      ]
+    }
+  ]
 }
