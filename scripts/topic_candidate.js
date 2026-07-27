@@ -57,23 +57,26 @@ function inDomain(keyword, scope) {
   return (scope.domain_tokens || []).some((t) => keyword.includes(t));
 }
 
-function normalize(v){return String(v).toLowerCase().replace(/s/g,'').replace(/9미리/g,'9mm');}
+// 9MM문선과 9미리문선처럼 표기가 갈려도 같은 규칙을 받게 한다.
+function normalize(value) {
+  return String(value).toLowerCase().replace(/\s/g, '').replace(/9미리/g, '9mm');
+}
 
 function scopeVerdict(rawKeyword, scope) {
   const keyword = normalize(rawKeyword);
   if ((scope.out_of_domain || []).some((t) => keyword.includes(t))) {
     return { level: 'BLOCK', label: '도메인 밖', reason: '문·중문 영역이 아니다' };
   }
-  for (const item of scope.competitor_brand || []) {
-    if (keyword.includes(normalize(item))) {
-      return { level: 'WARN', label: '경쟁 브랜드', convert_to: '구조와 선택 기준 비교', rule: `${item} 등 타사명을 제목이나 비교 우위 주장에 쓰지 않는다` };
-    }
-  }
   for (const item of scope.excluded_permanent || []) {
     if (keyword.includes(normalize(item.term))) return { level: 'BLOCK', label: '영구 제외', ...item };
   }
   for (const item of scope.excluded_product || []) {
     if (keyword.includes(normalize(item.term))) return { level: 'BLOCK', label: '미취급 제품', ...item };
+  }
+  for (const item of scope.competitor_brand || []) {
+    if (keyword.includes(normalize(item))) {
+      return { level: 'WARN', label: '경쟁 브랜드', convert_to: '구조와 선택 기준 비교', rule: `${item} 등 타사명을 제목이나 비교 우위 주장에 쓰지 않는다` };
+    }
   }
   for (const item of scope.convert_only || []) {
     if (keyword.includes(normalize(item.term))) return { level: 'WARN', label: '전환 필요', ...item };
@@ -85,6 +88,25 @@ function scopeVerdict(rawKeyword, scope) {
       return { level: 'WARN', label: '취급 여부 미확인', convert_to: '사장님 확인 후 진행', rule: item.reason };
     }
   }
+
+  // 제외 목록만으로는 끝나지 않는다. 2026-07-27에 터닝도어를 막았더니
+  // 가마찌도어가, 그걸 막았더니 시스템도어와 프렌치도어가 나왔다.
+  // 제품명처럼 생긴 키워드는 handled 목록에 있을 때만 통과시킨다.
+  const productLike = /(도어|중문)$/.test(keyword);
+  if (productLike) {
+    const handled = Object.values(scope.handled || {}).flat().map(normalize);
+    const modifiers = (scope.handled_modifiers || []).map(normalize);
+    const known = handled.some((term) => keyword.includes(term) || term.includes(keyword));
+    const described = modifiers.some((mod) => keyword.includes(mod));
+    if (!known && !described) {
+      return {
+        level: 'BLOCK',
+        label: '미취급 추정',
+        reason: 'config/product_scope.json 의 handled 목록에 없는 제품명이다. 취급한다는 근거가 확인되면 handled 에 추가하고 다시 돌린다',
+      };
+    }
+  }
+
   return { level: 'PASS', label: '취급 범위 안' };
 }
 

@@ -137,6 +137,28 @@ function testGamachiDoorBlocked() {
   assert.strictEqual(scopeVerdict('가마찌도어', scope).level, 'BLOCK');
 }
 
+// 제외 목록만으로는 끝나지 않는다. 터닝도어를 막으니 가마찌도어가,
+// 그걸 막으니 시스템도어와 프렌치도어가 나왔다. handled 화이트리스트로 닫는다.
+function testUnknownProductNamesBlockedByAllowlist() {
+  ['시스템도어', '프렌치도어', '오버헤드도어', '판넬도어', '간이중문', '패브릭중문'].forEach((keyword) => {
+    assert.strictEqual(scopeVerdict(keyword, scope).level, 'BLOCK', keyword);
+  });
+}
+
+// 취급 제품과 그 변형은 통과해야 한다.
+function testHandledProductsAndVariantsPass() {
+  ['ABS도어', 'ABS슬라이딩도어', '3연동중문', '스윙도어', '유리중문', '간살중문'].forEach((keyword) => {
+    assert.notStrictEqual(scopeVerdict(keyword, scope).level, 'BLOCK', keyword);
+  });
+}
+
+// 경쟁사 이름이 붙어도 미취급 제품이면 BLOCK 이어야 한다.
+function testCompetitorPrefixDoesNotBypassExclusion() {
+  ['KCC터닝도어', '영림펫도어'].forEach((keyword) => {
+    assert.strictEqual(scopeVerdict(keyword, scope).level, 'BLOCK', keyword);
+  });
+}
+
 function main() {
   testUnhandledProductsBlocked();
   testPermanentExclusionsBlocked();
@@ -154,6 +176,9 @@ function main() {
   testSynonymDuplicateDetected();
   testNearSortedByRecency();
   testGamachiDoorBlocked();
+  testUnknownProductNamesBlockedByAllowlist();
+  testHandledProductsAndVariantsPass();
+  testCompetitorPrefixDoesNotBypassExclusion();
   console.log('topic candidate tests passed');
 }
 
