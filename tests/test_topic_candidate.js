@@ -111,6 +111,32 @@ function testExploreExcludesOutOfDomain() {
   assert.doesNotMatch(result.stdout, /리모델링/);
 }
 
+// 2026-07-27 Codex가 마이너스몰딩을 올렸으나 130번 무몰딩 글과 정면 충돌이었다.
+// 문자열이 겹치지 않아 서브토큰만으로는 못 잡는다. 동의어 사전이 필요하다.
+function testSynonymDuplicateDetected() {
+  const entries = [
+    { no: '130', text: '몰딩없는집, 무몰딩, 방문교체, 문선마감 몰딩 없는 집 방문교체' },
+    { no: '012', text: '원슬라이딩중문 몰딩 관련 언급만 있음' },
+  ];
+  const result = duplicateCheck('마이너스몰딩', entries, scope);
+  assert.strictEqual(result.near[0][0], '130', JSON.stringify(result.near));
+  assert.match(result.near[0][1], /동의어/);
+}
+
+// 같은 토큰이면 최신 글이 먼저 나와야 한다. 최신 글이 카니발 위험이 크다.
+function testNearSortedByRecency() {
+  const entries = [
+    { no: '012', text: '몰딩 언급' },
+    { no: '165', text: '몰딩 언급' },
+  ];
+  const result = duplicateCheck('평몰딩', entries, scope);
+  assert.strictEqual(result.near[0][0], '165', JSON.stringify(result.near));
+}
+
+function testGamachiDoorBlocked() {
+  assert.strictEqual(scopeVerdict('가마찌도어', scope).level, 'BLOCK');
+}
+
 function main() {
   testUnhandledProductsBlocked();
   testPermanentExclusionsBlocked();
@@ -125,6 +151,9 @@ function main() {
   testCliBlocksOnUnhandledProduct();
   testCliPassesOnCleanKeyword();
   testExploreExcludesOutOfDomain();
+  testSynonymDuplicateDetected();
+  testNearSortedByRecency();
+  testGamachiDoorBlocked();
   console.log('topic candidate tests passed');
 }
 

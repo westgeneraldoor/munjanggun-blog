@@ -78,6 +78,13 @@ function scopeVerdict(rawKeyword, scope) {
   for (const item of scope.convert_only || []) {
     if (keyword.includes(normalize(item.term))) return { level: 'WARN', label: '전환 필요', ...item };
   }
+  // 라인업에 없지만 미취급이라고 단정할 근거도 없는 제품이다.
+  // PASS 를 주면 취급 가능한 것처럼 읽히므로 사람 확인을 요구한다.
+  for (const item of scope.needs_confirmation || []) {
+    if (keyword.includes(normalize(item.term))) {
+      return { level: 'WARN', label: '취급 여부 미확인', convert_to: '사장님 확인 후 진행', rule: item.reason };
+    }
+  }
   return { level: 'PASS', label: '취급 범위 안' };
 }
 
@@ -93,21 +100,45 @@ function subTokens(keyword) {
   return [...tokens];
 }
 
+// 문자열이 겹치지 않아도 같은 소재인 경우가 있다.
+// 마이너스몰딩과 무몰딩이 그렇다. 2026-07-27에 이걸 못 봐서
+// 130번과 정면 충돌하는 후보가 통과됐다.
+function synonymTokens(keyword, scope) {
+  const groups = scope.synonyms || [];
+  const hits = new Set();
+  groups.forEach((group) => {
+    if (group.some((term) => keyword.includes(term))) {
+      group.forEach((term) => hits.add(term));
+    }
+  });
+  return [...hits];
+}
+
 function duplicateCheck(keyword, entries, scope = {}) {
   const stop = new Set(scope.common_tokens || []);
   const exact = entries.filter((e) => new RegExp(`(^|[\\s,])${keyword}([\\s,]|$)`).test(e.text));
   // 2글자 토큰까지 봐야 문턱 같은 핵심 조각을 놓치지 않는다.
   // 대신 방문·중문·교체처럼 거의 모든 글에 있는 흔한 조각은 뺀다.
   const tokens = subTokens(keyword).filter((t) => t.length >= 2 && !stop.has(t));
+  const synonyms = synonymTokens(keyword, scope);
+  const all = [...new Set([...tokens, ...synonyms])];
   const near = new Map();
   entries.forEach((e) => {
     if (exact.some((x) => x.no === e.no)) return;
-    const hits = tokens.filter((t) => e.text.includes(t));
-    if (hits.length > 0) near.set(e.no, hits.sort((a, b) => b.length - a.length)[0]);
+    const hits = all.filter((t) => e.text.includes(t));
+    if (hits.length === 0) return;
+    const best = hits.sort((a, b) => b.length - a.length)[0];
+    near.set(e.no, { token: best, synonym: synonyms.includes(best) });
   });
   return {
     exact: exact.map((e) => e.no).sort(),
-    near: [...near.entries()].sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0])),
+    // 최신 글일수록 카니발 위험이 크다. 글번호 내림차순이 기본이다.
+    // 동의어로 걸린 건은 문자열이 안 겹치는데도 같은 소재라는 뜻이라 먼저 보여준다.
+    near: [...near.entries()].sort((a, b) => {
+      if (a[1].synonym !== b[1].synonym) return a[1].synonym ? -1 : 1;
+      if (b[1].token.length !== a[1].token.length) return b[1].token.length - a[1].token.length;
+      return Number(b[0]) - Number(a[0]);
+    }).map(([no, info]) => [no, info.token + (info.synonym ? '·동의어' : '')]),
   };
 }
 
