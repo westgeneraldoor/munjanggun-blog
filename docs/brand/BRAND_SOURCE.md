@@ -55,7 +55,7 @@ C:\Users\hjh\안티그래비티\문장군_브랜드\CHANGELOG.md
 | --- | --- |
 | `docs/strategy/BRAND_CONTEXT.md` | 블로그 프로젝트에서 바로 읽는 로컬 브랜드 스냅샷. 중앙 원본과 2026-06-25 인터뷰 요약을 반영한다 |
 | `docs/brand/BLOG_BRAND_ADAPTER.md` | 중앙 원본을 네이버 블로그 글쓰기 방식으로 바꾸는 프로젝트 전용 어댑터 |
-| `docs/brand/BRAND_SYNC_AUDIT_2026-06-25.md` | 중앙 원본과 블로그 스냅샷의 차이, 충돌, 승격 항목 정리 |
+| `docs/archive/BRAND_SYNC_AUDIT_2026-06-25.md` | 중앙 원본과 블로그 스냅샷의 차이, 충돌, 승격 항목 정리 |
 | `AGENTS.md` | 실제 에이전트 실행 규칙. 중앙 원본과 블로그 어댑터를 모두 읽도록 한다 |
 
 ## 운영 원칙

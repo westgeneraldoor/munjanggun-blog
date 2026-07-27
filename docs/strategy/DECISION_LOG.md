@@ -32,7 +32,7 @@
   1. 리라이팅은 알고리즘 정상화 후로 보류
   2. 하루 1편 발행 유지 (블로그 활동 지수 방어)
   3. Phase 4 = 지역 시공사례 대량 확장(청주/대전/평택/세종/수원/용인/안산 등) + 미작성 중급 키워드 3개
-- **근거 문서:** `PHASE4_ANALYSIS_20260518.md`
+- **근거 문서:** `docs/archive/PHASE4_ANALYSIS_20260518.md`
 - **영향:** `CONTENT_PLAN.md`(v4.0 Phase 4 추가), `POSTING_REGISTRY.md`
 - **재검토 조건:** 알고리즘 정상화 확인 후 리라이팅 대상 확정 시. 또는 지역 글 10편 발행 후 전환 성과 평가 시.
 
@@ -205,7 +205,7 @@
   1. `C:\Users\hjh\안티그래비티\문장군_브랜드`를 문장군 전체 브랜드 원본 폴더로 사용한다.
   2. 중앙 폴더에 `FIELD_JUDGMENT_RULES.md`를 추가해 고객 오해, 무료 방문 실측, 중문 구조별 가능 범위, 견적 변수, 자재판매/셀프중문, 문선, 방문교체, 거주중 시공, AppSheet 현장 활용 기준을 공통 지식으로 관리한다.
   3. 중앙 폴더에 `PROJECT_ADAPTERS.md`를 추가해 중앙 원본과 프로젝트별 어댑터를 분리하는 운영 방식을 정한다.
-  4. 블로그 프로젝트에는 `docs/brand/BRAND_SOURCE.md`, `docs/brand/BLOG_BRAND_ADAPTER.md`, `docs/brand/BRAND_SYNC_AUDIT_2026-06-25.md`를 추가한다.
+  4. 블로그 프로젝트에는 `docs/brand/BRAND_SOURCE.md`, `docs/brand/BLOG_BRAND_ADAPTER.md`, `docs/archive/BRAND_SYNC_AUDIT_2026-06-25.md`를 추가한다.
   5. `AGENTS.md`는 중앙 브랜드 원본을 우선 읽고, 접근할 수 없을 때만 `docs/strategy/BRAND_CONTEXT.md`를 로컬 스냅샷으로 사용한다.
   6. 현관문 제외, 단일 MD, 네이버 태그란, AppSheet 현장 서사 슬롯, 발행 하드게이트처럼 블로그 전용 규칙은 중앙 원본에 섞지 않고 블로그 어댑터에 둔다.
   7. 원본 인터뷰, AppSheet 자료, 네이버 통계 원본은 중앙 폴더와 공개 저장소에 넣지 않는다.
@@ -221,7 +221,7 @@
   4. 블로그 썸네일은 `PHOTO_TREATMENT.md`의 `16 / 9`, 텍스트 안전영역, 개인정보, 수직선, 밝기, Before/After 기준을 따른다.
   5. 어두운 스마트스토어 썸네일 남발형, 빨간 특가 전단지형, 네이비 대기업형, AI 카드뉴스형은 `ANTI_PATTERNS.md` 기준으로 보류 또는 수정한다.
   6. `tokens/brand.css`와 `tokens/brand.tokens.json`은 웹앱, 랜딩, 템플릿 구현 시 우선 사용한다. 순수 블로그 원고 작성에는 억지 적용하지 않는다.
-- **영향:** `AGENTS.md`, `docs/brand/BRAND_SOURCE.md`, `docs/brand/BLOG_BRAND_ADAPTER.md`, `docs/brand/BRAND_SYNC_AUDIT_2026-06-25.md`
+- **영향:** `AGENTS.md`, `docs/brand/BRAND_SOURCE.md`, `docs/brand/BLOG_BRAND_ADAPTER.md`, `docs/archive/BRAND_SYNC_AUDIT_2026-06-25.md`
 - **재검토 조건:** 블로그 썸네일 자동 생성, 카드형 이미지 템플릿, 랜딩/대시보드 구현이 시작되어 토큰 적용 범위를 더 구체화해야 할 때.
 
 ---

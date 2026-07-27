@@ -157,27 +157,37 @@ daily report는 증거, channel diagnosis는 해석, ACTIVE_TOPIC_QUEUE는 실�
 
 | 문서 | 등급 | 비고 |
 | --- | --- | --- |
-| `docs/brand/BRAND_SYNC_AUDIT_2026-06-25.md` | REFERENCE | 중앙 브랜드 원본과 블로그 규칙 차이 감사 결과 |
+| `docs/archive/BRAND_SYNC_AUDIT_2026-06-25.md` | REFERENCE | 중앙 브랜드 원본과 블로그 규칙 차이 감사 결과 |
 | `docs/strategy/DECISION_LOG.md` | REFERENCE | 과거 의사결정 기록. 최신 운영은 ACTIVE 문서 우선 |
 | `docs/strategy/_context.md` | REFERENCE | 세션 요약과 현재 운영 맥락 |
 | `docs/templates/` | REFERENCE | STATUS/APPROVAL_LOG 템플릿 |
 
-## 8. Archive 후보
+## 8. Archive
 
-아래 문서는 삭제하지 않는다. 다만 현재 작업자의 필수 읽기 문서로 보지 않고, 후속 PR에서 `docs/archive/` 이동 여부를 검토한다.
+2026-07-27에 실제 이동을 완료했다. 아래 문서는 삭제하지 않되 작업자의 필수 읽기 대상이 아니다.
 
 | 문서 | 이유 |
 | --- | --- |
-| `docs/operations/CONTENT_PRODUCTION_IMPROVEMENT_AUDIT_20260613.md` | 과거 개선 감사. 제작노트 분리 등 일부는 현재 단일 MD 원칙으로 대체됨 |
-| `docs/strategy/PHASE4_ANALYSIS_20260518.md` | 과거 분석. 현재 daily/scorecard 운영과 직접 연결되지 않음 |
-| `outputs/audit/` | 감사 패키지. 공개/커밋 여부는 `DATA_SECURITY_POLICY.md` 우선 |
+| `docs/archive/CONTENT_PRODUCTION_IMPROVEMENT_AUDIT_20260613.md` | 과거 개선 감사. 제작노트 분리 등은 현재 단일 MD 원칙으로 대체됨 |
+| `docs/archive/PHASE4_ANALYSIS_20260518.md` | 과거 분석. 현재 daily/scorecard 운영과 직접 연결되지 않음 |
+| `docs/archive/BRAND_SYNC_AUDIT_2026-06-25.md` | 중앙 브랜드 동기화 감사. 필요 시 참조 |
+| `docs/archive/superpowers/` | 과거 plan/spec 산출물 |
+| `outputs/audit/` | 감사 패키지. 공개·커밋 여부는 `DATA_SECURITY_POLICY.md` 우선 |
 
-## 9. 후속 PR로 남긴 것
+## 9. 문서 중복 방지 원칙
 
-이번 색인 정리 범위에서는 아래를 구현하지 않는다.
+2026-07-27 정리 기준이다. 같은 규칙이 두 곳에 있으면 한쪽은 반드시 낡는다.
+실제로 `문틀시트지 시공 전 확인할 3가지 기준`은 플레이북 7장에 나쁜 제목 예시로 이미 적혀 있었지만,
+22KB 문서 중간에 묻혀 있어 2026-07-27 초안에서 그대로 재현됐다.
 
-- topic scorecard 누락을 WARN에서 hard fail로 올릴지 판단
-- 날짜별 topic scorecard 자동 생성
-- archive 후보 문서 실제 이동
+| 주제 | 정본 | 다른 문서의 처리 |
+| --- | --- | --- |
+| 원고 파일 구성, 본문 승리 포맷, 제목 규칙 | `docs/operations/SINGLE_POST_FILE_STANDARD.md` | 포인터만 둔다 |
+| 원고 1편 실행 절차 | `docs/operations/POST_WRITING_WORK_ORDER.md` | 포인터만 둔다 |
+| 현장 단락 구조 | `docs/operations/FIELD_STORY_SECTION_STANDARD.md` | 포인터만 둔다 |
+| 후킹 패턴 | `docs/strategy/HOOKING_FORMULA.md` | 포인터만 둔다 |
+| daily 관측·실행 기록 | `docs/operations/DAILY_OBSERVATION_CONTRACT.md` | 포인터만 둔다 |
+| 성과 판정 | `docs/operations/POST_PERFORMANCE_LEDGER.md` | 포인터만 둔다 |
+| 운영 흐름 전체 | `docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md` | 원고 안쪽 규칙은 적지 않는다 |
 
-이 항목들은 운영 루틴 고도화 후속 PR에서 처리한다.
+새 규칙을 쓸 때는 먼저 정본이 어디인지 정하고 거기에만 쓴다. 다른 문서에는 링크만 남긴다.
