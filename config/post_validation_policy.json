@@ -51,5 +51,6 @@
         "BRAND_SCHEDULE_CLAIM_INVALID"
       ]
     }
-  ]
+  ],
+  "primary_keyword_min_coverage": 0.5
 }

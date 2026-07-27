@@ -435,7 +435,38 @@ function testWinningFormatNotAppliedBeforeCutover() {
   }
 }
 
+// 글감에서 정한 1순위 키워드를 제목에서 버리면 검색 수요가 가장 큰 축을 잃는다.
+// 2026-07-27 174번 초안이 방문잠겼을때(월 2,150)를 제목에서 뺀 사례가 있었다.
+function testPrimaryKeywordDroppedFromTitleWarns() {
+  const lines = winningFormatPostLines(numberedSections())
+    .map((line) => (line.startsWith('# ') ? '# 화장실 문고리가 헛돌아 안 열릴 때 주의할 점' : line))
+    .map((line) => (line.startsWith('#방문교체') ? '#방문잠겼을때 #문짝교체 #문틀 #무료방문실측 #문장군 #문장군중문' : line));
+  const post = writeRootPost('991_primary_keyword_probe.md', lines);
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 0, result.stdout);
+    assert.match(result.stdout, /1순위 키워드/);
+  } finally {
+    fs.rmSync(post, { force: true });
+  }
+}
+
+function testPrimaryKeywordKeptInTitlePasses() {
+  const lines = winningFormatPostLines(numberedSections())
+    .map((line) => (line.startsWith('# ') ? '# 방문이 안에서 잠겨 안 열릴 때, 문고리만 바꾸면 될까요?' : line))
+    .map((line) => (line.startsWith('#방문교체') ? '#방문잠겼을때 #문짝교체 #문틀 #무료방문실측 #문장군 #문장군중문' : line));
+  const post = writeRootPost('990_primary_keyword_ok.md', lines);
+  try {
+    const result = runValidate(post);
+    assert.doesNotMatch(result.stdout, /1순위 키워드/);
+  } finally {
+    fs.rmSync(post, { force: true });
+  }
+}
+
 function main() {
+  testPrimaryKeywordDroppedFromTitleWarns();
+  testPrimaryKeywordKeptInTitlePasses();
   testWinningFormatMissingNumberedSectionsFails();
   testWinningFormatMissingCustomerQuoteFails();
   testWinningFormatHashtagHeadingLevelFails();

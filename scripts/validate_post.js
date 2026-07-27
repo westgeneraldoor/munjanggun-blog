@@ -24,6 +24,7 @@ const MAX_SAME_PATTERN = policy.maxSamePattern;
 const WINNING_FORMAT_FROM_NUMBER = policy.winningFormatFromNumber;
 const NUMBERED_SECTION_MIN = policy.numberedSectionMin;
 const CUSTOMER_QUOTE_MIN = policy.customerQuoteMin;
+const PRIMARY_KEYWORD_MIN_COVERAGE = policy.primaryKeywordMinCoverage;
 
 const bannedTerms = [
   '물론',
@@ -219,6 +220,37 @@ function validateProductScope(content, issues) {
   }
 }
 
+const BRAND_HASHTAGS = new Set(['#문장군', '#문장군중문', '#무료방문실측']);
+
+// 해시태그 첫 항목은 그 글의 1순위 검색 키워드다.
+// 그것이 제목에 반영되지 않으면 글감에서 정한 최대 수요 키워드를 버린 것이다.
+function primaryKeyword(hashtags) {
+  const tag = hashtags.find((value) => !BRAND_HASHTAGS.has(value));
+  return tag ? tag.slice(1) : null;
+}
+
+// 한국어 제목은 조사와 어미 때문에 키워드가 그대로 박히지 않는다.
+// 완전 일치 대신 키워드 구성 음절이 제목에 얼마나 남아 있는지로 본다.
+function keywordCoverage(keyword, title) {
+  const compact = title.replace(/\s/g, '');
+  const chars = [...new Set([...keyword])];
+  if (chars.length === 0) return 1;
+  return chars.filter((char) => compact.includes(char)).length / chars.length;
+}
+
+function validatePrimaryKeywordInTitle(title, hashtags, issues) {
+  const keyword = primaryKeyword(hashtags);
+  if (!keyword || !title) return;
+  const coverage = keywordCoverage(keyword, title);
+  if (coverage < PRIMARY_KEYWORD_MIN_COVERAGE) {
+    addIssue(
+      issues,
+      'warn',
+      `1순위 키워드 '${keyword}'가 제목에 거의 반영되지 않았습니다(음절 커버율 ${Math.round(coverage * 100)}%). 검색 수요가 가장 큰 키워드를 제목에서 버리지 않았는지 확인하세요.`
+    );
+  }
+}
+
 function validateWinningFormat(content, rel, number, issues) {
   if (!rel.startsWith('posts/') || number < WINNING_FORMAT_FROM_NUMBER) return;
 
@@ -344,6 +376,7 @@ function validateFile(filePath, options) {
   }
 
   validateProductScope(content, issues);
+  validatePrimaryKeywordInTitle(title, hashtags, issues);
   validateWinningFormat(content, rel, number, issues);
 
   return {

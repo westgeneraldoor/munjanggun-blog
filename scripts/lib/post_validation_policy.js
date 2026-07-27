@@ -32,6 +32,7 @@ function loadPostValidationPolicy(filePath = POLICY_PATH) {
     winningFormatFromNumber: positiveInteger(raw.winning_format_from_number, 173),
     numberedSectionMin: positiveInteger(raw.numbered_section_min, 3),
     customerQuoteMin: positiveInteger(raw.customer_quote_min, 1),
+    primaryKeywordMinCoverage: typeof raw.primary_keyword_min_coverage === 'number' ? raw.primary_keyword_min_coverage : 0.5,
     dailyContractV2From: String(raw.daily_contract_v2_from || ''),
     acceptedBrandClaimExceptions: Array.isArray(raw.accepted_brand_claim_exceptions)
       ? raw.accepted_brand_claim_exceptions
