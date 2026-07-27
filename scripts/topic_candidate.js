@@ -28,8 +28,12 @@ function readJson(filePath, fallback = null) {
   }
 }
 
-// 등록부의 모든 표에서 (글번호, 키워드+제목+소재) 를 모은다.
+// 등록부의 모든 표에서 글번호별 정보를 모은다.
 // 한 글이 여러 표에 나오므로 글번호 기준으로 합친다.
+//
+// 2026-07-27: 글번호와 매칭 토큰만 돌려주던 것을 제목·소재·발행상태까지
+// 담도록 바꿨다. 근접 글 목록만 받은 작업자가 소재를 열어보지 않고
+// "일반 공간 선택 글" 같은 짐작으로 넘어가 카니발이 났다.
 function registryEntries(registry) {
   const byNo = new Map();
   (registry.blocks || []).filter((b) => b.type === 'table').forEach((block) => {
@@ -38,15 +42,30 @@ function registryEntries(registry) {
     const ti = idx(/제목/);
     const si = idx(/소재/);
     const mi = idx(/메모/);
+    const ui = idx(/URL/);
     block.rows.forEach((row) => {
       const match = String(row[0]).match(/^(\d{3})/);
       if (!match) return;
       const no = match[1];
-      const text = [ki, ti, si, mi].filter((i) => i >= 0).map((i) => row[i] || '').join(' ');
-      byNo.set(no, `${byNo.get(no) || ''} ${text}`);
+      const prev = byNo.get(no) || { no, text: '', title: '', topic: '', published: false };
+      const pick = (i) => (i >= 0 ? String(row[i] || '').trim() : '');
+      prev.text += ` ${[ki, ti, si, mi].filter((i) => i >= 0).map((i) => row[i] || '').join(' ')}`;
+      // 같은 글이 여러 표에 있고 열 구성이 다르다. 가장 긴 값을 쓴다.
+      let title = pick(ti);
+      // 제목 열이 없고 메모 칸에 "발행 제목: X" 로 들어 있는 표가 있다.
+      if (!title) {
+        const memo = String(row.join(' ')).match(/발행 제목:\s*([^.]+)/);
+        if (memo) title = memo[1].trim();
+      }
+      if (title.length > prev.title.length) prev.title = title;
+      const topic = pick(si);
+      if (topic.length > prev.topic.length) prev.topic = topic;
+      // URL 열이 없는 표에서는 메모 칸에 링크가 들어 있다. 행 전체를 본다.
+      if (/blog\.naver\.com/.test(pick(ui)) || /blog\.naver\.com/.test(row.join(' '))) prev.published = true;
+      byNo.set(no, prev);
     });
   });
-  return [...byNo.entries()].map(([no, text]) => ({ no, text: text.replace(/\s+/g, ' ').trim() }));
+  return [...byNo.values()].map((e) => ({ ...e, text: e.text.replace(/\s+/g, ' ').trim() }));
 }
 
 // 문/중문 도메인 밖 키워드를 먼저 걸러낸다.
@@ -216,6 +235,7 @@ function explore(data, limit) {
 
 function check(data, inputs) {
   const { keywords, entries, scope, clusters, locks } = data;
+  const byNo = new Map(entries.map((entry) => [entry.no, entry]));
   let blocked = false;
 
   console.log('# 글감 후보 검증');
@@ -248,9 +268,20 @@ function check(data, inputs) {
     }
 
     if (dup.near.length > 0) {
-      const shown = dup.near.slice(0, 8).map(([no, tok]) => `${no}(${tok})`).join(', ');
-      console.log(`- 근접 ${dup.near.length}편: ${shown}`);
-      console.log('  - 각 글과 어떻게 각도를 나눌지 밝히지 않으면 카니발이다.');
+      console.log(`- 근접 ${dup.near.length}편 (상위 ${Math.min(5, dup.near.length)}편의 소재를 아래에 편다)`);
+      console.log('');
+      dup.near.slice(0, 5).forEach(([no, token]) => {
+        const entry = byNo.get(no) || {};
+        const lock = entry.published === false ? ' **[URL등록대기·중복금지]**' : '';
+        console.log(`  - **${no}** (${token})${lock} ${entry.title || ''}`);
+        if (entry.topic) console.log(`    소재: ${entry.topic.slice(0, 160)}`);
+      });
+      if (dup.near.length > 5) {
+        console.log(`  - 나머지 ${dup.near.length - 5}편: ${dup.near.slice(5).map(([n]) => n).join(', ')}`);
+      }
+      console.log('');
+      console.log('  위 소재를 읽고 각 글과 어떻게 각도를 나눌지 밝혀라.');
+      console.log('  글번호만 인용하고 소재를 읽지 않으면 같은 글을 다시 쓰게 된다.');
     } else {
       console.log('- 근접: 없음');
     }

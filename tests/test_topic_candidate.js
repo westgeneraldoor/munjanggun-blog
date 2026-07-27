@@ -5,7 +5,7 @@ const { spawnSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..');
 const cli = path.join(root, 'scripts', 'topic_candidate.js');
-const { scopeVerdict, duplicateCheck, clusterStatus } = require('../scripts/topic_candidate');
+const { scopeVerdict, duplicateCheck, clusterStatus, registryEntries } = require('../scripts/topic_candidate');
 const scope = JSON.parse(fs.readFileSync(path.join(root, 'config', 'product_scope.json'), 'utf8'));
 
 function run(args) {
@@ -159,6 +159,35 @@ function testCompetitorPrefixDoesNotBypassExclusion() {
   });
 }
 
+// 근접 글의 소재를 같이 보여줘야 작업자가 읽는다.
+// 글번호만 던지면 소재를 열어보지 않고 짐작으로 넘어간다.
+function testRegistryEntriesCarryTitleAndTopic() {
+  const registry = JSON.parse(fs.readFileSync(path.join(root, 'docs/strategy/POSTING_REGISTRY.json'), 'utf8'));
+  const entries = registryEntries(registry);
+  const byNo = new Map(entries.map((e) => [e.no, e]));
+  const e023 = byNo.get('023');
+  assert.ok(e023.title.length > 0, '023 제목이 비었다');
+  assert.match(e023.topic, /답답함/, '023 소재에 답답함이 보여야 한다');
+  assert.strictEqual(e023.published, true);
+}
+
+// URL 열이 없고 메모 칸에만 링크와 발행 제목이 있는 표가 있다.
+function testTitleAndUrlFoundInMemoColumn() {
+  const registry = JSON.parse(fs.readFileSync(path.join(root, 'docs/strategy/POSTING_REGISTRY.json'), 'utf8'));
+  const byNo = new Map(registryEntries(registry).map((e) => [e.no, e]));
+  const e111 = byNo.get('111');
+  assert.ok(e111.title.length > 0, '111 제목을 메모에서 못 찾았다');
+  assert.strictEqual(e111.published, true, '111 은 발행완료다');
+}
+
+// 작성완료·URL등록대기 글은 중복 금지 대상이라 표시가 필요하다.
+function testPendingPostsMarkedUnpublished() {
+  const registry = JSON.parse(fs.readFileSync(path.join(root, 'docs/strategy/POSTING_REGISTRY.json'), 'utf8'));
+  const byNo = new Map(registryEntries(registry).map((e) => [e.no, e]));
+  assert.strictEqual(byNo.get('066').published, false);
+  assert.strictEqual(byNo.get('170').published, false);
+}
+
 function main() {
   testUnhandledProductsBlocked();
   testPermanentExclusionsBlocked();
@@ -179,6 +208,9 @@ function main() {
   testUnknownProductNamesBlockedByAllowlist();
   testHandledProductsAndVariantsPass();
   testCompetitorPrefixDoesNotBypassExclusion();
+  testRegistryEntriesCarryTitleAndTopic();
+  testTitleAndUrlFoundInMemoColumn();
+  testPendingPostsMarkedUnpublished();
   console.log('topic candidate tests passed');
 }
 
