@@ -17,10 +17,10 @@
 
 | 유형 | 최신 파일 | 기준일/기간 | 용도 |
 | --- | --- | --- | --- |
-| 채널 진단 | `outputs/reports/channel_diagnosis_2026-07-09.md` | 2026-07-08 일간 확정값, 2026-07-09 실시간 일간 현황, 주간/월간 관리자 통계 | 관리자 통계 전체 메뉴 기반 운영 지표 확장 |
-| 최신 포인터 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 2026-07-09 | 새 세션용 진입점 |
-| daily | `outputs/reports/daily/2026-07-09_seo_watch.md` | 2026-07-08 | L2 표준 daily. 방문 분석, 유입경로, 검색어, TOP20, 공감/댓글 보조 신호 |
-| topic scorecard | `outputs/reports/topic_candidates/2026-07-08_topic_scorecard.md` | 2026-07-07 자료 기반 | 신규 후보 4개 판단 |
+| 채널 진단 | `outputs/reports/channel_diagnosis_2026-07-15.md` | 2026-06-15~2026-07-14 확정값, 2026-07-15 실시간 현황 | L3 진단. 성장 확인과 재방문·내부 회수 병목 판단 |
+| 최신 포인터 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 2026-07-15 | 새 세션용 진입점 |
+| daily | `outputs/reports/daily/2026-07-27_seo_watch.md` | 2026-07-26 확정, 2026-07-27 08:45 실시간 | L3 보정 수집. 1,145조회, 통합검색 76.72%. 166~168·리뷰릴스-114 URL 등록 후 초기 반응 분리 관찰 |
+| topic scorecard | `outputs/reports/topic_candidates/2026-07-14_topic_scorecard.md` | 2026-07-13 통계, 2026-07-06 광고 API 기반 | 159~161번의 방문 진단·중문 철거 후 재설치 각도와 중복 회피 판단 |
 | ranking | `outputs/reports/ranking_report.md` | 2026-07-07 | URL 기반 순위 참고 |
 | ranking summary | `outputs/reports/ranking_changes_summary.md` | 2026-07-06 -> 2026-07-07 | 순위 변화 보조 |
 | TOP10 analysis | `outputs/reports/top10_analysis.md` | 2026-07-06 갱신 | 상위 글 제목/구조 참고 |
@@ -29,6 +29,7 @@
 
 | 보고서 | 기준 자료 | 핵심 결론 |
 | --- | --- | --- |
+| `outputs/reports/channel_diagnosis_2026-07-15.md` | 인앱 브라우저 관리자 통계, 2026-06-15~07-14 일별 원본, 2026-07-15 실시간 현황 | 1,100뷰 방어선은 형성됐으나 2,000뷰의 다음 병목은 재방문·내부 링크 회수 |
 | `outputs/reports/channel_diagnosis_2026-07-09.md` | 네이버 블로그 관리자 통계 전체 메뉴, 2026-07-08 일간 확정값, 2026-07-09 실시간 현황 | 조회수 중심 daily에서 UV, 평균 사용 시간, 재방문율, 시간대별 유입어, 기기/성별/연령, 지표 다운로드 기반 운영으로 확장 필요 |
 | `outputs/reports/channel_diagnosis_2026-07-08.md` | 2026-06-26~2026-07-07 daily, ranking, 공감수, ACTIVE_TOPIC_QUEUE | 1,100대 방어선 형성. 2,000 돌파는 허브 복구와 내부링크 회수 구조가 필요 |
 
@@ -36,6 +37,24 @@
 
 | 보고서 | 기준일 | 핵심 메모 |
 | --- | --- | --- |
+| `outputs/reports/daily/2026-07-27_seo_watch.md` | 2026-07-26 | 조회수 1,145. 통합검색 76.72%. 드레스룸·걸레받이·세탁실 보호축 유지, 166~168·리뷰릴스-114는 URL 등록 직후라 3일 관찰로 분리. |
+| `outputs/reports/daily/2026-07-26_seo_watch.md` | 2026-07-25 | 조회수 992. 통합검색 82.51%. 방문교체 검색은 비용·닫힘 원인·열림 방향을 분리 관찰. |
+| `outputs/reports/daily/2026-07-25_seo_watch.md` | 2026-07-24 | 조회수 1,126. 통합검색 79.58%. 드레스룸·걸레받이·세탁실의 조건 판단형 보호축 유지. |
+| `outputs/reports/daily/2026-07-24_seo_watch.md` | 2026-07-23 | 조회수 1,144. 통합검색 78.19%. 걸레받이·방문 닫힘·드레스룸의 서로 다른 문제 상황을 보존. |
+| `outputs/reports/daily/2026-07-23_seo_watch.md` | 2026-07-22 | 조회수 1,121·순방문자 889·평균 사용 시간 3분 1초. 164·리뷰릴스-098 공감·댓글 1·2위, 조회 TOP20 미진입이라 검색 잔존은 미판정. |
+| `outputs/reports/daily/2026-07-22_seo_watch.md` | 2026-07-21 | 조회수 1,164·순방문자 909·평균 사용 시간 3분 1초. 통합검색 80.28% 유지, 163·리뷰릴스-098 URL 등록 후 3일/7일 분리 관찰. |
+| `outputs/reports/daily/2026-07-21_seo_watch.md` | 2026-07-20 | 조회수 1,202·평균 사용 시간 3분 12초. 162번 발행 당일 TOP20 18위·공감 44·댓글 3, 리뷰릴스-036은 공감 28·댓글 5지만 클립 재생 없음. |
+| `outputs/reports/daily/2026-07-20_seo_watch.md` | 2026-07-19 | 조회수 1,098로 연휴 저점 회복. 161번 발행 당일 TOP20 공동 8위·공감 33·댓글 4, 리뷰릴스 클립 재생은 미확인. |
+| `outputs/reports/daily/2026-07-19_seo_watch.md` | 2026-07-18 | 조회수 1,005. 160번 공감 30·댓글 2지만 조회 TOP20 미진입. |
+| `outputs/reports/daily/2026-07-18_seo_watch.md` | 2026-07-17 | 조회수 943. 159번 공감 26, 리뷰릴스-034 공감 22, 두 글 모두 검색 전환은 미확인. |
+| `outputs/reports/daily/2026-07-17_seo_watch.md` | 2026-07-16 | 조회수 951. 158번 공감 40, 리뷰릴스-025 공감 27, 클립 재생은 미확인. |
+| `outputs/reports/daily/2026-07-16_seo_watch.md` | 2026-07-15 | 조회수 1,063. 최근 7일 성장 유지, 157번·리뷰릴스-005의 초기 공명 확인. |
+| `outputs/reports/daily/2026-07-15_seo_watch.md` | 2026-07-14 | 조회수 1,130. 검색 유입은 강하고, 비용·설치·교체 허브의 내부 회수 강화가 다음 우선순위. |
+| `outputs/reports/daily/2026-07-14_seo_watch.md` | 2026-07-13 | 조회수 1,201. 아파트 중문 설치 비용·세탁실 문 교체·문짝교체비용 반복, 152~154는 첫날 관찰 상태. |
+| `outputs/reports/daily/2026-07-13_seo_watch.md` | 2026-07-12 | 조회수 1,086. 문교체비용·중문 설치비용·화장실문교체비용이 상위권. 150~151은 발행 첫날 관찰 상태. |
+| `outputs/reports/daily/2026-07-12_seo_watch.md` | 2026-07-11 | 조회수 919. 중문 비용·종류, 문짝교체비용, 세탁실 문 교체가 TOP20 유지. |
+| `outputs/reports/daily/2026-07-11_seo_watch.md` | 2026-07-10 | 조회수 1,022. 몰딩·중문 비용·문교체비용·문선 보호축 유지. |
+| `outputs/reports/daily/2026-07-10_seo_watch.md` | 2026-07-09 | 조회수 1,204로 1,200대 회복. 검색 유입 75.07%, 몰딩·중문비용·방문교체·문선 상위권 유지. 142~144 초기 반응 관찰 |
 | `outputs/reports/daily/2026-07-09_seo_watch.md` | 2026-07-08 | 조회수 1,104. 공감 146으로 신규 글 반응 강함. 유리/걸레받이/드레스룸 3일 잔존 관찰 |
 | `outputs/reports/daily/2026-07-07_seo_watch.md` | 2026-07-07 | 조회수 1,142. 공감/댓글 강함. 136~138 공감 반응 확인 |
 | `outputs/reports/daily/2026-07-06_seo_watch.md` | 2026-07-06 | 조회수 1,163. PC 통합검색 상승. 133~135 당일 관찰권 |

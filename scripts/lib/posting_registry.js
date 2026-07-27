@@ -72,6 +72,42 @@ function postingEntries(sourcePath = REGISTRY_SOURCE_PATH) {
   return [...byKey.values()];
 }
 
+function dedupEntries(sourcePath = REGISTRY_SOURCE_PATH) {
+  const rows = registryRows(sourcePath);
+  const byPostNo = new Map();
+
+  rows.forEach((row) => {
+    const postNo = normalizePostNo(row['#'] || row['글']);
+    const file = row['파일'] || '';
+    const targetKeywords = row['타겟 키워드'] || '';
+    const title = row['포스팅 제목'] || row['포스트 제목'] || '';
+    const summary = row['소재 요약'] || row['다룬 소재 (중복 방지용)'] || '';
+
+    // 원고 상태표는 소재 정보를 갖지 않으므로, 실제 콘텐츠 원장 행만 중복 방지 대상으로 삼는다.
+    if (!postNo || !file || (!targetKeywords && !title && !summary)) return;
+
+    const url = plainUrl(row.URL || row.url);
+    const state = row['콘텐츠/URL 상태'] || row['발행일'] || '';
+    const entry = {
+      postNo,
+      file,
+      hub: row['허브'] || '',
+      targetKeywords,
+      title,
+      summary,
+      url,
+      postId: postIdFromUrl(url),
+      dedupStatus: state || (url ? '발행완료·URL등록완료' : '작성완료·URL등록대기'),
+      isDedupProtected: true,
+    };
+
+    const existing = byPostNo.get(postNo);
+    if (!existing || (!existing.url && entry.url)) byPostNo.set(postNo, entry);
+  });
+
+  return [...byPostNo.values()];
+}
+
 function trackingKeywordRows(sourcePath = REGISTRY_SOURCE_PATH) {
   const source = readJsonFile(sourcePath, null);
   if (!source || !Array.isArray(source.blocks)) return [];
@@ -141,6 +177,7 @@ module.exports = {
   postNosFromValue,
   registryRows,
   postingEntries,
+  dedupEntries,
   trackingKeywordRows,
   buildTrackingTargets,
 };

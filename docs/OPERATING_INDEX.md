@@ -39,7 +39,8 @@
 | `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | GENERATED | 신규 글감 후보별 scorecard. 현재 누락 시 `ops:daily` WARN |
 | `docs/strategy/ACTIVE_TOPIC_QUEUE.json` | ACTIVE_ROUTINE | daily 다음 액션을 Q-ID, lane, status로 닫는 원본 실행판 |
 | `docs/strategy/ACTIVE_TOPIC_QUEUE.md` | GENERATED | active topic queue의 사람이 읽는 렌더링본. 직접 수정하지 않고 `npm run render:strategy`로 갱신 |
-| `docs/strategy/POSTING_REGISTRY.json` | ACTIVE_ROUTINE | 기존 글 URL, 다룬 소재, 중복/카니발 위험의 원본 |
+| `docs/strategy/SEO_TAXONOMY.json` | ACTIVE_ROUTINE | H1~H5 핵심 허브, 클러스터, 고객 의도와 cutover 이후 Q-ID·원고의 정규 분류 원본. 기존 원장의 `허브` 표기는 표시용 레거시 값 |
+| `docs/strategy/POSTING_REGISTRY.json` | ACTIVE_ROUTINE | 작성완료 글 전체의 키워드·소재·URL 상태와 중복/카니발 위험 원본. URL 없는 작성완료 글도 포함 |
 | `docs/strategy/POSTING_REGISTRY.md` | GENERATED | posting registry의 사람이 읽는 렌더링본. 직접 수정하지 않고 `npm run render:strategy`로 갱신 |
 | `docs/strategy/CONTENT_PLAN.md` | ACTIVE_ROUTINE | 장기 전략, 슬롯 이력, 실행판 링크 |
 | `docs/strategy/POSTING_EXCLUSION_RULES.md` | ACTIVE_STANDARD | 제외 키워드, 검색어 전환, 취급 가능/불가 |
@@ -49,6 +50,10 @@
 주의: `outputs/reports/ranking_report.md`는 daily 글감 선정의 자동 근거가 아니다. URL 기반 추적 구현 전까지 weekly/experimental 참고로만 쓴다.
 
 글감 선정의 기본 순서는 `키워드 → 고객 상황 → 고객 불안 문장 → 제목 후보 → 문장군 필터`다. 광고 API와 daily 유입어는 검색 수요를 확인하는 뼈대이고, 최종 제목은 고객이 검색창에 치기 직전의 말에 가깝게 만든다.
+
+### 3-0. 작성완료와 URL 등록의 관계
+
+`POSTING_REGISTRY`는 URL 목록만이 아니라 콘텐츠 중복 방지 원장이다. Codex가 원고를 작성완료해 파일·제목·키워드·소재 요약을 등록한 즉시 `작성완료·URL등록대기`로 잠긴다. 이 행은 URL이 `-`이어도 새 글감 중복·카니발 확인에 반드시 포함한다. 직원이 네이버 포스팅 후 URL을 전달하면 `발행완료·URL등록완료`로 갱신하며, 그때부터 URL 기반 추적과 실제 발행 확인을 이어간다.
 
 ### 3-1. `오늘 글감 3개` 응답 출력 계약
 
@@ -87,7 +92,7 @@
 - 왜 오늘 봐야 하는지
 - 제목 후보 최소 3개
 
-최종 글감이 `136~138 URL대기`, 최근 발행글, 보호글과 가까우면 `근접 경고:`를 반드시 붙인다. 이 경고에는 겹치는 글 번호와 분리 각도를 함께 적는다.
+최종 글감이 최근 작성완료·URL등록대기 글, 최근 발행글, 보호글과 가까우면 `근접 경고:`를 반드시 붙인다. URL 유무와 관계없이 겹치는 글 번호와 분리 각도를 함께 적는다.
 
 이 출력 계약을 지키지 않고 제목만 제시하면 글감 선정 업무를 완료한 것으로 보지 않는다.
 
@@ -112,10 +117,13 @@ daily report는 증거, channel diagnosis는 해석, ACTIVE_TOPIC_QUEUE는 실�
 
 | 문서 | 등급 | 확인할 것 |
 | --- | --- | --- |
+| `docs/operations/POST_WRITING_WORK_ORDER.md` | ACTIVE_ROUTINE | 원고 1편만 쓰는 작업자 세션의 단독 진입 문서. 읽을 문서 4개, 절차, 자가 검수, 멈춤 조건 |
 | `docs/operations/CONTENT_WORKFLOW_PLAYBOOK.md` | ACTIVE_ROUTINE | 신규/리라이팅/URL 등록/분석 작업 흐름 |
-| `docs/operations/SINGLE_POST_FILE_STANDARD.md` | ACTIVE_STANDARD | 제작노트 없는 단일 발행 MD 원칙 |
+| `docs/operations/SINGLE_POST_FILE_STANDARD.md` | ACTIVE_STANDARD | 제작노트 없는 단일 발행 MD 원칙. 4-1절은 170번 이후 승리 포맷 하드 기준 |
+| `posts/171_방문턱제거.md` | REFERENCE | 승리 포맷 레퍼런스 원고. 새 원고 작성 전 반드시 대조 (로컬 전용) |
 | `docs/operations/FIELD_STORY_SECTION_STANDARD.md` | ACTIVE_STANDARD | 실제 시공 현장 단락 구조와 AppSheet 후매칭 슬롯 |
 | `docs/operations/APPSHEET_FIELD_STORY_WORKFLOW.md` | ACTIVE_STANDARD | 실제 현장 데이터, evidence_ref, 비식별 기준 |
+| `docs/operations/REVIEW_REELS_CLIP_BLOG_WORKFLOW.md` | ACTIVE_ROUTINE | `문장군 컨텐츠`의 승인 완료 고객 리뷰 숏폼을 네이버 클립·블로그 포스팅으로 연결하는 절차 |
 | `docs/strategy/CONTENT_OPERATING_PRINCIPLES.md` | ACTIVE_STANDARD | 사건성, 자기 연관성, 문제 중심 콘텐츠 철학 |
 | `docs/strategy/HOOKING_FORMULA.md` | ACTIVE_STANDARD | 호기심, 숫자, 타깃, 통념반박, 손실, 결과 후킹 공식 |
 | `docs/strategy/BRAND_CONTEXT.md` | REFERENCE | 중앙 원본 접근이 어려울 때 쓰는 블로그 로컬 브랜드 스냅샷 |
@@ -130,7 +138,7 @@ daily report는 증거, channel diagnosis는 해석, ACTIVE_TOPIC_QUEUE는 실�
 | `docs/operations/BLOG_QUALITY_GATE.md` | ACTIVE_CORE | CLI가 막아야 하는 하드 FAIL 기준 |
 | `npm run validate:posts` | 실행 | 포스트 단위 자동 검수 |
 | `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` | 실행 | 발행 제어 하드게이트 |
-| `npm run ops:daily` | 실행 | daily report, topic scorecard, keyword data freshness, active topic queue 확인 |
+| `npm run ops:daily` | 실행 | daily report, active topic queue, SEO taxonomy, topic scorecard, keyword data freshness 확인 |
 
 ## 6. 주간/보조 분석
 

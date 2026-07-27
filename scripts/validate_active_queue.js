@@ -30,6 +30,7 @@ const ALLOWED_STATUSES = new Set([
   'scorecard_needed',
   'draft_ready',
   'publish_waiting',
+  'url_registration_pending',
   'monitor_3d',
   'monitor_7d',
   'excluded',
@@ -222,6 +223,7 @@ function inferDailyContract(row) {
   }
 
   if (/내부\s*링크|내부링크/.test(text)) statuses.push('internal_link');
+  if (/작성완료\s*[·/]?\s*URL\s*등록?대기|URL\s*등록?대기/.test(text)) statuses.push('url_registration_pending');
   if (/발행\s*대기|발행대기|URL\s*대기|URL대기/.test(text)) statuses.push('publish_waiting');
   if (/scorecard|스코어카드|점수표/i.test(text)) statuses.push('scorecard_needed');
   if (/3일\s*관찰|3일.*반복|monitor_3d/i.test(text)) statuses.push('monitor_3d');
@@ -280,8 +282,8 @@ function validateRow(row, index) {
     fails.push(`${label}: protect lane cannot direct major rewrite`);
   }
 
-  if (row.status === 'publish_waiting' && isPlaceholder(row.linked_asset)) {
-    fails.push(`${label}: publish_waiting needs linked_asset`);
+  if (['publish_waiting', 'url_registration_pending'].includes(row.status) && isPlaceholder(row.linked_asset)) {
+    fails.push(`${label}: ${row.status} needs linked_asset`);
   }
 
   if (row.status === 'scorecard_needed' && !/scorecard|스코어카드|점수표/i.test(row.next_action || '')) {

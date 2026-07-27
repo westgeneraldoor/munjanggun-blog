@@ -29,6 +29,9 @@ function loadPostValidationPolicy(filePath = POLICY_PATH) {
     internalLinksMin: positiveInteger(raw.internal_links_min, 2),
     recentPatternCount: positiveInteger(patternQuota.recent_count, 5),
     maxSamePattern: positiveInteger(patternQuota.max_same_pattern, 3),
+    winningFormatFromNumber: positiveInteger(raw.winning_format_from_number, 173),
+    numberedSectionMin: positiveInteger(raw.numbered_section_min, 3),
+    customerQuoteMin: positiveInteger(raw.customer_quote_min, 1),
   };
 }
 
