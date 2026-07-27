@@ -80,7 +80,7 @@ function testDoorFrameOnlyPositiveClaimFailsValidation() {
 }
 
 function testShortFieldStoryPostWarnsValidation() {
-  const post = writeRootPost('998_length_probe.md', basePostLines(['## 실제 시공 현장에서는 조금 다릅니다', '현장형 글인데 본문이 너무 짧으면 발행 기준을 통과하면 안 됩니다.']));
+  const post = writeRootPost('110_length_probe.md', basePostLines(['## 실제 시공 현장에서는 조금 다릅니다', '현장형 글인데 본문이 너무 짧으면 발행 기준을 통과하면 안 됩니다.']));
   try {
     const result = runValidate(post);
     assert.strictEqual(result.status, 0, result.stdout);
@@ -92,7 +92,7 @@ function testShortFieldStoryPostWarnsValidation() {
 }
 
 function testMissingFieldStorySectionFailsValidation() {
-  const post = writeRootPost('997_missing_field_section.md', basePostLines(['현장형 글인데 실제 시공 현장 단락 없이 설명만 이어지면 발행하면 안 됩니다.']));
+  const post = writeRootPost('111_missing_field_section.md', basePostLines(['현장형 글인데 실제 시공 현장 단락 없이 설명만 이어지면 발행하면 안 됩니다.']));
   try {
     const result = runValidate(post);
     assert.strictEqual(result.status, 1, result.stdout);
@@ -103,7 +103,7 @@ function testMissingFieldStorySectionFailsValidation() {
 }
 
 function testInternalMemoFailsValidation() {
-  const post = writeRootPost('996_internal_memo.md', basePostLines([
+  const post = writeRootPost('112_internal_memo.md', basePostLines([
     '## 실제 시공 현장에서는 조금 다릅니다',
     '현장형 글은 본문 안에서 사진이 필요한 장면을 자연스럽게 설명해야 합니다.',
     '',
@@ -278,7 +278,124 @@ function testCentralBrandClaimGateAllowsSafeClaims() {
   }
 }
 
+function winningFormatPostLines(extraLines = []) {
+  return [
+    '# 방문교체 전에 문틀 상태부터 나눠야 하는 이유',
+    '',
+    '방문교체를 알아볼 때 대부분 문짝부터 떠올립니다.',
+    '',
+    '"문짝만 바꿔도 되지 않을까요?"',
+    '',
+    ...extraLines,
+    '',
+    '## 실제 시공 현장에서는 조금 다릅니다',
+    '',
+    '비슷한 구축 아파트 현장에서도 문틀 상태를 함께 확인한 경우가 있었습니다.',
+    '',
+    '무료 방문실측으로 현장 조건을 확인하고 네이버 예약으로 접수할 수 있습니다.',
+    '',
+    '## 관련 글',
+    '',
+    'https://blog.naver.com/doorgeneral/224317511025',
+    'https://blog.naver.com/doorgeneral/224317523524',
+    '',
+    '## 해시태그',
+    '',
+    '#방문교체 #문짝교체 #문틀 #무료방문실측 #문장군 #문장군중문',
+    '',
+  ];
+}
+
+function numberedSections() {
+  return [
+    '## 1. 문틀이 틀어졌는지 먼저 봐야 합니다',
+    '',
+    '문틀이 틀어진 집은 문짝만 바꿔도 빛샘이 남습니다.',
+    '',
+    '## 2. 바닥 마감이 문짝 간격을 바꿉니다',
+    '',
+    '덧방한 바닥은 문짝 하단 간격을 줄입니다.',
+    '',
+    '## 3. 문선 경계는 도배 계획과 같이 정해집니다',
+    '',
+    '문선까지 바꾸면 벽지 끝선이 함께 드러납니다.',
+  ];
+}
+
+function testWinningFormatMissingNumberedSectionsFails() {
+  const post = writeRootPost('995_winning_format_sections.md', winningFormatPostLines([
+    '## 문틀 상태를 봅니다',
+    '',
+    '서술형 소제목만 있으면 모바일에서 결론이 스캔되지 않습니다.',
+  ]));
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /번호 판단 단락이 3개 이상 필요합니다/);
+  } finally {
+    fs.rmSync(post, { force: true });
+  }
+}
+
+function testWinningFormatMissingCustomerQuoteFails() {
+  const lines = winningFormatPostLines(numberedSections())
+    .filter((line) => !line.includes('문짝만 바꿔도 되지 않을까요?'));
+  const post = writeRootPost('994_winning_format_quote.md', lines);
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /큰따옴표로 1회 이상/);
+  } finally {
+    fs.rmSync(post, { force: true });
+  }
+}
+
+function testWinningFormatHashtagHeadingLevelFails() {
+  const lines = winningFormatPostLines(numberedSections())
+    .map((line) => (line === '## 해시태그' ? '# 해시태그' : line));
+  const post = writeRootPost('993_winning_format_hashtag.md', lines);
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /`## 해시태그`로 씁니다/);
+  } finally {
+    fs.rmSync(post, { force: true });
+  }
+}
+
+function testWinningFormatCompliantPostPasses() {
+  const post = writeRootPost('992_winning_format_ok.md', winningFormatPostLines(numberedSections()));
+  try {
+    const result = runValidate(post);
+    assert.strictEqual(result.status, 0, result.stdout);
+    assert.doesNotMatch(result.stdout, /번호 판단 단락/);
+    assert.doesNotMatch(result.stdout, /큰따옴표로/);
+  } finally {
+    fs.rmSync(post, { force: true });
+  }
+}
+
+function testWinningFormatNotAppliedBeforeCutover() {
+  const post = writeRootPost('172_winning_format_legacy.md', winningFormatPostLines([
+    '## 문틀 상태를 봅니다',
+    '',
+    '컷오버 이전 번호는 승리 포맷 하드 FAIL 대상이 아닙니다.',
+  ]).filter((line) => !line.includes('문짝만 바꿔도 되지 않을까요?')));
+  try {
+    const result = runValidate(post);
+    assert.doesNotMatch(result.stdout, /번호 판단 단락이 3개 이상 필요합니다/);
+    assert.doesNotMatch(result.stdout, /큰따옴표로 1회 이상/);
+  } finally {
+    fs.rmSync(post, { force: true });
+  }
+}
+
 function main() {
+  testWinningFormatMissingNumberedSectionsFails();
+  testWinningFormatMissingCustomerQuoteFails();
+  testWinningFormatHashtagHeadingLevelFails();
+  testWinningFormatCompliantPostPasses();
+  testWinningFormatNotAppliedBeforeCutover();
   testUnsupportedProductsFailValidation();
   testDoorFrameOnlyPositiveClaimFailsValidation();
   testShortFieldStoryPostWarnsValidation();

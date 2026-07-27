@@ -43,3 +43,6 @@ Thumbs.db
 
 # Local editor workspaces
 .obsidian/
+
+# Playwright CLI local cache
+.playwright-cli/

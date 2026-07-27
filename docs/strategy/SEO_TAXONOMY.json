@@ -1,0 +1,461 @@
+{
+  "schema_version": 1,
+  "id": "seo_taxonomy",
+  "updated_at": "2026-07-27",
+  "purpose": "핵심 허브·클러스터·고객 의도의 정규 분류와 현재 실행 항목의 근거 연결",
+  "migration": {
+    "cutover_date": "2026-07-10",
+    "cutover_post_no": 152,
+    "legacy_policy": "cutover 이전 원장의 허브 표기는 표시용 레거시 값이며 자동 분류하지 않는다. 명시적 assignment가 없는 과거 글은 unclassified로 취급한다.",
+    "new_content_policy": "cutover 이후 queue와 registry 글은 hub_ids, cluster_ids, intent_ids를 모두 가진 classified assignment가 필요하다."
+  },
+  "rotation_hub_ids": [
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5"
+  ],
+  "hubs": [
+    {
+      "hub_id": "H1",
+      "label": "중문"
+    },
+    {
+      "hub_id": "H2",
+      "label": "3연동중문"
+    },
+    {
+      "hub_id": "H3",
+      "label": "현관중문"
+    },
+    {
+      "hub_id": "H4",
+      "label": "방문교체"
+    },
+    {
+      "hub_id": "H5",
+      "label": "ABS도어"
+    }
+  ],
+  "clusters": [
+    {
+      "cluster_id": "C-H1-H3-COST",
+      "hub_ids": ["H1", "H3"],
+      "label": "아파트 중문 설치 비용 판단"
+    },
+    {
+      "cluster_id": "C-H3-NEWBUILD-GAP",
+      "hub_ids": ["H3"],
+      "label": "신축아파트 옵션·가벽 조건"
+    },
+    {
+      "cluster_id": "C-H1-H2-GLASS-RANGE",
+      "hub_ids": ["H1", "H2"],
+      "label": "중문 유리와 전체 교체 범위"
+    },
+    {
+      "cluster_id": "C-H4-H5-REPLACEMENT",
+      "hub_ids": ["H4", "H5"],
+      "label": "방문·ABS도어 교체 범위"
+    },
+    {
+      "cluster_id": "C-H4-MOISTURE-RISK",
+      "hub_ids": ["H4"],
+      "label": "화장실·세탁실 문 수분 손상"
+    },
+    {
+      "cluster_id": "C-H4-H5-TRIM-FINISH",
+      "hub_ids": ["H4", "H5"],
+      "label": "문선·몰딩 마감과 색상"
+    },
+    {
+      "cluster_id": "C-H4-SLIDING-ROOM",
+      "hub_ids": ["H4"],
+      "label": "실내문 미닫이문 생활 조건"
+    },
+    {
+      "cluster_id": "C-H4-H5-HARDWARE-RANGE",
+      "hub_ids": ["H4", "H5"],
+      "label": "손잡이·경첩과 문짝 교체 신호"
+    },
+    {
+      "cluster_id": "C-H4-H5-SELF-MEASUREMENT",
+      "hub_ids": ["H4", "H5"],
+      "label": "방문 실측·셀프 시공 실패"
+    },
+    {
+      "cluster_id": "C-H4-H5-SURFACE-CONDITION",
+      "hub_ids": ["H4", "H5"],
+      "label": "방문 시트지와 바탕 상태"
+    },
+    {
+      "cluster_id": "C-H3-PET-ENTRY",
+      "hub_ids": ["H3"],
+      "label": "반려동물 현관 중문 생활 동선"
+    },
+    {
+      "cluster_id": "C-H2-H3-OPENING-CONFIG",
+      "hub_ids": ["H2", "H3"],
+      "label": "두짝미서기와 개구부 조건"
+    },
+    {
+      "cluster_id": "C-H3-CEILING-FINISH",
+      "hub_ids": ["H3"],
+      "label": "현관 중문 상부·천장몰딩 마감"
+    },
+    {
+      "cluster_id": "C-H3-SMALL-HOME-LAYOUT",
+      "hub_ids": ["H3"],
+      "label": "원룸 현관 중문 공간 동선"
+    },
+    {
+      "cluster_id": "C-H2-H3-SEASONAL-COMFORT",
+      "hub_ids": ["H2", "H3"],
+      "label": "리뷰 기반 현관 중문 계절 쾌적성"
+    }
+  ],
+  "intents": [
+    {
+      "intent_id": "I-COST-SCOPE",
+      "label": "비용과 공사 범위 판단"
+    },
+    {
+      "intent_id": "I-LAYOUT-SUITABILITY",
+      "label": "공간 구조와 설치 적합성 판단"
+    },
+    {
+      "intent_id": "I-REPLACEMENT-SCOPE",
+      "label": "부품·문짝·전체 교체 범위 판단"
+    },
+    {
+      "intent_id": "I-FAILURE-RISK",
+      "label": "하자·실패 위험 회피"
+    },
+    {
+      "intent_id": "I-SERVICE-BOUNDARY",
+      "label": "취급 범위와 비교 기준 확인"
+    },
+    {
+      "intent_id": "I-FINISH-COORDINATION",
+      "label": "마감·색상 조화 판단"
+    },
+    {
+      "intent_id": "I-MEASUREMENT-RISK",
+      "label": "실측·셀프 시공 위험 회피"
+    },
+    {
+      "intent_id": "I-LIVING-SAFETY",
+      "label": "생활 동선·안전 조건 판단"
+    },
+    {
+      "intent_id": "I-PRIVACY-LAYOUT",
+      "label": "시선·공간 분리 판단"
+    },
+    {
+      "intent_id": "I-SPECIAL-USE",
+      "label": "특수 구조 사용 조건 판단"
+    },
+    {
+      "intent_id": "I-SEASONAL-COMFORT",
+      "label": "계절별 공간 분리와 체감 쾌적성 판단"
+    }
+  ],
+  "assignments": {
+    "queue:Q-033": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-SURFACE-CONDITION"],
+      "intent_ids": ["I-FINISH-COORDINATION", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-034": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-LIVING-SAFETY", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-035": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-SERVICE-BOUNDARY", "I-REPLACEMENT-SCOPE", "I-FAILURE-RISK"],
+      "classification_status": "classified"
+    },
+    "queue:Q-018": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H3"],
+      "cluster_ids": ["C-H3-PET-ENTRY"],
+      "intent_ids": ["I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
+    "queue:Q-019": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-SPECIAL-USE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-020": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H3"],
+      "cluster_ids": ["C-H3-CEILING-FINISH"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-FINISH-COORDINATION"],
+      "classification_status": "classified"
+    },
+    "queue:Q-022": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-SERVICE-BOUNDARY", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-023": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-REPLACEMENT-SCOPE", "I-FAILURE-RISK"],
+      "classification_status": "classified"
+    },
+    "queue:Q-032": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
+    "queue:Q-026": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H1", "H3"],
+      "cluster_ids": ["C-H1-H3-COST"],
+      "intent_ids": ["I-COST-SCOPE", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-027": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4"],
+      "cluster_ids": ["C-H4-MOISTURE-RISK"],
+      "intent_ids": ["I-FAILURE-RISK", "I-REPLACEMENT-SCOPE", "I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
+    "queue:Q-028": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-TRIM-FINISH"],
+      "intent_ids": ["I-FINISH-COORDINATION"],
+      "classification_status": "classified"
+    },
+    "queue:Q-029": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-TRIM-FINISH"],
+      "intent_ids": ["I-REPLACEMENT-SCOPE", "I-FINISH-COORDINATION"],
+      "classification_status": "classified"
+    },
+    "queue:Q-030": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-SPECIAL-USE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-031": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
+    "post:152": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-023"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-SELF-MEASUREMENT"],
+      "intent_ids": ["I-MEASUREMENT-RISK", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified",
+      "taxonomy_change_note": "Q-016 3일 관찰 종료 후 발행 글은 Q-023 문짝·문틀 교체 범위의 실측 위험 하위 근거로 보존"
+    },
+    "post:153": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-023"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-SURFACE-CONDITION"],
+      "intent_ids": ["I-FAILURE-RISK", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified",
+      "taxonomy_change_note": "Q-017 3일 관찰 종료 후 발행 글은 Q-023 문짝·문틀 교체 범위의 바탕 상태 하위 근거로 보존"
+    },
+    "post:154": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-018"],
+      "hub_ids": ["H3"],
+      "cluster_ids": ["C-H3-PET-ENTRY"],
+      "intent_ids": ["I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
+    "post:155": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-020"],
+      "hub_ids": ["H3"],
+      "cluster_ids": ["C-H3-CEILING-FINISH"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-FINISH-COORDINATION"],
+      "classification_status": "classified"
+    },
+    "post:156": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-030"],
+      "hub_ids": ["H3"],
+      "cluster_ids": ["C-H3-SMALL-HOME-LAYOUT"],
+      "intent_ids": ["I-PRIVACY-LAYOUT", "I-LAYOUT-SUITABILITY"],
+      "classification_status": "classified",
+      "taxonomy_change_note": "Q-021 관찰 종료 후 원룸 현관 동선 글은 Q-030 개구부·공간 구조 판단의 소형 주거 하위 근거로 보존"
+    },
+    "post:157": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-019"],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-SPECIAL-USE"],
+      "classification_status": "classified"
+    },
+    "post:158": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-022"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-SERVICE-BOUNDARY", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "post:159": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-023"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-REPLACEMENT-SCOPE", "I-FAILURE-RISK"],
+      "classification_status": "classified"
+    },
+    "post:160": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-023"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-HARDWARE-RANGE"],
+      "intent_ids": ["I-REPLACEMENT-SCOPE", "I-FAILURE-RISK"],
+      "classification_status": "classified",
+      "taxonomy_change_note": "Q-024 관찰 종료 후에는 Q-023의 방문교체 범위 축에 보존하되, 경첩·바닥 끌림의 세부 분류는 별도 후속 발행으로 확장하지 않음"
+    },
+    "post:161": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-026"],
+      "hub_ids": ["H1", "H3"],
+      "cluster_ids": ["C-H1-H3-COST"],
+      "intent_ids": ["I-COST-SCOPE", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "post:162": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-027"],
+      "hub_ids": ["H4"],
+      "cluster_ids": ["C-H4-MOISTURE-RISK"],
+      "intent_ids": ["I-FAILURE-RISK", "I-REPLACEMENT-SCOPE", "I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
+    "post:163": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-031"],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
+    "post:164": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-028"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-TRIM-FINISH"],
+      "intent_ids": ["I-FINISH-COORDINATION"],
+      "classification_status": "classified"
+    },
+    "post:165": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-029"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-TRIM-FINISH"],
+      "intent_ids": ["I-REPLACEMENT-SCOPE", "I-FINISH-COORDINATION"],
+      "classification_status": "classified"
+    },
+    "post:166": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-030"],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-SPECIAL-USE"],
+      "classification_status": "classified"
+    },
+    "post:167": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-032"],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-LIVING-SAFETY"],
+      "classification_status": "classified",
+      "taxonomy_change_note": "3연동 자동중문 일반론과 분리해 스위치 위치·프레임 설치선·문짝이 모이는 방향의 현관 구조 판단으로 운영"
+    },
+    "post:168": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-023"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-REPLACEMENT-SCOPE", "I-FAILURE-RISK"],
+      "classification_status": "classified",
+      "taxonomy_change_note": "문이 안 닫히는 원인 진단과 분리해 방문 방향 변경 때의 경첩·잠금장치·문틀·가구 간섭 범위를 다룸"
+    },
+    "post:169": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-022"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-SERVICE-BOUNDARY", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified",
+      "taxonomy_change_note": "ABS도어의 화장실 전용 오해와 분리해 화장실 문 한 짝 교체가 복도 전체 방문의 색·문선·손상 상태 비교로 이어지는 판단을 다룸"
+    },
+    "post:170": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-033"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-SURFACE-CONDITION"],
+      "intent_ids": ["I-FINISH-COORDINATION", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "post:171": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-034"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-LIVING-SAFETY", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "post:172": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-035"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-SERVICE-BOUNDARY", "I-REPLACEMENT-SCOPE", "I-FAILURE-RISK"],
+      "classification_status": "classified"
+    }
+  }
+}

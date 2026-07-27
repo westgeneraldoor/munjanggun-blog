@@ -21,6 +21,9 @@ const HASHTAG_MAX_COUNT = policy.hashtagMaxCount;
 const INTERNAL_LINKS_MIN = policy.internalLinksMin;
 const RECENT_PATTERN_COUNT = policy.recentPatternCount;
 const MAX_SAME_PATTERN = policy.maxSamePattern;
+const WINNING_FORMAT_FROM_NUMBER = policy.winningFormatFromNumber;
+const NUMBERED_SECTION_MIN = policy.numberedSectionMin;
+const CUSTOMER_QUOTE_MIN = policy.customerQuoteMin;
 
 const bannedTerms = [
   '물론',
@@ -142,20 +145,32 @@ function extractHashtags(content) {
   return (target.match(/#[^\s#]+/g) || []).map((tag) => tag.trim());
 }
 
-function countPublishBodyChars(content) {
-  const withoutHashtags = content.replace(/\n# 해시태그[\s\S]*$/m, '').trim();
+function extractPublishBody(content) {
+  const withoutHashtags = content.replace(/\n#{1,2} 해시태그[\s\S]*$/m, '').trim();
   const withoutTitleCandidates = withoutHashtags.replace(/^##\s*제목 후보\s*5개[\s\S]*?(?=\n#\s)/, '').trim();
-  const body = withoutTitleCandidates
+  return withoutTitleCandidates
     .split(/\r?\n/)
     .filter((line, index) => !(index === 0 && line.trim().startsWith('# ')))
     .join('\n')
     .replace(/https:\/\/blog\.naver\.com\/doorgeneral\/\d+/g, '')
     .trim();
+}
+
+function countPublishBodyChars(content) {
+  const body = extractPublishBody(content);
 
   return {
     withSpaces: body.length,
     noSpaces: body.replace(/\s/g, '').length,
   };
+}
+
+function numberedSectionHeadings(body) {
+  return (body.match(/^##\s+\d+\.\s*.+$/gm) || []).map((line) => line.replace(/^##\s+\d+\.\s*/, '').trim());
+}
+
+function countCustomerQuotes(body) {
+  return (body.match(/[“"][^”"\n]{4,80}[”"]/g) || []).length;
 }
 
 function classifyTitlePattern(title) {
@@ -192,6 +207,41 @@ function validateProductScope(content, issues) {
       addIssue(issues, 'fail', '문틀만 단독 교체 가능처럼 표현하면 안 됩니다. 문짝교체+문선마감 또는 문짝+문틀세트 범위로 안내해야 합니다.');
       break;
     }
+  }
+}
+
+function validateWinningFormat(content, rel, number, issues) {
+  if (!rel.startsWith('posts/') || number < WINNING_FORMAT_FROM_NUMBER) return;
+
+  const body = extractPublishBody(content);
+  const headings = numberedSectionHeadings(body);
+  const quotes = countCustomerQuotes(body);
+
+  if (headings.length < NUMBERED_SECTION_MIN) {
+    addIssue(
+      issues,
+      'fail',
+      `${WINNING_FORMAT_FROM_NUMBER}번 이후 원고는 '## 1.' 형태의 번호 판단 단락이 ${NUMBERED_SECTION_MIN}개 이상 필요합니다. 현재 ${headings.length}개입니다. 서술형 소제목으로 대체하면 모바일에서 결론이 스캔되지 않습니다.`
+    );
+  }
+
+  if (quotes < CUSTOMER_QUOTE_MIN) {
+    addIssue(
+      issues,
+      'fail',
+      `${WINNING_FORMAT_FROM_NUMBER}번 이후 원고는 고객이 실제로 할 법한 말을 큰따옴표로 ${CUSTOMER_QUOTE_MIN}회 이상 넣어야 합니다. 현재 ${quotes}회입니다. 도입부에 넣어 독자가 자기 상황으로 걸리게 만듭니다.`
+    );
+  }
+
+  if (headings.length >= 2) {
+    const endings = headings.map((heading) => heading.replace(/\s/g, '').slice(-4));
+    if (new Set(endings).size === 1) {
+      addIssue(issues, 'warn', '번호 판단 단락의 종결 표현이 모두 같습니다. 같은 문장틀 반복은 조립한 글처럼 읽힙니다.');
+    }
+  }
+
+  if (/^#\s*해시태그/m.test(content)) {
+    addIssue(issues, 'fail', '해시태그 섹션은 `## 해시태그`로 씁니다. `# 해시태그`는 발행 제목과 같은 H1이라 본문 구조가 깨집니다.');
   }
 }
 
@@ -280,6 +330,7 @@ function validateFile(filePath, options) {
   }
 
   validateProductScope(content, issues);
+  validateWinningFormat(content, rel, number, issues);
 
   return {
     file: rel,
