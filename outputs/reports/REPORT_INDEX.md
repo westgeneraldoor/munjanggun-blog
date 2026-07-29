@@ -19,7 +19,7 @@
 | --- | --- | --- | --- |
 | 채널 진단 | `outputs/reports/channel_diagnosis_2026-07-15.md` | 2026-06-15~2026-07-14 확정값, 2026-07-15 실시간 현황 | L3 진단. 성장 확인과 재방문·내부 회수 병목 판단 |
 | 최신 포인터 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 2026-07-15 | 새 세션용 진입점 |
-| daily | `outputs/reports/daily/2026-07-27_seo_watch.md` | 2026-07-26 확정, 2026-07-27 08:45 실시간 | L3 보정 수집. 1,145조회, 통합검색 76.72%. 166~168·리뷰릴스-114 URL 등록 후 초기 반응 분리 관찰 |
+| daily | `outputs/reports/daily/2026-07-29_seo_watch.md` | 2026-07-28 확정, 2026-07-29 09:10 실시간 | L3 누락 일자 보정. 1,201조회, 통합검색 80.12%. 177·리뷰릴스-100 URL 등록 후 초기 반응 분리 관찰 |
 | topic scorecard | `outputs/reports/topic_candidates/2026-07-14_topic_scorecard.md` | 2026-07-13 통계, 2026-07-06 광고 API 기반 | 159~161번의 방문 진단·중문 철거 후 재설치 각도와 중복 회피 판단 |
 | ranking | `outputs/reports/ranking_report.md` | 2026-07-07 | URL 기반 순위 참고 |
 | ranking summary | `outputs/reports/ranking_changes_summary.md` | 2026-07-06 -> 2026-07-07 | 순위 변화 보조 |
@@ -37,6 +37,8 @@
 
 | 보고서 | 기준일 | 핵심 메모 |
 | --- | --- | --- |
+| `outputs/reports/daily/2026-07-29_seo_watch.md` | 2026-07-28 | 조회수 1,201. 통합검색 80.12%. 드레스룸·걸레받이·화장실문·세탁실 보호축 유지, 177·리뷰릴스-100은 URL 등록 직후라 별도 관찰. |
+| `outputs/reports/daily/2026-07-28_seo_watch.md` | 2026-07-27 | 조회수 1,285. 통합검색 75.81%. 드레스룸·걸레받이·세탁실의 기존 보호축 유지, 3연동 중문 방음 검색어는 성능 보장으로 확장하지 않음. |
 | `outputs/reports/daily/2026-07-27_seo_watch.md` | 2026-07-26 | 조회수 1,145. 통합검색 76.72%. 드레스룸·걸레받이·세탁실 보호축 유지, 166~168·리뷰릴스-114는 URL 등록 직후라 3일 관찰로 분리. |
 | `outputs/reports/daily/2026-07-26_seo_watch.md` | 2026-07-25 | 조회수 992. 통합검색 82.51%. 방문교체 검색은 비용·닫힘 원인·열림 방향을 분리 관찰. |
 | `outputs/reports/daily/2026-07-25_seo_watch.md` | 2026-07-24 | 조회수 1,126. 통합검색 79.58%. 드레스룸·걸레받이·세탁실의 조건 판단형 보호축 유지. |

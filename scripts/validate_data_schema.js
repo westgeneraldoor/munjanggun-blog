@@ -154,25 +154,34 @@ function assertRecentRegistryRows(content) {
   });
 }
 
+// 2026-07-29: 기존 검사는 발행 상태 관리 표에 있는 행만 봤다.
+// 177번은 URL을 등록했지만 그 표에 행 자체가 없어서 검사에서 빠졌고,
+// published_at 이 null 인 채로 영구 unobserved 가 됐다.
+// URL 이 있는 모든 글을 모집단으로 잡고, 발행일이 어느 표에도 없으면 경고한다.
 function assertRegisteredUrlPublicationDates() {
   const registryPath = paths.docsStrategy('POSTING_REGISTRY.json');
   const registry = readJsonFile(registryPath, null);
-  const statusTable = (registry && Array.isArray(registry.blocks))
-    ? registry.blocks.find((block) => (
-      block.type === 'table'
-      && JSON.stringify(block.header) === JSON.stringify(PUBLISHING_STATUS_HEADER)
-    ))
-    : null;
+  if (!registry || !Array.isArray(registry.blocks)) return;
 
-  if (!statusTable || !Array.isArray(statusTable.rows)) return;
+  const withUrl = new Set();
+  const withDate = new Set();
 
-  statusTable.rows.forEach((row) => {
-    const postNo = String(row[0] || '').trim();
-    const publishedAt = String(row[3] || '').trim();
-    const url = String(row[4] || '').trim();
-    if (!url || url === '-' || /^\d{4}-\d{2}-\d{2}$/.test(publishedAt)) return;
-    warn(`발행일 미등록: ${postNo}`);
+  registry.blocks.filter((block) => block.type === 'table').forEach((block) => {
+    const urlIndex = block.header.findIndex((header) => /URL/.test(header));
+    const dateIndex = block.header.findIndex((header) => /발행일/.test(header));
+    (block.rows || []).forEach((row) => {
+      const postNo = String(row[0] || '').trim();
+      if (!postNo) return;
+      if (urlIndex >= 0 && /blog\.naver\.com/.test(String(row[urlIndex] || ''))) withUrl.add(postNo);
+      if (dateIndex >= 0 && /^\d{4}-\d{2}-\d{2}$/.test(String(row[dateIndex] || '').trim())) withDate.add(postNo);
+    });
   });
+
+  const missing = [...withUrl].filter((postNo) => !withDate.has(postNo)).sort();
+  missing.forEach((postNo) => warn(`발행일 미등록: ${postNo}`));
+  if (missing.length > 0) {
+    warn(`발행일이 없는 글은 성과 원장에서 영구 unobserved 가 된다. 현재 ${missing.length}편이다.`);
+  }
 }
 
 function assertPublicGeneratedOutputs() {
