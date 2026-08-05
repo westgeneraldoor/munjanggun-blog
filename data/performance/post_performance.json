@@ -151,7 +151,14 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-07-31",
+          "day": 80,
+          "rank": 18,
+          "views": 11
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일; 폐기 상태",
@@ -249,7 +256,14 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-08-05",
+          "day": 83,
+          "rank": 11,
+          "views": 19
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
@@ -289,6 +303,84 @@
           "day": 64,
           "rank": 11,
           "views": 15
+        },
+        {
+          "date": "2026-07-23",
+          "day": 70,
+          "rank": 16,
+          "views": 15
+        },
+        {
+          "date": "2026-07-24",
+          "day": 71,
+          "rank": 12,
+          "views": 16
+        },
+        {
+          "date": "2026-07-25",
+          "day": 72,
+          "rank": 7,
+          "views": 21
+        },
+        {
+          "date": "2026-07-26",
+          "day": 73,
+          "rank": 15,
+          "views": 16
+        },
+        {
+          "date": "2026-07-27",
+          "day": 74,
+          "rank": 9,
+          "views": 22
+        },
+        {
+          "date": "2026-07-28",
+          "day": 75,
+          "rank": 9,
+          "views": 24
+        },
+        {
+          "date": "2026-07-30",
+          "day": 77,
+          "rank": 12,
+          "views": 17
+        },
+        {
+          "date": "2026-07-31",
+          "day": 78,
+          "rank": 7,
+          "views": 18
+        },
+        {
+          "date": "2026-08-01",
+          "day": 79,
+          "rank": 11,
+          "views": 16
+        },
+        {
+          "date": "2026-08-02",
+          "day": 80,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-08-03",
+          "day": 81,
+          "rank": 11,
+          "views": 17
+        },
+        {
+          "date": "2026-08-04",
+          "day": 82,
+          "rank": 9,
+          "views": 20
+        },
+        {
+          "date": "2026-08-05",
+          "day": 83,
+          "rank": 15,
+          "views": 16
         }
       ],
       "observed_days": 0,
@@ -362,10 +454,58 @@
           "views": 21
         },
         {
+          "date": "2026-07-22",
+          "day": 59,
+          "rank": 11,
+          "views": 17
+        },
+        {
           "date": "2026-07-23",
           "day": 60,
           "rank": 8,
           "views": 19
+        },
+        {
+          "date": "2026-07-24",
+          "day": 61,
+          "rank": 9,
+          "views": 23
+        },
+        {
+          "date": "2026-07-25",
+          "day": 62,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-07-26",
+          "day": 63,
+          "rank": 7,
+          "views": 22
+        },
+        {
+          "date": "2026-07-27",
+          "day": 64,
+          "rank": 8,
+          "views": 23
+        },
+        {
+          "date": "2026-07-28",
+          "day": 65,
+          "rank": 12,
+          "views": 20
+        },
+        {
+          "date": "2026-07-29",
+          "day": 66,
+          "rank": 12,
+          "views": 17
+        },
+        {
+          "date": "2026-07-30",
+          "day": 67,
+          "rank": 8,
+          "views": 21
         },
         {
           "date": "2026-08-01",
@@ -425,7 +565,14 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-07-23",
+          "day": 70,
+          "rank": 10,
+          "views": 18
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
@@ -579,7 +726,14 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-07-24",
+          "day": 67,
+          "rank": 17,
+          "views": 13
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
@@ -812,10 +966,28 @@
           "views": 24
         },
         {
+          "date": "2026-07-22",
+          "day": 47,
+          "rank": 19,
+          "views": 13
+        },
+        {
           "date": "2026-07-23",
           "day": 48,
           "rank": 5,
           "views": 23
+        },
+        {
+          "date": "2026-07-24",
+          "day": 49,
+          "rank": 17,
+          "views": 13
+        },
+        {
+          "date": "2026-07-26",
+          "day": 51,
+          "rank": 4,
+          "views": 28
         },
         {
           "date": "2026-07-27",
@@ -830,10 +1002,46 @@
           "views": 26
         },
         {
+          "date": "2026-07-30",
+          "day": 55,
+          "rank": 7,
+          "views": 23
+        },
+        {
+          "date": "2026-07-31",
+          "day": 56,
+          "rank": 11,
+          "views": 15
+        },
+        {
           "date": "2026-08-01",
           "day": 57,
           "rank": 3,
           "views": 29
+        },
+        {
+          "date": "2026-08-02",
+          "day": 58,
+          "rank": 8,
+          "views": 21
+        },
+        {
+          "date": "2026-08-03",
+          "day": 59,
+          "rank": 6,
+          "views": 22
+        },
+        {
+          "date": "2026-08-04",
+          "day": 60,
+          "rank": 11,
+          "views": 19
+        },
+        {
+          "date": "2026-08-05",
+          "day": 61,
+          "rank": 13,
+          "views": 18
         }
       ],
       "observed_days": 0,
@@ -855,6 +1063,30 @@
           "day": 43,
           "rank": 18,
           "views": 12
+        },
+        {
+          "date": "2026-07-23",
+          "day": 47,
+          "rank": 13,
+          "views": 17
+        },
+        {
+          "date": "2026-07-25",
+          "day": 49,
+          "rank": 14,
+          "views": 16
+        },
+        {
+          "date": "2026-07-27",
+          "day": 51,
+          "rank": 14,
+          "views": 18
+        },
+        {
+          "date": "2026-07-28",
+          "day": 52,
+          "rank": 17,
+          "views": 15
         }
       ],
       "observed_days": 0,
@@ -890,6 +1122,42 @@
           "day": 39,
           "rank": 17,
           "views": 12
+        },
+        {
+          "date": "2026-07-24",
+          "day": 46,
+          "rank": 13,
+          "views": 15
+        },
+        {
+          "date": "2026-07-25",
+          "day": 47,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-07-29",
+          "day": 51,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-08-01",
+          "day": 54,
+          "rank": 18,
+          "views": 12
+        },
+        {
+          "date": "2026-08-04",
+          "day": 57,
+          "rank": 13,
+          "views": 17
+        },
+        {
+          "date": "2026-08-05",
+          "day": 58,
+          "rank": 14,
+          "views": 17
         }
       ],
       "observed_days": 0,
@@ -925,6 +1193,12 @@
           "day": 41,
           "rank": 15,
           "views": 13
+        },
+        {
+          "date": "2026-07-25",
+          "day": 47,
+          "rank": 18,
+          "views": 12
         }
       ],
       "observed_days": 0,
@@ -990,10 +1264,76 @@
           "views": 26
         },
         {
+          "date": "2026-07-23",
+          "day": 44,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-07-24",
+          "day": 45,
+          "rank": 4,
+          "views": 28
+        },
+        {
+          "date": "2026-07-25",
+          "day": 46,
+          "rank": 12,
+          "views": 18
+        },
+        {
+          "date": "2026-07-26",
+          "day": 47,
+          "rank": 10,
+          "views": 17
+        },
+        {
+          "date": "2026-07-29",
+          "day": 50,
+          "rank": 6,
+          "views": 23
+        },
+        {
+          "date": "2026-07-30",
+          "day": 51,
+          "rank": 9,
+          "views": 20
+        },
+        {
           "date": "2026-07-31",
           "day": 52,
           "rank": 5,
           "views": 21
+        },
+        {
+          "date": "2026-08-01",
+          "day": 53,
+          "rank": 9,
+          "views": 18
+        },
+        {
+          "date": "2026-08-02",
+          "day": 54,
+          "rank": 17,
+          "views": 13
+        },
+        {
+          "date": "2026-08-03",
+          "day": 55,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-08-04",
+          "day": 56,
+          "rank": 9,
+          "views": 20
+        },
+        {
+          "date": "2026-08-05",
+          "day": 57,
+          "rank": 9,
+          "views": 20
         }
       ],
       "observed_days": 0,
@@ -1021,6 +1361,30 @@
           "day": 40,
           "rank": 18,
           "views": 12
+        },
+        {
+          "date": "2026-07-27",
+          "day": 48,
+          "rank": 19,
+          "views": 13
+        },
+        {
+          "date": "2026-07-28",
+          "day": 49,
+          "rank": 10,
+          "views": 22
+        },
+        {
+          "date": "2026-08-01",
+          "day": 53,
+          "rank": 20,
+          "views": 11
+        },
+        {
+          "date": "2026-08-02",
+          "day": 54,
+          "rank": 14,
+          "views": 14
         }
       ],
       "observed_days": 0,
@@ -1086,10 +1450,34 @@
           "views": 20
         },
         {
+          "date": "2026-07-24",
+          "day": 44,
+          "rank": 9,
+          "views": 23
+        },
+        {
+          "date": "2026-07-25",
+          "day": 45,
+          "rank": 8,
+          "views": 20
+        },
+        {
+          "date": "2026-07-26",
+          "day": 46,
+          "rank": 8,
+          "views": 20
+        },
+        {
           "date": "2026-07-27",
           "day": 47,
           "rank": 4,
           "views": 25
+        },
+        {
+          "date": "2026-07-28",
+          "day": 48,
+          "rank": 12,
+          "views": 20
         },
         {
           "date": "2026-07-29",
@@ -1098,10 +1486,46 @@
           "views": 29
         },
         {
+          "date": "2026-07-30",
+          "day": 50,
+          "rank": 6,
+          "views": 24
+        },
+        {
+          "date": "2026-07-31",
+          "day": 51,
+          "rank": 7,
+          "views": 18
+        },
+        {
+          "date": "2026-08-01",
+          "day": 52,
+          "rank": 10,
+          "views": 17
+        },
+        {
           "date": "2026-08-02",
           "day": 53,
           "rank": 5,
           "views": 28
+        },
+        {
+          "date": "2026-08-03",
+          "day": 54,
+          "rank": 8,
+          "views": 21
+        },
+        {
+          "date": "2026-08-04",
+          "day": 55,
+          "rank": 7,
+          "views": 23
+        },
+        {
+          "date": "2026-08-05",
+          "day": 56,
+          "rank": 7,
+          "views": 25
         }
       ],
       "observed_days": 0,
@@ -1187,16 +1611,58 @@
           "views": 33
         },
         {
+          "date": "2026-07-24",
+          "day": 43,
+          "rank": 5,
+          "views": 27
+        },
+        {
+          "date": "2026-07-25",
+          "day": 44,
+          "rank": 4,
+          "views": 28
+        },
+        {
+          "date": "2026-07-26",
+          "day": 45,
+          "rank": 10,
+          "views": 17
+        },
+        {
+          "date": "2026-07-27",
+          "day": 46,
+          "rank": 10,
+          "views": 21
+        },
+        {
           "date": "2026-07-28",
           "day": 47,
           "rank": 4,
           "views": 29
         },
         {
+          "date": "2026-07-29",
+          "day": 48,
+          "rank": 6,
+          "views": 23
+        },
+        {
           "date": "2026-07-31",
           "day": 50,
           "rank": 3,
           "views": 31
+        },
+        {
+          "date": "2026-08-01",
+          "day": 51,
+          "rank": 7,
+          "views": 21
+        },
+        {
+          "date": "2026-08-02",
+          "day": 52,
+          "rank": 6,
+          "views": 26
         },
         {
           "date": "2026-08-03",
@@ -1265,6 +1731,66 @@
           "date": "2026-07-21",
           "day": 39,
           "rank": 10,
+          "views": 20
+        },
+        {
+          "date": "2026-07-25",
+          "day": 43,
+          "rank": 18,
+          "views": 12
+        },
+        {
+          "date": "2026-07-27",
+          "day": 45,
+          "rank": 13,
+          "views": 19
+        },
+        {
+          "date": "2026-07-28",
+          "day": 46,
+          "rank": 15,
+          "views": 18
+        },
+        {
+          "date": "2026-07-29",
+          "day": 47,
+          "rank": 17,
+          "views": 14
+        },
+        {
+          "date": "2026-07-31",
+          "day": 49,
+          "rank": 18,
+          "views": 11
+        },
+        {
+          "date": "2026-08-01",
+          "day": 50,
+          "rank": 13,
+          "views": 15
+        },
+        {
+          "date": "2026-08-02",
+          "day": 51,
+          "rank": 13,
+          "views": 17
+        },
+        {
+          "date": "2026-08-03",
+          "day": 52,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-08-04",
+          "day": 53,
+          "rank": 12,
+          "views": 18
+        },
+        {
+          "date": "2026-08-05",
+          "day": 54,
+          "rank": 9,
           "views": 20
         }
       ],
@@ -1375,6 +1901,18 @@
           "day": 35,
           "rank": 18,
           "views": 13
+        },
+        {
+          "date": "2026-08-04",
+          "day": 50,
+          "rank": 18,
+          "views": 15
+        },
+        {
+          "date": "2026-08-05",
+          "day": 51,
+          "rank": 15,
+          "views": 16
         }
       ],
       "observed_days": 0,
@@ -1478,6 +2016,36 @@
           "day": 32,
           "rank": 13,
           "views": 13
+        },
+        {
+          "date": "2026-07-22",
+          "day": 36,
+          "rank": 11,
+          "views": 17
+        },
+        {
+          "date": "2026-07-24",
+          "day": 38,
+          "rank": 11,
+          "views": 18
+        },
+        {
+          "date": "2026-07-27",
+          "day": 41,
+          "rank": 17,
+          "views": 14
+        },
+        {
+          "date": "2026-08-04",
+          "day": 49,
+          "rank": 6,
+          "views": 27
+        },
+        {
+          "date": "2026-08-05",
+          "day": 50,
+          "rank": 15,
+          "views": 16
         }
       ],
       "observed_days": 0,
@@ -1580,6 +2148,30 @@
           "day": 31,
           "rank": 10,
           "views": 16
+        },
+        {
+          "date": "2026-07-22",
+          "day": 34,
+          "rank": 15,
+          "views": 16
+        },
+        {
+          "date": "2026-07-25",
+          "day": 37,
+          "rank": 18,
+          "views": 12
+        },
+        {
+          "date": "2026-07-28",
+          "day": 40,
+          "rank": 8,
+          "views": 25
+        },
+        {
+          "date": "2026-07-29",
+          "day": 41,
+          "rank": 19,
+          "views": 13
         }
       ],
       "observed_days": 0,
@@ -1637,6 +2229,66 @@
           "day": 34,
           "rank": 8,
           "views": 19
+        },
+        {
+          "date": "2026-07-24",
+          "day": 36,
+          "rank": 8,
+          "views": 25
+        },
+        {
+          "date": "2026-07-25",
+          "day": 37,
+          "rank": 8,
+          "views": 20
+        },
+        {
+          "date": "2026-07-26",
+          "day": 38,
+          "rank": 10,
+          "views": 17
+        },
+        {
+          "date": "2026-07-28",
+          "day": 40,
+          "rank": 14,
+          "views": 19
+        },
+        {
+          "date": "2026-07-30",
+          "day": 42,
+          "rank": 16,
+          "views": 14
+        },
+        {
+          "date": "2026-07-31",
+          "day": 43,
+          "rank": 18,
+          "views": 11
+        },
+        {
+          "date": "2026-08-02",
+          "day": 45,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-08-03",
+          "day": 46,
+          "rank": 9,
+          "views": 18
+        },
+        {
+          "date": "2026-08-04",
+          "day": 47,
+          "rank": 18,
+          "views": 15
+        },
+        {
+          "date": "2026-08-05",
+          "day": 48,
+          "rank": 20,
+          "views": 14
         }
       ],
       "observed_days": 0,
@@ -1875,10 +2527,64 @@
           "views": 18
         },
         {
+          "date": "2026-07-22",
+          "day": 30,
+          "rank": 16,
+          "views": 14
+        },
+        {
           "date": "2026-07-23",
           "day": 31,
           "rank": 8,
           "views": 19
+        },
+        {
+          "date": "2026-07-25",
+          "day": 33,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-07-26",
+          "day": 34,
+          "rank": 9,
+          "views": 18
+        },
+        {
+          "date": "2026-07-27",
+          "day": 35,
+          "rank": 14,
+          "views": 18
+        },
+        {
+          "date": "2026-07-28",
+          "day": 36,
+          "rank": 20,
+          "views": 14
+        },
+        {
+          "date": "2026-07-29",
+          "day": 37,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-08-01",
+          "day": 40,
+          "rank": 16,
+          "views": 14
+        },
+        {
+          "date": "2026-08-02",
+          "day": 41,
+          "rank": 19,
+          "views": 11
+        },
+        {
+          "date": "2026-08-04",
+          "day": 43,
+          "rank": 15,
+          "views": 16
         }
       ],
       "observed_days": 0,
@@ -1899,6 +2605,18 @@
           "date": "2026-07-19",
           "day": 26,
           "rank": 13,
+          "views": 14
+        },
+        {
+          "date": "2026-07-23",
+          "day": 30,
+          "rank": 18,
+          "views": 14
+        },
+        {
+          "date": "2026-07-29",
+          "day": 36,
+          "rank": 17,
           "views": 14
         }
       ],
@@ -2197,16 +2915,23 @@
     {
       "post_no": "112",
       "title": "전세집 중문 설치 전 집주인에게 확인할 3가지!",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-06-30",
+      "published_at_source": "daily",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-07-29",
+          "day": 29,
+          "rank": 19,
+          "views": 13
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
+      "verdict_at": "2026-08-05"
     },
     {
       "post_no": "113",
@@ -2270,10 +2995,64 @@
           "views": 14
         },
         {
+          "date": "2026-07-22",
+          "day": 22,
+          "rank": 11,
+          "views": 17
+        },
+        {
           "date": "2026-07-23",
           "day": 23,
           "rank": 4,
           "views": 24
+        },
+        {
+          "date": "2026-07-24",
+          "day": 24,
+          "rank": 17,
+          "views": 13
+        },
+        {
+          "date": "2026-07-26",
+          "day": 26,
+          "rank": 10,
+          "views": 17
+        },
+        {
+          "date": "2026-07-27",
+          "day": 27,
+          "rank": 10,
+          "views": 21
+        },
+        {
+          "date": "2026-07-28",
+          "day": 28,
+          "rank": 17,
+          "views": 15
+        },
+        {
+          "date": "2026-07-29",
+          "day": 29,
+          "rank": 10,
+          "views": 20
+        },
+        {
+          "date": "2026-07-30",
+          "day": 30,
+          "rank": 11,
+          "views": 18
+        },
+        {
+          "date": "2026-07-31",
+          "day": 31,
+          "rank": 10,
+          "views": 16
+        },
+        {
+          "date": "2026-08-02",
+          "day": 33,
+          "rank": 18,
+          "views": 12
         }
       ],
       "observed_days": 0,
@@ -2343,10 +3122,46 @@
           "views": 18
         },
         {
+          "date": "2026-07-22",
+          "day": 23,
+          "rank": 16,
+          "views": 14
+        },
+        {
           "date": "2026-07-23",
           "day": 24,
           "rank": 6,
           "views": 22
+        },
+        {
+          "date": "2026-07-24",
+          "day": 25,
+          "rank": 5,
+          "views": 27
+        },
+        {
+          "date": "2026-07-25",
+          "day": 26,
+          "rank": 6,
+          "views": 25
+        },
+        {
+          "date": "2026-07-26",
+          "day": 27,
+          "rank": 6,
+          "views": 23
+        },
+        {
+          "date": "2026-07-27",
+          "day": 28,
+          "rank": 19,
+          "views": 13
+        },
+        {
+          "date": "2026-07-28",
+          "day": 29,
+          "rank": 5,
+          "views": 26
         },
         {
           "date": "2026-07-29",
@@ -2359,6 +3174,30 @@
           "day": 31,
           "rank": 3,
           "views": 30
+        },
+        {
+          "date": "2026-07-31",
+          "day": 32,
+          "rank": 13,
+          "views": 12
+        },
+        {
+          "date": "2026-08-01",
+          "day": 33,
+          "rank": 7,
+          "views": 21
+        },
+        {
+          "date": "2026-08-02",
+          "day": 34,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-08-03",
+          "day": 35,
+          "rank": 11,
+          "views": 17
         },
         {
           "date": "2026-08-05",
@@ -2414,10 +3253,52 @@
           "views": 19
         },
         {
+          "date": "2026-07-23",
+          "day": 22,
+          "rank": 15,
+          "views": 16
+        },
+        {
+          "date": "2026-07-24",
+          "day": 23,
+          "rank": 15,
+          "views": 14
+        },
+        {
+          "date": "2026-07-26",
+          "day": 25,
+          "rank": 10,
+          "views": 17
+        },
+        {
+          "date": "2026-07-27",
+          "day": 26,
+          "rank": 10,
+          "views": 21
+        },
+        {
+          "date": "2026-07-29",
+          "day": 28,
+          "rank": 8,
+          "views": 21
+        },
+        {
           "date": "2026-07-30",
           "day": 29,
           "rank": 4,
           "views": 28
+        },
+        {
+          "date": "2026-08-02",
+          "day": 32,
+          "rank": 19,
+          "views": 11
+        },
+        {
+          "date": "2026-08-03",
+          "day": 33,
+          "rank": 19,
+          "views": 14
         }
       ],
       "observed_days": 0,
@@ -2456,6 +3337,48 @@
           "date": "2026-07-20",
           "day": 19,
           "rank": 19,
+          "views": 12
+        },
+        {
+          "date": "2026-07-22",
+          "day": 21,
+          "rank": 19,
+          "views": 13
+        },
+        {
+          "date": "2026-07-24",
+          "day": 23,
+          "rank": 7,
+          "views": 26
+        },
+        {
+          "date": "2026-07-25",
+          "day": 24,
+          "rank": 12,
+          "views": 18
+        },
+        {
+          "date": "2026-07-26",
+          "day": 25,
+          "rank": 16,
+          "views": 15
+        },
+        {
+          "date": "2026-07-29",
+          "day": 28,
+          "rank": 16,
+          "views": 15
+        },
+        {
+          "date": "2026-07-30",
+          "day": 29,
+          "rank": 16,
+          "views": 14
+        },
+        {
+          "date": "2026-08-01",
+          "day": 31,
+          "rank": 18,
           "views": 12
         }
       ],
@@ -2498,6 +3421,30 @@
           "day": 18,
           "rank": 15,
           "views": 16
+        },
+        {
+          "date": "2026-07-22",
+          "day": 20,
+          "rank": 16,
+          "views": 14
+        },
+        {
+          "date": "2026-07-23",
+          "day": 21,
+          "rank": 13,
+          "views": 17
+        },
+        {
+          "date": "2026-07-27",
+          "day": 25,
+          "rank": 17,
+          "views": 14
+        },
+        {
+          "date": "2026-07-28",
+          "day": 26,
+          "rank": 16,
+          "views": 16
         }
       ],
       "observed_days": 1,
@@ -2508,30 +3455,68 @@
     {
       "post_no": "124",
       "title": "ㄱ자중문 시공, 가벽이 필요한 현관 구조는 따로 있습니다",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-02",
+      "published_at_source": "daily",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
+      "observations": [
+        {
+          "date": "2026-07-28",
+          "day": 26,
+          "rank": 17,
+          "views": 15
+        },
+        {
+          "date": "2026-07-29",
+          "day": 27,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-07-30",
+          "day": 28,
+          "rank": 15,
+          "views": 15
+        }
+      ],
+      "observed_days": 1,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
+      "verdict_at": "2026-08-05"
     },
     {
       "post_no": "125",
       "title": "방문교체 vs 필름시공, 비용보다 먼저 봐야 할 기준!",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-02",
+      "published_at_source": "daily",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
+      "observations": [
+        {
+          "date": "2026-07-30",
+          "day": 28,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-08-01",
+          "day": 30,
+          "rank": 13,
+          "views": 15
+        },
+        {
+          "date": "2026-08-04",
+          "day": 33,
+          "rank": 18,
+          "views": 15
+        }
+      ],
+      "observed_days": 1,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
+      "verdict_at": "2026-08-05"
     },
     {
       "post_no": "126",
@@ -2605,6 +3590,84 @@
           "day": 18,
           "rank": 12,
           "views": 18
+        },
+        {
+          "date": "2026-07-22",
+          "day": 19,
+          "rank": 11,
+          "views": 17
+        },
+        {
+          "date": "2026-07-23",
+          "day": 20,
+          "rank": 16,
+          "views": 15
+        },
+        {
+          "date": "2026-07-24",
+          "day": 21,
+          "rank": 15,
+          "views": 14
+        },
+        {
+          "date": "2026-07-25",
+          "day": 22,
+          "rank": 8,
+          "views": 20
+        },
+        {
+          "date": "2026-07-26",
+          "day": 23,
+          "rank": 20,
+          "views": 12
+        },
+        {
+          "date": "2026-07-27",
+          "day": 24,
+          "rank": 5,
+          "views": 24
+        },
+        {
+          "date": "2026-07-28",
+          "day": 25,
+          "rank": 11,
+          "views": 21
+        },
+        {
+          "date": "2026-07-29",
+          "day": 26,
+          "rank": 10,
+          "views": 20
+        },
+        {
+          "date": "2026-07-30",
+          "day": 27,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-07-31",
+          "day": 28,
+          "rank": 13,
+          "views": 12
+        },
+        {
+          "date": "2026-08-01",
+          "day": 29,
+          "rank": 11,
+          "views": 16
+        },
+        {
+          "date": "2026-08-02",
+          "day": 30,
+          "rank": 7,
+          "views": 24
+        },
+        {
+          "date": "2026-08-04",
+          "day": 32,
+          "rank": 8,
+          "views": 22
         }
       ],
       "observed_days": 2,
@@ -2626,6 +3689,18 @@
           "day": 13,
           "rank": 17,
           "views": 12
+        },
+        {
+          "date": "2026-07-26",
+          "day": 22,
+          "rank": 17,
+          "views": 14
+        },
+        {
+          "date": "2026-07-31",
+          "day": 27,
+          "rank": 7,
+          "views": 18
         }
       ],
       "observed_days": 3,
@@ -2669,7 +3744,32 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-07-26",
+          "day": 21,
+          "rank": 19,
+          "views": 13
+        },
+        {
+          "date": "2026-08-02",
+          "day": 28,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-08-03",
+          "day": 29,
+          "rank": 14,
+          "views": 16
+        },
+        {
+          "date": "2026-08-05",
+          "day": 31,
+          "rank": 18,
+          "views": 15
+        }
+      ],
       "observed_days": 4,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
@@ -2753,6 +3853,12 @@
           "views": 30
         },
         {
+          "date": "2026-07-26",
+          "day": 20,
+          "rank": 5,
+          "views": 25
+        },
+        {
           "date": "2026-07-27",
           "day": 21,
           "rank": 3,
@@ -2771,9 +3877,45 @@
           "views": 26
         },
         {
+          "date": "2026-07-30",
+          "day": 24,
+          "rank": 10,
+          "views": 19
+        },
+        {
+          "date": "2026-07-31",
+          "day": 25,
+          "rank": 6,
+          "views": 19
+        },
+        {
           "date": "2026-08-01",
           "day": 26,
           "rank": 5,
+          "views": 22
+        },
+        {
+          "date": "2026-08-02",
+          "day": 27,
+          "rank": 9,
+          "views": 19
+        },
+        {
+          "date": "2026-08-03",
+          "day": 28,
+          "rank": 6,
+          "views": 22
+        },
+        {
+          "date": "2026-08-04",
+          "day": 29,
+          "rank": 13,
+          "views": 17
+        },
+        {
+          "date": "2026-08-05",
+          "day": 30,
+          "rank": 8,
           "views": 22
         }
       ],
@@ -2877,10 +4019,70 @@
           "views": 32
         },
         {
+          "date": "2026-07-25",
+          "day": 18,
+          "rank": 5,
+          "views": 27
+        },
+        {
           "date": "2026-07-26",
           "day": 19,
           "rank": 2,
           "views": 35
+        },
+        {
+          "date": "2026-07-27",
+          "day": 20,
+          "rank": 5,
+          "views": 24
+        },
+        {
+          "date": "2026-07-28",
+          "day": 21,
+          "rank": 5,
+          "views": 26
+        },
+        {
+          "date": "2026-07-29",
+          "day": 22,
+          "rank": 8,
+          "views": 21
+        },
+        {
+          "date": "2026-07-30",
+          "day": 23,
+          "rank": 4,
+          "views": 28
+        },
+        {
+          "date": "2026-07-31",
+          "day": 24,
+          "rank": 4,
+          "views": 30
+        },
+        {
+          "date": "2026-08-01",
+          "day": 25,
+          "rank": 5,
+          "views": 22
+        },
+        {
+          "date": "2026-08-02",
+          "day": 26,
+          "rank": 4,
+          "views": 32
+        },
+        {
+          "date": "2026-08-03",
+          "day": 27,
+          "rank": 4,
+          "views": 32
+        },
+        {
+          "date": "2026-08-04",
+          "day": 28,
+          "rank": 2,
+          "views": 38
         },
         {
           "date": "2026-08-05",
@@ -3022,6 +4224,12 @@
           "day": 27,
           "rank": 3,
           "views": 37
+        },
+        {
+          "date": "2026-08-05",
+          "day": 28,
+          "rank": 6,
+          "views": 27
         }
       ],
       "observed_days": 7,
@@ -3234,10 +4442,23 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 8,
+      "observations": [
+        {
+          "date": "2026-07-30",
+          "day": 20,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-07-31",
+          "day": 21,
+          "rank": 13,
+          "views": 12
+        }
+      ],
+      "observed_days": 9,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3260,9 +4481,39 @@
           "day": 12,
           "rank": 7,
           "views": 21
+        },
+        {
+          "date": "2026-07-23",
+          "day": 13,
+          "rank": 18,
+          "views": 14
+        },
+        {
+          "date": "2026-07-24",
+          "day": 14,
+          "rank": 13,
+          "views": 15
+        },
+        {
+          "date": "2026-07-25",
+          "day": 15,
+          "rank": 8,
+          "views": 20
+        },
+        {
+          "date": "2026-08-03",
+          "day": 24,
+          "rank": 9,
+          "views": 18
+        },
+        {
+          "date": "2026-08-04",
+          "day": 25,
+          "rank": 15,
+          "views": 16
         }
       ],
-      "observed_days": 8,
+      "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
       "verdict_at": "2026-08-05"
@@ -3276,9 +4527,9 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 8,
+      "observed_days": 9,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3295,11 +4546,35 @@
           "day": 10,
           "rank": 17,
           "views": 15
+        },
+        {
+          "date": "2026-07-27",
+          "day": 16,
+          "rank": 16,
+          "views": 16
+        },
+        {
+          "date": "2026-07-31",
+          "day": 20,
+          "rank": 12,
+          "views": 13
+        },
+        {
+          "date": "2026-08-02",
+          "day": 22,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-08-03",
+          "day": 23,
+          "rank": 15,
+          "views": 15
         }
       ],
-      "observed_days": 8,
+      "observed_days": 10,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 8일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 10일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3316,11 +4591,35 @@
           "day": 9,
           "rank": 8,
           "views": 21
+        },
+        {
+          "date": "2026-07-31",
+          "day": 20,
+          "rank": 13,
+          "views": 12
+        },
+        {
+          "date": "2026-08-01",
+          "day": 21,
+          "rank": 13,
+          "views": 15
+        },
+        {
+          "date": "2026-08-03",
+          "day": 23,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-08-05",
+          "day": 25,
+          "rank": 11,
+          "views": 19
         }
       ],
-      "observed_days": 8,
+      "observed_days": 10,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 8일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 10일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3332,9 +4631,9 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 8,
+      "observed_days": 11,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3346,9 +4645,9 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 8,
+      "observed_days": 11,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3364,10 +4663,23 @@
       "cluster_ids": [
         "C-H4-H5-SELF-MEASUREMENT"
       ],
-      "observations": [],
-      "observed_days": 9,
+      "observations": [
+        {
+          "date": "2026-07-30",
+          "day": 17,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-08-03",
+          "day": 21,
+          "rank": 20,
+          "views": 13
+        }
+      ],
+      "observed_days": 12,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3384,9 +4696,9 @@
         "C-H4-H5-SURFACE-CONDITION"
       ],
       "observations": [],
-      "observed_days": 9,
+      "observed_days": 12,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3402,9 +4714,9 @@
         "C-H3-PET-ENTRY"
       ],
       "observations": [],
-      "observed_days": 9,
+      "observed_days": 12,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3420,9 +4732,9 @@
         "C-H3-CEILING-FINISH"
       ],
       "observations": [],
-      "observed_days": 10,
+      "observed_days": 13,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3438,9 +4750,9 @@
         "C-H3-SMALL-HOME-LAYOUT"
       ],
       "observations": [],
-      "observed_days": 10,
+      "observed_days": 13,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3457,9 +4769,9 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 11,
+      "observed_days": 14,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3476,9 +4788,9 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 12,
+      "observed_days": 15,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3494,41 +4806,10 @@
       "cluster_ids": [
         "C-H4-H5-REPLACEMENT"
       ],
-      "observations": [
-        {
-          "date": "2026-07-30",
-          "day": 13,
-          "rank": 4,
-          "views": 28
-        },
-        {
-          "date": "2026-07-31",
-          "day": 14,
-          "rank": 4,
-          "views": 30
-        },
-        {
-          "date": "2026-08-02",
-          "day": 16,
-          "rank": 4,
-          "views": 32
-        },
-        {
-          "date": "2026-08-03",
-          "day": 17,
-          "rank": 4,
-          "views": 32
-        },
-        {
-          "date": "2026-08-04",
-          "day": 18,
-          "rank": 2,
-          "views": 38
-        }
-      ],
-      "observed_days": 12,
-      "verdict": "landed",
-      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "observations": [],
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3544,10 +4825,41 @@
       "cluster_ids": [
         "C-H4-H5-HARDWARE-RANGE"
       ],
-      "observations": [],
-      "observed_days": 12,
-      "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
+      "observations": [
+        {
+          "date": "2026-07-30",
+          "day": 12,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-07-31",
+          "day": 13,
+          "rank": 13,
+          "views": 12
+        },
+        {
+          "date": "2026-08-01",
+          "day": 14,
+          "rank": 16,
+          "views": 14
+        },
+        {
+          "date": "2026-08-03",
+          "day": 16,
+          "rank": 11,
+          "views": 17
+        },
+        {
+          "date": "2026-08-04",
+          "day": 17,
+          "rank": 15,
+          "views": 16
+        }
+      ],
+      "observed_days": 15,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3571,9 +4883,9 @@
           "views": 21
         }
       ],
-      "observed_days": 12,
-      "verdict": "insufficient_coverage",
-      "verdict_reason": "관측창 유효일 2일(수집행 합 64), 커버리지 부족으로 실패 판정 보류",
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3594,11 +4906,17 @@
           "day": 1,
           "rank": 18,
           "views": 14
+        },
+        {
+          "date": "2026-08-05",
+          "day": 16,
+          "rank": 18,
+          "views": 15
         }
       ],
-      "observed_days": 12,
-      "verdict": "insufficient_coverage",
-      "verdict_reason": "관측창 유효일 1일(수집행 합 59), 커버리지 부족으로 실패 판정 보류",
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3615,9 +4933,9 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 12,
-      "verdict": "insufficient_coverage",
-      "verdict_reason": "관측창 유효일 0일(수집행 합 54), 커버리지 부족으로 실패 판정 보류",
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3634,9 +4952,9 @@
         "C-H4-H5-TRIM-FINISH"
       ],
       "observations": [],
-      "observed_days": 12,
-      "verdict": "insufficient_coverage",
-      "verdict_reason": "관측창 유효일 0일(수집행 합 56), 커버리지 부족으로 실패 판정 보류",
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3653,9 +4971,9 @@
         "C-H4-H5-TRIM-FINISH"
       ],
       "observations": [],
-      "observed_days": 11,
-      "verdict": "insufficient_coverage",
-      "verdict_reason": "관측창 유효일 0일(수집행 합 53), 커버리지 부족으로 실패 판정 보류",
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3672,9 +4990,9 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 10,
-      "verdict": "insufficient_coverage",
-      "verdict_reason": "관측창 유효일 0일(수집행 합 50), 커버리지 부족으로 실패 판정 보류",
+      "observed_days": 13,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3691,9 +5009,9 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 10,
-      "verdict": "insufficient_coverage",
-      "verdict_reason": "관측창 유효일 0일(수집행 합 45), 커버리지 부족으로 실패 판정 보류",
+      "observed_days": 12,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3710,9 +5028,9 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 10,
-      "verdict": "insufficient_coverage",
-      "verdict_reason": "관측창 유효일 0일(수집행 합 40), 커버리지 부족으로 실패 판정 보류",
+      "observed_days": 11,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3730,8 +5048,8 @@
       ],
       "observations": [],
       "observed_days": 10,
-      "verdict": "insufficient_coverage",
-      "verdict_reason": "관측창 유효일 0일(수집행 합 35), 커버리지 부족으로 실패 판정 보류",
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
       "verdict_at": "2026-08-05"
     },
     {
@@ -3756,8 +5074,8 @@
     {
       "post_no": "171",
       "title": "방문턱제고, 바로 없앴다가 후회하는 집의 공통점",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-08-03",
+      "published_at_source": "registry",
       "queue_id": "Q-034",
       "hub_ids": [
         "H4",
@@ -3767,10 +5085,10 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 3,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-08-05"
     },
     {
       "post_no": "172",
@@ -3794,8 +5112,8 @@
     {
       "post_no": "173",
       "title": "슬라이딩도어에서 드르륵 소리 날 때, 레일 청소해도 그대로인 이유",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-08-04",
+      "published_at_source": "registry",
       "queue_id": "Q-036",
       "hub_ids": [
         "H4",
@@ -3806,16 +5124,16 @@
         "C-H4-H5-HARDWARE-RANGE"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 2,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-08-05"
     },
     {
       "post_no": "174",
       "title": "억지로 연 잠긴 방문, 문고리만 바꿔도 괜찮을까요?",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-08-02",
+      "published_at_source": "registry",
       "queue_id": "Q-038",
       "hub_ids": [
         "H4",
@@ -3825,16 +5143,16 @@
         "C-H4-H5-HARDWARE-RANGE"
       ],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 4,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
+      "verdict_at": "2026-08-05"
     },
     {
       "post_no": "175",
       "title": "방문수리 전 확인! 문짝에 구멍이 났을 때, 때워서 써도 괜찮을까요?",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-08-01",
+      "published_at_source": "registry",
       "queue_id": "Q-039",
       "hub_ids": [
         "H4",
@@ -3844,16 +5162,16 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 5,
+      "verdict": "pending",
+      "verdict_reason": "세 번째 유효 TOP20 관측일 대기",
+      "verdict_at": "2026-08-05"
     },
     {
       "post_no": "176",
       "title": "도어힌지, 방문경첩교체를 했는데 며칠 뒤 또 헐거워진다면?",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-31",
+      "published_at_source": "registry",
       "queue_id": "Q-038",
       "hub_ids": [
         "H4",
@@ -3863,10 +5181,10 @@
         "C-H4-H5-HARDWARE-RANGE"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 6,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 6일",
+      "verdict_at": "2026-08-05"
     },
     {
       "post_no": "177",
@@ -3882,15 +5200,15 @@
       ],
       "observations": [],
       "observed_days": 9,
-      "verdict": "insufficient_coverage",
-      "verdict_reason": "관측창 유효일 0일(수집행 합 30), 커버리지 부족으로 실패 판정 보류",
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
       "verdict_at": "2026-08-05"
     },
     {
       "post_no": "178",
       "title": "화장실문수리, 문 아래가 우글거리고 손잡이가 녹슬고 흔들릴 때",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-29",
+      "published_at_source": "registry",
       "queue_id": "Q-040",
       "hub_ids": [
         "H4"
@@ -3899,16 +5217,16 @@
         "C-H4-MOISTURE-RISK"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 8,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
+      "verdict_at": "2026-08-05"
     },
     {
       "post_no": "179",
       "title": "문틀보수, 걸림쇠 자리가 뜯겨 문이 안 닫힐 때",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-30",
+      "published_at_source": "registry",
       "queue_id": "Q-039",
       "hub_ids": [
         "H4",
@@ -3918,10 +5236,10 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 7,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 7일",
+      "verdict_at": "2026-08-05"
     }
   ],
   "unmapped_titles": [
@@ -3935,7 +5253,8 @@
     {
       "title": "3연동중문 플루트유리 선택 전 확인할 조건 3가지",
       "dates": [
-        "2026-07-17"
+        "2026-07-17",
+        "2026-07-23"
       ],
       "reason": "등록부에서 글번호를 찾지 못함"
     },
@@ -3943,6 +5262,14 @@
       "title": "깔끔하고 따뜻한 분위기의 베이지 중문 ㅣ 문장군 리뷰",
       "dates": [
         "2026-07-17"
+      ],
+      "reason": "등록부에서 글번호를 찾지 못함"
+    },
+    {
+      "title": "셀프중문 시작 전 꼭 봐야 할 3가지 기준!",
+      "dates": [
+        "2026-07-24",
+        "2026-07-26"
       ],
       "reason": "등록부에서 글번호를 찾지 못함"
     }

@@ -99,10 +99,14 @@ function testCliBlocksOnUnhandledProduct() {
   assert.match(result.stdout, /BLOCK/);
 }
 
-function testCliPassesOnCleanKeyword() {
-  // 라이브 등록부를 읽으므로 등록되지 않은 키워드를 쓴다.
+function testCliEvaluatesCleanKeywordWithoutCandidateBlock() {
+  // 라이브 성과 원장에는 다른 클러스터의 전역 재설계 BLOCK이 생길 수 있다.
+  // 따라서 종료 코드는 고정하지 않고, 후보 자체가 범위·완전중복으로 막히지 않는지만 본다.
   const result = run(['--check', '코너몰딩']);
-  assert.strictEqual(result.status, 0, result.stdout);
+  assert.match(result.stdout, /- 취급 범위: PASS/);
+  assert.match(result.stdout, /- 중복: 완전 일치 없음/);
+  assert.doesNotMatch(result.stdout, /- 취급 범위: \*\*BLOCK\*\*/);
+  assert.doesNotMatch(result.stdout, /- 중복: \*\*BLOCK\*\*/);
 }
 
 function testExploreExcludesOutOfDomain() {
@@ -209,7 +213,7 @@ function main() {
   testClusterStreakCounted();
   testLandedResetsStreak();
   testCliBlocksOnUnhandledProduct();
-  testCliPassesOnCleanKeyword();
+  testCliEvaluatesCleanKeywordWithoutCandidateBlock();
   testRegisteredDraftBlocksSameKeyword();
   testExploreExcludesOutOfDomain();
   testSynonymDuplicateDetected();

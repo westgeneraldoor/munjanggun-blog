@@ -303,6 +303,22 @@ function testKeepsLandedVerdictWhenTop20CaptureCoverageIsInsufficient() {
   assert.strictEqual(verdict.verdict, 'landed');
 }
 
+function testKeepsNewPostPendingUntilThirdFullTop20Day() {
+  assert.strictEqual(typeof verdictForPost, 'function');
+  const verdict = verdictForPost({
+    publishedAt: '2026-08-01',
+    latestReportDate: '2026-08-05',
+    observations: [],
+    validDates: new Set(['2026-08-01', '2026-08-02', '2026-08-03', '2026-08-04', '2026-08-05']),
+    top20RowCounts: new Map([
+      ['2026-08-04', 20],
+      ['2026-08-05', 20],
+    ]),
+  });
+  assert.strictEqual(verdict.verdict, 'pending');
+  assert.match(verdict.verdict_reason, /세 번째 유효 TOP20 관측일 대기/);
+}
+
 function testRecordsUnmappedTitlesInsteadOfGuessing() {
   const fixture = writeFixture({
     registryRows: [
@@ -736,6 +752,7 @@ function main() {
   testExcludesDaysZeroThroughTwoFromVerdict();
   testHoldsFadedVerdictWhenTop20CaptureCoverageIsInsufficient();
   testKeepsLandedVerdictWhenTop20CaptureCoverageIsInsufficient();
+  testKeepsNewPostPendingUntilThirdFullTop20Day();
   testRecordsUnmappedTitlesInsteadOfGuessing();
   testUsesPostNumberColumnBeforeTitleMapping();
   testRecordsReviewReelsIdentifierFromPostNumberColumn();

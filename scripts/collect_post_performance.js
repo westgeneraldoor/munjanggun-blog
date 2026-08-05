@@ -368,6 +368,13 @@ function verdictForPost({ publishedAt, latestReportDate, observations, validDate
       verdict_reason: '발행 3~14일 구간에 TOP20 2회 등장',
     };
   }
+  if (latestDay !== null && latestDay < 5 && coverageValidDays >= 2) {
+    return {
+      observed_days: observedDays,
+      verdict: 'pending',
+      verdict_reason: '세 번째 유효 TOP20 관측일 대기',
+    };
+  }
   if (observedDays >= 5) {
     if (coverageValidDays < 3) {
       return {
