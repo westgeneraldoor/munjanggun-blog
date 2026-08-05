@@ -4,10 +4,12 @@ const os = require('os');
 const path = require('path');
 
 let collectPostPerformance;
+let verdictForPost;
 try {
-  ({ collectPostPerformance } = require('../scripts/collect_post_performance'));
+  ({ collectPostPerformance, verdictForPost } = require('../scripts/collect_post_performance'));
 } catch (_error) {
   collectPostPerformance = undefined;
+  verdictForPost = undefined;
 }
 
 let renderPerformanceReport;
@@ -79,6 +81,22 @@ function topTable(headers, rows) {
     ...rows.map((row) => `| ${row.join(' | ')} |`),
     '',
   ].join('\n');
+}
+
+function padTop20Rows(rows, minimumRows = 10) {
+  const padded = rows.map((row) => [...row]);
+  for (let rank = padded.length + 1; rank <= minimumRows; rank += 1) {
+    padded.push([String(rank), '채움 글 하나', '1']);
+  }
+  return padded;
+}
+
+function rankedRows(count, titlePrefix = '채움') {
+  return Array.from({ length: count }, (_, index) => [
+    String(index + 1),
+    `${titlePrefix} ${index + 1}`,
+    String(20 - index),
+  ]);
 }
 
 function writeFixture({ files, registryRows, registryBlocks = [], postNos }) {
@@ -216,14 +234,14 @@ function testExcludesDaysZeroThroughTwoFromVerdict() {
         date,
         topTable(
           ['순위', '게시글', '조회수'],
-          [
+          padTop20Rows([
             ...(index < 3 ? [['1', '신규 노출 글', String(10 - index)]] : []),
             ['2', '채움 글 하나', '9'],
             ['3', '채움 글 둘', '8'],
             ['4', '채움 글 셋', '7'],
             ['5', '채움 글 넷', '6'],
             ['6', '채움 글 하나', '5'],
-          ]
+          ])
         ),
       ])
     ),
@@ -237,6 +255,52 @@ function testExcludesDaysZeroThroughTwoFromVerdict() {
   } finally {
     removeDir(fixture.dir);
   }
+}
+
+function testHoldsFadedVerdictWhenTop20CaptureCoverageIsInsufficient() {
+  const fixture = writeFixture({
+    registryRows: [['152', '관측 보류 글', '2026-07-01']],
+    postNos: ['152'],
+    files: Object.fromEntries(
+      ['2026-07-01', '2026-07-02', '2026-07-03', '2026-07-04', '2026-07-05'].map((date, index) => [
+        date,
+        topTable(
+          ['순위', '게시글', '조회수'],
+          rankedRows(index < 3 ? 10 : 5)
+        ),
+      ])
+    ),
+  });
+
+  try {
+    const post = postByNo(collect(fixture), '152');
+    assert.strictEqual(post.observed_days, 5);
+    assert.strictEqual(post.verdict, 'insufficient_coverage');
+    assert.match(post.verdict_reason, /관측창 유효일 0일\(수집행 합 10\), 커버리지 부족으로 실패 판정 보류/);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
+function testKeepsLandedVerdictWhenTop20CaptureCoverageIsInsufficient() {
+  assert.strictEqual(typeof verdictForPost, 'function');
+  const verdict = verdictForPost({
+    publishedAt: '2026-07-01',
+    latestReportDate: '2026-07-05',
+    observations: [
+      { date: '2026-07-04', day: 3, rank: 1, views: 10 },
+      { date: '2026-07-05', day: 4, rank: 1, views: 9 },
+    ],
+    validDates: new Set(['2026-07-01', '2026-07-02', '2026-07-03', '2026-07-04', '2026-07-05']),
+    top20RowCounts: new Map([
+      ['2026-07-01', 10],
+      ['2026-07-02', 10],
+      ['2026-07-03', 10],
+      ['2026-07-04', 5],
+      ['2026-07-05', 5],
+    ]),
+  });
+  assert.strictEqual(verdict.verdict, 'landed');
 }
 
 function testRecordsUnmappedTitlesInsteadOfGuessing() {
@@ -407,13 +471,13 @@ function testIncludesRegistryPostsWithoutTop20Appearances() {
         date,
         topTable(
           ['순위', '게시글', '조회수'],
-          [
+          padTop20Rows([
             ['1', '채움 글 하나', '10'],
             ['2', '채움 글 둘', '9'],
             ['3', '채움 글 셋', '8'],
             ['4', '채움 글 넷', '7'],
             ['5', '채움 글 다섯', '6'],
-          ]
+          ])
         ),
       ])
     ),
@@ -629,11 +693,12 @@ function testReportsClusterWinRatesAndFadedStreakWarnings() {
       { post_no: '155', published_at: '2026-07-13', cluster_ids: ['C-ONE'], verdict: 'unobserved' },
       { post_no: '156', published_at: '2026-07-14', cluster_ids: ['C-TWO'], verdict: 'landed' },
       { post_no: '157', published_at: '2026-07-15', cluster_ids: ['C-TWO'], verdict: 'faded' },
+      { post_no: '158', published_at: '2026-07-16', cluster_ids: ['C-ONE'], verdict: 'insufficient_coverage' },
     ],
   });
 
-  assert.match(report, /\| C-ONE \| 0 \| 3 \| 1 \| 0\.0% \| 3 \| WARN \|/);
-  assert.match(report, /\| C-TWO \| 1 \| 1 \| 0 \| 50\.0% \| 1 \| 정상 \|/);
+  assert.match(report, /\| C-ONE \| 0 \| 3 \| 1 \| 1 \| 0\.0% \| 3 \| WARN \|/);
+  assert.match(report, /\| C-TWO \| 1 \| 1 \| 0 \| 0 \| 50\.0% \| 1 \| 정상 \|/);
   assert.match(report, /WARN: C-ONE 같은 클러스터에서 faded 3연속/);
 }
 
@@ -669,6 +734,8 @@ function main() {
   testParsesHeaderOrderedTablesByColumnName();
   testMarksFewerThanFiveValidDaysUnobserved();
   testExcludesDaysZeroThroughTwoFromVerdict();
+  testHoldsFadedVerdictWhenTop20CaptureCoverageIsInsufficient();
+  testKeepsLandedVerdictWhenTop20CaptureCoverageIsInsufficient();
   testRecordsUnmappedTitlesInsteadOfGuessing();
   testUsesPostNumberColumnBeforeTitleMapping();
   testRecordsReviewReelsIdentifierFromPostNumberColumn();

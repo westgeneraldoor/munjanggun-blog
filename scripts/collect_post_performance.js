@@ -91,6 +91,13 @@ function topSection(content) {
   return body.join('\n');
 }
 
+function top20RankedRowCount(sectionText) {
+  return String(sectionText || '')
+    .split(/\r?\n/)
+    .filter((line) => /^\|\s*\d+\s*\|/.test(line.trim()))
+    .length;
+}
+
 function topTableColumns(headers) {
   const normalized = headers.map(normalizeHeader);
   const postNoIndex = normalized.findIndex((header) => header === '글번호');
@@ -257,6 +264,7 @@ function listDailyReports(reportsDir) {
 function collectDailyEvidence(reportsDir, titleMap) {
   const appearances = [];
   const validDates = new Set();
+  const top20RowCounts = new Map();
   const allReportDates = [];
   const unmapped = new Map();
 
@@ -264,6 +272,7 @@ function collectDailyEvidence(reportsDir, titleMap) {
     allReportDates.push(date);
     const content = fs.readFileSync(path.join(reportsDir, fileName), 'utf8');
     const section = topSection(content);
+    top20RowCounts.set(date, top20RankedRowCount(section));
     if (!section) return;
 
     extractMarkdownTables(section).forEach((table) => {
@@ -293,7 +302,7 @@ function collectDailyEvidence(reportsDir, titleMap) {
     });
   });
 
-  return { appearances, validDates, allReportDates, unmapped };
+  return { appearances, validDates, top20RowCounts, allReportDates, unmapped };
 }
 
 function addDirectIdentifierEntries(byPostNo, appearances) {
@@ -325,7 +334,7 @@ function taxonomyInfo(postNo, taxonomy) {
   };
 }
 
-function verdictForPost({ publishedAt, latestReportDate, observations, validDates }) {
+function verdictForPost({ publishedAt, latestReportDate, observations, validDates, top20RowCounts = new Map() }) {
   const latestDay = dayDifference(latestReportDate, publishedAt);
   const windowObservations = observations.filter((observation) => observation.day >= 3 && observation.day <= 14);
   const observedDays = [...validDates]
@@ -334,6 +343,16 @@ function verdictForPost({ publishedAt, latestReportDate, observations, validDate
       return day !== null && day >= 0 && day <= 14;
     })
     .length;
+  const coverageWindowRows = [...top20RowCounts.entries()]
+    .filter(([date]) => {
+      const day = dayDifference(date, publishedAt);
+      return day !== null && day >= 3 && day <= 14;
+    });
+  const coverageValidDays = coverageWindowRows
+    .filter(([, rowCount]) => rowCount >= 10)
+    .length;
+  const coverageRowsTotal = coverageWindowRows
+    .reduce((total, [, rowCount]) => total + rowCount, 0);
 
   if (latestDay !== null && latestDay < 3) {
     return {
@@ -350,6 +369,13 @@ function verdictForPost({ publishedAt, latestReportDate, observations, validDate
     };
   }
   if (observedDays >= 5) {
+    if (coverageValidDays < 3) {
+      return {
+        observed_days: observedDays,
+        verdict: 'insufficient_coverage',
+        verdict_reason: `관측창 유효일 ${coverageValidDays}일(수집행 합 ${coverageRowsTotal}), 커버리지 부족으로 실패 판정 보류`,
+      };
+    }
     return {
       observed_days: observedDays,
       verdict: 'faded',
@@ -418,6 +444,7 @@ function collectPostPerformance({
         latestReportDate,
         observations,
         validDates: evidence.validDates,
+        top20RowCounts: evidence.top20RowCounts,
       });
       return {
         post_no: entry.post_no,

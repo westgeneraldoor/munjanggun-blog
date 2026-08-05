@@ -14,11 +14,13 @@ function clusterRows(posts) {
         cluster_id: clusterId,
         landed: 0,
         faded: 0,
+        insufficient_coverage: 0,
         unobserved: 0,
         posts: [],
       };
       if (post.verdict === 'landed') cluster.landed += 1;
       if (post.verdict === 'faded') cluster.faded += 1;
+      if (post.verdict === 'insufficient_coverage') cluster.insufficient_coverage += 1;
       if (post.verdict === 'unobserved') cluster.unobserved += 1;
       cluster.posts.push(post);
       clusters.set(clusterId, cluster);
@@ -57,17 +59,17 @@ function renderPerformanceReport(ledger) {
     '# 게시글 성과 클러스터 보고',
     '',
     `> 원장 기준일: ${ledger.updated_at || '-'}`,
-    '> 승률 = landed / (landed + faded). unobserved는 분자와 분모에서 제외한다.',
+    '> 승률 = landed / (landed + faded). insufficient_coverage와 unobserved는 분자와 분모에서 제외한다.',
     '',
-    '| 클러스터 | landed | faded | unobserved | 승률 | faded 연속 | 상태 |',
-    '| --- | ---: | ---: | ---: | ---: | ---: | --- |',
+    '| 클러스터 | landed | faded | insufficient_coverage | unobserved | 승률 | faded 연속 | 상태 |',
+    '| --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |',
   ];
 
   if (rows.length === 0) {
-    lines.push('| 분류된 클러스터 없음 | 0 | 0 | 0 | - | 0 | 정상 |');
+    lines.push('| 분류된 클러스터 없음 | 0 | 0 | 0 | 0 | - | 0 | 정상 |');
   } else {
     rows.forEach((row) => {
-      lines.push(`| ${row.cluster_id} | ${row.landed} | ${row.faded} | ${row.unobserved} | ${row.win_rate} | ${row.faded_streak} | ${row.status} |`);
+      lines.push(`| ${row.cluster_id} | ${row.landed} | ${row.faded} | ${row.insufficient_coverage} | ${row.unobserved} | ${row.win_rate} | ${row.faded_streak} | ${row.status} |`);
     });
   }
 
