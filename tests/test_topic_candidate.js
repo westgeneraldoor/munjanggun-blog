@@ -181,12 +181,12 @@ function testTitleAndUrlFoundInMemoColumn() {
   assert.strictEqual(e111.published, true, '111 은 발행완료다');
 }
 
-// 작성완료·URL등록대기 글은 중복 금지 대상이라 표시가 필요하다.
-function testPendingPostsMarkedUnpublished() {
+// URL등록대기 글은 미발행, 공개 확인 글은 발행완료로 구분해야 한다.
+function testPendingAndConfirmedPostsHaveCorrectPublicationState() {
   const registry = JSON.parse(fs.readFileSync(path.join(root, 'docs/strategy/POSTING_REGISTRY.json'), 'utf8'));
   const byNo = new Map(registryEntries(registry).map((e) => [e.no, e]));
   assert.strictEqual(byNo.get('066').published, false);
-  assert.strictEqual(byNo.get('170').published, false);
+  assert.strictEqual(byNo.get('170').published, true);
 }
 
 // 원고를 쓰고 등록부에 넣지 않으면 다음 글감 선정에서 같은 소재가 다시 올라온다.
@@ -220,7 +220,7 @@ function main() {
   testCompetitorPrefixDoesNotBypassExclusion();
   testRegistryEntriesCarryTitleAndTopic();
   testTitleAndUrlFoundInMemoColumn();
-  testPendingPostsMarkedUnpublished();
+  testPendingAndConfirmedPostsHaveCorrectPublicationState();
   console.log('topic candidate tests passed');
 }
 
