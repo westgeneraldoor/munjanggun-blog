@@ -379,6 +379,13 @@
 | 리뷰릴스-111          | 111_냄새먼지깔끔시공              | 발행완료 | 2026-07-27 | [링크](https://blog.naver.com/doorgeneral/224359579652) |
 | 리뷰릴스-114          | 114_반려동물소음차단              | 발행완료 | 2026-07-24 | [링크](https://blog.naver.com/doorgeneral/224356818785) |
 | 170               | 170_문틀시트지방문교체.md          | 발행완료 |            | [링크](https://blog.naver.com/doorgeneral/224363707352) |
+| 171               | 171_방문턱제거.md              | 발행완료 | 2026-08-03 | [링크](https://blog.naver.com/doorgeneral/224363626854) |
+| 173               | 173_슬라이딩도어레일롤러.md         | 발행완료 | 2026-08-04 | [링크](https://blog.naver.com/doorgeneral/224363672266) |
+| 174               | 174_방문잠김문고리고장.md          | 발행완료 | 2026-08-02 | [링크](https://blog.naver.com/doorgeneral/224363626042) |
+| 175               | 175_문짝구멍파손교체.md           | 발행완료 | 2026-08-01 | [링크](https://blog.naver.com/doorgeneral/224363625480) |
+| 176               | 176_도어힌지경첩부품교체.md         | 발행완료 | 2026-07-31 | [링크](https://blog.naver.com/doorgeneral/224363624753) |
+| 178               | 178_화장실문수리교체판단.md         | 발행완료 | 2026-07-29 | [링크](https://blog.naver.com/doorgeneral/224361446206) |
+| 179               | 179_문틀손상단독교체.md           | 발행완료 | 2026-07-30 | [링크](https://blog.naver.com/doorgeneral/224362562911) |
 | 리뷰릴스-미매칭-20260731 | 공개 블로그 REVIEW / 원본 ID 미확인 | 발행완료 | 2026-07-31 | [링크](https://blog.naver.com/doorgeneral/224363970584) |
 
 ---
