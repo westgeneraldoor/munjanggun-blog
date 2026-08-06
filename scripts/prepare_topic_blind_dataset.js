@@ -23,6 +23,23 @@ const forbiddenOutcomeFields = [
   'cluster_ids',
 ];
 
+const operationalLeakRules = [
+  { name: 'queue marker', pattern: /\bQ-\d+\b/i },
+  { name: 'top-rank marker', pattern: /\bTOP\s*\d+\b/i },
+  { name: 'protected asset', pattern: /보호글|보호\s*자산/i },
+  { name: 'performance operation', pattern: /순위\s*이탈|상위\s*유지|약세\s*보강|검색\s*방어용|보강용/i },
+  { name: 'performance-based planning', pattern: /(?:순위[·\s]*통계|누적\s*통계|통계)\s*기반|신규\s*글/i },
+  { name: 'authoring template', pattern: /(?:정보성|제품가이드)\s*[A-Z]\s*템플릿\s*적용/i },
+];
+
+const allowedRecordFields = new Set([
+  'blind_id',
+  'title',
+  'target_keywords',
+  'topic_summary',
+  'has_summary',
+]);
+
 function normalizeHeader(value) {
   return String(value || '').replace(/[\s*_`]/g, '').trim();
 }
@@ -98,8 +115,119 @@ function maskDateReferences(value) {
   return text.replace(/20\d\d/g, '[날짜 마스킹]');
 }
 
+function validPostNumbers(topics) {
+  return new Set([...topics.keys()].map(normalizePostNo).filter(Boolean));
+}
+
+function removeOperationalSentences(value) {
+  return String(value || '')
+    .split(/(?<=[.!?])\s+|\r?\n+/)
+    .map((sentence) => sentence.trim())
+    .filter(Boolean)
+    .filter((sentence) => !operationalLeakRules.some((rule) => rule.pattern.test(sentence)))
+    .join(' ')
+    .trim();
+}
+
+function maskPostReferences(value, postNumbers) {
+  const valid = postNumbers instanceof Set
+    ? postNumbers
+    : new Set(Array.from(postNumbers || [], normalizePostNo).filter(Boolean));
+  let text = String(value || '');
+
+  const maskSequence = (sequence) => sequence.replace(/\d{3}(?:-\d+)?/g, (token) => (
+    valid.has(normalizePostNo(token)) ? '[다른 글]' : token
+  ));
+
+  text = text.replace(
+    /(\d{3}(?:-\d+)?(?:\s*[\/·]\s*\d{3}(?:-\d+)?)+)번/g,
+    (sequence) => maskSequence(sequence).replace(/번$/, '')
+  );
+  text = text.replace(
+    /(\d{3}(?:-\d+)?(?:\s*[\/·]\s*\d{3}(?:-\d+)?)+)(?=\s*내부링크)/g,
+    maskSequence
+  );
+  text = text.replace(/\b(\d{3}(?:-\d+)?)(?=\s*내부링크)/g, (match, token) => (
+    valid.has(normalizePostNo(token)) ? '[다른 글]' : match
+  ));
+
+  text = text.replace(/\b(\d{3}(?:-\d+)?)번/g, (match, token) => (
+    valid.has(normalizePostNo(token)) ? '[다른 글]' : match
+  ));
+  return text;
+}
+
+function hasMeaningfulSummary(value) {
+  const remainder = String(value || '')
+    .replace(/\[(?:날짜 마스킹|다른 글)\]/g, ' ')
+    .replace(/내부링크/g, ' ')
+    .replace(/[\s/·,;:()[\].!?-]+/g, '');
+  return /[0-9A-Za-z가-힣]/.test(remainder);
+}
+
+function sanitizeTopicSummary(value, postNumbers) {
+  const withoutDates = maskDateReferences(value);
+  const withoutOperations = removeOperationalSentences(withoutDates);
+  const withoutPostNumbers = maskPostReferences(withoutOperations, postNumbers).trim();
+  return hasMeaningfulSummary(withoutPostNumbers) ? withoutPostNumbers : '';
+}
+
+function dateLeakIn(value) {
+  const text = String(value || '');
+  return /20\d\d|(?:20)?\d{2}[-/]\d{1,2}[-/]\d{1,2}|\d{1,2}월\s*\d{1,2}일|(?:^|[^\d/])\d{1,2}\/\d{1,2}(?![\d/])/.test(text);
+}
+
+function assertSafeBlindDataset(dataset, postNumbers) {
+  const problems = [];
+  if (dataset.generated_at) problems.push('top-level generated_at');
+  if (!Array.isArray(dataset.records)) problems.push('records is not an array');
+  if (Array.isArray(dataset.records) && dataset.record_count !== dataset.records.length) {
+    problems.push('record_count mismatch');
+  }
+
+  (dataset.records || []).forEach((record, index) => {
+    const label = record.blind_id || `record[${index}]`;
+    Object.keys(record).forEach((field) => {
+      if (!allowedRecordFields.has(field)) problems.push(`${label}: unexpected field ${field}`);
+    });
+    allowedRecordFields.forEach((field) => {
+      if (!Object.prototype.hasOwnProperty.call(record, field)) {
+        problems.push(`${label}: missing field ${field}`);
+      }
+    });
+    forbiddenOutcomeFields.forEach((field) => {
+      if (Object.prototype.hasOwnProperty.call(record, field)) {
+        problems.push(`${label}: forbidden field ${field}`);
+      }
+    });
+    if (!/^T-[a-p]{12}$/.test(String(record.blind_id || ''))) {
+      problems.push(`${label}: reversible-looking blind_id`);
+    }
+
+    ['title', 'topic_summary', 'target_keywords'].forEach((field) => {
+      const values = Array.isArray(record[field]) ? record[field] : [record[field]];
+      values.forEach((value) => {
+        if (dateLeakIn(value)) problems.push(`${label}.${field}: date reference`);
+        operationalLeakRules.forEach((rule) => {
+          if (rule.pattern.test(String(value || ''))) {
+            problems.push(`${label}.${field}: ${rule.name}`);
+          }
+        });
+        if (maskPostReferences(value, postNumbers) !== String(value || '')) {
+          problems.push(`${label}.${field}: registered post reference`);
+        }
+      });
+    });
+  });
+
+  if (problems.length > 0) {
+    throw new Error(`Blind dataset leakage detected:\n- ${problems.join('\n- ')}`);
+  }
+}
+
 function buildBlindDataset(registry, performance) {
   const topics = registryTopics(registry);
+  const postNumbers = validPostNumbers(topics);
   const records = (performance.posts || [])
     .filter((post) => post && (post.verdict === 'landed' || post.verdict === 'faded'))
     .map((post) => {
@@ -107,7 +235,7 @@ function buildBlindDataset(registry, performance) {
       const topic = topics.get(postNo);
       if (!postNo || !topic || !topic.title) return null;
       const targetKeywords = topic.target_keywords.map(maskDateReferences);
-      const topicSummary = maskDateReferences(topic.topic_summary);
+      const topicSummary = sanitizeTopicSummary(topic.topic_summary, postNumbers);
       return {
         blind_id: blindId(postNo),
         title: maskDateReferences(topic.title),
@@ -125,6 +253,12 @@ function buildBlindDataset(registry, performance) {
     record_count: records.length,
     records,
   };
+}
+
+function writeBlindDataset(outputPath, dataset, postNumbers) {
+  assertSafeBlindDataset(dataset, postNumbers);
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+  fs.writeFileSync(outputPath, `${JSON.stringify(dataset, null, 2)}\n`, 'utf8');
 }
 
 function defaultOutputPath(snapshotDate) {
@@ -154,18 +288,23 @@ function main() {
   const performance = JSON.parse(fs.readFileSync(DEFAULT_PERFORMANCE_PATH, 'utf8'));
   const dataset = buildBlindDataset(registry, performance);
   if (!options.out) options.out = defaultOutputPath(performance.updated_at);
-  fs.mkdirSync(path.dirname(options.out), { recursive: true });
-  fs.writeFileSync(options.out, `${JSON.stringify(dataset, null, 2)}\n`, 'utf8');
+  writeBlindDataset(options.out, dataset, validPostNumbers(registryTopics(registry)));
   console.log(`topic blind dataset written: ${dataset.record_count} records -> ${options.out}`);
 }
 
 if (require.main === module) main();
 
 module.exports = {
+  assertSafeBlindDataset,
   blindId,
   buildBlindDataset,
   defaultOutputPath,
   forbiddenOutcomeFields,
   maskDateReferences,
+  maskPostReferences,
+  operationalLeakRules,
   registryTopics,
+  removeOperationalSentences,
+  sanitizeTopicSummary,
+  writeBlindDataset,
 };

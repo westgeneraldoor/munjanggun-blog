@@ -1,11 +1,16 @@
 const assert = require('assert');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 const {
+  assertSafeBlindDataset,
   blindId,
   buildBlindDataset,
   defaultOutputPath,
   forbiddenOutcomeFields,
   maskDateReferences,
+  writeBlindDataset,
 } = require('../scripts/prepare_topic_blind_dataset');
 
 function registry(rows) {
@@ -122,6 +127,135 @@ function testMarksRecordsWithoutSummaryOrKeywords() {
   });
 }
 
+function testRemovesOutcomeSentencesButPreservesTopicEvidence() {
+  const dataset = buildBlindDataset(
+    registry([
+      ['001', '001_old.md', 'H1', '', '비교 대상', '-', '', '비교 글'],
+      ['019-1', '019-1_old.md', 'H1', '', '두 번째 비교 대상', '-', '', '비교 글'],
+      ['057', '057_old.md', 'H1', '', '세 번째 비교 대상', '-', '', '비교 글'],
+      ['079', '079_old.md', 'H1', '', '네 번째 비교 대상', '-', '', '비교 글'],
+      [
+        '152',
+        '152_a.md',
+        'H1',
+        '천장몰딩',
+        '고객 고민 제목',
+        '-',
+        '',
+        'Q-001 보호글. 천장몰딩 종류를 공정 범위와 끝선 기준으로 비교한다. TOP1 보호 자산이므로 대수술하지 않는다. 057/019-1/079 내부링크',
+      ],
+    ]),
+    performance([{ post_no: '152', verdict: 'landed' }])
+  );
+
+  assert.strictEqual(
+    dataset.records[0].topic_summary,
+    '천장몰딩 종류를 공정 범위와 끝선 기준으로 비교한다. [다른 글]/[다른 글]/[다른 글] 내부링크'
+  );
+  assert.doesNotMatch(dataset.records[0].topic_summary, /Q-001|TOP1|보호글|보호 자산/);
+}
+
+function testMasksOnlyRegisteredPostReferencesInReferenceContexts() {
+  const dataset = buildBlindDataset(
+    registry([
+      ['012', '012_old.md', 'H1', '', '비교 대상', '-', '', '비교 글'],
+      ['100', '100_old.md', 'H1', '', '비교 대상', '-', '', '비교 글'],
+      ['145', '145_old.md', 'H1', '', '비교 대상', '-', '', '비교 글'],
+      ['153', '153_old.md', 'H1', '', '비교 대상', '-', '', '비교 글'],
+      ['160', '160_old.md', 'H1', '', '비교 대상', '-', '', '비교 글'],
+      ['162', '162_old.md', 'H1', '', '비교 대상', '-', '', '비교 글'],
+      [
+        '152',
+        '152_a.md',
+        'H1',
+        '방문교체',
+        '고객 고민 제목',
+        '-',
+        '',
+        '160번의 진단과 구분한다. 153·162·145번의 상시 노출과 다르다. 100 내부링크도 확인한다. 100% 무료, 300mm 폭, 12개월 사용, 999번 사례를 비교한다.',
+      ],
+    ]),
+    performance([{ post_no: '152', verdict: 'faded' }])
+  );
+
+  assert.strictEqual(
+    dataset.records[0].topic_summary,
+    '[다른 글]의 진단과 구분한다. [다른 글]·[다른 글]·[다른 글]의 상시 노출과 다르다. [다른 글] 내부링크도 확인한다. 100% 무료, 300mm 폭, 12개월 사용, 999번 사례를 비교한다.'
+  );
+}
+
+function testRemovesHollowSummaryWithoutDiscardingKeywordContext() {
+  const dataset = buildBlindDataset(
+    registry([["152", '152_a.md', 'H1', '중문설치', '고객 고민 제목', '-', '', '순위·통계 기반 신규 글. TOP20 진입.']]),
+    performance([{ post_no: '152', verdict: 'landed' }])
+  );
+
+  assert.strictEqual(dataset.records[0].topic_summary, '');
+  assert.strictEqual(dataset.records[0].has_summary, true);
+  assert.deepStrictEqual(dataset.records[0].target_keywords, ['중문설치']);
+}
+
+function testRejectsUnsafeDatasetBeforeWriting() {
+  const unsafeDataset = {
+    schema_version: 1,
+    id: 'topic_outcome_blind_dataset',
+    record_count: 1,
+    records: [{
+      blind_id: 'T-abcdefghijkl',
+      title: '고객 고민 제목',
+      target_keywords: ['중문설치'],
+      topic_summary: 'TOP20 진입을 확인한 보호 자산',
+      has_summary: true,
+    }],
+  };
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'topic-blind-gate-'));
+  const outputPath = path.join(tempDir, 'unsafe.json');
+
+  try {
+    assert.throws(
+      () => assertSafeBlindDataset(unsafeDataset, new Set(['160'])),
+      /blind dataset leakage/i
+    );
+    assert.throws(
+      () => writeBlindDataset(outputPath, unsafeDataset, new Set(['160'])),
+      /blind dataset leakage/i
+    );
+    assert.strictEqual(fs.existsSync(outputPath), false);
+  } finally {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  }
+}
+
+function testGateAllowsOrdinaryNumbersButRejectsRegisteredPostReferences() {
+  const safeDataset = {
+    schema_version: 1,
+    id: 'topic_outcome_blind_dataset',
+    record_count: 1,
+    records: [{
+      blind_id: 'T-abcdefghijkl',
+      title: '100%가 아니라 12mm 기준',
+      target_keywords: ['24평 중문'],
+      topic_summary: '300mm 폭과 12개월 사용 조건을 비교한다.',
+      has_summary: true,
+    }],
+  };
+  assert.doesNotThrow(() => assertSafeBlindDataset(safeDataset, new Set(['012', '100', '160'])));
+
+  const unsafeDataset = JSON.parse(JSON.stringify(safeDataset));
+  unsafeDataset.records[0].topic_summary = '160번의 진단과 비교한다.';
+  assert.throws(
+    () => assertSafeBlindDataset(unsafeDataset, new Set(['160'])),
+    /registered post reference/i
+  );
+
+  const unexpectedFieldDataset = JSON.parse(JSON.stringify(safeDataset));
+  unexpectedFieldDataset.records[0].publication_cohort = 'late';
+  assert.throws(
+    () => assertSafeBlindDataset(unexpectedFieldDataset, new Set(['160'])),
+    /unexpected field publication_cohort/i
+  );
+}
+
 function testDatesDefaultOutputFromPerformanceSnapshot() {
   assert.match(
     defaultOutputPath('2026-08-15'),
@@ -135,6 +269,11 @@ function main() {
   testRemovesEveryOutcomeAndOrderingField();
   testMasksSupportedDateFormsWithoutChangingOrdinaryNumbers();
   testMarksRecordsWithoutSummaryOrKeywords();
+  testRemovesOutcomeSentencesButPreservesTopicEvidence();
+  testMasksOnlyRegisteredPostReferencesInReferenceContexts();
+  testRemovesHollowSummaryWithoutDiscardingKeywordContext();
+  testRejectsUnsafeDatasetBeforeWriting();
+  testGateAllowsOrdinaryNumbersButRejectsRegisteredPostReferences();
   testDatesDefaultOutputFromPerformanceSnapshot();
   console.log('topic blind dataset tests passed');
 }
