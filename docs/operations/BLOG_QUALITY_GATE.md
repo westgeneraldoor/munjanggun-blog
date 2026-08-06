@@ -38,6 +38,8 @@ node scripts/blog_quality_gate.js --post "posts/085_문틀교체비용.md" --mod
 - `POST_QA_NOT_PASS`
 - `PUBLISH_APPROVAL_MISSING`
 - `POST_ALREADY_PUBLISHED`
+- `APPROVED_BODY_MISSING`
+- `APPROVED_BODY_HASH_MISMATCH`
 
 원고 품질:
 
@@ -126,6 +128,8 @@ npm run test:blog-gate
 아래 항목은 경고가 아니라 모두 `FAIL`이며, 하나라도 나오면 네이버 발행 금지다.
 
 - `APPROVAL_HASH_MISSING`: `APPROVAL_LOG.md`에 승인 당시 본문 SHA-256이 없음
+- `APPROVED_BODY_MISSING`: 180번부터 `APPROVAL_LOG.md`가 있으면 `APPROVED_BODY.md` 스냅샷도 있어야 함
+- `APPROVED_BODY_HASH_MISMATCH`: `APPROVED_BODY.md`가 `APPROVAL_LOG.md`의 승인 SHA-256과 다름
 - `APPROVAL_HASH_MISMATCH`: 승인 후 본문이 바뀜
 - `EVIDENCE_REQUIRED`: 실제 고객/현장/사례처럼 보이는 문장에 `EVIDENCE.json`의 `evidence_refs`가 없음
 - `QUOTE_EVIDENCE_REQUIRED`: 직접 인용문이 있는데 `quote_status`가 없음
@@ -145,8 +149,13 @@ npm run test:blog-gate
 outputs/publish_control/NNN_키워드/
 ├── STATUS.md
 ├── APPROVAL_LOG.md
+├── APPROVED_BODY.md
 └── EVIDENCE.json
 ```
+
+승인자는 원고 파일을 줄바꿈, BOM, 앞뒤 공백을 바꾸지 않고 `APPROVED_BODY.md`로 바이트 그대로 복사한 뒤, 그 해시를 `APPROVAL_LOG.md`에 기록한다. 이 검사는 180번부터 적용한다.
+
+`outputs/publish_control/`은 `.gitignore` 대상이므로 `APPROVED_BODY.md`는 git 백업이 아니다. 이 스냅샷은 로컬 원고 덮어쓰기 사고의 대조·복구 수단일 뿐이며, 디스크 손실에는 보호 기능이 없다.
 
 `EVIDENCE.json` 최소 구조:
 

@@ -467,6 +467,7 @@ function testPublishModeAllowsQuestionTitleWarningWhenOtherwiseValid() {
   );
   const controlDir = makeControlDir({ postPath: post });
   try {
+    fs.copyFileSync(post, path.join(controlDir, 'APPROVED_BODY.md'));
     fs.writeFileSync(
       registry,
       `${originalRegistry}\n| 980 | 980_question_title_gate_probe.md | 테스트 | 아파트중문, 현관중문 | 아파트 중문 설치 3가지, 우리 집에는 어떨까 | - | - | 질문형 제목 gate 회귀 테스트 |\n`,
@@ -625,6 +626,66 @@ function testApprovalHashMismatchBlocksPublish() {
   removeDir(controlDir);
 }
 
+function testApprovedBodyMissingBlocksPublishFromPost180() {
+  const { dir, post } = writeTempPost('180_approved_body_missing.md', basePostLines());
+  const controlDir = makeControlDir({ postPath: post });
+  try {
+    const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+    assert.strictEqual(result.status, 1);
+    assertBlocked(payload, 'APPROVED_BODY_MISSING');
+    const issue = payload.issues.find((item) => item.code === 'APPROVED_BODY_MISSING');
+    assert.strictEqual(issue.message, 'APPROVED_BODY.md snapshot is required from post 180.');
+  } finally {
+    removeDir(dir);
+    removeDir(controlDir);
+  }
+}
+
+function testApprovedBodyHashMismatchBlocksPublishFromPost180() {
+  const { dir, post } = writeTempPost('180_approved_body_hash_mismatch.md', basePostLines());
+  const controlDir = makeControlDir({ postPath: post });
+  try {
+    fs.writeFileSync(path.join(controlDir, 'APPROVED_BODY.md'), 'different approved snapshot\n', 'utf8');
+    const { result, payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+    assert.strictEqual(result.status, 1);
+    assertBlocked(payload, 'APPROVED_BODY_HASH_MISMATCH');
+    const issue = payload.issues.find((item) => item.code === 'APPROVED_BODY_HASH_MISMATCH');
+    assert.strictEqual(issue.message, 'APPROVED_BODY.md does not match the approved SHA-256.');
+  } finally {
+    removeDir(dir);
+    removeDir(controlDir);
+  }
+}
+
+function testApprovedBodySnapshotMatchesApprovedHashFromPost180() {
+  const { dir, post } = writeTempPost('180_approved_body_match.md', basePostLines());
+  const controlDir = makeControlDir({ postPath: post });
+  try {
+    fs.copyFileSync(post, path.join(controlDir, 'APPROVED_BODY.md'));
+    const { payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+    const actualCodes = codes(payload);
+    assert(!actualCodes.includes('APPROVED_BODY_MISSING'));
+    assert(!actualCodes.includes('APPROVED_BODY_HASH_MISMATCH'));
+  } finally {
+    removeDir(dir);
+    removeDir(controlDir);
+  }
+}
+
+function testApprovedBodySnapshotIsNotRequiredBeforePost180() {
+  const { dir, post } = writeTempPost('179_approved_body_not_required.md', basePostLines());
+  const controlDir = makeControlDir({ postPath: post });
+  try {
+    const { payload } = runGate(['--post', post, '--mode', 'publish', '--control-dir', controlDir]);
+    const actualCodes = codes(payload);
+    assert(!actualCodes.includes('APPROVED_BODY_MISSING'));
+    assert(!actualCodes.includes('APPROVED_BODY_HASH_MISMATCH'));
+  } finally {
+    removeDir(dir);
+    removeDir(controlDir);
+  }
+}
+
 function testActualCaseWithoutEvidenceBlocksPublish() {
   const { dir, post } = writeTempPost(
     '988_case_no_evidence.md',
@@ -765,6 +826,7 @@ function testCentralBrandSafeClaimCodesAllowPublish() {
   const originalRegistry = fs.readFileSync(registry, 'utf8');
   const controlDir = makeControlDir({ postPath: post });
   try {
+    fs.copyFileSync(post, path.join(controlDir, 'APPROVED_BODY.md'));
     fs.writeFileSync(
       registry,
       `${originalRegistry}\n| 980 | 980_brand_claim_safe.md | 테스트 | 브랜드 claim safe | 브랜드 claim safe | - | - | 중앙 브랜드 claim gate 회귀 테스트 |\n`,
@@ -800,6 +862,10 @@ function main() {
     testProductionNotesAndBodyHashtagsBlockPublish,
     testApprovalHashMissingBlocksPublish,
     testApprovalHashMismatchBlocksPublish,
+    testApprovedBodyMissingBlocksPublishFromPost180,
+    testApprovedBodyHashMismatchBlocksPublishFromPost180,
+    testApprovedBodySnapshotMatchesApprovedHashFromPost180,
+    testApprovedBodySnapshotIsNotRequiredBeforePost180,
     testActualCaseWithoutEvidenceBlocksPublish,
     testDirectQuoteWithoutQuoteStatusBlocksPublish,
     testConstructedExampleCannotLookLikeActualCase,

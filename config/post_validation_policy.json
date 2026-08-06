@@ -22,6 +22,7 @@
     "max_same_pattern": 3
   },
   "winning_format_from_number": 170,
+  "approved_body_snapshot_from_number": 180,
   "numbered_section_min": 3,
   "customer_quote_min": 1,
   "daily_contract_v2_from": "2026-07-28",

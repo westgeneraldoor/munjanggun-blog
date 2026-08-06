@@ -5,6 +5,7 @@ const { spawnSync } = require('child_process');
 const { ROOT_DIR } = require('./lib/paths');
 const { findBrandClaimIssues } = require('./lib/brand_claim_rules');
 const { postingEntries } = require('./lib/posting_registry');
+const validationPolicy = require('../config/post_validation_policy.json');
 
 const FAIL = 'fail';
 const WARN = 'warn';
@@ -66,6 +67,11 @@ function readTextIfExists(filePath) {
 
 function fileSha256(filePath) {
   return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+}
+
+function postNumber(postPath) {
+  const match = path.basename(postPath).match(/^(\d{3})/);
+  return match ? Number(match[1]) : null;
 }
 
 function extractApprovalHash(approvalText) {
@@ -151,6 +157,7 @@ function validateControlFiles(controlDir, postPath) {
   const issues = [];
   const statusPath = path.join(controlDir, 'STATUS.md');
   const approvalPath = path.join(controlDir, 'APPROVAL_LOG.md');
+  const approvedBodyPath = path.join(controlDir, 'APPROVED_BODY.md');
   const statusText = readTextIfExists(statusPath);
   const approvalText = readTextIfExists(approvalPath);
 
@@ -173,6 +180,13 @@ function validateControlFiles(controlDir, postPath) {
     if (!approvedHash) {
       issues.push(makeIssue(FAIL, 'APPROVAL_HASH_MISSING', 'APPROVAL_LOG.md must record the approved post SHA-256.', approvalPath));
     } else {
+      const requiresApprovedBody = postNumber(postPath) >= validationPolicy.approved_body_snapshot_from_number;
+      if (requiresApprovedBody && !fs.existsSync(approvedBodyPath)) {
+        issues.push(makeIssue(FAIL, 'APPROVED_BODY_MISSING', 'APPROVED_BODY.md snapshot is required from post 180.', approvedBodyPath));
+      } else if (requiresApprovedBody && fileSha256(approvedBodyPath) !== approvedHash) {
+        issues.push(makeIssue(FAIL, 'APPROVED_BODY_HASH_MISMATCH', 'APPROVED_BODY.md does not match the approved SHA-256.', approvedBodyPath));
+      }
+
       const currentHash = fileSha256(postPath);
       if (approvedHash !== currentHash) {
         issues.push(makeIssue(FAIL, 'APPROVAL_HASH_MISMATCH', 'Post content changed after approval. Re-run QA and approval.', approvalPath));
