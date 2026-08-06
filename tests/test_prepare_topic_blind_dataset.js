@@ -172,7 +172,7 @@ function testMasksOnlyRegisteredPostReferencesInReferenceContexts() {
         '고객 고민 제목',
         '-',
         '',
-        '160번의 진단과 구분한다. 153·162·145번의 상시 노출과 다르다. 100 내부링크도 확인한다. 100% 무료, 300mm 폭, 12개월 사용, 999번 사례를 비교한다.',
+        '160번과 153·162·145번 비교. 100 내부링크. 100% 무료, 300mm, 12개월, 999번.',
       ],
     ]),
     performance([{ post_no: '152', verdict: 'faded' }])
@@ -180,7 +180,7 @@ function testMasksOnlyRegisteredPostReferencesInReferenceContexts() {
 
   assert.strictEqual(
     dataset.records[0].topic_summary,
-    '[다른 글]의 진단과 구분한다. [다른 글]·[다른 글]·[다른 글]의 상시 노출과 다르다. [다른 글] 내부링크도 확인한다. 100% 무료, 300mm 폭, 12개월 사용, 999번 사례를 비교한다.'
+    '[다른 글]과 [다른 글]·[다른 글]·[다른 글] 비교. [다른 글] 내부링크. 100% 무료, 300mm, 12개월, 999번.'
   );
 }
 
@@ -256,6 +256,114 @@ function testGateAllowsOrdinaryNumbersButRejectsRegisteredPostReferences() {
   );
 }
 
+function testRemovesAllAuthoringTemplateSentences() {
+  const dataset = buildBlindDataset(
+    registry([[
+      '152',
+      '152_a.md',
+      'H1',
+      '방문교체',
+      '고객 고민 제목',
+      '-',
+      '',
+      '가격가이드 E 템플릿 적용. 비용 범위와 추가금 기준을 설명한다. 비교가이드 B 템플릿. 선택 기준을 비교한다. 시공사례 C 템플릿 적용. 현장 사례를 설명한다.',
+    ]]),
+    performance([{ post_no: '152', verdict: 'landed' }])
+  );
+
+  assert.strictEqual(
+    dataset.records[0].topic_summary,
+    '비용 범위와 추가금 기준을 설명한다. 선택 기준을 비교한다. 현장 사례를 설명한다.'
+  );
+}
+
+function testMasksMarkdownFilenameReferencesWithoutChangingContent() {
+  const dataset = buildBlindDataset(
+    registry([[
+      '152',
+      '152_a.md',
+      'H1',
+      '중문설치',
+      '고객 고민 제목',
+      '-',
+      '',
+      '015_셀프중문.md와 003-1_현관중문.md를 참고해 현관 수평과 설치 난이도를 비교한다.',
+    ]]),
+    performance([{ post_no: '152', verdict: 'faded' }])
+  );
+
+  assert.strictEqual(
+    dataset.records[0].topic_summary,
+    '[다른 글]와 [다른 글]를 참고해 현관 수평과 설치 난이도를 비교한다.'
+  );
+}
+
+function testRemovesPublicationWorkflowSentences() {
+  const dataset = buildBlindDataset(
+    registry([[
+      '152',
+      '152_a.md',
+      'H1',
+      '중문설치',
+      '고객 고민 제목',
+      '-',
+      '',
+      '허브 복구용 새 발행본. 검색 매칭 보강 발행본. 기존 글 복구용. 현관 폭과 신발장 간섭을 설명한다.',
+    ]]),
+    performance([{ post_no: '152', verdict: 'landed' }])
+  );
+
+  assert.strictEqual(dataset.records[0].topic_summary, '현관 폭과 신발장 간섭을 설명한다.');
+}
+
+function testPreservesLongContentSummariesAfterMetadataRemoval() {
+  const source = '현관 폭과 신발장 간섭을 먼저 확인하고 문 열림 방향과 가벽 필요 여부를 함께 판단한다. 추가 비용과 마감 범위까지 비교해 고객이 선택할 기준을 정리한다.';
+
+  const dataset = buildBlindDataset(
+    registry([['152', '152_a.md', 'H1', '중문설치', '고객 고민 제목', '-', '', source]]),
+    performance([{ post_no: '152', verdict: 'landed' }])
+  );
+  assert.strictEqual(dataset.records[0].topic_summary, source);
+}
+
+function testGateRejectsFinalMetadataLeakPatterns() {
+  const base = {
+    schema_version: 1,
+    id: 'topic_outcome_blind_dataset',
+    record_count: 1,
+    records: [{
+      blind_id: 'T-abcdefghijkl',
+      title: '고객 고민 제목',
+      target_keywords: ['중문설치'],
+      topic_summary: '',
+      has_summary: true,
+    }],
+  };
+  const leaks = [
+    '가격가이드 E 템플릿 적용.',
+    '015_셀프중문.md를 참고한다.',
+    '허브 복구용 새 발행본.',
+    '[다른…',
+  ];
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'topic-blind-final-gate-'));
+
+  try {
+    leaks.forEach((leak, index) => {
+      const dataset = JSON.parse(JSON.stringify(base));
+      const outputPath = path.join(tempDir, `unsafe-${index}.json`);
+      dataset.records[0].topic_summary = leak;
+      assert.throws(
+        () => writeBlindDataset(outputPath, dataset, new Set(['015'])),
+        /blind dataset leakage/i,
+        `gate accepted leak: ${leak}`
+      );
+      assert.strictEqual(fs.existsSync(outputPath), false);
+    });
+  } finally {
+    fs.rmSync(tempDir, { recursive: true, force: true });
+  }
+}
+
 function testDatesDefaultOutputFromPerformanceSnapshot() {
   assert.match(
     defaultOutputPath('2026-08-15'),
@@ -274,6 +382,11 @@ function main() {
   testRemovesHollowSummaryWithoutDiscardingKeywordContext();
   testRejectsUnsafeDatasetBeforeWriting();
   testGateAllowsOrdinaryNumbersButRejectsRegisteredPostReferences();
+  testRemovesAllAuthoringTemplateSentences();
+  testMasksMarkdownFilenameReferencesWithoutChangingContent();
+  testRemovesPublicationWorkflowSentences();
+  testPreservesLongContentSummariesAfterMetadataRemoval();
+  testGateRejectsFinalMetadataLeakPatterns();
   testDatesDefaultOutputFromPerformanceSnapshot();
   console.log('topic blind dataset tests passed');
 }

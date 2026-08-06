@@ -5,6 +5,8 @@ const path = require('path');
 const ROOT_DIR = path.resolve(__dirname, '..');
 const DEFAULT_REGISTRY_PATH = path.join(ROOT_DIR, 'docs', 'strategy', 'POSTING_REGISTRY.json');
 const DEFAULT_PERFORMANCE_PATH = path.join(ROOT_DIR, 'data', 'performance', 'post_performance.json');
+const markdownFilenamePattern = /\b\d{3}(?:-\d+)?_[^\s]*?\.md\b/g;
+const brokenMaskingTokenPattern = /\[(?:다른|날짜)(?![^\]]*\])/;
 
 const forbiddenOutcomeFields = [
   'post_no',
@@ -27,9 +29,10 @@ const operationalLeakRules = [
   { name: 'queue marker', pattern: /\bQ-\d+\b/i },
   { name: 'top-rank marker', pattern: /\bTOP\s*\d+\b/i },
   { name: 'protected asset', pattern: /보호글|보호\s*자산/i },
-  { name: 'performance operation', pattern: /순위\s*이탈|상위\s*유지|약세\s*보강|검색\s*방어용|보강용/i },
+  { name: 'performance operation', pattern: /순위\s*이탈|상위\s*유지|약세\s*보강|검색\s*방어용|보강용|복구용/i },
   { name: 'performance-based planning', pattern: /(?:순위[·\s]*통계|누적\s*통계|통계)\s*기반|신규\s*글/i },
-  { name: 'authoring template', pattern: /(?:정보성|제품가이드)\s*[A-Z]\s*템플릿\s*적용/i },
+  { name: 'publication workflow', pattern: /허브\s*복구용|새\s*발행본|발행본/i },
+  { name: 'authoring template', pattern: /[가-힣]+\s*[A-Z]\s*템플릿(?:\s*적용)?/i },
 ];
 
 const allowedRecordFields = new Set([
@@ -157,6 +160,10 @@ function maskPostReferences(value, postNumbers) {
   return text;
 }
 
+function maskMarkdownFilenameReferences(value) {
+  return String(value || '').replace(markdownFilenamePattern, '[다른 글]');
+}
+
 function hasMeaningfulSummary(value) {
   const remainder = String(value || '')
     .replace(/\[(?:날짜 마스킹|다른 글)\]/g, ' ')
@@ -168,7 +175,8 @@ function hasMeaningfulSummary(value) {
 function sanitizeTopicSummary(value, postNumbers) {
   const withoutDates = maskDateReferences(value);
   const withoutOperations = removeOperationalSentences(withoutDates);
-  const withoutPostNumbers = maskPostReferences(withoutOperations, postNumbers).trim();
+  const withoutFilenames = maskMarkdownFilenameReferences(withoutOperations);
+  const withoutPostNumbers = maskPostReferences(withoutFilenames, postNumbers).trim();
   return hasMeaningfulSummary(withoutPostNumbers) ? withoutPostNumbers : '';
 }
 
@@ -215,6 +223,12 @@ function assertSafeBlindDataset(dataset, postNumbers) {
         });
         if (maskPostReferences(value, postNumbers) !== String(value || '')) {
           problems.push(`${label}.${field}: registered post reference`);
+        }
+        if (maskMarkdownFilenameReferences(value) !== String(value || '')) {
+          problems.push(`${label}.${field}: markdown filename reference`);
+        }
+        if (brokenMaskingTokenPattern.test(String(value || ''))) {
+          problems.push(`${label}.${field}: broken masking token`);
         }
       });
     });
@@ -301,6 +315,7 @@ module.exports = {
   defaultOutputPath,
   forbiddenOutcomeFields,
   maskDateReferences,
+  maskMarkdownFilenameReferences,
   maskPostReferences,
   operationalLeakRules,
   registryTopics,
