@@ -7,11 +7,6 @@ const DEFAULT_REPORTS_DIR = path.join(ROOT_DIR, 'outputs', 'reports', 'daily');
 const DEFAULT_REGISTRY_PATH = path.join(ROOT_DIR, 'docs', 'strategy', 'POSTING_REGISTRY.json');
 const DEFAULT_TAXONOMY_PATH = path.join(ROOT_DIR, 'docs', 'strategy', 'SEO_TAXONOMY.json');
 const DEFAULT_LEDGER_PATH = path.join(ROOT_DIR, 'data', 'performance', 'post_performance.json');
-const CONFIRMED_TITLE_HISTORY = {
-  // 등록부에는 현재 제목만 남아 있는 086번의 사용자 확인 발행 제목 이력이다.
-  '086': ['평수별 중문 설치 비용 확인할 3가지 기준'],
-};
-
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
@@ -80,7 +75,9 @@ function extractMarkdownTables(sectionText) {
 
 function topSection(content) {
   const lines = content.split(/\r?\n/);
-  const start = lines.findIndex((line) => /^##\s+게시글\s*TOP/.test(line.trim()));
+  const start = lines.findIndex((line) => (
+    /^##\s+(?:\d+\.\s*)?게시글\s*TOP\s*20(?:\s|$)/.test(line.trim())
+  ));
   if (start < 0) return null;
 
   const body = [];
@@ -245,9 +242,28 @@ function registryEntries(registry) {
       });
     });
 
-  Object.entries(CONFIRMED_TITLE_HISTORY).forEach(([postNo, titles]) => {
-    if (!byPostNo.has(postNo)) return;
-    titles.forEach((title) => addTitle(postNo, title));
+  (registry.title_aliases || []).forEach((aliasEntry) => {
+    const postNo = normalizePostNo(aliasEntry && aliasEntry.post_no);
+    if (!postNo || !byPostNo.has(postNo)) {
+      throw new Error(`title_aliases references unknown post: ${String(aliasEntry && aliasEntry.post_no)}`);
+    }
+    if (!Array.isArray(aliasEntry.titles) || aliasEntry.titles.length === 0) {
+      throw new Error(`title_aliases titles must be a non-empty array: ${postNo}`);
+    }
+    if (!String(aliasEntry.evidence || '').trim()) {
+      throw new Error(`title_aliases evidence is required: ${postNo}`);
+    }
+
+    aliasEntry.titles.forEach((title) => {
+      const text = String(title || '').trim();
+      const titleKey = normalizeTitle(text);
+      if (!titleKey) throw new Error(`title_aliases contains an empty title: ${postNo}`);
+      const existingOwners = titleMap.get(titleKey) || new Set();
+      if ([...existingOwners].some((owner) => owner !== postNo)) {
+        throw new Error(`title_aliases conflict for "${text}": ${[...existingOwners, postNo].join(', ')}`);
+      }
+      addTitle(postNo, text);
+    });
   });
 
   return { byPostNo, titleMap };

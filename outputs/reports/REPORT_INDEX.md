@@ -10,6 +10,7 @@
 | 채널 상태/목표/전략 분석 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 최신 장기 진단의 결론과 다음 읽을 파일 |
 | 일일 유입경로/검색어 관제 | 최신 `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` | daily report가 주 근거 |
 | 오늘 글감/신규 후보 | 최신 daily + 최신 `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | daily는 증거, scorecard는 후보 판단 |
+| 소재 선정 구조 재검증 | `docs/strategy/TOPIC_SELECTION_REDESIGN_PLAN_V0.2.md` + `outputs/reports/topic_analysis/2026-08-06_topic_blind_dataset.json` | 성패를 가린 독립 분류가 끝나기 전 운영 규칙으로 승격 금지 |
 | 순위 변화 참고 | `outputs/reports/ranking_report.md`, `outputs/reports/ranking_changes_summary.md` | weekly/experimental 보조 |
 | TOP10 구조 참고 | `outputs/reports/top10_analysis.md` | 제목/구조 참고, 단독 의사결정 금지 |
 
@@ -19,8 +20,9 @@
 | --- | --- | --- | --- |
 | 채널 진단 | `outputs/reports/channel_diagnosis_2026-07-15.md` | 2026-06-15~2026-07-14 확정값, 2026-07-15 실시간 현황 | L3 진단. 성장 확인과 재방문·내부 회수 병목 판단 |
 | 최신 포인터 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 2026-07-15 | 새 세션용 진입점 |
-| daily | `outputs/reports/daily/2026-08-05_seo_watch.md` | 2026-08-04 확정, 2026-08-05 16:25 실시간 | 1,247조회, 통합검색 78.67%. 170 URL 등록, 공개 REVIEW 1건 원본 ID 매칭 대기로 분리, 보호·관찰 Q-ID 갱신 |
+| daily | `outputs/reports/daily/2026-08-06_seo_watch.md` | 2026-08-05 확정, 2026-08-06 09:13 실시간 | 1,104조회, 통합검색 80.48%. TOP20 20행, 170 공감 1위는 SEO 성공과 분리 관찰 |
 | topic scorecard | `outputs/reports/topic_candidates/2026-07-14_topic_scorecard.md` | 2026-07-13 통계, 2026-07-06 광고 API 기반 | 159~161번의 방문 진단·중문 철거 후 재설치 각도와 중복 회피 판단 |
+| topic blind dataset | `outputs/reports/topic_analysis/2026-08-06_topic_blind_dataset.json` | 2026-08-06 성과 원장 | 글번호·날짜·순위·판정이 제거된 123건 독립 분류 입력 |
 | ranking | `outputs/reports/ranking_report.md` | 2026-07-07 | URL 기반 순위 참고 |
 | ranking summary | `outputs/reports/ranking_changes_summary.md` | 2026-07-06 -> 2026-07-07 | 순위 변화 보조 |
 | TOP10 analysis | `outputs/reports/top10_analysis.md` | 2026-07-06 갱신 | 상위 글 제목/구조 참고 |
@@ -37,6 +39,7 @@
 
 | 보고서 | 기준일 | 핵심 메모 |
 | --- | --- | --- |
+| `outputs/reports/daily/2026-08-06_seo_watch.md` | 2026-08-05 | 조회수 1,104·통합검색 80.48%. TOP20 20행 전수, 170 공감 1위는 조회 TOP20과 분리 관찰. |
 | `outputs/reports/daily/2026-08-05_seo_watch.md` | 2026-08-04 | 조회수 1,247·통합검색 78.67%. 드레스룸·몰딩·문 닫힘·중문가격·문선 비교 보호축 유지, 170은 3일 단독 관찰, 174·176은 7일 분리 관찰. |
 | `outputs/reports/daily/2026-08-04_seo_watch.md` | 2026-08-03 | 조회수 1,300·통합검색 78.44%. 드레스룸·방문 닫힘·천장몰딩·걸레받이 보호축 유지, 126·171·173·174·175·176·179 URL 등록 후 분리 관찰. |
 | `outputs/reports/daily/2026-08-03_seo_watch.md` | 2026-08-02 | 조회수 1,182·통합검색 77.12%. 드레스룸·걸레받이·천장몰딩·방문 닫힘 보호축 동시 잔존. |

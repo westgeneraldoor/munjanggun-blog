@@ -1,0 +1,1270 @@
+{
+  "schema_version": 1,
+  "id": "topic_outcome_blind_dataset",
+  "record_count": 123,
+  "records": [
+    {
+      "blind_id": "T-abiamgdolohh",
+      "title": "아파트 중문 브랜드 선택 전 꼭 봐야 할 3가지",
+      "target_keywords": [
+        "중문브랜드"
+      ],
+      "topic_summary": "비교가이드 B 템플릿 적용. 대기업 홈쇼핑 브랜드 vs 영세 공방 vs 문장군 직영 3대 채널 상세 비교표 제공, 시공 주체(외주 하청 vs 본사 전속팀)에 따른 마감 완성도 차이, A/S(기사 개인 조율 vs 본사 직영망 2년 보증) 차이, 신발장 EP 따내기 맞춤 공법을 통한 가벽비 추가금 절약 팁, 12개월 무이자할부(월 4만원대부터) 언급",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-adngmdamnboo",
+      "title": "아파트 중문 설치 이사 전과 입주 후 언제가 나을까?",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-ahnlfofkianf",
+      "title": "세종중문, 반려견 짖는 소음 완벽히 차단한 3가지 비결",
+      "target_keywords": [
+        "세종중문"
+      ],
+      "topic_summary": "시공사례 C 템플릿 적용. 세종 새롬동 아파트. 강아지 짖음으로 인한 복도 소음 갈등을 방지하기 위해 밀폐력이 뛰어난 3연동 중문 시공. 브론즈 유리를 적용해 시각적 자극을 줄이고 이중 모헤어와 레이저 레벨기 영점 조준으로 방음 효과를 극대화한 사례 어필.",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-aibomfkkaaei",
+      "title": "문선 종류 3가지 비교와 목공 공사 없이 슬림하게 마감하는 법",
+      "target_keywords": [
+        "문선 (5",
+        "020)"
+      ],
+      "topic_summary": "정보성 A 템플릿 적용. 문선 대표 4종 비교표(일반/12mm/9mm/무문선 공정, 마감재, 비용), 9mm/무문선 인테리어의 목공 가벽 보강 공사비 함정, 목공 보강 없는 12mm 슬림문선의 대안적 강점, 12mm 도배 경계선 밀착 시공, 뒤틀림 충격 완충 지지날개(쉐누 발포), 레이저 영점 조준, 수원 15년 구축 12mm 슬림문선 시공 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-ainjgleiejeh",
+      "title": "ㄱ자중문 시공, 가벽이 필요한 현관 구조는 따로 있습니다",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-akibjegnoojh",
+      "title": "폴딩 스윙중문 찾기 전 3가지 스윙 기준",
+      "target_keywords": [
+        "접이식중문(스윙)"
+      ],
+      "topic_summary": "제품가이드 A 템플릿 적용. 소비자 검색어 접이식중문을 문장군 제품명 스윙 구조로 자연스럽게 전환. 개방폭, 바닥 레일 유무, 신발장·스위치 간섭 기준을 설명하고 스윙도어/중문종류/여닫이문 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-anjgmlkoogoo",
+      "title": "신축아파트 중문 옵션 안했는데 나중에 설치 가능할까요?",
+      "target_keywords": [
+        "신축아파트중문",
+        "중문옵션",
+        "신축중문옵션",
+        "중문가벽",
+        "아파트중문"
+      ],
+      "topic_summary": "신축아파트 중문 옵션을 뺀 집에서 나중 시공 전 가벽 필요 여부, 고정면, 신발장 간섭, 스위치 위치를 먼저 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-apafogodafnk",
+      "title": "3연동 자동중문, 현관 동선부터 봐야 편합니다",
+      "target_keywords": [
+        "3연동자동중문",
+        "자동중문",
+        "현관동선",
+        "신발장간섭",
+        "자동중문설치"
+      ],
+      "topic_summary": "3연동 자동중문을 기능만으로 고르지 않고 신발장 문 열림, 가족 출입, 큰 짐과 문짝이 모이는 위치를 기준으로 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-bafjhbkdcllc",
+      "title": "좁은현관중문 설치 전 답답하지 않게 하는 3가지 기준 확인!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-bbejbdebachf",
+      "title": "도어힌지, 방문경첩교체를 했는데 며칠 뒤 또 헐거워진다면?",
+      "target_keywords": [
+        "도어힌지",
+        "방문경첩교체",
+        "방문교체",
+        "문짝교체",
+        "문틀"
+      ],
+      "topic_summary": "경첩 부품 자체가 망가진 상황을 소리가 시작되는 각도, 나사 구멍이 커졌는지, 문짝 무게 대비 힌지 개수로 나눠 진단하고 교체 범위로 착지하는 글. 160번의 문짝 처짐 원인 진단과 구분한다. 경첩 단독 교체와 셀프 방법은 안내하지 않는다",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-bgiaccpepncb",
+      "title": "중문 유리만 바꾸고 싶은데, 전체 교체까지 봐야 하는 경우",
+      "target_keywords": [
+        "중문유리교체",
+        "3연동중문유리교체",
+        "중문유리",
+        "중문교체",
+        "3연동중문"
+      ],
+      "topic_summary": "중문 유리교체를 유리 색상만이 아니라 문짝 프레임, 레일·롤러, 기존 부품 호환, 전체 교체 필요 여부로 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-bhafiejgffjm",
+      "title": "몰딩 없는 집 방문교체, 문선 마감까지 같이 봐야 하는 이유",
+      "target_keywords": [
+        "몰딩없는집",
+        "무몰딩",
+        "방문교체",
+        "문선마감",
+        "12mm문선"
+      ],
+      "topic_summary": "무몰딩/몰딩 없는 집에서 방문교체 시 문틀, 문선, 벽지 끝선까지 같이 봐야 하는 마감 기준 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-bogffpjnjfln",
+      "title": "중문설치 살면서 할 때 소음 분진 줄이는 3가지 시공 포인트",
+      "target_keywords": [
+        "중문설치"
+      ],
+      "topic_summary": "살면서(거주 중) 시공 타임라인 및 분진소음 강도 표, 복도 실외재단 및 집진기 가공 방식, 시흥 구축아파트 2시간 완성 시공 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-bpakllhpifnp",
+      "title": "우드 컬러 중문 선택 전 확인해야 할 3가지!!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-bpdlajaihmel",
+      "title": "3연동중문이 뻑뻑해졌다면 수리보다 먼저 봐야 할 교체 신호",
+      "target_keywords": [
+        "3연동중문수리",
+        "중문수리",
+        "3연동중문교체",
+        "중문교체비용",
+        "중문레일"
+      ],
+      "topic_summary": "3연동중문 뻑뻑함을 수리 가능성보다 레일, 롤러, 프레임, 교체 신호로 안전하게 전환하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-bplicmcmnhke",
+      "title": "중문 업체 고를 때, 가격보다 설치 후 대응을 먼저 봐야 하는 이유",
+      "target_keywords": [
+        "중문업체",
+        "중문브랜드",
+        "중문시공업체",
+        "신축아파트중문",
+        "중문견적"
+      ],
+      "topic_summary": "중문 업체 선택 시 가격보다 실측 방식, 설치 후 문의 흐름, 현장 조건 확인을 먼저 보게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-cafamffcnlie",
+      "title": "화장실 문턱, 바꾸기 전 확인할 3가지 경계",
+      "target_keywords": [
+        "화장실문턱",
+        "화장실문교체",
+        "욕실문교체",
+        "화장실문틀",
+        "ABS도어"
+      ],
+      "topic_summary": "화장실 문턱을 단독 제거 대상으로 보지 않고 욕실 타일과 바닥 높이, 문틀 하부의 습기 흔적, 문짝 간격과 생활 동선을 함께 확인하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-cdpnagnabhga",
+      "title": "방문을 미닫이문으로 바꾸고 싶을 때 먼저 봐야 할 기준!",
+      "target_keywords": [
+        "방미닫이문설치",
+        "방문슬라이딩도어",
+        "방문미닫이문",
+        "미닫이문여닫이문교체",
+        "방문교체"
+      ],
+      "topic_summary": "여닫이 방문을 미닫이문/슬라이딩도어로 바꿀 때 벽면 여유, 레일, 문틀 마감까지 확인하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-cehkidmiolca",
+      "title": "자동중문 단점, 고장 걱정 전에 꼭 확인해 보세요!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-cfimglppcnlp",
+      "title": "셀프중문 시작 전 꼭 봐야 할 3가지 실패 이유",
+      "target_keywords": [
+        "셀프중문"
+      ],
+      "topic_summary": "015_셀프중문.md의 셀프 실패 후 전문가 전환 관점 새 발행본. 셀프중문/중문셀프시공 의도 대응, 현관 수평·실제 비용·유리와 프레임 취급 난이도, 안산 고객 셀프 실패 후 재시공 사례, 무료 방문실측 후 결정 CTA",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-cgmppbolhika",
+      "title": "3연동중문은 큰 가구 반입 때 어떻게 해야 할까요?",
+      "target_keywords": [
+        "3연동중문큰가구",
+        "3연동중문문짝탈부착",
+        "3연동중문설치",
+        "중문설치큰가구",
+        "3연동중문사이즈"
+      ],
+      "topic_summary": "큰 가구 반입 걱정을 3연동중문 문짝 탈부착, 유효 통과 폭, 이사 전후 설치 순서 기준으로 풀어내는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-chjnkklogoal",
+      "title": "셀프중문 시작 전 꼭 봐야 할 3가지 기준!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-chkbnjncpjip",
+      "title": "화장실문 교체, 타일 마감 걱정하기 전 확인할 3가지!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-cjnddifnfbge",
+      "title": "걸레받이 교체, 실리콘만 다시 쏘면 괜찮을까요?",
+      "target_keywords": [
+        "걸레받이교체",
+        "걸레받이실리콘",
+        "걸레받이몰딩",
+        "문선마감"
+      ],
+      "topic_summary": "걸레받이 틈을 실리콘 문제로만 보지 않고 벽 하단, 바닥재 끝선, 문틀 옆 마감선까지 함께 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-cpdmjpnmnojn",
+      "title": "3연동중문 브론즈유리 선택 전 꼭 보는 3가지",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-dedfjjjfaacl",
+      "title": "아파트 중문 설치 비용 예산 아끼는 3가지 팩트 체크",
+      "target_keywords": [
+        "아파트중문설치비용"
+      ],
+      "topic_summary": "가격가이드 E 템플릿 적용. 인테리어 예산 초과 시 중문 포기하려는 자금 압박 공감, 턴키 중간 마진을 줄이는 직영 개별 발주 비교표, 현관 변수별 추가금 유발 요인 정리표, 이자 0원 12개월 무이자할부(월 4만원대부터)를 통한 유동성 확보 팁, 네이버 브랜드스토어 안전 결제 팁, 100% 무료 방문 실측 제안",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-dgffgdkfelgp",
+      "title": "중문 철거 후 재설치, 기존 자리에서 먼저 봐야 할 기준",
+      "target_keywords": [
+        "중문철거",
+        "중문재설치",
+        "중문철거후재설치",
+        "중문교체",
+        "중문철거비용"
+      ],
+      "topic_summary": "기존 중문을 철거한 뒤 재설치할 때 기존 자리의 레일·프레임·바닥·벽 마감과 재사용 가능 범위를 먼저 확인하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-dgjhjhcaihic",
+      "title": "중문 견적 받기 전 확인할 3가지 실측 기준",
+      "target_keywords": [
+        "중문견적받는법",
+        "중문견적"
+      ],
+      "topic_summary": "[날짜 마스킹] 순위·통계 기반 신규 글. 중문견적 상승과 견적 받는 방법 유입을 제품 가격표가 아니라 현관 간섭, 가벽 필요, 철거·마감 범위 실측 기준으로 재해석. 057/019-1/079 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-dgjlmcmdheep",
+      "title": "좁은 원룸에 중문 달면 더 답답해질까요?",
+      "target_keywords": [
+        "원룸중문",
+        "원룸현관중문",
+        "현관중문",
+        "중문설치",
+        "좁은현관중문"
+      ],
+      "topic_summary": "원룸 현관 중문을 집 안 시선 차단만이 아니라 두 문 사이 대기공간, 냉장고·신발장 간섭, 조도와 이삿짐 통과 폭으로 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-dhakledgpiod",
+      "title": "아파트 양개형 중문 선택 전 꼭 봐야 할 3가지",
+      "target_keywords": [
+        "양개형중문"
+      ],
+      "topic_summary": "제품가이드 A 템플릿 적용. 여닫이 양개형 미제작 사실 공감, 넓은 2m~3m 폭 대형 현장용 미닫이 방식 2종(3연동 양개형 vs 2짝 미서기 양개형) 상세 비교표, 상하부 레일 수평 정밀 측정 영점 시공 노하우(처짐 방지), 이중 고밀도 모헤어 밀폐력 강조, 용인 2.4m 광폭 현관 3연동 양개형 시공 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-dhhinomjgfap",
+      "title": "좁은 현관 중문 설치, 신발장 간섭부터 확인해야 하는 이유!",
+      "target_keywords": [
+        "좁은현관중문",
+        "신발장간섭중문",
+        "ㄱ자중문",
+        "현관가벽중문",
+        "3연동중문"
+      ],
+      "topic_summary": "좁은 현관 중문을 최소사이즈가 아니라 신발장 문 열림, 손잡이 돌출, 고정면, 실제 통과 폭 기준으로 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-dmokoepiopch",
+      "title": "자동중문 비용, 설치 후 AS까지 생각하면 꼭 봐야 할 것",
+      "target_keywords": [
+        "중문자동문비용",
+        "자동중문비용",
+        "자동중문AS",
+        "신축아파트중문",
+        "현관중문자동문"
+      ],
+      "topic_summary": "자동중문 비용을 제품가가 아니라 전기·센서·구동부·신축 옵션 AS 주체와 설치 후 대응 흐름으로 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-dnhmeepaeejn",
+      "title": "3연동 중문 댐퍼 유무, 설치 전 꼭 확인해야 할 기준!",
+      "target_keywords": [
+        "3연동중문댐퍼",
+        "3연동중문",
+        "중문댐퍼",
+        "3연동중문단점",
+        "중문설치"
+      ],
+      "topic_summary": "3연동중문 댐퍼 유무를 닫힘 소리, 레일 수평, 사용 습관 기준으로 판단하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-dojgghoidoln",
+      "title": "문교체비용 달라지는 3가지 견적 기준",
+      "target_keywords": [
+        "문교체비용"
+      ],
+      "topic_summary": "가격가이드 E 템플릿 적용. 문짝만/문짝+문틀필름/문짝+문틀세트/12mm슬림문선 세트 범위 결정표, 방문·화장실문·세탁실문·중문별 비용 기준, 성남 아파트 방별 교체 범위 분리 견적 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-eegoehkcmhhd",
+      "title": "화장실 문틀 교체 3가지 세트 기준",
+      "target_keywords": [
+        "화장실문틀교체"
+      ],
+      "topic_summary": "정보성 A 템플릿 적용. 문틀 단독 교체 불가 기준을 정직하게 설명하고, 기존 문틀 철거 후 우레탄 폼과 새 문틀로 개구부가 달라져 기존 문짝 재사용이 어려운 이유, 문짝+문틀세트/문짝교체+문선마감/문짝교체+문틀필름 선택 기준, 화장실문교체/방문교체비용/ABS도어 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-eepkkmdffadf",
+      "title": "세탁실 문 교체비용, 문틀 상태에 따라 달라지는 3가지 기준",
+      "target_keywords": [
+        "세탁실문교체",
+        "세탁실문교체비용",
+        "ABS도어",
+        "문틀 상태",
+        "화장실문교체비용"
+      ],
+      "topic_summary": "세탁실 문 교체비용을 문짝만이 아니라 문틀 하부 습기, 세탁기 간섭, ABS도어와 타공 여부 기준으로 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-efdkaldjacdk",
+      "title": "ㄱ자중문 설치, 신발장 간섭한다면 먼저 봐야 할 것",
+      "target_keywords": [
+        "ㄱ자중문",
+        "ㄱ자중문설치",
+        "신발장간섭중문",
+        "현관가벽중문",
+        "좁은현관중문"
+      ],
+      "topic_summary": "ㄱ자중문 설치 시 신발장 돌출과 문 열림 간섭을 먼저 보고, 가공·가벽·중문 구조 선택으로 풀어내는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-egbcfmcgbdji",
+      "title": "12mm 슬림문선 세트 선택 전 보는 3가지 기준",
+      "target_keywords": [
+        "12mm슬림문선세트",
+        "슬림문선세트"
+      ],
+      "topic_summary": "[날짜 마스킹] 제품 범위 보정 신규 글. 9mm 문선은 비교 검색어로만 다루고 문장군 시공 가능 서비스처럼 쓰지 않음. 문장군 기준인 12mm슬림문선 세트를 마감선, 교체 범위, 문틀 상태 기준으로 설명. 063/075/050 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-ekdincpkkpdp",
+      "title": "전세집 중문 설치 전 집주인에게 확인할 3가지!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-eohkbjcjlaee",
+      "title": "아파트 현관 중문종류 5종 비교하고 1분 만에 고르는 법",
+      "target_keywords": [
+        "중문종류 (930)"
+      ],
+      "topic_summary": "정보성 A 템플릿 적용. 현관 중문 대표 8종 비교표(구동/개방률/폭/장점/한계), 구조 상황별 맞춤 추천 맵(가로 폭/벽면/가벽 여부), 신발장/디딤판/스위치 간섭 변수 대처법, 신발장 EP 따내기 매립 공법, 용인 수지 30평대 1120mm 좁은 현관에 프렌치 양개도어 대안으로 초슬림 무턱 스윙도어 맞춤 시공한 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-fddegdoeahhe",
+      "title": "몰딩시공 타이밍이 비용을 바꾸는 이유",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-ffggpibppbpj",
+      "title": "화장실 문짝만 바꾸려다, 방문 전체를 교체하게 된 이유",
+      "target_keywords": [
+        "화장실문교체",
+        "화장실문짝교체",
+        "ABS도어",
+        "방문교체",
+        "문짝교체"
+      ],
+      "topic_summary": "화장실문 한 짝의 손상에서 시작해 한 짝만 교체해도 되는 조건과 복도에서 보이는 여러 방문·문선·마감 상태를 함께 비교할 조건을 나눈 상황형 정보글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-fkklokafolem",
+      "title": "방문손잡이교체 전 문짝 상태를 먼저 봐야 하는 이유",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-fkncdikbffan",
+      "title": "문선 색상 바꿨는데 집이 더 낡아 보이는 3가지 이유",
+      "target_keywords": [
+        "문선색상",
+        "문선몰딩",
+        "문틀몰딩",
+        "도배몰딩",
+        "몰딩색상",
+        "12mm슬림문선"
+      ],
+      "topic_summary": "문선 색상을 문선 규격이나 공사 범위가 아닌 벽지, 문짝, 바닥, 걸레받이, 조명 아래 경계선의 선택 기준으로 설명하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-fokhjogagcmf",
+      "title": "3연동중문 단점, 설치 전 먼저 봐야 할 3가지",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-fpmihnoiaehh",
+      "title": "드레스룸 슬라이딩도어가 불편한 집은 이유가 있습니다",
+      "target_keywords": [
+        "드레스룸슬라이딩도어",
+        "드레스룸중문",
+        "슬라이딩도어",
+        "원슬라이딩도어"
+      ],
+      "topic_summary": "드레스룸 슬라이딩도어를 입구 폭만이 아니라 옷장 문, 서랍, 침대 동선, 벽면 여유 기준으로 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-gcbedcplnboh",
+      "title": "세탁실 문이 세탁기에 걸릴 때, 교체 전에 먼저 봐야 할 기준",
+      "target_keywords": [
+        "세탁실문교체",
+        "세탁실문방향",
+        "세탁실문세탁기간섭",
+        "세탁실문교체비용",
+        "방문슬라이딩도어"
+      ],
+      "topic_summary": "세탁실 문이 세탁기나 건조기와 간섭될 때 문 방향 변경보다 세탁기 돌출, 문틀, 경첩, 슬라이딩 가능성을 먼저 보는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-gfegcomiflcn",
+      "title": "스윙도어 중문 손 끼임, 아이 있는 집은 이것부터 확인하세요!",
+      "target_keywords": [
+        "스윙도어중문손끼임",
+        "스윙도어중문",
+        "아이있는집중문",
+        "중문손끼임",
+        "스윙도어중문단점"
+      ],
+      "topic_summary": "아이 있는 집에서 스윙도어 중문을 볼 때 디자인보다 손끼임, 닫힘 속도, 댐퍼, 열림 방향을 먼저 확인하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-ggodjdakbfhd",
+      "title": "걸레받이몰딩 시공 전 꼭 봐야 할 3가지 체크리스트",
+      "target_keywords": [
+        "걸레받이몰딩 (6",
+        "800)"
+      ],
+      "topic_summary": "정보성 A 템플릿 적용. 걸레받이 몰딩 3종 비교표(MDF/PVC/알루미늄), 바닥재별 몰딩 시공 가이드 표, 벽/바닥 수평 편차와 실리콘 마감의 상관관계, 시공 정석 순서(바닥→몰딩→도배), 12mm 슬림문선 간섭 회피 사선 재단 가공, 곰팡이 방지 바이오 실리콘 마감, 성남 구축 아파트 화장실 앞 썩은 몰딩 교체 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-gkkbbnlkiboc",
+      "title": "3연동중문 설치 전 확인할 3가지 비용 기준",
+      "target_keywords": [
+        "3연동중문"
+      ],
+      "topic_summary": "002_3연동중문.md의 허브 복구용 새 발행본. 3연동중문/3연동 중문 설치/3연동중문 설치 비용 의도 대응, 프레임·유리 사양, 레일·댐퍼 부속, 현장 변수와 추가금 안내, 수원 아이 있는 집 초슬림 3연동중문 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-gmhelebbance",
+      "title": "방문 경첩교체 전에 문짝이 처진 이유부터 봐야 합니다",
+      "target_keywords": [
+        "방문경첩교체",
+        "방문경첩",
+        "문이바닥에끌릴때",
+        "문이안닫힐때",
+        "문짝교체"
+      ],
+      "topic_summary": "방문경첩교체 검색을 경첩 나사 하나의 수리 권유로 끝내지 않고, 문짝 처짐·문틀 간격·바닥 마감 높이의 진단 기준으로 전환하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-gmmgmoodjlhf",
+      "title": "ABS도어란? 화장실문과 방문을 고를 때 먼저 나눠야 할 기준",
+      "target_keywords": [
+        "ABS도어",
+        "ABS도어란",
+        "ABS방문",
+        "화장실문교체",
+        "방문교체"
+      ],
+      "topic_summary": "ABS도어를 화장실 전용 문으로 오해하지 않도록 문짝 표면·문틀·문선·사용 공간을 나눠 방 문까지의 선택 기준을 설명하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-gnoeohcalcfd",
+      "title": "ABS도어 방문교체, 문짝만 바꿔도 되는 집과 문틀까지 봐야 하는 집",
+      "target_keywords": [
+        "ABS도어",
+        "방문교체",
+        "방문교체비용",
+        "문짝교체비용",
+        "문교체비용"
+      ],
+      "topic_summary": "ABS도어 방문교체를 문짝 단독, 문짝+문틀세트, 문선·필름 마감 범위로 나누어 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-godohkompmkh",
+      "title": "아파트 중문 설치 시간 달라지는 3가지 현장",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-haelgdndleob",
+      "title": "아파트 9mm 문선 선택 전 꼭 봐야 할 3가지",
+      "target_keywords": [
+        "9mm문선(비교 검색어)"
+      ],
+      "topic_summary": "비교가이드 B 템플릿 적용. 9mm 문선 검색어 대응용 비교 글이며, 문장군 9mm 시공 가능 주장 금지. 9mm vs 12mm 슬림문선 세트 상세 비교표 제공, 9mm 문선의 약한 완충 지지구조(헐거워짐 및 도배선 찢어짐 하자리스크) 지적, 문장군 기준인 12mm 문선의 충격 흡수 완충 지지날개(발포 쉐누 날개) 및 문틀+문짝 일체 '슬림문선 세트 시공'의 장기 보존성 강점 소구, 성남 30평형 방문/문틀 전체 교체 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-hdagejkdkiig",
+      "title": "거주중 중문시공 전 꼭 보는 3가지 생활 기준",
+      "target_keywords": [
+        "거주중중문시공",
+        "살면서중문"
+      ],
+      "topic_summary": "[날짜 마스킹] TOP20 작성일 확인. 083 TOP20 진입과 살면서 중문 상승을 받아 거주중 중문시공만 분리. 작업 공간, 집에 있어야 하는 시간, 현장 변수 기준으로 정리. 083/047/070 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-hgpipmachmjo",
+      "title": "문틀보수, 걸림쇠 자리가 뜯겨 문이 안 닫힐 때",
+      "target_keywords": [
+        "문틀보수",
+        "문틀수리",
+        "문짝+문틀세트",
+        "문짝교체",
+        "방문교체"
+      ],
+      "topic_summary": "문틀 단독 교체를 하지 않는 이유를 새 문틀과 기존 문짝의 맞물림 구조로 설명하고, 손상 위치를 걸림쇠·경첩·문선으로 나눠 문짝+문틀세트와 문짝교체+문선마감 범위로 안내하는 글. 문틀만 교체 가능처럼 읽히는 문장을 쓰지 않는다",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-hjkfpbhcpjch",
+      "title": "화장실문수리, 문 아래가 우글거리고 손잡이가 녹슬고 흔들릴 때",
+      "target_keywords": [
+        "화장실문수리",
+        "화장실문교체",
+        "ABS도어",
+        "문짝교체",
+        "방문교체"
+      ],
+      "topic_summary": "화장실문의 부분 보수와 교체를 물이 닿는 면과 마른 면의 차이, 환기 조건이 결정하는 보수 수명, 금속 부품 부식 순서로 판단하는 글. 117번의 하부 손상 신호와 달리 보수 수명 판단 축이다. 방수 성능과 곰팡이 해결은 단정하지 않는다",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-iclfeljgiile",
+      "title": "초슬림 3연동중문 단점? 얇아서 불안하다면 꼭 확인하세요!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-igncdnelfbcm",
+      "title": "문짝교체비용 아끼는 개별 교체 vs 전체 시공 3가지 기준",
+      "target_keywords": [
+        "문짝교체비용"
+      ],
+      "topic_summary": "개별 교체 vs 전체교체 비용 효율, 노후 훼손 수준 판단 기준 3가지, 문장군 가성비 문틀 필름 래핑 + ABS도어 믹스 시공 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-iipflcokohcl",
+      "title": "중문 시공 소음, 거주 중 중문 설치 미리 알아두면 좋은 3가지",
+      "target_keywords": [
+        "중문시공소음",
+        "거주중중문시공",
+        "살고있는집중문시공",
+        "중문설치",
+        "중문시공"
+      ],
+      "topic_summary": "살고 있는 집에서 중문 시공 시 소음, 분진, 작업 동선이 달라지는 현장 기준",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-ijjbdifhfnpl",
+      "title": "문틀교체비용 전 꼭 확인할 3가지 범위",
+      "target_keywords": [
+        "문틀교체비용"
+      ],
+      "topic_summary": "가격가이드 E 템플릿 적용. 문틀만 단독 교체 비용이 아니라 문짝+문틀세트, 문짝교체+문선마감, 문짝교체+문틀필름 범위별 비용 구조를 설명. 기존 문짝 재사용 어려움, 우레탄 폼과 개구부 변화, 무료 방문실측 CTA",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-ikhefiacenhh",
+      "title": "ABS도어 가격 최저가와 실제 견적 3가지 진짜 차이",
+      "target_keywords": [
+        "ABS도어가격"
+      ],
+      "topic_summary": "가격가이드 E 템플릿 적용. 화장실문 부푸는 Pain Point 공감, 미끼 최저가 vs 올인원 패키지(자재+부자재+시공+폐기) 구성 비교표 제공, 추가 비용 유발 요인(비규격, 양중비, 출장비 등) 정리표, 문틀 뜯지 않는 필름 래핑 + ABS도어 교체 실속 가성비 조합 제안, 12개월 무이자할부(월 만원대부터) 및 도어 3년 무상 품질보증 팁",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-iomafchhhpmd",
+      "title": "아파트 아치형 중문 선택 전 꼭 봐야 할 3가지",
+      "target_keywords": [
+        "아치형중문"
+      ],
+      "topic_summary": "제품가이드 A 템플릿 적용. 아치형 가벽 조적/목공 가공비 추가금 부담 공감, 가벽 목공사 없이 중문 프레임 자체 가공으로 아치를 연출하는 문장군의 강점 소구, 4대 디자인 라인업(소프트 아치, 라운드 아치, 하프문 아치, 플로우 아치) 비교표 및 제공된 이미지별(3연동/스윙/원슬라이딩) 디자인 매칭 상세 설명, 곡선 틈새 외풍 방지 이중 모헤어 밀폐 기술, 수원 30평대 소프트 아치 3연동 중문 시공 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-jbanoaabhhep",
+      "title": "문장군 간살중문 디자인 완성하는 3가지 조합",
+      "target_keywords": [
+        "문장군간살중문",
+        "간살중문"
+      ],
+      "topic_summary": "[날짜 마스킹]~21 누적 통계 기반 신규 글. 문장군 간살/문장군 앤티크 화이트 브랜드 검색 방어용. 간살 간격, 유리 조합, 화이트·우드·골드 색상 기준으로 정리. 068/062/052 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-jcggencgmall",
+      "title": "아파트 중문 유리 선택 전 꼭 봐야 할 2가지",
+      "target_keywords": [
+        "중문유리"
+      ],
+      "topic_summary": "제품가이드 A 템플릿 적용. 중문유리 옵션(투명/모루/브론즈 등) 결정 장애 공감, 중문 유리 대표 4종 비교표 제공, 시선 차단과 조도 동시 조율하는 믹스매치/하부 고시 설계 팁, 파손 방지용 안전 강화유리 탑재 필요성 소구, 수원 영통구 30평대 복도식 아파트 브론즈 강화유리+하부 고시 시공 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-jebjlapknleg",
+      "title": "방문교체 후 걸레받이 색상이 어색하지 않게 고르는 기준",
+      "target_keywords": [
+        "걸레받이색상",
+        "걸레받이교체",
+        "방문교체",
+        "문선색상",
+        "도배몰딩"
+      ],
+      "topic_summary": "걸레받이 색상을 단독 샘플로 고르지 않고 새 방문·문선·벽지·바닥이 만나는 모서리와 기존 철거 자국까지 함께 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-jggehfecdegd",
+      "title": "중문 설치 소음 분진 줄이는 3가지 준비!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-jkijoobiagid",
+      "title": "화장실문교체 전 문틀까지 봐야 하는 3가지 신호",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-jllioppfpjkn",
+      "title": "방문이 안 닫힐 때 수리로 될지 교체해야 할지 나누는 기준!",
+      "target_keywords": [
+        "방문수리",
+        "방문교체",
+        "방문교체비용",
+        "방문경첩",
+        "문틀교체"
+      ],
+      "topic_summary": "방문이 안 닫히거나 처질 때 손잡이·경첩 수리로 끝나는지 문짝·문틀 교체까지 봐야 하는지 나누는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-kfhpcgahmbbd",
+      "title": "3연동중문 디자인, 우리 집 분위기에 맞게 고르려면?",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-khpponppedfc",
+      "title": "중문슬라이딩도어 설치 전 보는 3가지 조건",
+      "target_keywords": [
+        "중문슬라이딩도어"
+      ],
+      "topic_summary": "012_원슬라이딩중문.md와 046_슬라이딩도어.md의 검색 매칭 보강 발행본. 중문슬라이딩도어/원슬라이딩중문/슬라이딩도어 의도 연결, 3연동·원슬라이딩·2짝미서기·ABS 슬라이딩도어 차이, 벽면 조건과 좁은 현관 동선 기준",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-kicibfoieabl",
+      "title": "신축 아파트 중문 옵션 후회 줄이는 3가지 기준",
+      "target_keywords": [
+        "신축중문옵션",
+        "신축아파트중문"
+      ],
+      "topic_summary": "[날짜 마스킹]~21 누적 통계 기반 신규 글. 신축 중문옵션 안하면/신축옵션 중문 하자 검색 의도를 옵션 비판이 아니라 현관 구조, 유리·프레임 선택 폭, 입주 후 실측 가능성 기준으로 재해석. 057/052/079 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-kmhpadbdpfaa",
+      "title": "방문수리 전 확인! 문짝에 구멍이 났을 때, 때워서 써도 괜찮을까요?",
+      "target_keywords": [
+        "문짝수리",
+        "방문짝수리",
+        "방문구멍수리",
+        "문짝교체",
+        "방문교체"
+      ],
+      "topic_summary": "문짝의 물리적 파손을 구멍 깊이(표면층 대 속 빈 구조), 손상 위치(힘이 실리는 자리), 한 짝만 교체할 때의 다른 문과 색·질감 차이로 나눠 교체 범위를 판단하게 하는 글. 퍼티·메움 보수 시공은 취급하지 않는다",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-kncfmmnebhjm",
+      "title": "평수별 아파트 중문 설치 비용 확인할 3가지 기준",
+      "target_keywords": [
+        "평수별중문설치비용",
+        "아파트중문설치비용"
+      ],
+      "topic_summary": "[날짜 마스킹]~17 누적 통계 기반 신규 글. 평수별 중문 비용 검색어를 평수보다 현관 폭, 가벽·신발장·스위치 간섭, 유리·프레임·철거 여부 기준으로 재해석. 057/019-1/030 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-lckoebkjofga",
+      "title": "여닫이문 vs 미닫이문 공간별 후회 없는 3가지 선택 기준",
+      "target_keywords": [
+        "여닫이문"
+      ],
+      "topic_summary": "여닫이 vs 미닫이 구조 비교표, 안방/욕실 사생활 방음엔 여닫이, 좁은 수납엔 미닫이 매칭 가이드, 인천 계양구 믹스매치 시공 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-lfghbgbnmcpp",
+      "title": "방문교체 셀프 실측했다가 문이 안 맞는 3가지 이유",
+      "target_keywords": [
+        "방문사이즈",
+        "방문셀프실측",
+        "방문셀프시공",
+        "방문교체",
+        "문짝교체"
+      ],
+      "topic_summary": "방문 셀프 실측과 셀프 시공의 실패 지점을 문짝 크기, 경첩, 손잡이·래치, 기존 문짝 처리로 나누고 무료 방문실측·주문제작·시공 흐름으로 전환하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-lgimfjoaadoe",
+      "title": "고양이 키우는 집, 중문 달면 고양이 탈출 걱정이 끝날까요?",
+      "target_keywords": [
+        "고양이중문",
+        "고양이있는집",
+        "현관중문",
+        "아파트중문",
+        "중문유리"
+      ],
+      "topic_summary": "고양이 있는 집의 중문을 탈출 방지 보장이나 펫도어 상품이 아니라 두 문 사이 대기공간, 열림 방향, 유리 시야, 센서와 가족 출입 습관으로 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-lhhfejlcmaae",
+      "title": "방문교체와 시트지 사이에서 고민된다면?",
+      "target_keywords": [
+        "방문시트지",
+        "문틀시트지",
+        "문짝시트지",
+        "방문교체",
+        "문짝교체"
+      ],
+      "topic_summary": "방문 시트지를 비용·색상 비교가 아니라 문짝 하부 부풀음, 모서리 벌어짐, 처짐, 문틀·문선 경계처럼 시트지로 가려지지 않는 바탕 상태 기준으로 설명하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-lichjiafiljo",
+      "title": "방문교체비용, 시공법별 가격 차이 만드는 3가지 항목",
+      "target_keywords": [
+        "방문교체비용 (1",
+        "950)"
+      ],
+      "topic_summary": "가격가이드 E 템플릿 적용. 방문 교체 3가지 시공법(문짝만/문짝+문틀필름/세트교체) 비용 구조 비교표, 숨은 비용 6대 항목(시공비/부자재/인양비/폐기물 등) 정리, 견적 체크리스트 5가지, 성남 20년 구축 습기 문틀 세트교체 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-lilfjbbldcon",
+      "title": "문장군 도어 검색 전 확인할 3가지",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-lkakclbdldhd",
+      "title": "신축아파트 옵션 중문, AS까지 생각하면 꼭 확인할 것!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-lmhfcffjjdob",
+      "title": "방문 슬라이딩도어 설치 전 보는 3가지 벽면 기준",
+      "target_keywords": [
+        "방문슬라이딩도어",
+        "방미닫이문설치"
+      ],
+      "topic_summary": "[날짜 마스킹]~21 누적 통계 기반 신규 글. 슬라이딩 방문 시공/방문 슬라이딩 도어 유입을 벽면 여유, 상부 레일, 문틀·문선 마감, 방음 기대치 기준으로 정리. 071/075/083 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-lmohhpfpnnel",
+      "title": "자동중문가격 견적 전 꼭 확인할 3가지 기준",
+      "target_keywords": [
+        "자동중문가격"
+      ],
+      "topic_summary": "가격가이드 E 템플릿 적용. 자동중문가격을 모터·센서·컨트롤러·구동 레일, 전기선 위치와 마감, 현관 구조와 유리·프레임 사양으로 분리해 설명. 근거 없는 수치 단정 대신 월 4만원대~8만원대 범위 표현과 무료 방문실측 CTA",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-lnjmjblkmkmd",
+      "title": "살면서 방문교체, 중문시공 전 3가지 확인하기",
+      "target_keywords": [
+        "살면서 방문교체",
+        "거주중 중문시공"
+      ],
+      "topic_summary": "정보성 A 템플릿 적용. 종합 리모델링이 아니라 문장군 실제 범위인 살면서 방문교체와 거주중 중문시공으로 축소. 짐 이동 범위, 시공 시간과 생활 동선, 거주중 무료 실측 기준을 설명하고 방문교체/아파트중문/중문설치 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-lobchdjfolie",
+      "title": "방문교체 고민, 문짝만 바꿔도 집 분위기가 달라질까?",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-loilbdaaggng",
+      "title": "12mm 슬림문선 방문 교체 시 꼭 선택해야 하는 3가지 이유",
+      "target_keywords": [
+        "12mm 슬림문선"
+      ],
+      "topic_summary": "두꺼운 구형 문선 철거, 9mm 대비 별도 목공가벽 보강 불필요, 도배 마감선 찢어짐 예방, 문틀 뒤틀림 충격 완충 지지날개 성능",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-lolojhefchio",
+      "title": "중문 설치 전 확인! 현관 폭만 보면 스위치가 가려질 수 있습니다",
+      "target_keywords": [
+        "중문설치",
+        "현관중문",
+        "3연동중문",
+        "중문프레임",
+        "현관스위치"
+      ],
+      "topic_summary": "중문 설치를 현관 폭과 디자인만으로 고르지 않고 스위치 위치, 프레임 설치선, 문짝이 모이는 방향과 생활 동선을 함께 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-mabckmlfbmlc",
+      "title": "화장실 미닫이문, 공간 넓어진다고 달면 안 되는 3가지 이유!",
+      "target_keywords": [
+        "화장실미닫이문",
+        "방문슬라이딩도어",
+        "화장실문교체",
+        "욕실문교체"
+      ],
+      "topic_summary": "화장실 미닫이문을 설치 권유가 아닌 물청소, 잠금, 문틈, 냄새 동선, 벽면 공간의 회피 기준으로 설명하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-mbnlpppmcadg",
+      "title": "스윙중문 선택 전 확인할 3가지 구조 기준",
+      "target_keywords": [
+        "프렌치중문"
+      ],
+      "topic_summary": "제품가이드 A 템플릿 적용. 프렌치중문을 공식 제품명 아닌 프렌치 스타일 디자인 취향으로 풀고, 현관 폭·유리 분할·실제 구동 방식(스윙/미서기양개/2짝미서기/3연동양개) 기준 제시. 용인 넓은 현관 모루유리 미서기양개 스타일 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-mcbmdagpdnbi",
+      "title": "3연동 중문 모루유리 플루트유리 3가지 차이",
+      "target_keywords": [
+        "3연동중문모루유리",
+        "플루트3연동중문"
+      ],
+      "topic_summary": "[날짜 마스킹]~21 누적 통계 기반 신규 글. 3연동 중문 모루유리/플루트/브론즈 검색 의도를 현관 밝기, 시야 차단, 유리 질감, 프레임 색상 조합으로 분화. 062/069/052 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-mffdjgfoomfi",
+      "title": "천장몰딩 종류 3가지 비교와 뜯어내기 전 꼭 알아야 할 점",
+      "target_keywords": [
+        "천장몰딩 (3",
+        "340)"
+      ],
+      "topic_summary": "Q-001 보호글. 천장몰딩 종류(갈매기/슬림 평몰딩/마이너스·무몰딩)를 공정 범위와 기존 벽·천장 끝선 기준으로 비교하는 글. TOP1 보호 자산이므로 제목·본문 대수술보다 로컬 링크 제거, 과장 claim 정리, 걸레받이/문선 마감 글과의 내부링크 회수를 우선한다.",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-mhoibnidifkh",
+      "title": "방문교체 vs 필름시공, 비용보다 먼저 봐야 할 기준!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-momjjdiokkjj",
+      "title": "현관 중문 설치 효과 없을까 봐 걱정될 때 보는 3가지!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-nbgkihfjbfbp",
+      "title": "방문교체와 도배, 어떤 공사를 먼저 해야 자국이 덜 남을까요?",
+      "target_keywords": [
+        "방문교체",
+        "도배순서",
+        "문짝교체",
+        "문틀교체",
+        "문선몰딩"
+      ],
+      "topic_summary": "방문교체와 도배 순서를 문짝만 교체하는 경우와 문틀·문선까지 바꾸는 경우로 나누고 벽지·바닥 마감 경계를 먼저 확인하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-nconhdeaepik",
+      "title": "화장실문교체비용 타일 공사 없이 해결하는 3가지 실전 팁",
+      "target_keywords": [
+        "화장실문교체비용 (670)"
+      ],
+      "topic_summary": "가격가이드 E 템플릿 적용. 화장실문 시공 방식 3가지 옵션 비교표, 계약서 확인용 숨은 비용 5대 항목, 타일 파손 유발하는 비전문 철거의 함정, 타일 파손 막는 문장군의 정밀 사전 칼선 절삭 공법, 100% 방수 ABS 발포 문틀 및 바이오 실리콘 마감, 인천 25년 노후 아파트 타일 깨짐 없이 당일 1시간 30분 만에 욕실 문틀/문짝 전체 세트 교체한 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-njbhkhndmjck",
+      "title": "원슬라이딩 현관중문 주의할 3가지 구조 조건",
+      "target_keywords": [
+        "원슬라이딩중문단점",
+        "원슬라이딩중문"
+      ],
+      "topic_summary": "[날짜 마스킹]~21 누적 통계 기반 신규 글. 원슬라이딩 중문 하자/반자동 원슬라이딩 단점 검색 의도를 벽면 여유, 레일·바닥 수평, 유리 면적과 시야 기준으로 정리. 071/079/052 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-njclfbgjbegg",
+      "title": "슬라이딩도어 설치로 좁은 방 공간 넓히는 3가지 노하우",
+      "target_keywords": [
+        "슬라이딩도어"
+      ],
+      "topic_summary": "여닫이 반경 면적 낭비 해소, 스위치배선 간섭 회피, 상부 행거형 무레일 방식, 드레스룸 2평 절약 시공 사례, 양방향 댐퍼",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-njimedjdakoc",
+      "title": "방문교체할 때, 열리는 방향까지 바꾸고 싶다면 문틀을 확인하세요",
+      "target_keywords": [
+        "방문교체",
+        "문짝교체",
+        "문열림방향",
+        "방문방향",
+        "문틀교체"
+      ],
+      "topic_summary": "방문교체 때 문이 열리는 방향을 바꾸고 싶은 상황을 문짝만의 선택으로 보지 않고 경첩·잠금장치·문틀·가구 간섭과 마감 범위로 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-nlkheibodmmk",
+      "title": "아파트 현관 중문 설치 전 보는 3가지 기준",
+      "target_keywords": [
+        "아파트 현관 중문"
+      ],
+      "topic_summary": "003_현관중문.md 및 003-1_현관중문.md의 정확 키워드 보강 발행본. 아파트 현관 중문 띄어쓰기 키워드 앞배치, 현관 폭/신발장·스위치 간섭/설치 목적 3단 기준, 인천 좁은 현관 스윙도어 전환 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-nmeclgpldego",
+      "title": "아파트 9mm 슬림문선, 사진처럼 안 나오는 집은 이유가 있습니다",
+      "target_keywords": [
+        "9mm문선",
+        "아파트9mm문선",
+        "12mm슬림문선",
+        "슬림문선",
+        "문선몰딩"
+      ],
+      "topic_summary": "9mm 문선 검색어를 문장군 시공 가능 서비스처럼 쓰지 않고, 문틀 깊이·벽지 자국·도배 계획·12mm 슬림문선 세트 기준으로 전환하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-nnemkeojfjeg",
+      "title": "방문교체비용, 문짝만 바꿀 때와 문틀까지 바꿀 때 차이",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-npeomlmdbkka",
+      "title": "현관가벽 설치 전 3가지 구조 기준",
+      "target_keywords": [
+        "현관가벽"
+      ],
+      "topic_summary": "정보성 A 템플릿 적용. 기존 ㄱ자중문 글과 중복되지 않게 가벽 필요 여부를 구조 진단형으로 분리, 고정면 유무/가벽 없이 가능한 신발장·벽면 활용/가벽 목적별 중문 선택 기준, ㄱ자중문/중문종류/중문설치 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-npnpoifekbpo",
+      "title": "3연동중문 최대한 넓게 쓰고 싶다면? 신발장 옆을 확인해 보세요",
+      "target_keywords": [
+        "3연동중문",
+        "신축아파트중문",
+        "중문확장시공",
+        "중문개구부",
+        "신발장측판"
+      ],
+      "topic_summary": "신축아파트 신발장 옆 EP 측판이 중문 설치선을 막는 구조에서 측판 가공·재마감 가능 여부와 고정문 위치를 확인해 실제 개구부를 확보하는 기준을 설명하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-oaakjcpcadfh",
+      "title": "9mm 문선 12mm 문선 차이, 얇기보다 먼저 볼 것!",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-oainciaacdld",
+      "title": "신발장 간섭있는 집, 중문 설치 전 확인할 3가지",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-occkafmnhimi",
+      "title": "스윙도어중문 단점 줄이는 설치 전 3가지 기준",
+      "target_keywords": [
+        "스윙도어중문단점",
+        "스윙도어중문"
+      ],
+      "topic_summary": "[날짜 마스킹] 순위·통계 기반 신규 글. 스윙도어중문 상위 유지와 스윙도어 단독 약세 보강. 문 열림 반경, 바닥 수평, 3연동중문 비교 기준으로 정리. 084/038/021 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-oekpbmmfpbnb",
+      "title": "천장몰딩 있는 집, 중문 설치하려면 몰딩을 잘라야 할까요?",
+      "target_keywords": [
+        "천장몰딩",
+        "천정몰딩",
+        "현관중문",
+        "중문설치",
+        "우물천장",
+        "중문마감"
+      ],
+      "topic_summary": "천장몰딩과 우물천장이 있는 현관에서 중문 상부 프레임, 천장선, 신발장·스위치 간섭을 함께 보고 설치 위치와 마감 방향을 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-oeljhghcajga",
+      "title": "두짝미서기 중문, 좁은 현관에 설치하면 개구부가 더 줄어듭니다",
+      "target_keywords": [
+        "두짝미서기",
+        "2연동중문",
+        "미서기중문",
+        "현관중문",
+        "중문종류"
+      ],
+      "topic_summary": "두짝미서기를 좁은 현관의 일반 해법으로 권하지 않고, 개구부 감소 위험과 옷장·전원주택 계단 통로처럼 한 짝씩 나눠 쓰는 특수 구조를 설명하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-ohpfmnodjdco",
+      "title": "3연동중문 플루트유리 선택 전 확인할 조건 3가지",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-okdilbgajjme",
+      "title": "드레스룸중문 설치 전 확인할 3가지 공간 기준",
+      "target_keywords": [
+        "드레스룸중문"
+      ],
+      "topic_summary": "정보성 A 템플릿 적용. 드레스룸 입구 폭과 벽면 여유, 시야 차단과 개방감, 먼지와 냄새 흐름을 기준으로 원슬라이딩/스윙/미서기 선택 가이드. 수원 안방 드레스룸 모루유리 원슬라이딩 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-ollnlikncknj",
+      "title": "중문설치비용 알아보기 전 우리 집 현관에서 먼저 볼 것",
+      "target_keywords": [
+        "중문설치",
+        "중문설치비용",
+        "중문시공비용",
+        "아파트 현관 중문 설치 비용"
+      ],
+      "topic_summary": "중문 설치를 제품 선택보다 현관 폭, 신발장·스위치 간섭, 철거와 마감 범위가 먼저 결정하는 실측 기준으로 설명하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-onpmghdmleda",
+      "title": "아파트 타공도어 설치 전 꼭 봐야 할 3가지",
+      "target_keywords": [
+        "타공도어"
+      ],
+      "topic_summary": "제품가이드 A 템플릿 적용. 화장실 썩은문 ABS 교체 공감, 사생활 보호를 위한 대표 불투명 유리 3종(모루 vs 아쿠아 vs 미스트) 비교표, 비침 걱정 없는 타공창 높이/크기 법칙, 방과 욕실 도어의 최적 인테리어 믹스매치 비율 팁, 타공 테두리 PVC 발포 방수 마감 처리, 안산 32평형 믹스매치 시공 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-opdddimgkllf",
+      "title": "현관중문비용 갑자기 달라지는 3가지 구조 조건",
+      "target_keywords": [
+        "현관중문비용",
+        "아파트중문설치비용"
+      ],
+      "topic_summary": "[날짜 마스킹] 순위·통계 기반 신규 글. 현관중문비용 순위 이탈 보강용. 현관 폭·열림 방향, 가벽·고정면, 철거·마감 범위를 비용 차이 기준으로 설명. 057/019-1/079 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-ophklhmdfpop",
+      "title": "중문 유리, 밖에서 집 안이 보일까 걱정된다면?",
+      "target_keywords": [
+        "중문유리",
+        "중문브론즈유리",
+        "모루유리중문",
+        "플루트유리",
+        "사생활보호중문"
+      ],
+      "topic_summary": "중문 유리 선택을 색감보다 밖에서 보이는 시선 방향, 조명, 하부 고시, 유리 면적 기준으로 판단하게 하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-pccpcolelhla",
+      "title": "문장군중문 선택 전 확인할 3가지 기준",
+      "target_keywords": [
+        "문장군중문"
+      ],
+      "topic_summary": "011_문장군중문.md의 브랜드 방어형 새 발행본. 문장군중문/문장군/문장군 중문 단점 의도 대응, 외주 아닌 전속 시공팀 3팀, 무료 방문실측의 추가금 변수 확인, 화성 자체 제작과 중문 2년 A/S 기준, 단점까지 솔직히 설명하는 선택 기준형 구조",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-pehofikcfkmd",
+      "title": "방문 손잡이만 바꾸려다 문짝까지 보게 되는 3가지 신호",
+      "target_keywords": [
+        "방문손잡이교체",
+        "방문교체",
+        "문짝교체",
+        "문이안닫힐때",
+        "ABS도어"
+      ],
+      "topic_summary": "방문 손잡이 교체 검색어를 손잡이 단독 수리 권유가 아닌 문짝 처짐, 경첩, 문틀 간격에 따른 교체 범위 판단으로 전환하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-pfobhnckphjd",
+      "title": "중문 색상 고르는법! 포인트로 할지, 집 톤에 맞출지 정하세요",
+      "target_keywords": [
+        "중문색상고르는법",
+        "중문색상",
+        "현관중문색상",
+        "브론즈중문",
+        "화이트중문"
+      ],
+      "topic_summary": "중문 색상을 포인트형/톤맞춤형으로 나눠 벽지, 신발장, 바닥, 조명, 유리 색감까지 함께 판단하는 글",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-pikifpodanal",
+      "title": "방문이 장마철에 안 닫힐 때, 비가 그쳐도 남는 신호",
+      "target_keywords": [
+        "방문교체",
+        "문부풀음",
+        "습기",
+        "장마",
+        "문짝교체"
+      ],
+      "topic_summary": "계절성 수분 팽창과 영구 변형을 비가 그친 뒤 회복 여부, 문짝이 닿는 위치, 반복된 여름 횟수로 구분하는 글. 153·162·145번의 상시 물 노출과 달리 계절 변형 축이다. 대패·사포 같은 셀프 보수와 제습 해결 단정은 하지 않는다",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-pilmhagdkhhh",
+      "title": "중문 교체 비용, 기존 중문 철거가 견적을 바꾸는 이유 3가지",
+      "target_keywords": [],
+      "topic_summary": "",
+      "has_summary": false
+    },
+    {
+      "blind_id": "T-pjoamlhocpbk",
+      "title": "세탁실문교체 전 꼭 봐야 할 3가지 기준",
+      "target_keywords": [
+        "세탁실문교체"
+      ],
+      "topic_summary": "정보성 A 템플릿 적용. 세탁실 문 하부 습기, 문짝/문틀 손상 범위, 환기와 타공도어 선택 기준을 분리해 설명. 안산 구축 아파트 세탁실 ABS도어 문짝+문틀세트 교체 사례, ABS도어가격/타공도어/방문교체 내부링크",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-pkfagbbncida",
+      "title": "방음중문 설치 전 확인할 3가지 소음 기준",
+      "target_keywords": [
+        "방음중문"
+      ],
+      "topic_summary": "정보성 A 템플릿 적용. 완전 방음 대신 복도·엘리베이터·반려견 생활소음 완화 관점. 유리 두께보다 틈새/수평/레일/모헤어 밀폐 기준, 3연동중문과 유리 시야 차단, 세종 아파트 반려견 소음 완화 사례",
+      "has_summary": true
+    },
+    {
+      "blind_id": "T-ppncgohlgkha",
+      "title": "문짝교체 전, 문틀 공사까지 커지지 않게 확인해야 할 기준",
+      "target_keywords": [
+        "문짝교체",
+        "방문교체",
+        "방문짝교체",
+        "문이안닫힐때",
+        "문틀교체"
+      ],
+      "topic_summary": "문이 안 닫히는 문제를 문짝만 교체할 수 있는 조건과 문틀·문선까지 봐야 하는 조건으로 나누고, 닫힘 간격·경첩·바닥을 기준으로 설명하는 글",
+      "has_summary": true
+    }
+  ]
+}

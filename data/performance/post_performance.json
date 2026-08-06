@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "post_performance",
-  "updated_at": "2026-08-05",
+  "updated_at": "2026-08-06",
   "posts": [
     {
       "post_no": "001",
@@ -15,7 +15,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "002",
@@ -29,7 +29,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "003",
@@ -43,7 +43,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "003-1",
@@ -53,11 +53,36 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 17,
+          "rank": 15,
+          "views": 8
+        },
+        {
+          "date": "2026-06-16",
+          "day": 21,
+          "rank": 16,
+          "views": 14
+        },
+        {
+          "date": "2026-06-17",
+          "day": 22,
+          "rank": 10,
+          "views": 15
+        },
+        {
+          "date": "2026-06-20",
+          "day": 25,
+          "rank": 19,
+          "views": 9
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "004",
@@ -71,7 +96,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "005",
@@ -81,11 +106,24 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-06-13",
+          "day": 33,
+          "rank": 18,
+          "views": 7
+        },
+        {
+          "date": "2026-07-05",
+          "day": 55,
+          "rank": 30,
+          "views": 7
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "006",
@@ -99,7 +137,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "007",
@@ -109,11 +147,30 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-06-14",
+          "day": 34,
+          "rank": 20,
+          "views": 7
+        },
+        {
+          "date": "2026-06-22",
+          "day": 42,
+          "rank": 20,
+          "views": 12
+        },
+        {
+          "date": "2026-06-25",
+          "day": 45,
+          "rank": 19,
+          "views": 9
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "008",
@@ -127,7 +184,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "009",
@@ -141,7 +198,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "010",
@@ -153,6 +210,12 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-06-12",
+          "day": 31,
+          "rank": 18,
+          "views": 7
+        },
+        {
           "date": "2026-07-31",
           "day": 80,
           "rank": 18,
@@ -162,7 +225,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일; 폐기 상태",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "011",
@@ -176,7 +239,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "012",
@@ -190,7 +253,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "013",
@@ -204,7 +267,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "014",
@@ -218,7 +281,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "015",
@@ -232,7 +295,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "016",
@@ -242,11 +305,42 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 31,
+          "rank": 10,
+          "views": 11
+        },
+        {
+          "date": "2026-06-14",
+          "day": 33,
+          "rank": 19,
+          "views": 8
+        },
+        {
+          "date": "2026-06-15",
+          "day": 34,
+          "rank": 17,
+          "views": 13
+        },
+        {
+          "date": "2026-06-16",
+          "day": 35,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-06-24",
+          "day": 43,
+          "rank": 19,
+          "views": 14
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "016-1",
@@ -258,6 +352,18 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-06-12",
+          "day": 29,
+          "rank": 18,
+          "views": 7
+        },
+        {
+          "date": "2026-06-13",
+          "day": 30,
+          "rank": 10,
+          "views": 11
+        },
+        {
           "date": "2026-08-05",
           "day": 83,
           "rank": 11,
@@ -267,7 +373,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "017",
@@ -281,7 +387,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "018",
@@ -292,6 +398,84 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 29,
+          "rank": 4,
+          "views": 32
+        },
+        {
+          "date": "2026-06-13",
+          "day": 30,
+          "rank": 4,
+          "views": 29
+        },
+        {
+          "date": "2026-06-14",
+          "day": 31,
+          "rank": 6,
+          "views": 25
+        },
+        {
+          "date": "2026-06-15",
+          "day": 32,
+          "rank": 3,
+          "views": 37
+        },
+        {
+          "date": "2026-06-16",
+          "day": 33,
+          "rank": 5,
+          "views": 35
+        },
+        {
+          "date": "2026-06-17",
+          "day": 34,
+          "rank": 5,
+          "views": 32
+        },
+        {
+          "date": "2026-06-18",
+          "day": 35,
+          "rank": 11,
+          "views": 20
+        },
+        {
+          "date": "2026-06-20",
+          "day": 37,
+          "rank": 19,
+          "views": 9
+        },
+        {
+          "date": "2026-06-25",
+          "day": 42,
+          "rank": 14,
+          "views": 13
+        },
+        {
+          "date": "2026-07-01",
+          "day": 48,
+          "rank": 7,
+          "views": 27
+        },
+        {
+          "date": "2026-07-02",
+          "day": 49,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-07-09",
+          "day": 56,
+          "rank": 12,
+          "views": 19
+        },
+        {
+          "date": "2026-07-10",
+          "day": 57,
+          "rank": 17,
+          "views": 14
+        },
         {
           "date": "2026-07-16",
           "day": 63,
@@ -386,7 +570,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "019",
@@ -400,7 +584,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일; 폐기 상태",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "019-1",
@@ -412,10 +596,166 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-06-12",
+          "day": 19,
+          "rank": 2,
+          "views": 47
+        },
+        {
+          "date": "2026-06-13",
+          "day": 20,
+          "rank": 2,
+          "views": 38
+        },
+        {
+          "date": "2026-06-14",
+          "day": 21,
+          "rank": 2,
+          "views": 63
+        },
+        {
+          "date": "2026-06-15",
+          "day": 22,
+          "rank": 2,
+          "views": 63
+        },
+        {
+          "date": "2026-06-16",
+          "day": 23,
+          "rank": 2,
+          "views": 56
+        },
+        {
+          "date": "2026-06-17",
+          "day": 24,
+          "rank": 4,
+          "views": 55
+        },
+        {
+          "date": "2026-06-18",
+          "day": 25,
+          "rank": 2,
+          "views": 52
+        },
+        {
           "date": "2026-06-19",
           "day": 26,
           "rank": 2,
           "views": 52
+        },
+        {
+          "date": "2026-06-20",
+          "day": 27,
+          "rank": 4,
+          "views": 33
+        },
+        {
+          "date": "2026-06-21",
+          "day": 28,
+          "rank": 4,
+          "views": 34
+        },
+        {
+          "date": "2026-06-22",
+          "day": 29,
+          "rank": 5,
+          "views": 41
+        },
+        {
+          "date": "2026-06-23",
+          "day": 30,
+          "rank": 3,
+          "views": 35
+        },
+        {
+          "date": "2026-06-24",
+          "day": 31,
+          "rank": 10,
+          "views": 24
+        },
+        {
+          "date": "2026-06-25",
+          "day": 32,
+          "rank": 5,
+          "views": 28
+        },
+        {
+          "date": "2026-06-26",
+          "day": 33,
+          "rank": 8,
+          "views": 22
+        },
+        {
+          "date": "2026-06-27",
+          "day": 34,
+          "rank": 9,
+          "views": 19
+        },
+        {
+          "date": "2026-06-28",
+          "day": 35,
+          "rank": 8,
+          "views": 20
+        },
+        {
+          "date": "2026-06-29",
+          "day": 36,
+          "rank": 6,
+          "views": 32
+        },
+        {
+          "date": "2026-07-01",
+          "day": 38,
+          "rank": 14,
+          "views": 19
+        },
+        {
+          "date": "2026-07-02",
+          "day": 39,
+          "rank": 19,
+          "views": 11
+        },
+        {
+          "date": "2026-07-03",
+          "day": 40,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-07-04",
+          "day": 41,
+          "rank": 7,
+          "views": 22
+        },
+        {
+          "date": "2026-07-05",
+          "day": 42,
+          "rank": 7,
+          "views": 25
+        },
+        {
+          "date": "2026-07-06",
+          "day": 43,
+          "rank": 13,
+          "views": 18
+        },
+        {
+          "date": "2026-07-07",
+          "day": 44,
+          "rank": 9,
+          "views": 21
+        },
+        {
+          "date": "2026-07-09",
+          "day": 46,
+          "rank": 7,
+          "views": 23
+        },
+        {
+          "date": "2026-07-10",
+          "day": 47,
+          "rank": 5,
+          "views": 24
         },
         {
           "date": "2026-07-16",
@@ -536,12 +876,18 @@
           "day": 73,
           "rank": 4,
           "views": 31
+        },
+        {
+          "date": "2026-08-06",
+          "day": 74,
+          "rank": 5,
+          "views": 24
         }
       ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "020",
@@ -551,11 +897,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-06-15",
+          "day": 32,
+          "rank": 8,
+          "views": 27
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "021",
@@ -567,6 +920,24 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-06-13",
+          "day": 30,
+          "rank": 11,
+          "views": 10
+        },
+        {
+          "date": "2026-06-17",
+          "day": 34,
+          "rank": 16,
+          "views": 11
+        },
+        {
+          "date": "2026-06-18",
+          "day": 35,
+          "rank": 17,
+          "views": 9
+        },
+        {
           "date": "2026-07-23",
           "day": 70,
           "rank": 10,
@@ -576,7 +947,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "022",
@@ -590,7 +961,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "023",
@@ -604,7 +975,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "024",
@@ -614,11 +985,24 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-06-13",
+          "day": 30,
+          "rank": 18,
+          "views": 7
+        },
+        {
+          "date": "2026-07-03",
+          "day": 50,
+          "rank": 21,
+          "views": 10
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "025",
@@ -632,7 +1016,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "026",
@@ -646,7 +1030,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "027",
@@ -656,11 +1040,66 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 16,
+          "rank": 7,
+          "views": 14
+        },
+        {
+          "date": "2026-06-14",
+          "day": 18,
+          "rank": 8,
+          "views": 17
+        },
+        {
+          "date": "2026-06-15",
+          "day": 19,
+          "rank": 20,
+          "views": 11
+        },
+        {
+          "date": "2026-06-16",
+          "day": 20,
+          "rank": 10,
+          "views": 19
+        },
+        {
+          "date": "2026-06-17",
+          "day": 21,
+          "rank": 15,
+          "views": 12
+        },
+        {
+          "date": "2026-06-20",
+          "day": 24,
+          "rank": 14,
+          "views": 16
+        },
+        {
+          "date": "2026-06-21",
+          "day": 25,
+          "rank": 11,
+          "views": 18
+        },
+        {
+          "date": "2026-06-23",
+          "day": 27,
+          "rank": 18,
+          "views": 15
+        },
+        {
+          "date": "2026-07-04",
+          "day": 38,
+          "rank": 20,
+          "views": 12
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "028",
@@ -670,11 +1109,54 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 17,
+          "rank": 15,
+          "views": 8
+        },
+        {
+          "date": "2026-06-13",
+          "day": 18,
+          "rank": 11,
+          "views": 10
+        },
+        {
+          "date": "2026-06-14",
+          "day": 19,
+          "rank": 12,
+          "views": 11
+        },
+        {
+          "date": "2026-06-15",
+          "day": 20,
+          "rank": 15,
+          "views": 14
+        },
+        {
+          "date": "2026-06-18",
+          "day": 23,
+          "rank": 17,
+          "views": 9
+        },
+        {
+          "date": "2026-06-20",
+          "day": 25,
+          "rank": 18,
+          "views": 10
+        },
+        {
+          "date": "2026-07-05",
+          "day": 40,
+          "rank": 30,
+          "views": 7
+        }
+      ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "029",
@@ -688,7 +1170,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "030",
@@ -702,21 +1184,106 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "031",
       "title": "우리 집 현관에는 3연동 중문이 맞을까, 스윙도어 중문이 맞을까?",
-      "published_at": "2026-05-28",
+      "published_at": "2026-05-29",
       "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
+      "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 14,
+          "rank": 6,
+          "views": 20
+        },
+        {
+          "date": "2026-06-13",
+          "day": 15,
+          "rank": 14,
+          "views": 9
+        },
+        {
+          "date": "2026-06-14",
+          "day": 16,
+          "rank": 10,
+          "views": 12
+        },
+        {
+          "date": "2026-06-15",
+          "day": 17,
+          "rank": 17,
+          "views": 13
+        },
+        {
+          "date": "2026-06-16",
+          "day": 18,
+          "rank": 16,
+          "views": 14
+        },
+        {
+          "date": "2026-06-18",
+          "day": 20,
+          "rank": 14,
+          "views": 17
+        },
+        {
+          "date": "2026-06-20",
+          "day": 22,
+          "rank": 13,
+          "views": 17
+        },
+        {
+          "date": "2026-06-21",
+          "day": 23,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-06-22",
+          "day": 24,
+          "rank": 16,
+          "views": 17
+        },
+        {
+          "date": "2026-06-24",
+          "day": 26,
+          "rank": 4,
+          "views": 33
+        },
+        {
+          "date": "2026-06-25",
+          "day": 27,
+          "rank": 13,
+          "views": 15
+        },
+        {
+          "date": "2026-06-26",
+          "day": 28,
+          "rank": 18,
+          "views": 12
+        },
+        {
+          "date": "2026-07-04",
+          "day": 36,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-08-06",
+          "day": 69,
+          "rank": 17,
+          "views": 12
+        }
+      ],
+      "observed_days": 1,
       "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 1일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "032",
@@ -728,16 +1295,58 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-06-12",
+          "day": 25,
+          "rank": 9,
+          "views": 13
+        },
+        {
+          "date": "2026-06-13",
+          "day": 26,
+          "rank": 7,
+          "views": 15
+        },
+        {
+          "date": "2026-06-14",
+          "day": 27,
+          "rank": 14,
+          "views": 9
+        },
+        {
+          "date": "2026-06-17",
+          "day": 30,
+          "rank": 12,
+          "views": 14
+        },
+        {
+          "date": "2026-06-20",
+          "day": 33,
+          "rank": 15,
+          "views": 14
+        },
+        {
+          "date": "2026-06-30",
+          "day": 43,
+          "rank": 17,
+          "views": 18
+        },
+        {
           "date": "2026-07-24",
           "day": 67,
           "rank": 17,
           "views": 13
+        },
+        {
+          "date": "2026-08-06",
+          "day": 80,
+          "rank": 11,
+          "views": 15
         }
       ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "033",
@@ -748,6 +1357,24 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 24,
+          "rank": 18,
+          "views": 7
+        },
+        {
+          "date": "2026-06-16",
+          "day": 28,
+          "rank": 19,
+          "views": 13
+        },
+        {
+          "date": "2026-06-17",
+          "day": 29,
+          "rank": 18,
+          "views": 10
+        },
         {
           "date": "2026-07-17",
           "day": 59,
@@ -764,7 +1391,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "034",
@@ -775,10 +1402,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 1,
       "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "035",
@@ -792,7 +1419,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "036",
@@ -803,10 +1430,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 1,
       "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "037",
@@ -817,10 +1444,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 1,
       "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "038",
@@ -830,11 +1457,84 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
+      "observations": [
+        {
+          "date": "2026-06-17",
+          "day": 18,
+          "rank": 10,
+          "views": 15
+        },
+        {
+          "date": "2026-06-20",
+          "day": 21,
+          "rank": 16,
+          "views": 13
+        },
+        {
+          "date": "2026-06-21",
+          "day": 22,
+          "rank": 10,
+          "views": 19
+        },
+        {
+          "date": "2026-06-22",
+          "day": 23,
+          "rank": 14,
+          "views": 20
+        },
+        {
+          "date": "2026-06-23",
+          "day": 24,
+          "rank": 4,
+          "views": 30
+        },
+        {
+          "date": "2026-06-24",
+          "day": 25,
+          "rank": 17,
+          "views": 18
+        },
+        {
+          "date": "2026-06-25",
+          "day": 26,
+          "rank": 6,
+          "views": 25
+        },
+        {
+          "date": "2026-06-26",
+          "day": 27,
+          "rank": 16,
+          "views": 13
+        },
+        {
+          "date": "2026-06-27",
+          "day": 28,
+          "rank": 13,
+          "views": 15
+        },
+        {
+          "date": "2026-06-28",
+          "day": 29,
+          "rank": 8,
+          "views": 20
+        },
+        {
+          "date": "2026-06-30",
+          "day": 31,
+          "rank": 12,
+          "views": 21
+        },
+        {
+          "date": "2026-07-02",
+          "day": 33,
+          "rank": 11,
+          "views": 15
+        }
+      ],
+      "observed_days": 2,
       "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 2일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "039",
@@ -845,10 +1545,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 2,
       "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 2일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "040",
@@ -858,11 +1558,48 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-13",
+          "day": 5,
+          "rank": 18,
+          "views": 7
+        },
+        {
+          "date": "2026-06-16",
+          "day": 8,
+          "rank": 14,
+          "views": 16
+        },
+        {
+          "date": "2026-06-21",
+          "day": 13,
+          "rank": 18,
+          "views": 10
+        },
+        {
+          "date": "2026-06-25",
+          "day": 17,
+          "rank": 19,
+          "views": 9
+        },
+        {
+          "date": "2026-06-28",
+          "day": 20,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-07-06",
+          "day": 28,
+          "rank": 20,
+          "views": 13
+        }
+      ],
+      "observed_days": 10,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "041",
@@ -873,10 +1610,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 2,
       "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 2일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "042",
@@ -887,10 +1624,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 3,
       "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 3일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "043",
@@ -904,7 +1641,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "044",
@@ -915,10 +1652,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 4,
       "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "045",
@@ -929,6 +1666,168 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 7,
+          "rank": 5,
+          "views": 25
+        },
+        {
+          "date": "2026-06-13",
+          "day": 8,
+          "rank": 6,
+          "views": 16
+        },
+        {
+          "date": "2026-06-14",
+          "day": 9,
+          "rank": 10,
+          "views": 12
+        },
+        {
+          "date": "2026-06-15",
+          "day": 10,
+          "rank": 12,
+          "views": 19
+        },
+        {
+          "date": "2026-06-16",
+          "day": 11,
+          "rank": 13,
+          "views": 17
+        },
+        {
+          "date": "2026-06-17",
+          "day": 12,
+          "rank": 6,
+          "views": 29
+        },
+        {
+          "date": "2026-06-18",
+          "day": 13,
+          "rank": 7,
+          "views": 25
+        },
+        {
+          "date": "2026-06-20",
+          "day": 15,
+          "rank": 6,
+          "views": 30
+        },
+        {
+          "date": "2026-06-21",
+          "day": 16,
+          "rank": 5,
+          "views": 32
+        },
+        {
+          "date": "2026-06-22",
+          "day": 17,
+          "rank": 4,
+          "views": 43
+        },
+        {
+          "date": "2026-06-23",
+          "day": 18,
+          "rank": 7,
+          "views": 28
+        },
+        {
+          "date": "2026-06-24",
+          "day": 19,
+          "rank": 8,
+          "views": 28
+        },
+        {
+          "date": "2026-06-25",
+          "day": 20,
+          "rank": 4,
+          "views": 37
+        },
+        {
+          "date": "2026-06-26",
+          "day": 21,
+          "rank": 3,
+          "views": 34
+        },
+        {
+          "date": "2026-06-27",
+          "day": 22,
+          "rank": 1,
+          "views": 58
+        },
+        {
+          "date": "2026-06-28",
+          "day": 23,
+          "rank": 2,
+          "views": 42
+        },
+        {
+          "date": "2026-06-29",
+          "day": 24,
+          "rank": 3,
+          "views": 49
+        },
+        {
+          "date": "2026-06-30",
+          "day": 25,
+          "rank": 2,
+          "views": 61
+        },
+        {
+          "date": "2026-07-01",
+          "day": 26,
+          "rank": 3,
+          "views": 46
+        },
+        {
+          "date": "2026-07-02",
+          "day": 27,
+          "rank": 3,
+          "views": 38
+        },
+        {
+          "date": "2026-07-03",
+          "day": 28,
+          "rank": 6,
+          "views": 26
+        },
+        {
+          "date": "2026-07-04",
+          "day": 29,
+          "rank": 3,
+          "views": 36
+        },
+        {
+          "date": "2026-07-05",
+          "day": 30,
+          "rank": 1,
+          "views": 53
+        },
+        {
+          "date": "2026-07-06",
+          "day": 31,
+          "rank": 5,
+          "views": 30
+        },
+        {
+          "date": "2026-07-07",
+          "day": 32,
+          "rank": 7,
+          "views": 22
+        },
+        {
+          "date": "2026-07-09",
+          "day": 34,
+          "rank": 10,
+          "views": 20
+        },
+        {
+          "date": "2026-07-10",
+          "day": 35,
+          "rank": 14,
+          "views": 18
+        },
         {
           "date": "2026-07-16",
           "day": 41,
@@ -1042,12 +1941,18 @@
           "day": 61,
           "rank": 13,
           "views": 18
+        },
+        {
+          "date": "2026-08-06",
+          "day": 62,
+          "rank": 8,
+          "views": 22
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 7,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "046",
@@ -1058,6 +1963,150 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 6,
+          "rank": 3,
+          "views": 42
+        },
+        {
+          "date": "2026-06-13",
+          "day": 7,
+          "rank": 1,
+          "views": 42
+        },
+        {
+          "date": "2026-06-14",
+          "day": 8,
+          "rank": 4,
+          "views": 29
+        },
+        {
+          "date": "2026-06-15",
+          "day": 9,
+          "rank": 9,
+          "views": 25
+        },
+        {
+          "date": "2026-06-16",
+          "day": 10,
+          "rank": 6,
+          "views": 27
+        },
+        {
+          "date": "2026-06-17",
+          "day": 11,
+          "rank": 12,
+          "views": 14
+        },
+        {
+          "date": "2026-06-18",
+          "day": 12,
+          "rank": 6,
+          "views": 28
+        },
+        {
+          "date": "2026-06-20",
+          "day": 14,
+          "rank": 5,
+          "views": 31
+        },
+        {
+          "date": "2026-06-21",
+          "day": 15,
+          "rank": 7,
+          "views": 26
+        },
+        {
+          "date": "2026-06-22",
+          "day": 16,
+          "rank": 9,
+          "views": 27
+        },
+        {
+          "date": "2026-06-23",
+          "day": 17,
+          "rank": 13,
+          "views": 22
+        },
+        {
+          "date": "2026-06-24",
+          "day": 18,
+          "rank": 11,
+          "views": 23
+        },
+        {
+          "date": "2026-06-25",
+          "day": 19,
+          "rank": 15,
+          "views": 12
+        },
+        {
+          "date": "2026-06-26",
+          "day": 20,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-06-27",
+          "day": 21,
+          "rank": 16,
+          "views": 13
+        },
+        {
+          "date": "2026-06-28",
+          "day": 22,
+          "rank": 5,
+          "views": 28
+        },
+        {
+          "date": "2026-06-29",
+          "day": 23,
+          "rank": 8,
+          "views": 28
+        },
+        {
+          "date": "2026-06-30",
+          "day": 24,
+          "rank": 8,
+          "views": 27
+        },
+        {
+          "date": "2026-07-01",
+          "day": 25,
+          "rank": 9,
+          "views": 25
+        },
+        {
+          "date": "2026-07-03",
+          "day": 27,
+          "rank": 3,
+          "views": 31
+        },
+        {
+          "date": "2026-07-04",
+          "day": 28,
+          "rank": 9,
+          "views": 20
+        },
+        {
+          "date": "2026-07-05",
+          "day": 29,
+          "rank": 6,
+          "views": 28
+        },
+        {
+          "date": "2026-07-06",
+          "day": 30,
+          "rank": 12,
+          "views": 19
+        },
+        {
+          "date": "2026-07-09",
+          "day": 33,
+          "rank": 8,
+          "views": 22
+        },
         {
           "date": "2026-07-19",
           "day": 43,
@@ -1087,12 +2136,18 @@
           "day": 52,
           "rank": 17,
           "views": 15
+        },
+        {
+          "date": "2026-08-06",
+          "day": 61,
+          "rank": 20,
+          "views": 11
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 8,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "047",
@@ -1102,11 +2157,84 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 4,
+          "rank": 7,
+          "views": 14
+        },
+        {
+          "date": "2026-06-13",
+          "day": 5,
+          "rank": 14,
+          "views": 9
+        },
+        {
+          "date": "2026-06-14",
+          "day": 6,
+          "rank": 13,
+          "views": 10
+        },
+        {
+          "date": "2026-06-15",
+          "day": 7,
+          "rank": 15,
+          "views": 14
+        },
+        {
+          "date": "2026-06-17",
+          "day": 9,
+          "rank": 18,
+          "views": 10
+        },
+        {
+          "date": "2026-06-18",
+          "day": 10,
+          "rank": 9,
+          "views": 22
+        },
+        {
+          "date": "2026-06-20",
+          "day": 12,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-06-21",
+          "day": 13,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-06-22",
+          "day": 14,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-06-23",
+          "day": 15,
+          "rank": 20,
+          "views": 13
+        },
+        {
+          "date": "2026-06-24",
+          "day": 16,
+          "rank": 14,
+          "views": 19
+        },
+        {
+          "date": "2026-06-27",
+          "day": 19,
+          "rank": 16,
+          "views": 13
+        }
+      ],
+      "observed_days": 10,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "048",
@@ -1117,6 +2245,144 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 4,
+          "rank": 1,
+          "views": 67
+        },
+        {
+          "date": "2026-06-13",
+          "day": 5,
+          "rank": 3,
+          "views": 30
+        },
+        {
+          "date": "2026-06-14",
+          "day": 6,
+          "rank": 3,
+          "views": 45
+        },
+        {
+          "date": "2026-06-15",
+          "day": 7,
+          "rank": 7,
+          "views": 32
+        },
+        {
+          "date": "2026-06-16",
+          "day": 8,
+          "rank": 9,
+          "views": 22
+        },
+        {
+          "date": "2026-06-17",
+          "day": 9,
+          "rank": 8,
+          "views": 27
+        },
+        {
+          "date": "2026-06-18",
+          "day": 10,
+          "rank": 5,
+          "views": 30
+        },
+        {
+          "date": "2026-06-20",
+          "day": 12,
+          "rank": 7,
+          "views": 26
+        },
+        {
+          "date": "2026-06-21",
+          "day": 13,
+          "rank": 8,
+          "views": 25
+        },
+        {
+          "date": "2026-06-22",
+          "day": 14,
+          "rank": 6,
+          "views": 32
+        },
+        {
+          "date": "2026-06-23",
+          "day": 15,
+          "rank": 12,
+          "views": 24
+        },
+        {
+          "date": "2026-06-24",
+          "day": 16,
+          "rank": 13,
+          "views": 20
+        },
+        {
+          "date": "2026-06-26",
+          "day": 18,
+          "rank": 4,
+          "views": 30
+        },
+        {
+          "date": "2026-06-27",
+          "day": 19,
+          "rank": 13,
+          "views": 15
+        },
+        {
+          "date": "2026-06-28",
+          "day": 20,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-06-29",
+          "day": 21,
+          "rank": 15,
+          "views": 21
+        },
+        {
+          "date": "2026-07-01",
+          "day": 23,
+          "rank": 17,
+          "views": 17
+        },
+        {
+          "date": "2026-07-03",
+          "day": 25,
+          "rank": 21,
+          "views": 10
+        },
+        {
+          "date": "2026-07-04",
+          "day": 26,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-07-05",
+          "day": 27,
+          "rank": 17,
+          "views": 14
+        },
+        {
+          "date": "2026-07-06",
+          "day": 28,
+          "rank": 19,
+          "views": 14
+        },
+        {
+          "date": "2026-07-07",
+          "day": 29,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-07-09",
+          "day": 31,
+          "rank": 14,
+          "views": 17
+        },
         {
           "date": "2026-07-17",
           "day": 39,
@@ -1160,10 +2426,10 @@
           "views": 17
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 10,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "049",
@@ -1173,11 +2439,48 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-22",
+          "day": 0,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-06-26",
+          "day": 4,
+          "rank": 16,
+          "views": 13
+        },
+        {
+          "date": "2026-06-27",
+          "day": 5,
+          "rank": 16,
+          "views": 13
+        },
+        {
+          "date": "2026-06-28",
+          "day": 6,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-07-03",
+          "day": 11,
+          "rank": 29,
+          "views": 8
+        },
+        {
+          "date": "2026-07-06",
+          "day": 14,
+          "rank": 32,
+          "views": 8
+        }
+      ],
+      "observed_days": 15,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "050",
@@ -1188,6 +2491,132 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-14",
+          "day": 6,
+          "rank": 14,
+          "views": 9
+        },
+        {
+          "date": "2026-06-15",
+          "day": 7,
+          "rank": 9,
+          "views": 25
+        },
+        {
+          "date": "2026-06-16",
+          "day": 8,
+          "rank": 12,
+          "views": 18
+        },
+        {
+          "date": "2026-06-17",
+          "day": 9,
+          "rank": 16,
+          "views": 11
+        },
+        {
+          "date": "2026-06-18",
+          "day": 10,
+          "rank": 11,
+          "views": 20
+        },
+        {
+          "date": "2026-06-20",
+          "day": 12,
+          "rank": 9,
+          "views": 21
+        },
+        {
+          "date": "2026-06-21",
+          "day": 13,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-06-22",
+          "day": 14,
+          "rank": 13,
+          "views": 22
+        },
+        {
+          "date": "2026-06-23",
+          "day": 15,
+          "rank": 18,
+          "views": 15
+        },
+        {
+          "date": "2026-06-24",
+          "day": 16,
+          "rank": 12,
+          "views": 22
+        },
+        {
+          "date": "2026-06-26",
+          "day": 18,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-06-29",
+          "day": 21,
+          "rank": 14,
+          "views": 22
+        },
+        {
+          "date": "2026-06-30",
+          "day": 22,
+          "rank": 6,
+          "views": 28
+        },
+        {
+          "date": "2026-07-01",
+          "day": 23,
+          "rank": 19,
+          "views": 16
+        },
+        {
+          "date": "2026-07-02",
+          "day": 24,
+          "rank": 11,
+          "views": 15
+        },
+        {
+          "date": "2026-07-03",
+          "day": 25,
+          "rank": 16,
+          "views": 12
+        },
+        {
+          "date": "2026-07-05",
+          "day": 27,
+          "rank": 18,
+          "views": 12
+        },
+        {
+          "date": "2026-07-06",
+          "day": 28,
+          "rank": 16,
+          "views": 15
+        },
+        {
+          "date": "2026-07-07",
+          "day": 29,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-07-09",
+          "day": 31,
+          "rank": 13,
+          "views": 18
+        },
+        {
+          "date": "2026-07-10",
+          "day": 32,
+          "rank": 5,
+          "views": 24
+        },
         {
           "date": "2026-07-19",
           "day": 41,
@@ -1201,10 +2630,10 @@
           "views": 12
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일; 폐기 상태",
-      "verdict_at": "2026-08-05"
+      "observed_days": 10,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장; 폐기 상태",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "051",
@@ -1216,16 +2645,172 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-06-13",
+          "day": 4,
+          "rank": 14,
+          "views": 9
+        },
+        {
+          "date": "2026-06-14",
+          "day": 5,
+          "rank": 14,
+          "views": 9
+        },
+        {
+          "date": "2026-06-15",
+          "day": 6,
+          "rank": 3,
+          "views": 37
+        },
+        {
+          "date": "2026-06-16",
+          "day": 7,
+          "rank": 1,
+          "views": 61
+        },
+        {
+          "date": "2026-06-17",
+          "day": 8,
+          "rank": 2,
+          "views": 75
+        },
+        {
+          "date": "2026-06-18",
+          "day": 9,
+          "rank": 1,
+          "views": 62
+        },
+        {
           "date": "2026-06-19",
           "day": 10,
           "rank": 1,
           "views": 62
         },
         {
+          "date": "2026-06-20",
+          "day": 11,
+          "rank": 1,
+          "views": 60
+        },
+        {
+          "date": "2026-06-21",
+          "day": 12,
+          "rank": 1,
+          "views": 63
+        },
+        {
+          "date": "2026-06-22",
+          "day": 13,
+          "rank": 1,
+          "views": 83
+        },
+        {
+          "date": "2026-06-23",
+          "day": 14,
+          "rank": 1,
+          "views": 73
+        },
+        {
+          "date": "2026-06-24",
+          "day": 15,
+          "rank": 1,
+          "views": 53
+        },
+        {
+          "date": "2026-06-25",
+          "day": 16,
+          "rank": 1,
+          "views": 59
+        },
+        {
+          "date": "2026-06-26",
+          "day": 17,
+          "rank": 1,
+          "views": 46
+        },
+        {
+          "date": "2026-06-27",
+          "day": 18,
+          "rank": 2,
+          "views": 50
+        },
+        {
+          "date": "2026-06-28",
+          "day": 19,
+          "rank": 1,
+          "views": 76
+        },
+        {
+          "date": "2026-06-29",
+          "day": 20,
+          "rank": 1,
+          "views": 87
+        },
+        {
+          "date": "2026-06-30",
+          "day": 21,
+          "rank": 1,
+          "views": 64
+        },
+        {
+          "date": "2026-07-01",
+          "day": 22,
+          "rank": 1,
+          "views": 70
+        },
+        {
+          "date": "2026-07-02",
+          "day": 23,
+          "rank": 1,
+          "views": 68
+        },
+        {
+          "date": "2026-07-03",
+          "day": 24,
+          "rank": 2,
+          "views": 53
+        },
+        {
+          "date": "2026-07-04",
+          "day": 25,
+          "rank": 1,
+          "views": 55
+        },
+        {
+          "date": "2026-07-05",
+          "day": 26,
+          "rank": 4,
+          "views": 41
+        },
+        {
+          "date": "2026-07-06",
+          "day": 27,
+          "rank": 2,
+          "views": 62
+        },
+        {
+          "date": "2026-07-07",
+          "day": 28,
+          "rank": 1,
+          "views": 66
+        },
+        {
           "date": "2026-07-08",
           "day": 29,
           "rank": 1,
           "views": 66
+        },
+        {
+          "date": "2026-07-09",
+          "day": 30,
+          "rank": 2,
+          "views": 50
+        },
+        {
+          "date": "2026-07-10",
+          "day": 31,
+          "rank": 2,
+          "views": 44
         },
         {
           "date": "2026-07-16",
@@ -1334,12 +2919,18 @@
           "day": 57,
           "rank": 9,
           "views": 20
+        },
+        {
+          "date": "2026-08-06",
+          "day": 58,
+          "rank": 17,
+          "views": 12
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 11,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "052",
@@ -1351,10 +2942,166 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-06-12",
+          "day": 3,
+          "rank": 14,
+          "views": 9
+        },
+        {
+          "date": "2026-06-13",
+          "day": 4,
+          "rank": 5,
+          "views": 22
+        },
+        {
+          "date": "2026-06-14",
+          "day": 5,
+          "rank": 1,
+          "views": 78
+        },
+        {
+          "date": "2026-06-15",
+          "day": 6,
+          "rank": 6,
+          "views": 35
+        },
+        {
+          "date": "2026-06-16",
+          "day": 7,
+          "rank": 4,
+          "views": 37
+        },
+        {
+          "date": "2026-06-17",
+          "day": 8,
+          "rank": 1,
+          "views": 101
+        },
+        {
+          "date": "2026-06-18",
+          "day": 9,
+          "rank": 3,
+          "views": 35
+        },
+        {
           "date": "2026-06-19",
           "day": 10,
           "rank": 3,
           "views": 35
+        },
+        {
+          "date": "2026-06-20",
+          "day": 11,
+          "rank": 2,
+          "views": 39
+        },
+        {
+          "date": "2026-06-21",
+          "day": 12,
+          "rank": 3,
+          "views": 43
+        },
+        {
+          "date": "2026-06-22",
+          "day": 13,
+          "rank": 2,
+          "views": 48
+        },
+        {
+          "date": "2026-06-23",
+          "day": 14,
+          "rank": 5,
+          "views": 29
+        },
+        {
+          "date": "2026-06-24",
+          "day": 15,
+          "rank": 6,
+          "views": 32
+        },
+        {
+          "date": "2026-06-25",
+          "day": 16,
+          "rank": 9,
+          "views": 23
+        },
+        {
+          "date": "2026-06-26",
+          "day": 17,
+          "rank": 6,
+          "views": 26
+        },
+        {
+          "date": "2026-06-27",
+          "day": 18,
+          "rank": 7,
+          "views": 22
+        },
+        {
+          "date": "2026-06-29",
+          "day": 20,
+          "rank": 8,
+          "views": 28
+        },
+        {
+          "date": "2026-06-30",
+          "day": 21,
+          "rank": 9,
+          "views": 26
+        },
+        {
+          "date": "2026-07-01",
+          "day": 22,
+          "rank": 13,
+          "views": 20
+        },
+        {
+          "date": "2026-07-02",
+          "day": 23,
+          "rank": 4,
+          "views": 27
+        },
+        {
+          "date": "2026-07-03",
+          "day": 24,
+          "rank": 5,
+          "views": 28
+        },
+        {
+          "date": "2026-07-04",
+          "day": 25,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-07-05",
+          "day": 26,
+          "rank": 13,
+          "views": 18
+        },
+        {
+          "date": "2026-07-06",
+          "day": 27,
+          "rank": 16,
+          "views": 15
+        },
+        {
+          "date": "2026-07-07",
+          "day": 28,
+          "rank": 7,
+          "views": 22
+        },
+        {
+          "date": "2026-07-09",
+          "day": 30,
+          "rank": 15,
+          "views": 16
+        },
+        {
+          "date": "2026-07-10",
+          "day": 31,
+          "rank": 12,
+          "views": 19
         },
         {
           "date": "2026-07-19",
@@ -1387,10 +3134,10 @@
           "views": 14
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 11,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "053",
@@ -1401,6 +3148,156 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-14",
+          "day": 4,
+          "rank": 7,
+          "views": 23
+        },
+        {
+          "date": "2026-06-15",
+          "day": 5,
+          "rank": 5,
+          "views": 36
+        },
+        {
+          "date": "2026-06-16",
+          "day": 6,
+          "rank": 7,
+          "views": 25
+        },
+        {
+          "date": "2026-06-17",
+          "day": 7,
+          "rank": 6,
+          "views": 29
+        },
+        {
+          "date": "2026-06-18",
+          "day": 8,
+          "rank": 8,
+          "views": 24
+        },
+        {
+          "date": "2026-06-20",
+          "day": 10,
+          "rank": 3,
+          "views": 37
+        },
+        {
+          "date": "2026-06-21",
+          "day": 11,
+          "rank": 2,
+          "views": 59
+        },
+        {
+          "date": "2026-06-22",
+          "day": 12,
+          "rank": 2,
+          "views": 48
+        },
+        {
+          "date": "2026-06-23",
+          "day": 13,
+          "rank": 2,
+          "views": 55
+        },
+        {
+          "date": "2026-06-24",
+          "day": 14,
+          "rank": 2,
+          "views": 49
+        },
+        {
+          "date": "2026-06-25",
+          "day": 15,
+          "rank": 3,
+          "views": 42
+        },
+        {
+          "date": "2026-06-26",
+          "day": 16,
+          "rank": 5,
+          "views": 29
+        },
+        {
+          "date": "2026-06-27",
+          "day": 17,
+          "rank": 5,
+          "views": 26
+        },
+        {
+          "date": "2026-06-28",
+          "day": 18,
+          "rank": 11,
+          "views": 18
+        },
+        {
+          "date": "2026-06-29",
+          "day": 19,
+          "rank": 7,
+          "views": 29
+        },
+        {
+          "date": "2026-06-30",
+          "day": 20,
+          "rank": 11,
+          "views": 22
+        },
+        {
+          "date": "2026-07-01",
+          "day": 21,
+          "rank": 4,
+          "views": 34
+        },
+        {
+          "date": "2026-07-02",
+          "day": 22,
+          "rank": 9,
+          "views": 16
+        },
+        {
+          "date": "2026-07-03",
+          "day": 23,
+          "rank": 3,
+          "views": 31
+        },
+        {
+          "date": "2026-07-04",
+          "day": 24,
+          "rank": 6,
+          "views": 27
+        },
+        {
+          "date": "2026-07-05",
+          "day": 25,
+          "rank": 8,
+          "views": 22
+        },
+        {
+          "date": "2026-07-06",
+          "day": 26,
+          "rank": 7,
+          "views": 29
+        },
+        {
+          "date": "2026-07-07",
+          "day": 27,
+          "rank": 5,
+          "views": 30
+        },
+        {
+          "date": "2026-07-09",
+          "day": 29,
+          "rank": 3,
+          "views": 28
+        },
+        {
+          "date": "2026-07-10",
+          "day": 30,
+          "rank": 3,
+          "views": 29
+        },
         {
           "date": "2026-07-16",
           "day": 36,
@@ -1526,12 +3423,18 @@
           "day": 56,
           "rank": 7,
           "views": 25
+        },
+        {
+          "date": "2026-08-06",
+          "day": 57,
+          "rank": 15,
+          "views": 13
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 12,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "054",
@@ -1541,11 +3444,126 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-13",
+          "day": 3,
+          "rank": 17,
+          "views": 8
+        },
+        {
+          "date": "2026-06-14",
+          "day": 4,
+          "rank": 9,
+          "views": 15
+        },
+        {
+          "date": "2026-06-15",
+          "day": 5,
+          "rank": 11,
+          "views": 22
+        },
+        {
+          "date": "2026-06-16",
+          "day": 6,
+          "rank": 8,
+          "views": 23
+        },
+        {
+          "date": "2026-06-17",
+          "day": 7,
+          "rank": 9,
+          "views": 25
+        },
+        {
+          "date": "2026-06-18",
+          "day": 8,
+          "rank": 9,
+          "views": 22
+        },
+        {
+          "date": "2026-06-20",
+          "day": 10,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-06-21",
+          "day": 11,
+          "rank": 9,
+          "views": 22
+        },
+        {
+          "date": "2026-06-22",
+          "day": 12,
+          "rank": 6,
+          "views": 32
+        },
+        {
+          "date": "2026-06-23",
+          "day": 13,
+          "rank": 14,
+          "views": 21
+        },
+        {
+          "date": "2026-06-24",
+          "day": 14,
+          "rank": 3,
+          "views": 34
+        },
+        {
+          "date": "2026-06-25",
+          "day": 15,
+          "rank": 11,
+          "views": 18
+        },
+        {
+          "date": "2026-06-28",
+          "day": 18,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-06-29",
+          "day": 19,
+          "rank": 15,
+          "views": 21
+        },
+        {
+          "date": "2026-06-30",
+          "day": 20,
+          "rank": 19,
+          "views": 17
+        },
+        {
+          "date": "2026-07-01",
+          "day": 21,
+          "rank": 14,
+          "views": 19
+        },
+        {
+          "date": "2026-07-06",
+          "day": 26,
+          "rank": 10,
+          "views": 20
+        },
+        {
+          "date": "2026-07-10",
+          "day": 30,
+          "rank": 16,
+          "views": 15
+        },
+        {
+          "date": "2026-08-06",
+          "day": 57,
+          "rank": 11,
+          "views": 15
+        }
+      ],
+      "observed_days": 12,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "056",
@@ -1557,10 +3575,172 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-06-12",
+          "day": 1,
+          "rank": 10,
+          "views": 11
+        },
+        {
+          "date": "2026-06-13",
+          "day": 2,
+          "rank": 8,
+          "views": 12
+        },
+        {
+          "date": "2026-06-14",
+          "day": 3,
+          "rank": 5,
+          "views": 26
+        },
+        {
+          "date": "2026-06-15",
+          "day": 4,
+          "rank": 1,
+          "views": 73
+        },
+        {
+          "date": "2026-06-16",
+          "day": 5,
+          "rank": 3,
+          "views": 46
+        },
+        {
+          "date": "2026-06-17",
+          "day": 6,
+          "rank": 3,
+          "views": 64
+        },
+        {
+          "date": "2026-06-18",
+          "day": 7,
+          "rank": 4,
+          "views": 32
+        },
+        {
+          "date": "2026-06-20",
+          "day": 9,
+          "rank": 7,
+          "views": 26
+        },
+        {
+          "date": "2026-06-21",
+          "day": 10,
+          "rank": 6,
+          "views": 30
+        },
+        {
+          "date": "2026-06-22",
+          "day": 11,
+          "rank": 8,
+          "views": 28
+        },
+        {
+          "date": "2026-06-23",
+          "day": 12,
+          "rank": 7,
+          "views": 28
+        },
+        {
+          "date": "2026-06-24",
+          "day": 13,
+          "rank": 7,
+          "views": 29
+        },
+        {
+          "date": "2026-06-25",
+          "day": 14,
+          "rank": 2,
+          "views": 46
+        },
+        {
+          "date": "2026-06-26",
+          "day": 15,
+          "rank": 2,
+          "views": 35
+        },
+        {
+          "date": "2026-06-27",
+          "day": 16,
+          "rank": 3,
+          "views": 42
+        },
+        {
+          "date": "2026-06-28",
+          "day": 17,
+          "rank": 3,
+          "views": 38
+        },
+        {
+          "date": "2026-06-29",
+          "day": 18,
+          "rank": 2,
+          "views": 58
+        },
+        {
+          "date": "2026-06-30",
+          "day": 19,
+          "rank": 3,
+          "views": 56
+        },
+        {
+          "date": "2026-07-01",
+          "day": 20,
+          "rank": 2,
+          "views": 51
+        },
+        {
+          "date": "2026-07-02",
+          "day": 21,
+          "rank": 2,
+          "views": 59
+        },
+        {
+          "date": "2026-07-03",
+          "day": 22,
+          "rank": 1,
+          "views": 60
+        },
+        {
+          "date": "2026-07-04",
+          "day": 23,
+          "rank": 2,
+          "views": 52
+        },
+        {
+          "date": "2026-07-05",
+          "day": 24,
+          "rank": 2,
+          "views": 49
+        },
+        {
+          "date": "2026-07-06",
+          "day": 25,
+          "rank": 1,
+          "views": 65
+        },
+        {
+          "date": "2026-07-07",
+          "day": 26,
+          "rank": 2,
+          "views": 57
+        },
+        {
           "date": "2026-07-08",
           "day": 27,
           "rank": 2,
           "views": 57
+        },
+        {
+          "date": "2026-07-09",
+          "day": 28,
+          "rank": 1,
+          "views": 52
+        },
+        {
+          "date": "2026-07-10",
+          "day": 29,
+          "rank": 1,
+          "views": 64
         },
         {
           "date": "2026-07-16",
@@ -1681,12 +3861,18 @@
           "day": 55,
           "rank": 2,
           "views": 34
+        },
+        {
+          "date": "2026-08-06",
+          "day": 56,
+          "rank": 4,
+          "views": 26
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 13,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "057",
@@ -1698,10 +3884,142 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-06-12",
+          "day": 0,
+          "rank": 10,
+          "views": 11
+        },
+        {
+          "date": "2026-06-18",
+          "day": 6,
+          "rank": 16,
+          "views": 10
+        },
+        {
+          "date": "2026-06-20",
+          "day": 8,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-06-21",
+          "day": 9,
+          "rank": 12,
+          "views": 17
+        },
+        {
+          "date": "2026-06-22",
+          "day": 10,
+          "rank": 11,
+          "views": 26
+        },
+        {
+          "date": "2026-06-23",
+          "day": 11,
+          "rank": 9,
+          "views": 25
+        },
+        {
+          "date": "2026-06-24",
+          "day": 12,
+          "rank": 14,
+          "views": 19
+        },
+        {
+          "date": "2026-06-25",
+          "day": 13,
+          "rank": 6,
+          "views": 25
+        },
+        {
+          "date": "2026-06-26",
+          "day": 14,
+          "rank": 7,
+          "views": 24
+        },
+        {
+          "date": "2026-06-27",
+          "day": 15,
+          "rank": 4,
+          "views": 29
+        },
+        {
+          "date": "2026-06-28",
+          "day": 16,
+          "rank": 7,
+          "views": 25
+        },
+        {
+          "date": "2026-06-29",
+          "day": 17,
+          "rank": 5,
+          "views": 34
+        },
+        {
+          "date": "2026-06-30",
+          "day": 18,
+          "rank": 4,
+          "views": 31
+        },
+        {
+          "date": "2026-07-01",
+          "day": 19,
+          "rank": 7,
+          "views": 27
+        },
+        {
+          "date": "2026-07-02",
+          "day": 20,
+          "rank": 9,
+          "views": 16
+        },
+        {
+          "date": "2026-07-03",
+          "day": 21,
+          "rank": 12,
+          "views": 16
+        },
+        {
+          "date": "2026-07-04",
+          "day": 22,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-07-05",
+          "day": 23,
+          "rank": 9,
+          "views": 21
+        },
+        {
+          "date": "2026-07-06",
+          "day": 24,
+          "rank": 3,
+          "views": 37
+        },
+        {
+          "date": "2026-07-07",
+          "day": 25,
+          "rank": 3,
+          "views": 32
+        },
+        {
           "date": "2026-07-08",
           "day": 26,
           "rank": 3,
           "views": 32
+        },
+        {
+          "date": "2026-07-09",
+          "day": 27,
+          "rank": 3,
+          "views": 28
+        },
+        {
+          "date": "2026-07-10",
+          "day": 28,
+          "rank": 5,
+          "views": 24
         },
         {
           "date": "2026-07-16",
@@ -1792,12 +4110,18 @@
           "day": 54,
           "rank": 9,
           "views": 20
+        },
+        {
+          "date": "2026-08-06",
+          "day": 55,
+          "rank": 7,
+          "views": 23
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "058",
@@ -1808,10 +4132,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "059",
@@ -1821,11 +4145,42 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일; 폐기 상태",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-16",
+          "day": 4,
+          "rank": 20,
+          "views": 12
+        },
+        {
+          "date": "2026-06-18",
+          "day": 6,
+          "rank": 17,
+          "views": 9
+        },
+        {
+          "date": "2026-07-02",
+          "day": 20,
+          "rank": 19,
+          "views": 11
+        },
+        {
+          "date": "2026-07-05",
+          "day": 23,
+          "rank": 18,
+          "views": 12
+        },
+        {
+          "date": "2026-07-06",
+          "day": 24,
+          "rank": 16,
+          "views": 15
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장; 폐기 상태",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "060",
@@ -1836,10 +4191,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "061",
@@ -1849,11 +4204,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-12",
+          "day": 0,
+          "rank": 10,
+          "views": 11
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "062",
@@ -1864,10 +4226,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "063",
@@ -1878,6 +4240,114 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-15",
+          "day": 0,
+          "rank": 13,
+          "views": 17
+        },
+        {
+          "date": "2026-06-16",
+          "day": 1,
+          "rank": 10,
+          "views": 19
+        },
+        {
+          "date": "2026-06-17",
+          "day": 2,
+          "rank": 18,
+          "views": 10
+        },
+        {
+          "date": "2026-06-18",
+          "day": 3,
+          "rank": 11,
+          "views": 20
+        },
+        {
+          "date": "2026-06-20",
+          "day": 5,
+          "rank": 17,
+          "views": 12
+        },
+        {
+          "date": "2026-06-21",
+          "day": 6,
+          "rank": 16,
+          "views": 12
+        },
+        {
+          "date": "2026-06-23",
+          "day": 8,
+          "rank": 16,
+          "views": 18
+        },
+        {
+          "date": "2026-06-24",
+          "day": 9,
+          "rank": 20,
+          "views": 13
+        },
+        {
+          "date": "2026-06-26",
+          "day": 11,
+          "rank": 11,
+          "views": 15
+        },
+        {
+          "date": "2026-06-27",
+          "day": 12,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-06-29",
+          "day": 14,
+          "rank": 12,
+          "views": 24
+        },
+        {
+          "date": "2026-06-30",
+          "day": 15,
+          "rank": 17,
+          "views": 18
+        },
+        {
+          "date": "2026-07-02",
+          "day": 17,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-07-04",
+          "day": 19,
+          "rank": 16,
+          "views": 15
+        },
+        {
+          "date": "2026-07-06",
+          "day": 21,
+          "rank": 14,
+          "views": 17
+        },
+        {
+          "date": "2026-07-07",
+          "day": 22,
+          "rank": 9,
+          "views": 21
+        },
+        {
+          "date": "2026-07-09",
+          "day": 24,
+          "rank": 19,
+          "views": 13
+        },
+        {
+          "date": "2026-07-10",
+          "day": 25,
+          "rank": 10,
+          "views": 20
+        },
         {
           "date": "2026-07-16",
           "day": 31,
@@ -1913,12 +4383,18 @@
           "day": 51,
           "rank": 15,
           "views": 16
+        },
+        {
+          "date": "2026-08-06",
+          "day": 52,
+          "rank": 13,
+          "views": 14
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "064",
@@ -1929,10 +4405,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "065",
@@ -1945,7 +4421,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
+      "verdict_at": "2026-08-06",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -1959,7 +4435,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
+      "verdict_at": "2026-08-06",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -1973,7 +4449,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
+      "verdict_at": "2026-08-06",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -1984,11 +4460,36 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-22",
+          "day": 6,
+          "rank": 17,
+          "views": 14
+        },
+        {
+          "date": "2026-06-23",
+          "day": 7,
+          "rank": 5,
+          "views": 29
+        },
+        {
+          "date": "2026-06-24",
+          "day": 8,
+          "rank": 14,
+          "views": 19
+        },
+        {
+          "date": "2026-07-07",
+          "day": 21,
+          "rank": 36,
+          "views": 8
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "069",
@@ -1999,6 +4500,78 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-27",
+          "day": 11,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-06-29",
+          "day": 13,
+          "rank": 4,
+          "views": 39
+        },
+        {
+          "date": "2026-06-30",
+          "day": 14,
+          "rank": 4,
+          "views": 31
+        },
+        {
+          "date": "2026-07-01",
+          "day": 15,
+          "rank": 6,
+          "views": 30
+        },
+        {
+          "date": "2026-07-02",
+          "day": 16,
+          "rank": 5,
+          "views": 23
+        },
+        {
+          "date": "2026-07-03",
+          "day": 17,
+          "rank": 9,
+          "views": 20
+        },
+        {
+          "date": "2026-07-04",
+          "day": 18,
+          "rank": 10,
+          "views": 17
+        },
+        {
+          "date": "2026-07-05",
+          "day": 19,
+          "rank": 11,
+          "views": 20
+        },
+        {
+          "date": "2026-07-06",
+          "day": 20,
+          "rank": 10,
+          "views": 20
+        },
+        {
+          "date": "2026-07-07",
+          "day": 21,
+          "rank": 13,
+          "views": 19
+        },
+        {
+          "date": "2026-07-09",
+          "day": 23,
+          "rank": 10,
+          "views": 20
+        },
+        {
+          "date": "2026-07-10",
+          "day": 24,
+          "rank": 5,
+          "views": 24
+        },
         {
           "date": "2026-07-16",
           "day": 30,
@@ -2046,12 +4619,18 @@
           "day": 50,
           "rank": 15,
           "views": 16
+        },
+        {
+          "date": "2026-08-06",
+          "day": 51,
+          "rank": 10,
+          "views": 18
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "070",
@@ -2061,11 +4640,102 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-17",
+          "day": 0,
+          "rank": 14,
+          "views": 13
+        },
+        {
+          "date": "2026-06-22",
+          "day": 5,
+          "rank": 12,
+          "views": 24
+        },
+        {
+          "date": "2026-06-23",
+          "day": 6,
+          "rank": 14,
+          "views": 21
+        },
+        {
+          "date": "2026-06-24",
+          "day": 7,
+          "rank": 4,
+          "views": 33
+        },
+        {
+          "date": "2026-06-25",
+          "day": 8,
+          "rank": 8,
+          "views": 24
+        },
+        {
+          "date": "2026-06-26",
+          "day": 9,
+          "rank": 9,
+          "views": 19
+        },
+        {
+          "date": "2026-06-27",
+          "day": 10,
+          "rank": 6,
+          "views": 23
+        },
+        {
+          "date": "2026-06-28",
+          "day": 11,
+          "rank": 8,
+          "views": 20
+        },
+        {
+          "date": "2026-06-29",
+          "day": 12,
+          "rank": 19,
+          "views": 16
+        },
+        {
+          "date": "2026-06-30",
+          "day": 13,
+          "rank": 10,
+          "views": 23
+        },
+        {
+          "date": "2026-07-01",
+          "day": 14,
+          "rank": 5,
+          "views": 31
+        },
+        {
+          "date": "2026-07-02",
+          "day": 15,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-07-03",
+          "day": 16,
+          "rank": 16,
+          "views": 12
+        },
+        {
+          "date": "2026-07-05",
+          "day": 18,
+          "rank": 18,
+          "views": 12
+        },
+        {
+          "date": "2026-07-10",
+          "day": 23,
+          "rank": 10,
+          "views": 20
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "071",
@@ -2075,11 +4745,42 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-28",
+          "day": 11,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-06-29",
+          "day": 12,
+          "rank": 19,
+          "views": 16
+        },
+        {
+          "date": "2026-06-30",
+          "day": 13,
+          "rank": 19,
+          "views": 17
+        },
+        {
+          "date": "2026-07-07",
+          "day": 20,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-07-09",
+          "day": 22,
+          "rank": 17,
+          "views": 14
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "072",
@@ -2089,11 +4790,60 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-21",
+          "day": 3,
+          "rank": 18,
+          "views": 10
+        },
+        {
+          "date": "2026-06-22",
+          "day": 4,
+          "rank": 9,
+          "views": 27
+        },
+        {
+          "date": "2026-06-23",
+          "day": 5,
+          "rank": 9,
+          "views": 25
+        },
+        {
+          "date": "2026-06-25",
+          "day": 7,
+          "rank": 12,
+          "views": 16
+        },
+        {
+          "date": "2026-06-26",
+          "day": 8,
+          "rank": 9,
+          "views": 19
+        },
+        {
+          "date": "2026-06-27",
+          "day": 9,
+          "rank": 12,
+          "views": 16
+        },
+        {
+          "date": "2026-06-28",
+          "day": 10,
+          "rank": 11,
+          "views": 18
+        },
+        {
+          "date": "2026-06-29",
+          "day": 11,
+          "rank": 17,
+          "views": 18
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "073",
@@ -2104,6 +4854,78 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-27",
+          "day": 10,
+          "rank": 13,
+          "views": 15
+        },
+        {
+          "date": "2026-06-28",
+          "day": 11,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-06-29",
+          "day": 12,
+          "rank": 8,
+          "views": 28
+        },
+        {
+          "date": "2026-06-30",
+          "day": 13,
+          "rank": 13,
+          "views": 20
+        },
+        {
+          "date": "2026-07-01",
+          "day": 14,
+          "rank": 16,
+          "views": 18
+        },
+        {
+          "date": "2026-07-03",
+          "day": 16,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-07-04",
+          "day": 17,
+          "rank": 10,
+          "views": 17
+        },
+        {
+          "date": "2026-07-05",
+          "day": 18,
+          "rank": 12,
+          "views": 19
+        },
+        {
+          "date": "2026-07-06",
+          "day": 19,
+          "rank": 8,
+          "views": 24
+        },
+        {
+          "date": "2026-07-07",
+          "day": 20,
+          "rank": 15,
+          "views": 15
+        },
+        {
+          "date": "2026-07-09",
+          "day": 22,
+          "rank": 19,
+          "views": 13
+        },
+        {
+          "date": "2026-07-10",
+          "day": 23,
+          "rank": 12,
+          "views": 19
+        },
         {
           "date": "2026-07-16",
           "day": 29,
@@ -2123,10 +4945,10 @@
           "views": 15
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "074",
@@ -2137,6 +4959,18 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-07-03",
+          "day": 15,
+          "rank": 18,
+          "views": 11
+        },
+        {
+          "date": "2026-07-10",
+          "day": 22,
+          "rank": 17,
+          "views": 14
+        },
         {
           "date": "2026-07-18",
           "day": 30,
@@ -2174,10 +5008,10 @@
           "views": 13
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "075",
@@ -2188,6 +5022,84 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-27",
+          "day": 9,
+          "rank": 19,
+          "views": 12
+        },
+        {
+          "date": "2026-06-28",
+          "day": 10,
+          "rank": 6,
+          "views": 26
+        },
+        {
+          "date": "2026-06-29",
+          "day": 11,
+          "rank": 11,
+          "views": 26
+        },
+        {
+          "date": "2026-06-30",
+          "day": 12,
+          "rank": 13,
+          "views": 20
+        },
+        {
+          "date": "2026-07-01",
+          "day": 13,
+          "rank": 10,
+          "views": 22
+        },
+        {
+          "date": "2026-07-02",
+          "day": 14,
+          "rank": 6,
+          "views": 19
+        },
+        {
+          "date": "2026-07-03",
+          "day": 15,
+          "rank": 10,
+          "views": 18
+        },
+        {
+          "date": "2026-07-04",
+          "day": 16,
+          "rank": 4,
+          "views": 35
+        },
+        {
+          "date": "2026-07-05",
+          "day": 17,
+          "rank": 5,
+          "views": 29
+        },
+        {
+          "date": "2026-07-06",
+          "day": 18,
+          "rank": 4,
+          "views": 33
+        },
+        {
+          "date": "2026-07-07",
+          "day": 19,
+          "rank": 3,
+          "views": 32
+        },
+        {
+          "date": "2026-07-09",
+          "day": 21,
+          "rank": 6,
+          "views": 24
+        },
+        {
+          "date": "2026-07-10",
+          "day": 22,
+          "rank": 9,
+          "views": 21
+        },
         {
           "date": "2026-07-16",
           "day": 28,
@@ -2289,12 +5201,18 @@
           "day": 48,
           "rank": 20,
           "views": 14
+        },
+        {
+          "date": "2026-08-06",
+          "day": 49,
+          "rank": 15,
+          "views": 13
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "076",
@@ -2304,11 +5222,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-07-05",
+          "day": 16,
+          "rank": 18,
+          "views": 12
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "077",
@@ -2319,10 +5244,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "078",
@@ -2333,10 +5258,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "079",
@@ -2347,10 +5272,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "080",
@@ -2363,7 +5288,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
+      "verdict_at": "2026-08-06",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -2377,7 +5302,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
+      "verdict_at": "2026-08-06",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -2388,11 +5313,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-07-05",
+          "day": 13,
+          "rank": 14,
+          "views": 15
+        }
+      ],
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 15일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "083",
@@ -2402,11 +5334,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-21",
+          "day": -1,
+          "rank": 16,
+          "views": 12
+        }
+      ],
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "084",
@@ -2417,10 +5356,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "085",
@@ -2431,10 +5370,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "086",
@@ -2445,6 +5384,36 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-07-02",
+          "day": 9,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-07-03",
+          "day": 10,
+          "rank": 13,
+          "views": 15
+        },
+        {
+          "date": "2026-07-04",
+          "day": 11,
+          "rank": 10,
+          "views": 17
+        },
+        {
+          "date": "2026-07-05",
+          "day": 12,
+          "rank": 14,
+          "views": 15
+        },
+        {
+          "date": "2026-07-07",
+          "day": 14,
+          "rank": 15,
+          "views": 15
+        },
         {
           "date": "2026-07-16",
           "day": 23,
@@ -2458,10 +5427,10 @@
           "views": 12
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 15,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "087",
@@ -2474,7 +5443,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
+      "verdict_at": "2026-08-06",
       "verdict_reason": "발행일 미상; 폐기 상태"
     },
     {
@@ -2485,11 +5454,72 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-28",
+          "day": 5,
+          "rank": 18,
+          "views": 13
+        },
+        {
+          "date": "2026-06-30",
+          "day": 7,
+          "rank": 6,
+          "views": 28
+        },
+        {
+          "date": "2026-07-01",
+          "day": 8,
+          "rank": 11,
+          "views": 21
+        },
+        {
+          "date": "2026-07-02",
+          "day": 9,
+          "rank": 14,
+          "views": 14
+        },
+        {
+          "date": "2026-07-03",
+          "day": 10,
+          "rank": 8,
+          "views": 22
+        },
+        {
+          "date": "2026-07-04",
+          "day": 11,
+          "rank": 7,
+          "views": 22
+        },
+        {
+          "date": "2026-07-05",
+          "day": 12,
+          "rank": 2,
+          "views": 49
+        },
+        {
+          "date": "2026-07-06",
+          "day": 13,
+          "rank": 5,
+          "views": 30
+        },
+        {
+          "date": "2026-07-07",
+          "day": 14,
+          "rank": 11,
+          "views": 20
+        },
+        {
+          "date": "2026-07-09",
+          "day": 16,
+          "rank": 5,
+          "views": 25
+        }
+      ],
+      "observed_days": 15,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "089",
@@ -2500,10 +5530,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "090",
@@ -2514,6 +5544,84 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-23",
+          "day": 1,
+          "rank": 17,
+          "views": 17
+        },
+        {
+          "date": "2026-06-27",
+          "day": 5,
+          "rank": 7,
+          "views": 22
+        },
+        {
+          "date": "2026-06-28",
+          "day": 6,
+          "rank": 4,
+          "views": 29
+        },
+        {
+          "date": "2026-06-29",
+          "day": 7,
+          "rank": 13,
+          "views": 23
+        },
+        {
+          "date": "2026-07-01",
+          "day": 9,
+          "rank": 11,
+          "views": 21
+        },
+        {
+          "date": "2026-07-02",
+          "day": 10,
+          "rank": 7,
+          "views": 18
+        },
+        {
+          "date": "2026-07-03",
+          "day": 11,
+          "rank": 15,
+          "views": 13
+        },
+        {
+          "date": "2026-07-04",
+          "day": 12,
+          "rank": 13,
+          "views": 16
+        },
+        {
+          "date": "2026-07-05",
+          "day": 13,
+          "rank": 9,
+          "views": 21
+        },
+        {
+          "date": "2026-07-06",
+          "day": 14,
+          "rank": 8,
+          "views": 24
+        },
+        {
+          "date": "2026-07-07",
+          "day": 15,
+          "rank": 11,
+          "views": 20
+        },
+        {
+          "date": "2026-07-09",
+          "day": 17,
+          "rank": 15,
+          "views": 16
+        },
+        {
+          "date": "2026-07-10",
+          "day": 18,
+          "rank": 17,
+          "views": 14
+        },
         {
           "date": "2026-07-19",
           "day": 27,
@@ -2587,10 +5695,10 @@
           "views": 16
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 15,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "091",
@@ -2601,6 +5709,72 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-23",
+          "day": 0,
+          "rank": 9,
+          "views": 25
+        },
+        {
+          "date": "2026-06-24",
+          "day": 1,
+          "rank": 9,
+          "views": 27
+        },
+        {
+          "date": "2026-06-25",
+          "day": 2,
+          "rank": 10,
+          "views": 19
+        },
+        {
+          "date": "2026-06-26",
+          "day": 3,
+          "rank": 11,
+          "views": 15
+        },
+        {
+          "date": "2026-06-27",
+          "day": 4,
+          "rank": 19,
+          "views": 12
+        },
+        {
+          "date": "2026-06-30",
+          "day": 7,
+          "rank": 13,
+          "views": 20
+        },
+        {
+          "date": "2026-07-03",
+          "day": 10,
+          "rank": 21,
+          "views": 10
+        },
+        {
+          "date": "2026-07-04",
+          "day": 11,
+          "rank": 5,
+          "views": 29
+        },
+        {
+          "date": "2026-07-05",
+          "day": 12,
+          "rank": 14,
+          "views": 15
+        },
+        {
+          "date": "2026-07-07",
+          "day": 14,
+          "rank": 6,
+          "views": 23
+        },
+        {
+          "date": "2026-07-09",
+          "day": 16,
+          "rank": 17,
+          "views": 14
+        },
         {
           "date": "2026-07-19",
           "day": 26,
@@ -2620,10 +5794,10 @@
           "views": 14
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 15,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "092",
@@ -2635,16 +5809,28 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-07-03",
+          "day": 10,
+          "rank": 18,
+          "views": 11
+        },
+        {
+          "date": "2026-07-07",
+          "day": 14,
+          "rank": 15,
+          "views": 15
+        },
+        {
           "date": "2026-07-21",
           "day": 28,
           "rank": 19,
           "views": 13
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 15,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "093",
@@ -2655,10 +5841,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 15,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "094",
@@ -2668,11 +5854,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-06-24",
+          "day": 0,
+          "rank": 18,
+          "views": 16
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "095",
@@ -2683,10 +5876,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "096",
@@ -2697,10 +5890,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "097",
@@ -2711,178 +5904,279 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "098",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "3연동중문 브론즈유리 선택 전 꼭 보는 3가지",
+      "published_at": "2026-06-25",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observations": [
+        {
+          "date": "2026-06-25",
+          "day": 0,
+          "rank": 15,
+          "views": 12
+        },
+        {
+          "date": "2026-07-02",
+          "day": 7,
+          "rank": 11,
+          "views": 15
+        },
+        {
+          "date": "2026-07-07",
+          "day": 12,
+          "rank": 21,
+          "views": 14
+        },
+        {
+          "date": "2026-07-18",
+          "day": 23,
+          "rank": 19,
+          "views": 11
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "099",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "셀프중문 시작 전 꼭 봐야 할 3가지 기준!",
+      "published_at": "2026-06-25",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observations": [
+        {
+          "date": "2026-06-25",
+          "day": 0,
+          "rank": 18,
+          "views": 10
+        },
+        {
+          "date": "2026-07-24",
+          "day": 29,
+          "rank": 17,
+          "views": 13
+        },
+        {
+          "date": "2026-07-26",
+          "day": 31,
+          "rank": 17,
+          "views": 14
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "100",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "문장군 도어 검색 전 확인할 3가지",
+      "published_at": "2026-06-25",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "101",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "신발장 간섭있는 집, 중문 설치 전 확인할 3가지",
+      "published_at": "2026-06-25",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observations": [
+        {
+          "date": "2026-06-26",
+          "day": 1,
+          "rank": 18,
+          "views": 12
+        }
+      ],
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "102",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "중문 설치 소음 분진 줄이는 3가지 준비!",
+      "published_at": "2026-06-26",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "103",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "화장실문 교체, 타일 마감 걱정하기 전 확인할 3가지!",
+      "published_at": "2026-06-26",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "104",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "좁은현관중문 설치 전 답답하지 않게 하는 3가지 기준 확인!",
+      "published_at": "2026-06-26",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "105",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "아파트 중문 설치 시간 달라지는 3가지 현장",
+      "published_at": "2026-06-26",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 14,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "106",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "3연동중문 플루트유리 선택 전 확인할 조건 3가지",
+      "published_at": "2026-06-27",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observations": [
+        {
+          "date": "2026-06-29",
+          "day": 2,
+          "rank": 17,
+          "views": 18
+        },
+        {
+          "date": "2026-07-01",
+          "day": 4,
+          "rank": 19,
+          "views": 16
+        },
+        {
+          "date": "2026-07-03",
+          "day": 6,
+          "rank": 18,
+          "views": 11
+        },
+        {
+          "date": "2026-07-04",
+          "day": 7,
+          "rank": 20,
+          "views": 12
+        },
+        {
+          "date": "2026-07-07",
+          "day": 10,
+          "rank": 21,
+          "views": 14
+        },
+        {
+          "date": "2026-07-17",
+          "day": 20,
+          "rank": 15,
+          "views": 13
+        },
+        {
+          "date": "2026-07-23",
+          "day": 26,
+          "rank": 18,
+          "views": 14
+        }
+      ],
+      "observed_days": 13,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "107",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "3연동중문 단점, 설치 전 먼저 봐야 할 3가지",
+      "published_at": "2026-06-28",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observations": [
+        {
+          "date": "2026-06-28",
+          "day": 0,
+          "rank": 14,
+          "views": 14
+        }
+      ],
+      "observed_days": 12,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "108",
-      "title": "",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "초슬림 3연동중문 단점? 얇아서 불안하다면 꼭 확인하세요!",
+      "published_at": "2026-06-29",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 11,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "109",
       "title": "자동중문 단점, 고장 걱정 전에 꼭 확인해 보세요!",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-06-29",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 11,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "110",
@@ -2895,28 +6189,28 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
+      "verdict_at": "2026-08-06",
       "verdict_reason": "발행일 미상"
     },
     {
       "post_no": "111",
       "title": "우드 컬러 중문 선택 전 확인해야 할 3가지!!",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-06-29",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 11,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "112",
       "title": "전세집 중문 설치 전 집주인에게 확인할 3가지!",
       "published_at": "2026-06-30",
-      "published_at_source": "daily",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
@@ -2928,44 +6222,44 @@
           "views": 13
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 10,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "113",
       "title": "방문교체 고민, 문짝만 바꿔도 집 분위기가 달라질까?",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-06-30",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 10,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "114",
       "title": "현관 중문 설치 효과 없을까 봐 걱정될 때 보는 3가지!",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-06-30",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 10,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "115",
       "title": "몰딩시공 타이밍이 비용을 바꾸는 이유",
       "published_at": "2026-06-30",
-      "published_at_source": "daily",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
@@ -3055,48 +6349,108 @@
           "views": 12
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 10,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "116",
       "title": "아파트 중문 설치 이사 전과 입주 후 언제가 나을까?",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-06-30",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 10,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "117",
       "title": "화장실문교체 전 문틀까지 봐야 하는 3가지 신호",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-06-29",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 11,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "118",
       "title": "9mm 문선 12mm 문선 차이, 얇기보다 먼저 볼 것!",
       "published_at": "2026-06-29",
-      "published_at_source": "daily",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-06-30",
+          "day": 1,
+          "rank": 13,
+          "views": 20
+        },
+        {
+          "date": "2026-07-01",
+          "day": 2,
+          "rank": 17,
+          "views": 17
+        },
+        {
+          "date": "2026-07-02",
+          "day": 3,
+          "rank": 7,
+          "views": 18
+        },
+        {
+          "date": "2026-07-03",
+          "day": 4,
+          "rank": 7,
+          "views": 24
+        },
+        {
+          "date": "2026-07-04",
+          "day": 5,
+          "rank": 17,
+          "views": 14
+        },
+        {
+          "date": "2026-07-05",
+          "day": 6,
+          "rank": 18,
+          "views": 12
+        },
+        {
+          "date": "2026-07-06",
+          "day": 7,
+          "rank": 15,
+          "views": 16
+        },
+        {
+          "date": "2026-07-07",
+          "day": 8,
+          "rank": 14,
+          "views": 16
+        },
+        {
+          "date": "2026-07-09",
+          "day": 10,
+          "rank": 8,
+          "views": 22
+        },
+        {
+          "date": "2026-07-10",
+          "day": 11,
+          "rank": 4,
+          "views": 25
+        },
         {
           "date": "2026-07-16",
           "day": 17,
@@ -3204,36 +6558,48 @@
           "day": 37,
           "rank": 5,
           "views": 30
+        },
+        {
+          "date": "2026-08-06",
+          "day": 38,
+          "rank": 9,
+          "views": 19
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 11,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "119",
       "title": "방문손잡이교체 전 문짝 상태를 먼저 봐야 하는 이유",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-06-30",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 10,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "120",
       "title": "방문교체비용, 문짝만 바꿀 때와 문틀까지 바꿀 때 차이",
       "published_at": "2026-07-01",
-      "published_at_source": "daily",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-07-07",
+          "day": 6,
+          "rank": 31,
+          "views": 9
+        },
         {
           "date": "2026-07-20",
           "day": 19,
@@ -3301,16 +6667,16 @@
           "views": 14
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "121",
       "title": "중문 교체 비용, 기존 중문 철거가 견적을 바꾸는 이유 3가지",
       "published_at": "2026-07-01",
-      "published_at_source": "daily",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
@@ -3382,34 +6748,64 @@
           "views": 12
         }
       ],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "122",
       "title": "3연동중문 디자인, 우리 집 분위기에 맞게 고르려면?",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-01",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "123",
       "title": "신축아파트 옵션 중문, AS까지 생각하면 꼭 확인할 것!",
       "published_at": "2026-07-02",
-      "published_at_source": "daily",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-07-02",
+          "day": 0,
+          "rank": 24,
+          "views": 9
+        },
+        {
+          "date": "2026-07-03",
+          "day": 1,
+          "rank": 24,
+          "views": 9
+        },
+        {
+          "date": "2026-07-04",
+          "day": 2,
+          "rank": 25,
+          "views": 10
+        },
+        {
+          "date": "2026-07-07",
+          "day": 5,
+          "rank": 31,
+          "views": 9
+        },
+        {
+          "date": "2026-07-10",
+          "day": 8,
+          "rank": 14,
+          "views": 18
+        },
         {
           "date": "2026-07-16",
           "day": 14,
@@ -3447,20 +6843,26 @@
           "views": 16
         }
       ],
-      "observed_days": 1,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 1일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 9,
+      "verdict": "landed",
+      "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "124",
       "title": "ㄱ자중문 시공, 가벽이 필요한 현관 구조는 따로 있습니다",
       "published_at": "2026-07-02",
-      "published_at_source": "daily",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-07-02",
+          "day": 0,
+          "rank": 38,
+          "views": 6
+        },
         {
           "date": "2026-07-28",
           "day": 26,
@@ -3480,20 +6882,26 @@
           "views": 15
         }
       ],
-      "observed_days": 1,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "125",
       "title": "방문교체 vs 필름시공, 비용보다 먼저 봐야 할 기준!",
       "published_at": "2026-07-02",
-      "published_at_source": "daily",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-07-02",
+          "day": 0,
+          "rank": 30,
+          "views": 7
+        },
         {
           "date": "2026-07-30",
           "day": 28,
@@ -3513,24 +6921,24 @@
           "views": 15
         }
       ],
-      "observed_days": 1,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "126",
       "title": "중문 색상 고르는법! 포인트로 할지, 집 톤에 맞출지 정하세요",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-07-03",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "127",
@@ -3540,11 +6948,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 2,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 2일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-07-05",
+          "day": 2,
+          "rank": 27,
+          "views": 8
+        }
+      ],
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "128",
@@ -3555,6 +6970,18 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-07-04",
+          "day": 1,
+          "rank": 30,
+          "views": 9
+        },
+        {
+          "date": "2026-07-06",
+          "day": 3,
+          "rank": 32,
+          "views": 8
+        },
         {
           "date": "2026-07-16",
           "day": 13,
@@ -3670,10 +7097,10 @@
           "views": 22
         }
       ],
-      "observed_days": 2,
+      "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "129",
@@ -3684,6 +7111,18 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-07-04",
+          "day": 0,
+          "rank": 30,
+          "views": 9
+        },
+        {
+          "date": "2026-07-06",
+          "day": 2,
+          "rank": 25,
+          "views": 11
+        },
         {
           "date": "2026-07-17",
           "day": 13,
@@ -3703,10 +7142,10 @@
           "views": 18
         }
       ],
-      "observed_days": 3,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 3일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "130",
@@ -3716,11 +7155,24 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 3,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 3일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-07-04",
+          "day": 0,
+          "rank": 20,
+          "views": 12
+        },
+        {
+          "date": "2026-07-05",
+          "day": 1,
+          "rank": 18,
+          "views": 12
+        }
+      ],
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "131",
@@ -3730,11 +7182,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 4,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
-      "verdict_at": "2026-08-05"
+      "observations": [
+        {
+          "date": "2026-07-05",
+          "day": 0,
+          "rank": 27,
+          "views": 8
+        }
+      ],
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "132",
@@ -3768,12 +7227,18 @@
           "day": 31,
           "rank": 18,
           "views": 15
+        },
+        {
+          "date": "2026-08-06",
+          "day": 32,
+          "rank": 17,
+          "views": 12
         }
       ],
-      "observed_days": 4,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 9,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "133",
@@ -3783,11 +7248,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 5,
+      "observations": [
+        {
+          "date": "2026-07-06",
+          "day": 0,
+          "rank": 25,
+          "views": 11
+        }
+      ],
+      "observed_days": 9,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 5일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "134",
@@ -3798,6 +7270,18 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [
+        {
+          "date": "2026-07-06",
+          "day": 0,
+          "rank": 29,
+          "views": 9
+        },
+        {
+          "date": "2026-07-07",
+          "day": 1,
+          "rank": 21,
+          "views": 14
+        },
         {
           "date": "2026-07-16",
           "day": 10,
@@ -3917,12 +7401,18 @@
           "day": 30,
           "rank": 8,
           "views": 22
+        },
+        {
+          "date": "2026-08-06",
+          "day": 31,
+          "rank": 3,
+          "views": 30
         }
       ],
-      "observed_days": 5,
+      "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "135",
@@ -3932,11 +7422,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 5,
+      "observations": [
+        {
+          "date": "2026-07-06",
+          "day": 0,
+          "rank": 21,
+          "views": 12
+        }
+      ],
+      "observed_days": 9,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 5일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "136",
@@ -3948,16 +7445,22 @@
       "cluster_ids": [],
       "observations": [
         {
+          "date": "2026-07-07",
+          "day": 0,
+          "rank": 27,
+          "views": 11
+        },
+        {
           "date": "2026-07-21",
           "day": 14,
           "rank": 11,
           "views": 19
         }
       ],
-      "observed_days": 6,
+      "observed_days": 9,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 6일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "137",
@@ -3967,11 +7470,18 @@
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
-      "observations": [],
-      "observed_days": 6,
+      "observations": [
+        {
+          "date": "2026-07-07",
+          "day": 0,
+          "rank": 27,
+          "views": 11
+        }
+      ],
+      "observed_days": 9,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 6일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "138",
@@ -4089,12 +7599,18 @@
           "day": 29,
           "rank": 3,
           "views": 33
+        },
+        {
+          "date": "2026-08-06",
+          "day": 30,
+          "rank": 2,
+          "views": 34
         }
       ],
-      "observed_days": 6,
+      "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "139",
@@ -4230,12 +7746,18 @@
           "day": 28,
           "rank": 6,
           "views": 27
+        },
+        {
+          "date": "2026-08-06",
+          "day": 29,
+          "rank": 5,
+          "views": 24
         }
       ],
-      "observed_days": 7,
+      "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "140",
@@ -4371,12 +7893,18 @@
           "day": 28,
           "rank": 1,
           "views": 47
+        },
+        {
+          "date": "2026-08-06",
+          "day": 29,
+          "rank": 1,
+          "views": 37
         }
       ],
-      "observed_days": 7,
+      "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "141",
@@ -4387,10 +7915,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 7,
+      "observed_days": 9,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 7일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "142",
@@ -4401,10 +7929,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 8,
+      "observed_days": 10,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "143",
@@ -4415,10 +7943,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 8,
+      "observed_days": 10,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "144",
@@ -4429,10 +7957,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 8,
+      "observed_days": 10,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "145",
@@ -4456,10 +7984,10 @@
           "views": 12
         }
       ],
-      "observed_days": 9,
+      "observed_days": 10,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "146",
@@ -4513,10 +8041,10 @@
           "views": 16
         }
       ],
-      "observed_days": 9,
+      "observed_days": 10,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "147",
@@ -4527,10 +8055,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 9,
+      "observed_days": 10,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "148",
@@ -4575,7 +8103,7 @@
       "observed_days": 10,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "149",
@@ -4615,12 +8143,18 @@
           "day": 25,
           "rank": 11,
           "views": 19
+        },
+        {
+          "date": "2026-08-06",
+          "day": 26,
+          "rank": 13,
+          "views": 14
         }
       ],
       "observed_days": 10,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "150",
@@ -4634,7 +8168,7 @@
       "observed_days": 11,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "151",
@@ -4648,7 +8182,7 @@
       "observed_days": 11,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "152",
@@ -4680,7 +8214,7 @@
       "observed_days": 12,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "153",
@@ -4699,7 +8233,7 @@
       "observed_days": 12,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "154",
@@ -4717,7 +8251,7 @@
       "observed_days": 12,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "155",
@@ -4735,7 +8269,7 @@
       "observed_days": 13,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "156",
@@ -4753,7 +8287,7 @@
       "observed_days": 13,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "157",
@@ -4772,7 +8306,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "158",
@@ -4791,7 +8325,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "159",
@@ -4810,7 +8344,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "160",
@@ -4860,7 +8394,7 @@
       "observed_days": 15,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "161",
@@ -4886,7 +8420,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "162",
@@ -4917,7 +8451,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "163",
@@ -4936,7 +8470,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "164",
@@ -4955,7 +8489,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "165",
@@ -4971,10 +8505,10 @@
         "C-H4-H5-TRIM-FINISH"
       ],
       "observations": [],
-      "observed_days": 14,
+      "observed_days": 15,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "166",
@@ -4990,10 +8524,10 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 13,
+      "observed_days": 14,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "167",
@@ -5009,10 +8543,10 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 12,
+      "observed_days": 13,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "168",
@@ -5028,10 +8562,10 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 11,
+      "observed_days": 12,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "169",
@@ -5047,16 +8581,16 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 10,
+      "observed_days": 11,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "170",
       "title": "문짝은 멀쩡한데 문틀시트지 붙이면 티 안 날까요?",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-08-05",
+      "published_at_source": "registry",
       "queue_id": "Q-033",
       "hub_ids": [
         "H4",
@@ -5066,10 +8600,10 @@
         "C-H4-H5-SURFACE-CONDITION"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 2,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "171",
@@ -5085,10 +8619,10 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 3,
-      "verdict": "pending",
-      "verdict_reason": "발행 후 3일 미만",
-      "verdict_at": "2026-08-05"
+      "observed_days": 4,
+      "verdict": "unobserved",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "172",
@@ -5106,7 +8640,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-05",
+      "verdict_at": "2026-08-06",
       "verdict_reason": "발행일 미상; 폐기 상태"
     },
     {
@@ -5124,10 +8658,10 @@
         "C-H4-H5-HARDWARE-RANGE"
       ],
       "observations": [],
-      "observed_days": 2,
+      "observed_days": 3,
       "verdict": "pending",
       "verdict_reason": "발행 후 3일 미만",
-      "verdict_at": "2026-08-05"
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "174",
@@ -5143,10 +8677,10 @@
         "C-H4-H5-HARDWARE-RANGE"
       ],
       "observations": [],
-      "observed_days": 4,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
-      "verdict_at": "2026-08-05"
+      "observed_days": 5,
+      "verdict": "pending",
+      "verdict_reason": "세 번째 유효 TOP20 관측일 대기",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "175",
@@ -5162,10 +8696,10 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 5,
-      "verdict": "pending",
-      "verdict_reason": "세 번째 유효 TOP20 관측일 대기",
-      "verdict_at": "2026-08-05"
+      "observed_days": 6,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 6일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "176",
@@ -5181,10 +8715,10 @@
         "C-H4-H5-HARDWARE-RANGE"
       ],
       "observations": [],
-      "observed_days": 6,
+      "observed_days": 7,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 6일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 7일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "177",
@@ -5199,10 +8733,10 @@
         "C-H4-MOISTURE-RISK"
       ],
       "observations": [],
-      "observed_days": 9,
+      "observed_days": 10,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "178",
@@ -5217,10 +8751,10 @@
         "C-H4-MOISTURE-RISK"
       ],
       "observations": [],
-      "observed_days": 8,
+      "observed_days": 9,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-06"
     },
     {
       "post_no": "179",
@@ -5236,25 +8770,17 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 7,
+      "observed_days": 8,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 7일",
-      "verdict_at": "2026-08-05"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
+      "verdict_at": "2026-08-06"
     }
   ],
   "unmapped_titles": [
     {
-      "title": "3연동중문 브론즈유리 선택 전 꼭 보는 3가지",
+      "title": "깔끔하고 따뜻한 분위기의 베이지 중문",
       "dates": [
-        "2026-07-18"
-      ],
-      "reason": "등록부에서 글번호를 찾지 못함"
-    },
-    {
-      "title": "3연동중문 플루트유리 선택 전 확인할 조건 3가지",
-      "dates": [
-        "2026-07-17",
-        "2026-07-23"
+        "2026-06-26"
       ],
       "reason": "등록부에서 글번호를 찾지 못함"
     },
@@ -5266,10 +8792,59 @@
       "reason": "등록부에서 글번호를 찾지 못함"
     },
     {
-      "title": "셀프중문 시작 전 꼭 봐야 할 3가지 기준!",
+      "title": "멤브레인도어, ABS도어로 바꾸는 3가지 이유",
       "dates": [
-        "2026-07-24",
-        "2026-07-26"
+        "2026-06-13",
+        "2026-06-14",
+        "2026-06-15",
+        "2026-06-16",
+        "2026-06-18",
+        "2026-06-22"
+      ],
+      "reason": "등록부에서 글번호를 찾지 못함"
+    },
+    {
+      "title": "문장군 현관중문 시공사례와 실제 비용정보",
+      "dates": [
+        "2026-07-10"
+      ],
+      "reason": "등록부에서 글번호를 찾지 못함"
+    },
+    {
+      "title": "방문 화장실문 교체 - 20년 넘은 아파트, 문짝 '6개'만 바...",
+      "dates": [
+        "2026-06-26"
+      ],
+      "reason": "등록부에서 글번호를 찾지 못함"
+    },
+    {
+      "title": "방문 화장실문 교체 현장",
+      "dates": [
+        "2026-06-18"
+      ],
+      "reason": "등록부에서 글번호를 찾지 못함"
+    },
+    {
+      "title": "방문 화장실문 교체 현장 - 과감하게 문틀까지 전부 뽑아내세요!",
+      "dates": [
+        "2026-06-12",
+        "2026-06-13",
+        "2026-06-14",
+        "2026-06-15"
+      ],
+      "reason": "등록부에서 글번호를 찾지 못함"
+    },
+    {
+      "title": "어떤 색이 어울릴까? 인테리어 초보를 위한 중문 컬러 선...",
+      "dates": [
+        "2026-06-21"
+      ],
+      "reason": "등록부에서 글번호를 찾지 못함"
+    },
+    {
+      "title": "워너청담 슈퍼펜트하우스, 아이유 집 보다 비싼",
+      "dates": [
+        "2026-06-25"
       ],
       "reason": "등록부에서 글번호를 찾지 못함"
     }

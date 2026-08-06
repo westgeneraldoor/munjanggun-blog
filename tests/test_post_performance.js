@@ -36,10 +36,11 @@ function writeJson(filePath, value) {
   writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`);
 }
 
-function registry(rows, extraBlocks = []) {
+function registry(rows, extraBlocks = [], titleAliases = []) {
   return {
     schema_version: 1,
     id: 'posting_registry',
+    title_aliases: titleAliases,
     blocks: [
       {
         type: 'table',
@@ -72,9 +73,9 @@ function taxonomy(postNos) {
   };
 }
 
-function topTable(headers, rows) {
+function topTable(headers, rows, heading = '## 게시글 TOP20') {
   return [
-    '## 게시글 TOP20',
+    heading,
     '',
     `| ${headers.join(' | ')} |`,
     `| ${headers.map(() => '---').join(' | ')} |`,
@@ -99,13 +100,13 @@ function rankedRows(count, titlePrefix = '채움') {
   ]);
 }
 
-function writeFixture({ files, registryRows, registryBlocks = [], postNos }) {
+function writeFixture({ files, registryRows, registryBlocks = [], titleAliases = [], postNos }) {
   const dir = makeTempDir('post-performance-');
   const reportsDir = path.join(dir, 'daily');
   const registryPath = path.join(dir, 'POSTING_REGISTRY.json');
   const taxonomyPath = path.join(dir, 'SEO_TAXONOMY.json');
 
-  writeJson(registryPath, registry(registryRows, registryBlocks));
+  writeJson(registryPath, registry(registryRows, registryBlocks, titleAliases));
   writeJson(taxonomyPath, taxonomy(postNos));
   Object.entries(files).forEach(([date, content]) => {
     writeFile(path.join(reportsDir, `${date}_seo_watch.md`), content);
@@ -460,6 +461,126 @@ function testFallsBackToTitleMappingWhenPostNumberIsDash() {
   }
 }
 
+function testParsesAllObservedTop20HeadingForms() {
+  const headings = [
+    '## 게시글 TOP20',
+    '## 4. 게시글 TOP20',
+    '## 4. 게시글 TOP 20',
+    '## 3. 게시글 TOP 20',
+    '## 3. 게시글 TOP 20 관찰',
+    '## 5. 게시글 TOP20',
+  ];
+  const files = Object.fromEntries(headings.map((heading, index) => {
+    const date = `2026-07-${String(index + 1).padStart(2, '0')}`;
+    return [date, topTable(
+      ['순위', '게시글', '조회수'],
+      [
+        ['1', '헤딩 회수 대상 글', String(20 - index)],
+        ['2', '채움 글 하나', '9'],
+        ['3', '채움 글 둘', '8'],
+        ['4', '채움 글 셋', '7'],
+        ['5', '채움 글 넷', '6'],
+      ],
+      heading
+    )];
+  }));
+  const fixture = writeFixture({
+    registryRows: [
+      ['152', '헤딩 회수 대상 글', '2026-07-01'],
+      ['153', '채움 글 하나', '2026-07-01'],
+      ['154', '채움 글 둘', '2026-07-01'],
+      ['155', '채움 글 셋', '2026-07-01'],
+      ['156', '채움 글 넷', '2026-07-01'],
+    ],
+    postNos: ['152', '153', '154', '155', '156'],
+    files,
+  });
+
+  try {
+    const post = postByNo(collect(fixture), '152');
+    assert.strictEqual(post.observations.length, headings.length);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
+function testMapsOnlyExplicitRegistryTitleAliases() {
+  const fixture = writeFixture({
+    registryRows: [
+      ['152', '정본 제목', '2026-07-01'],
+      ['153', '채움 글 하나', '2026-07-01'],
+      ['154', '채움 글 둘', '2026-07-01'],
+      ['155', '채움 글 셋', '2026-07-01'],
+      ['156', '채움 글 넷', '2026-07-01'],
+    ],
+    titleAliases: [{
+      post_no: '152',
+      titles: ['리포트에 옮겨 적힌 확인 별칭'],
+      evidence: 'daily 표기 흔들림 직접 대조',
+    }],
+    postNos: ['152', '153', '154', '155', '156'],
+    files: {
+      '2026-07-10': topTable(
+        ['순위', '게시글', '조회수'],
+        [
+          ['1', '리포트에 옮겨 적힌 확인 별칭', '10'],
+          ['2', '채움 글 하나', '9'],
+          ['3', '채움 글 둘', '8'],
+          ['4', '채움 글 셋', '7'],
+          ['5', '채움 글 넷', '6'],
+        ]
+      ),
+    },
+  });
+
+  try {
+    const ledger = collect(fixture);
+    assert.strictEqual(postByNo(ledger, '152').observations.length, 1);
+    assert(!ledger.unmapped_titles.some((item) => item.title === '리포트에 옮겨 적힌 확인 별칭'));
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
+function testBlocksConflictingRegistryAliases() {
+  const fixture = writeFixture({
+    registryRows: [
+      ['152', '정본 제목 하나', '2026-07-01'],
+      ['153', '정본 제목 둘', '2026-07-01'],
+      ['154', '채움 글 하나', '2026-07-01'],
+      ['155', '채움 글 둘', '2026-07-01'],
+      ['156', '채움 글 셋', '2026-07-01'],
+      ['157', '채움 글 넷', '2026-07-01'],
+    ],
+    titleAliases: [
+      { post_no: '152', titles: ['충돌 별칭'], evidence: 'fixture' },
+      { post_no: '153', titles: ['충돌 별칭'], evidence: 'fixture' },
+    ],
+    postNos: ['152', '153', '154', '155', '156', '157'],
+    files: {
+      '2026-07-10': topTable(
+        ['순위', '게시글', '조회수'],
+        [
+          ['1', '충돌 별칭', '10'],
+          ['2', '채움 글 하나', '9'],
+          ['3', '채움 글 둘', '8'],
+          ['4', '채움 글 셋', '7'],
+          ['5', '채움 글 넷', '6'],
+        ]
+      ),
+    },
+  });
+
+  try {
+    assert.throws(
+      () => collect(fixture),
+      /title_aliases conflict.*충돌 별칭/
+    );
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
 function testIncludesRegistryPostsWithoutTop20Appearances() {
   const fixture = writeFixture({
     registryRows: [
@@ -573,6 +694,11 @@ function testMapsConfirmedTitleHistoryAlias() {
       ['154', '채움 글 셋', '2026-06-01'],
       ['155', '채움 글 넷', '2026-06-01'],
     ],
+    titleAliases: [{
+      post_no: '086',
+      titles: ['평수별 중문 설치 비용 확인할 3가지 기준'],
+      evidence: '사용자 확인 발행 제목 이력',
+    }],
     postNos: ['086', '152', '153', '154', '155'],
     files: {
       '2026-07-10': topTable(
@@ -757,6 +883,9 @@ function main() {
   testUsesPostNumberColumnBeforeTitleMapping();
   testRecordsReviewReelsIdentifierFromPostNumberColumn();
   testFallsBackToTitleMappingWhenPostNumberIsDash();
+  testParsesAllObservedTop20HeadingForms();
+  testMapsOnlyExplicitRegistryTitleAliases();
+  testBlocksConflictingRegistryAliases();
   testIncludesRegistryPostsWithoutTop20Appearances();
   testMapsMemoPublishedTitleAlias();
   testMapsConfirmedTitleHistoryAlias();
