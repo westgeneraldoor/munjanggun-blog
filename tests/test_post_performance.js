@@ -84,6 +84,10 @@ function topTable(headers, rows, heading = '## 게시글 TOP20') {
   ].join('\n');
 }
 
+function withDataDate(dataDate, content) {
+  return `> 데이터 기준일: ${dataDate}\n\n${content}`;
+}
+
 function padTop20Rows(rows, minimumRows = 10) {
   const padded = rows.map((row) => [...row]);
   for (let rank = padded.length + 1; rank <= minimumRows; rank += 1) {
@@ -132,6 +136,103 @@ function postByNo(ledger, postNo) {
   const post = ledger.posts.find((item) => item.post_no === postNo);
   assert(post, `missing post ${postNo}`);
   return post;
+}
+
+function testUsesMatchingReportDataDate() {
+  const fixture = writeFixture({
+    registryRows: [['152', '기준일 일치 글', '2026-07-01']],
+    postNos: ['152'],
+    files: {
+      '2026-07-04': withDataDate(
+        '2026-07-04',
+        topTable(['순위', '게시글', '조회수'], padTop20Rows([['1', '기준일 일치 글', '10']]))
+      ),
+    },
+  });
+
+  try {
+    const ledger = collect(fixture);
+    assert.strictEqual(ledger.updated_at, '2026-07-04');
+    assert.deepStrictEqual(postByNo(ledger, '152').observations, [
+      { date: '2026-07-04', day: 3, rank: 1, views: 10 },
+    ]);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
+function testUsesPriorReportDataDateInsteadOfFileName() {
+  const fixture = writeFixture({
+    registryRows: [['152', '전날 기준 글', '2026-07-01']],
+    postNos: ['152'],
+    files: {
+      '2026-07-05': withDataDate(
+        '2026-07-04',
+        topTable(['순위', '게시글', '조회수'], padTop20Rows([['1', '전날 기준 글', '10']]))
+      ),
+    },
+  });
+
+  try {
+    const ledger = collect(fixture);
+    assert.strictEqual(ledger.updated_at, '2026-07-04');
+    assert.deepStrictEqual(postByNo(ledger, '152').observations, [
+      { date: '2026-07-04', day: 3, rank: 1, views: 10 },
+    ]);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
+function testKeepsOnlyMostCompleteReportForDuplicateDataDate() {
+  const fixture = writeFixture({
+    registryRows: [['152', '중복 기준 글', '2026-07-01']],
+    postNos: ['152'],
+    files: {
+      '2026-07-04': withDataDate(
+        '2026-07-03',
+        topTable(['순위', '게시글', '조회수'], padTop20Rows([['1', '중복 기준 글', '10']], 5))
+      ),
+      '2026-07-05': withDataDate(
+        '2026-07-03',
+        topTable(['순위', '게시글', '조회수'], padTop20Rows([['2', '중복 기준 글', '99']], 10))
+      ),
+    },
+  });
+
+  try {
+    const ledger = collect(fixture);
+    assert.deepStrictEqual(postByNo(ledger, '152').observations, [
+      { date: '2026-07-03', day: 2, rank: 2, views: 99 },
+    ]);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
+function testUsesLaterFileWhenDuplicateDataDateCoverageTies() {
+  const fixture = writeFixture({
+    registryRows: [['152', '동률 기준 글', '2026-07-01']],
+    postNos: ['152'],
+    files: {
+      '2026-07-04': withDataDate(
+        '2026-07-03',
+        topTable(['순위', '게시글', '조회수'], padTop20Rows([['1', '동률 기준 글', '10']], 10))
+      ),
+      '2026-07-05': withDataDate(
+        '2026-07-03',
+        topTable(['순위', '게시글', '조회수'], padTop20Rows([['3', '동률 기준 글', '88']], 10))
+      ),
+    },
+  });
+
+  try {
+    assert.deepStrictEqual(postByNo(collect(fixture), '152').observations, [
+      { date: '2026-07-03', day: 2, rank: 3, views: 88 },
+    ]);
+  } finally {
+    removeDir(fixture.dir);
+  }
 }
 
 function testParsesHeaderOrderedTablesByColumnName() {
@@ -873,6 +974,10 @@ function testThreeStreakDoesNotBlock() {
 }
 
 function main() {
+  testUsesMatchingReportDataDate();
+  testUsesPriorReportDataDateInsteadOfFileName();
+  testKeepsOnlyMostCompleteReportForDuplicateDataDate();
+  testUsesLaterFileWhenDuplicateDataDateCoverageTies();
   testParsesHeaderOrderedTablesByColumnName();
   testMarksFewerThanFiveValidDaysUnobserved();
   testExcludesDaysZeroThroughTwoFromVerdict();

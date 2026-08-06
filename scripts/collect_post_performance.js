@@ -118,6 +118,12 @@ function parseReportDate(fileName) {
   return match ? match[1] : '';
 }
 
+function parseReportDataDate(content) {
+  const match = String(content || '').match(/^>\s*데이터 기준일:\s*(\d{4}-\d{2}-\d{2})\s*$/m);
+  if (!match || toUtcDay(match[1]) === null) return '';
+  return match[1];
+}
+
 function toUtcDay(dateText) {
   const match = String(dateText || '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (!match) return null;
@@ -277,18 +283,80 @@ function listDailyReports(reportsDir) {
     .sort((left, right) => left.date.localeCompare(right.date));
 }
 
+function selectDailyReports(reportsDir) {
+  const fallbackFiles = [];
+  const byObservationDate = new Map();
+
+  listDailyReports(reportsDir).forEach(({ fileName, date: fileDate }) => {
+    const content = fs.readFileSync(path.join(reportsDir, fileName), 'utf8');
+    const dataDate = parseReportDataDate(content);
+    const observationDate = dataDate || fileDate;
+    const section = topSection(content);
+    const candidate = {
+      fileName,
+      fileDate,
+      observationDate,
+      content,
+      section,
+      rankedRowCount: top20RankedRowCount(section),
+    };
+
+    if (!dataDate) fallbackFiles.push(fileName);
+    const candidates = byObservationDate.get(observationDate) || [];
+    candidates.push(candidate);
+    byObservationDate.set(observationDate, candidates);
+  });
+
+  const duplicates = [];
+  const reports = [];
+  [...byObservationDate.entries()].forEach(([observationDate, candidates]) => {
+    candidates.sort((left, right) => (
+      right.rankedRowCount - left.rankedRowCount
+      || right.fileDate.localeCompare(left.fileDate)
+      || right.fileName.localeCompare(left.fileName)
+    ));
+    const selected = candidates[0];
+    reports.push(selected);
+    if (candidates.length > 1) {
+      duplicates.push({
+        observationDate,
+        selected,
+        excluded: candidates.slice(1),
+      });
+    }
+  });
+
+  reports.sort((left, right) => left.observationDate.localeCompare(right.observationDate));
+  fallbackFiles.sort();
+  duplicates.sort((left, right) => left.observationDate.localeCompare(right.observationDate));
+  return { reports, fallbackFiles, duplicates };
+}
+
+function logCollectionDiagnostics(diagnostics, logger) {
+  if (typeof logger !== 'function') return;
+  const fallbackFiles = diagnostics.fallbackFiles || [];
+  const duplicates = diagnostics.duplicates || [];
+  logger(`[post-performance] 데이터 기준일 파일명 폴백: ${fallbackFiles.length}건${fallbackFiles.length ? ` (${fallbackFiles.join(', ')})` : ''}`);
+  logger(`[post-performance] 중복 데이터 기준일 단일화: ${duplicates.length}일`);
+  duplicates.forEach(({ observationDate, selected, excluded }) => {
+    const excludedText = excluded
+      .map((report) => `${report.fileName}(${report.rankedRowCount}행)`)
+      .join(', ');
+    logger(`[post-performance] ${observationDate}: 채택 ${selected.fileName}(${selected.rankedRowCount}행), 배제 ${excludedText}`);
+  });
+}
+
 function collectDailyEvidence(reportsDir, titleMap) {
   const appearances = [];
   const validDates = new Set();
   const top20RowCounts = new Map();
   const allReportDates = [];
   const unmapped = new Map();
+  const selection = selectDailyReports(reportsDir);
 
-  listDailyReports(reportsDir).forEach(({ fileName, date }) => {
+  selection.reports.forEach(({ observationDate: date, section, rankedRowCount }) => {
     allReportDates.push(date);
-    const content = fs.readFileSync(path.join(reportsDir, fileName), 'utf8');
-    const section = topSection(content);
-    top20RowCounts.set(date, top20RankedRowCount(section));
+    top20RowCounts.set(date, rankedRowCount);
     if (!section) return;
 
     extractMarkdownTables(section).forEach((table) => {
@@ -318,7 +386,17 @@ function collectDailyEvidence(reportsDir, titleMap) {
     });
   });
 
-  return { appearances, validDates, top20RowCounts, allReportDates, unmapped };
+  return {
+    appearances,
+    validDates,
+    top20RowCounts,
+    allReportDates,
+    unmapped,
+    diagnostics: {
+      fallbackFiles: selection.fallbackFiles,
+      duplicates: selection.duplicates,
+    },
+  };
 }
 
 function addDirectIdentifierEntries(byPostNo, appearances) {
@@ -416,10 +494,12 @@ function collectPostPerformance({
   reportsDir = DEFAULT_REPORTS_DIR,
   registryPath = DEFAULT_REGISTRY_PATH,
   taxonomyPath = DEFAULT_TAXONOMY_PATH,
+  logger = null,
 } = {}) {
   const { byPostNo, titleMap } = registryEntries(readJson(registryPath));
   const taxonomy = readJson(taxonomyPath);
   const evidence = collectDailyEvidence(reportsDir, titleMap);
+  logCollectionDiagnostics(evidence.diagnostics, logger);
   addDirectIdentifierEntries(byPostNo, evidence.appearances);
 
   // daily는 파일 날짜 순으로 읽으므로, 발행일이 없는 글에는 가장 이른 TOP20 작성일만 쓴다.
@@ -513,7 +593,7 @@ function writeLedger(ledger, ledgerPath = DEFAULT_LEDGER_PATH) {
 
 function main() {
   const options = parseArgs(process.argv.slice(2));
-  const ledger = collectPostPerformance();
+  const ledger = collectPostPerformance({ logger: console.log });
   if (options.write) writeLedger(ledger);
   console.log(`post performance collected: ${ledger.posts.length} posts, ${ledger.unmapped_titles.length} unmapped titles${options.write ? ' (written)' : ''}`);
 }
