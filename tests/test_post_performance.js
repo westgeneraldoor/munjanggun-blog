@@ -920,6 +920,107 @@ function testPreservesObservationsWhenPublishedDateIsUnknown() {
   }
 }
 
+// URL로 직접 확인한 외부 발행글도 명시적 식별자가 있으면 TOP20 관측을 미매핑으로 남기지 않아야 한다.
+function testTracksExplicitExternalRegistryIdentifiersFromTop20() {
+  const fixture = writeFixture({
+    registryRows: [
+      ['legacy-222663593685', '기존 공개 발행글', '2022-03-04'],
+      ['리뷰릴스-미매칭-20260806', '원본 미매칭 REVIEW 글', '2026-08-06'],
+    ],
+    postNos: ['legacy-222663593685', '리뷰릴스-미매칭-20260806'],
+    files: {
+      '2026-08-07': withDataDate(
+        '2026-08-06',
+        topTable(
+          ['순위', '글번호', '게시글', '조회수'],
+          [
+            ['1', 'legacy-222663593685', '기존 공개 발행글', '21'],
+            ['2', '리뷰릴스-미매칭-20260806', '원본 미매칭 REVIEW 글', '17'],
+          ]
+        )
+      ),
+    },
+  });
+
+  try {
+    const ledger = collect(fixture);
+    assert.deepStrictEqual(postByNo(ledger, 'legacy-222663593685').observations, [
+      { date: '2026-08-06', day: 1616, rank: 1, views: 21 },
+    ]);
+    assert.deepStrictEqual(postByNo(ledger, '리뷰릴스-미매칭-20260806').observations, [
+      { date: '2026-08-06', day: 0, rank: 2, views: 17 },
+    ]);
+    assert.deepStrictEqual(ledger.unmapped_titles, []);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
+// 공개 확인으로 등록한 미매칭 REVIEW 글은 날짜를 가진 URL 추적표와 제목을 가진 콘텐츠 표가 분리돼 있어도 하나의 분리 성과 레코드가 되어야 한다.
+function testJoinsUnmatchedReviewTitleWithPublicationTrackingRecord() {
+  const fixture = writeFixture({
+    registryRows: [],
+    registryBlocks: [
+      {
+        type: 'table',
+        header: ['#', '파일', '발행상태', '발행일', 'URL'],
+        rows: [['리뷰릴스-미매칭-20260806', '공개 REVIEW', '발행완료', '2026-08-06', 'https://blog.naver.com/doorgeneral/224370047786']],
+      },
+      {
+        type: 'table',
+        header: ['콘텐츠 ID', '원본 프로젝트', '원본 소재', '포스트 제목', 'URL', '콘텐츠/URL 상태', '활용 요약'],
+        rows: [['리뷰릴스-미매칭-20260806', '공개 블로그 직접 확인', '원본 ID 미확인', '원본 미매칭 REVIEW 글', 'https://blog.naver.com/doorgeneral/224370047786', '발행완료·URL등록완료', '분리 관찰']],
+      },
+    ],
+    postNos: ['리뷰릴스-미매칭-20260806'],
+    files: {
+      '2026-08-07': withDataDate(
+        '2026-08-06',
+        topTable(['순위', '글번호', '게시글', '조회수'], [['1', '리뷰릴스-미매칭-20260806', '원본 미매칭 REVIEW 글', '17']])
+      ),
+    },
+  });
+
+  try {
+    const post = postByNo(collect(fixture), '리뷰릴스-미매칭-20260806');
+    assert.strictEqual(post.title, '원본 미매칭 REVIEW 글');
+    assert.strictEqual(post.published_at, '2026-08-06');
+    assert.deepStrictEqual(post.observations, [
+      { date: '2026-08-06', day: 0, rank: 1, views: 17 },
+    ]);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
+// 승인된 리뷰릴스는 별도 운영 자료다. URL 추적표만으로 일반 성과 원장에 소급 추가하면 안 된다.
+function testKeepsRegularReviewReelsOutOfLedgerWithoutDailyIdentifier() {
+  const fixture = writeFixture({
+    registryRows: [],
+    registryBlocks: [
+      {
+        type: 'table',
+        header: ['#', '파일', '발행상태', '발행일', 'URL'],
+        rows: [['리뷰릴스-004', '004_어려운시공', '발행완료', '2026-07-29', 'https://blog.naver.com/doorgeneral/224361968127']],
+      },
+      {
+        type: 'table',
+        header: ['콘텐츠 ID', '원본 프로젝트', '원본 소재', '포스트 제목', 'URL', '콘텐츠/URL 상태', '활용 요약'],
+        rows: [['리뷰릴스-004', '문장군 컨텐츠', '004_어려운시공', '승인 원본 REVIEW 글', 'https://blog.naver.com/doorgeneral/224361968127', '발행완료·URL등록완료', '분리 관찰']],
+      },
+    ],
+    postNos: [],
+    files: {},
+  });
+
+  try {
+    const ledger = collect(fixture);
+    assert.strictEqual(ledger.posts.some((post) => post.post_no === '리뷰릴스-004'), false);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
 function testReportsClusterWinRatesAndFadedStreakWarnings() {
   assert.strictEqual(
     typeof renderPerformanceReport,
@@ -996,6 +1097,9 @@ function main() {
   testMapsConfirmedTitleHistoryAlias();
   testUsesEarliestDailyWrittenDateWhenRegistryDateIsMissing();
   testPreservesObservationsWhenPublishedDateIsUnknown();
+  testTracksExplicitExternalRegistryIdentifiersFromTop20();
+  testJoinsUnmatchedReviewTitleWithPublicationTrackingRecord();
+  testKeepsRegularReviewReelsOutOfLedgerWithoutDailyIdentifier();
   testReportsClusterWinRatesAndFadedStreakWarnings();
   testRedesignClusterBlocks();
   testThreeStreakDoesNotBlock();

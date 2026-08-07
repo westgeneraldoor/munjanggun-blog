@@ -12,7 +12,10 @@ function readJson(filePath) {
 }
 
 function normalizePostNo(value) {
-  const match = String(value || '').trim().match(/^(\d{1,3})(-\d+)?/);
+  const text = String(value || '').trim();
+  if (/^리뷰릴스-미매칭-\d{8}$/.test(text) || /^legacy-\d+$/.test(text)) return text;
+
+  const match = text.match(/^(\d{1,3})(-\d+)?/);
   if (!match) return '';
   return `${match[1].padStart(3, '0')}${match[2] || ''}`;
 }
@@ -226,7 +229,9 @@ function registryEntries(registry) {
     .filter((block) => block.type === 'table' && Array.isArray(block.header) && Array.isArray(block.rows))
     .forEach((block) => {
       const headers = block.header.map(normalizeHeader);
-      const postNoIndex = headers.findIndex((header) => header === '#' || header === '글번호' || header === '글');
+      const postNoIndex = headers.findIndex((header) => (
+        header === '#' || header === '글번호' || header === '글' || header === '콘텐츠ID'
+      ));
       const titleIndex = headers.findIndex((header) => header === '포스팅제목' || header === '포스트제목');
       const publishedAtIndex = headers.findIndex((header) => header === '발행일(TOP20작성일기준)' || header === '발행일');
       if (postNoIndex < 0) return;
