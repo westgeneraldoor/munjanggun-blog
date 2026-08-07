@@ -957,6 +957,96 @@
         "I-FAILURE-RISK"
       ],
       "classification_status": "classified"
+    },
+    "post:180": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-031"
+      ],
+      "hub_ids": [
+        "H2",
+        "H3"
+      ],
+      "cluster_ids": [
+        "C-H2-H3-OPENING-CONFIG"
+      ],
+      "intent_ids": [
+        "I-LAYOUT-SUITABILITY",
+        "I-LIVING-SAFETY"
+      ],
+      "classification_status": "classified"
+    },
+    "post:181": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-032"
+      ],
+      "hub_ids": [
+        "H2",
+        "H3"
+      ],
+      "cluster_ids": [
+        "C-H2-H3-OPENING-CONFIG"
+      ],
+      "intent_ids": [
+        "I-LAYOUT-SUITABILITY",
+        "I-LIVING-SAFETY"
+      ],
+      "classification_status": "classified"
+    },
+    "post:182": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-032"
+      ],
+      "hub_ids": [
+        "H3"
+      ],
+      "cluster_ids": [
+        "C-H3-NEWBUILD-GAP"
+      ],
+      "intent_ids": [
+        "I-LAYOUT-SUITABILITY"
+      ],
+      "classification_status": "classified",
+      "taxonomy_change_note": "088번 소재를 신축 옵션·가벽 조건 클러스터(C-H3-NEWBUILD-GAP)로 재분류. 소스 refs로 쓴 Q-032(현관 스위치·프레임 간섭)는 hub/cluster가 달라 참고용 근접 큐일 뿐이며, 신축 옵션 시점 판단을 다루는 큐가 taxonomy에 아직 없어 가장 가까운 H3 큐를 앵커로 사용했다."
+    },
+    "post:183": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-030"
+      ],
+      "hub_ids": [
+        "H2",
+        "H3"
+      ],
+      "cluster_ids": [
+        "C-H2-H3-OPENING-CONFIG"
+      ],
+      "intent_ids": [
+        "I-LAYOUT-SUITABILITY",
+        "I-SPECIAL-USE"
+      ],
+      "classification_status": "classified"
+    },
+    "post:184": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-022"
+      ],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-REPLACEMENT"
+      ],
+      "intent_ids": [
+        "I-COST-SCOPE",
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified",
+      "taxonomy_change_note": "059번 소재를 가격/견적 축(I-COST-SCOPE)으로 분류. 소스 refs로 쓴 Q-022는 동일 hub/cluster(H4·H5, C-H4-H5-REPLACEMENT)지만 intent가 I-SERVICE-BOUNDARY로 달라, ABS도어 가격 비교라는 이 글의 핵심 검색 의도(I-COST-SCOPE)를 명시적으로 추가했다."
     }
   }
 }
