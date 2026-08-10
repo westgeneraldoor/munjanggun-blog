@@ -1047,6 +1047,95 @@
       ],
       "classification_status": "classified",
       "taxonomy_change_note": "059번 소재를 가격/견적 축(I-COST-SCOPE)으로 분류. 소스 refs로 쓴 Q-022는 동일 hub/cluster(H4·H5, C-H4-H5-REPLACEMENT)지만 intent가 I-SERVICE-BOUNDARY로 달라, ABS도어 가격 비교라는 이 글의 핵심 검색 의도(I-COST-SCOPE)를 명시적으로 추가했다."
+    },
+    "post:185": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-031"
+      ],
+      "hub_ids": [
+        "H2",
+        "H3"
+      ],
+      "cluster_ids": [
+        "C-H2-H3-OPENING-CONFIG"
+      ],
+      "intent_ids": [
+        "I-LAYOUT-SUITABILITY",
+        "I-LIVING-SAFETY"
+      ],
+      "classification_status": "classified"
+    },
+    "post:186": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-033"
+      ],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-SURFACE-CONDITION"
+      ],
+      "intent_ids": [
+        "I-FINISH-COORDINATION",
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified"
+    },
+    "post:187": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-032"
+      ],
+      "hub_ids": [
+        "H3"
+      ],
+      "cluster_ids": [
+        "C-H3-PET-ENTRY"
+      ],
+      "intent_ids": [
+        "I-LIVING-SAFETY"
+      ],
+      "classification_status": "classified",
+      "taxonomy_change_note": "040번 소재를 반려동물 현관 동선 클러스터(C-H3-PET-ENTRY)로 분류. 소스 refs로 쓴 Q-032(현관 스위치·프레임 간섭)는 hub/cluster가 달라 참고용 근접 큐이며, post:154와 같은 클러스터를 공유한다. 완벽 차단·dB 수치 표현으로 확장하지 않는다."
+    },
+    "post:188": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-040"
+      ],
+      "hub_ids": [
+        "H4"
+      ],
+      "cluster_ids": [
+        "C-H4-MOISTURE-RISK"
+      ],
+      "intent_ids": [
+        "I-FAILURE-RISK",
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified"
+    },
+    "post:189": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-029"
+      ],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-TRIM-FINISH"
+      ],
+      "intent_ids": [
+        "I-FINISH-COORDINATION",
+        "I-PRIVACY-LAYOUT"
+      ],
+      "classification_status": "classified",
+      "taxonomy_change_note": "022번 소재를 타공도어 마감/프라이버시 축으로 분류. 소스 refs로 쓴 Q-029는 동일 hub/cluster(H4·H5, C-H4-H5-TRIM-FINISH)지만 intent가 I-REPLACEMENT-SCOPE로 달라, 욕실문 노출 구조 판단이라는 핵심 검색 의도(I-PRIVACY-LAYOUT)를 명시적으로 추가했다."
     }
   }
 }
