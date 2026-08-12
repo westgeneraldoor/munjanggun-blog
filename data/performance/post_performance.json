@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "post_performance",
-  "updated_at": "2026-08-11",
+  "updated_at": "2026-08-12",
   "posts": [
     {
       "post_no": "001",
@@ -15,7 +15,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "002",
@@ -29,7 +29,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "003",
@@ -45,12 +45,18 @@
           "day": 89,
           "rank": 15,
           "views": 15
+        },
+        {
+          "date": "2026-08-12",
+          "day": 93,
+          "rank": 10,
+          "views": 18
         }
       ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "003-1",
@@ -89,7 +95,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "004",
@@ -103,7 +109,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "005",
@@ -130,7 +136,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "006",
@@ -144,7 +150,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "007",
@@ -177,7 +183,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "008",
@@ -191,7 +197,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "009",
@@ -205,7 +211,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "010",
@@ -232,7 +238,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "011",
@@ -246,7 +252,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "012",
@@ -260,7 +266,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "013",
@@ -274,7 +280,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "014",
@@ -288,7 +294,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "015",
@@ -302,7 +308,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "016",
@@ -347,7 +353,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "016-1",
@@ -380,7 +386,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "017",
@@ -394,7 +400,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "018",
@@ -571,7 +577,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "019",
@@ -585,7 +591,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "019-1",
@@ -907,12 +913,18 @@
           "day": 79,
           "rank": 6,
           "views": 25
+        },
+        {
+          "date": "2026-08-12",
+          "day": 80,
+          "rank": 1,
+          "views": 34
         }
       ],
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "020",
@@ -933,7 +945,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "021",
@@ -966,7 +978,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "022",
@@ -980,7 +992,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "023",
@@ -994,7 +1006,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "024",
@@ -1021,7 +1033,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "025",
@@ -1035,7 +1047,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "026",
@@ -1049,7 +1061,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "027",
@@ -1118,7 +1130,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "028",
@@ -1175,7 +1187,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "029",
@@ -1226,7 +1238,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "030",
@@ -1240,7 +1252,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "031",
@@ -1339,7 +1351,7 @@
       "observed_days": 1,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 1일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "032",
@@ -1402,7 +1414,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "033",
@@ -1447,7 +1459,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "034",
@@ -1461,7 +1473,7 @@
       "observed_days": 1,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "035",
@@ -1475,7 +1487,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "036",
@@ -1489,7 +1501,7 @@
       "observed_days": 1,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "037",
@@ -1503,7 +1515,7 @@
       "observed_days": 1,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "038",
@@ -1590,7 +1602,7 @@
       "observed_days": 2,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 2일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "039",
@@ -1604,7 +1616,7 @@
       "observed_days": 2,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 2일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "040",
@@ -1655,7 +1667,7 @@
       "observed_days": 10,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "041",
@@ -1669,7 +1681,7 @@
       "observed_days": 2,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 2일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "042",
@@ -1683,7 +1695,7 @@
       "observed_days": 3,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 3일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "043",
@@ -1697,7 +1709,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "044",
@@ -1711,7 +1723,7 @@
       "observed_days": 4,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "045",
@@ -2033,12 +2045,18 @@
           "day": 67,
           "rank": 2,
           "views": 31
+        },
+        {
+          "date": "2026-08-12",
+          "day": 68,
+          "rank": 8,
+          "views": 20
         }
       ],
       "observed_days": 7,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "046",
@@ -2239,7 +2257,7 @@
       "observed_days": 8,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "047",
@@ -2326,7 +2344,7 @@
       "observed_days": 10,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "048",
@@ -2528,12 +2546,18 @@
           "day": 64,
           "rank": 19,
           "views": 16
+        },
+        {
+          "date": "2026-08-12",
+          "day": 65,
+          "rank": 10,
+          "views": 18
         }
       ],
       "observed_days": 10,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "049",
@@ -2584,7 +2608,7 @@
       "observed_days": 15,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "050",
@@ -2743,7 +2767,7 @@
       "observed_days": 10,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "051",
@@ -3041,12 +3065,18 @@
           "day": 62,
           "rank": 7,
           "views": 26
+        },
+        {
+          "date": "2026-08-12",
+          "day": 64,
+          "rank": 10,
+          "views": 18
         }
       ],
       "observed_days": 11,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "052",
@@ -3266,12 +3296,18 @@
           "day": 63,
           "rank": 11,
           "views": 21
+        },
+        {
+          "date": "2026-08-12",
+          "day": 64,
+          "rank": 10,
+          "views": 18
         }
       ],
       "observed_days": 11,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "053",
@@ -3593,12 +3629,18 @@
           "day": 62,
           "rank": 5,
           "views": 26
+        },
+        {
+          "date": "2026-08-12",
+          "day": 63,
+          "rank": 10,
+          "views": 18
         }
       ],
       "observed_days": 12,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "054",
@@ -3727,7 +3769,7 @@
       "observed_days": 12,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "056",
@@ -4055,12 +4097,18 @@
           "day": 61,
           "rank": 1,
           "views": 40
+        },
+        {
+          "date": "2026-08-12",
+          "day": 62,
+          "rank": 3,
+          "views": 27
         }
       ],
       "observed_days": 13,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "057",
@@ -4322,12 +4370,18 @@
           "day": 60,
           "rank": 15,
           "views": 17
+        },
+        {
+          "date": "2026-08-12",
+          "day": 61,
+          "rank": 10,
+          "views": 18
         }
       ],
       "observed_days": 14,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "058",
@@ -4341,7 +4395,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "059",
@@ -4386,7 +4440,7 @@
       "observed_days": 14,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "060",
@@ -4400,7 +4454,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "061",
@@ -4421,7 +4475,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "062",
@@ -4435,7 +4489,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "063",
@@ -4600,7 +4654,7 @@
       "observed_days": 14,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "064",
@@ -4614,7 +4668,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "065",
@@ -4627,7 +4681,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -4641,7 +4695,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -4655,7 +4709,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -4695,7 +4749,7 @@
       "observed_days": 14,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "069",
@@ -4867,12 +4921,18 @@
           "day": 56,
           "rank": 6,
           "views": 25
+        },
+        {
+          "date": "2026-08-12",
+          "day": 57,
+          "rank": 16,
+          "views": 17
         }
       ],
       "observed_days": 14,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "070",
@@ -4977,7 +5037,7 @@
       "observed_days": 14,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "071",
@@ -5022,7 +5082,7 @@
       "observed_days": 14,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "072",
@@ -5085,7 +5145,7 @@
       "observed_days": 14,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "073",
@@ -5196,7 +5256,7 @@
       "observed_days": 14,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "074",
@@ -5254,12 +5314,18 @@
           "day": 40,
           "rank": 19,
           "views": 13
+        },
+        {
+          "date": "2026-08-12",
+          "day": 55,
+          "rank": 18,
+          "views": 13
         }
       ],
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "075",
@@ -5491,12 +5557,18 @@
           "day": 54,
           "rank": 8,
           "views": 22
+        },
+        {
+          "date": "2026-08-12",
+          "day": 55,
+          "rank": 5,
+          "views": 22
         }
       ],
       "observed_days": 14,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "076",
@@ -5517,7 +5589,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "077",
@@ -5531,7 +5603,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "078",
@@ -5545,7 +5617,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "079",
@@ -5559,7 +5631,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "080",
@@ -5572,7 +5644,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -5586,7 +5658,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -5608,7 +5680,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "083",
@@ -5629,7 +5701,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "084",
@@ -5643,7 +5715,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "085",
@@ -5657,7 +5729,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "086",
@@ -5720,7 +5792,7 @@
       "observed_days": 15,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "087",
@@ -5733,7 +5805,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상; 폐기 상태"
     },
     {
@@ -5809,7 +5881,7 @@
       "observed_days": 15,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "089",
@@ -5823,7 +5895,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "090",
@@ -5989,12 +6061,18 @@
           "day": 49,
           "rank": 11,
           "views": 21
+        },
+        {
+          "date": "2026-08-12",
+          "day": 51,
+          "rank": 18,
+          "views": 13
         }
       ],
       "observed_days": 15,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "091",
@@ -6087,7 +6165,7 @@
       "observed_days": 15,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "092",
@@ -6120,7 +6198,7 @@
       "observed_days": 15,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "093",
@@ -6134,7 +6212,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "094",
@@ -6155,7 +6233,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "095",
@@ -6169,7 +6247,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "096",
@@ -6183,7 +6261,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "097",
@@ -6197,7 +6275,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "098",
@@ -6236,7 +6314,7 @@
       "observed_days": 15,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "099",
@@ -6269,7 +6347,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "100",
@@ -6283,7 +6361,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "101",
@@ -6304,7 +6382,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "102",
@@ -6318,7 +6396,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "103",
@@ -6332,7 +6410,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "104",
@@ -6346,7 +6424,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "105",
@@ -6360,7 +6438,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "106",
@@ -6411,7 +6489,7 @@
       "observed_days": 13,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "107",
@@ -6432,7 +6510,7 @@
       "observed_days": 12,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "108",
@@ -6446,7 +6524,7 @@
       "observed_days": 11,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "109",
@@ -6460,7 +6538,7 @@
       "observed_days": 11,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "110",
@@ -6473,7 +6551,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -6488,7 +6566,7 @@
       "observed_days": 11,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "112",
@@ -6509,7 +6587,7 @@
       "observed_days": 10,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "113",
@@ -6523,7 +6601,7 @@
       "observed_days": 10,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "114",
@@ -6537,7 +6615,7 @@
       "observed_days": 10,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "115",
@@ -6630,7 +6708,7 @@
       "observed_days": 10,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "116",
@@ -6644,7 +6722,7 @@
       "observed_days": 10,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "117",
@@ -6658,7 +6736,7 @@
       "observed_days": 11,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "118",
@@ -6848,12 +6926,18 @@
           "day": 43,
           "rank": 4,
           "views": 28
+        },
+        {
+          "date": "2026-08-12",
+          "day": 44,
+          "rank": 18,
+          "views": 13
         }
       ],
       "observed_days": 11,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "119",
@@ -6867,7 +6951,7 @@
       "observed_days": 10,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "120",
@@ -6960,7 +7044,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "121",
@@ -7053,7 +7137,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "122",
@@ -7067,7 +7151,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "123",
@@ -7142,7 +7226,7 @@
       "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "124",
@@ -7181,7 +7265,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "125",
@@ -7226,7 +7310,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "126",
@@ -7240,7 +7324,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "127",
@@ -7261,7 +7345,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "128",
@@ -7426,7 +7510,7 @@
       "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "129",
@@ -7471,7 +7555,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "130",
@@ -7498,7 +7582,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "131",
@@ -7531,7 +7615,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "132",
@@ -7588,7 +7672,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "133",
@@ -7609,7 +7693,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "134",
@@ -7792,7 +7876,7 @@
       "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "135",
@@ -7813,7 +7897,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "136",
@@ -7840,7 +7924,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "137",
@@ -7861,7 +7945,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "138",
@@ -8021,12 +8105,18 @@
           "day": 35,
           "rank": 11,
           "views": 21
+        },
+        {
+          "date": "2026-08-12",
+          "day": 36,
+          "rank": 4,
+          "views": 24
         }
       ],
       "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "139",
@@ -8192,12 +8282,18 @@
           "day": 33,
           "rank": 13,
           "views": 20
+        },
+        {
+          "date": "2026-08-12",
+          "day": 35,
+          "rank": 8,
+          "views": 20
         }
       ],
       "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "140",
@@ -8369,12 +8465,18 @@
           "day": 34,
           "rank": 3,
           "views": 29
+        },
+        {
+          "date": "2026-08-12",
+          "day": 35,
+          "rank": 1,
+          "views": 34
         }
       ],
       "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "141",
@@ -8388,7 +8490,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "142",
@@ -8402,7 +8504,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "143",
@@ -8416,7 +8518,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "144",
@@ -8430,7 +8532,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "145",
@@ -8457,7 +8559,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "146",
@@ -8508,7 +8610,7 @@
       "observed_days": 9,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "147",
@@ -8522,7 +8624,7 @@
       "observed_days": 9,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "148",
@@ -8585,7 +8687,7 @@
       "observed_days": 10,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "149",
@@ -8648,7 +8750,7 @@
       "observed_days": 10,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 1회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "150",
@@ -8662,7 +8764,7 @@
       "observed_days": 11,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "151",
@@ -8676,7 +8778,7 @@
       "observed_days": 11,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "152",
@@ -8720,7 +8822,7 @@
       "observed_days": 12,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "153",
@@ -8739,7 +8841,7 @@
       "observed_days": 12,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "154",
@@ -8757,7 +8859,7 @@
       "observed_days": 12,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "155",
@@ -8782,7 +8884,7 @@
       "observed_days": 13,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "156",
@@ -8800,7 +8902,7 @@
       "observed_days": 13,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "157",
@@ -8819,7 +8921,7 @@
       "observed_days": 14,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "158",
@@ -8838,7 +8940,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "159",
@@ -8857,7 +8959,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "160",
@@ -8938,12 +9040,18 @@
           "day": 24,
           "rank": 8,
           "views": 22
+        },
+        {
+          "date": "2026-08-12",
+          "day": 25,
+          "rank": 6,
+          "views": 21
         }
       ],
       "observed_days": 15,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "161",
@@ -8969,7 +9077,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "162",
@@ -9000,7 +9108,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "163",
@@ -9019,7 +9127,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "164",
@@ -9034,11 +9142,18 @@
       "cluster_ids": [
         "C-H4-H5-TRIM-FINISH"
       ],
-      "observations": [],
+      "observations": [
+        {
+          "date": "2026-08-12",
+          "day": 21,
+          "rank": 6,
+          "views": 21
+        }
+      ],
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "165",
@@ -9057,7 +9172,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "166",
@@ -9076,7 +9191,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "167",
@@ -9095,7 +9210,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "168",
@@ -9114,7 +9229,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "169",
@@ -9133,7 +9248,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "170",
@@ -9149,10 +9264,10 @@
         "C-H4-H5-SURFACE-CONDITION"
       ],
       "observations": [],
-      "observed_days": 7,
+      "observed_days": 8,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 7일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "171",
@@ -9185,12 +9300,18 @@
           "day": 8,
           "rank": 13,
           "views": 18
+        },
+        {
+          "date": "2026-08-12",
+          "day": 9,
+          "rank": 17,
+          "views": 16
         }
       ],
-      "observed_days": 9,
+      "observed_days": 10,
       "verdict": "landed",
       "verdict_reason": "발행 3~14일 구간에 TOP20 2회 등장",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "172",
@@ -9208,7 +9329,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상; 폐기 상태"
     },
     {
@@ -9226,10 +9347,10 @@
         "C-H4-H5-HARDWARE-RANGE"
       ],
       "observations": [],
-      "observed_days": 8,
+      "observed_days": 9,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 9일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "174",
@@ -9245,10 +9366,10 @@
         "C-H4-H5-HARDWARE-RANGE"
       ],
       "observations": [],
-      "observed_days": 10,
+      "observed_days": 11,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 10일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "175",
@@ -9264,10 +9385,10 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 11,
+      "observed_days": 12,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 11일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "176",
@@ -9283,10 +9404,10 @@
         "C-H4-H5-HARDWARE-RANGE"
       ],
       "observations": [],
-      "observed_days": 12,
+      "observed_days": 13,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "177",
@@ -9304,7 +9425,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "178",
@@ -9319,10 +9440,10 @@
         "C-H4-MOISTURE-RISK"
       ],
       "observations": [],
-      "observed_days": 14,
+      "observed_days": 15,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "179",
@@ -9338,10 +9459,10 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 13,
+      "observed_days": 14,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "180",
@@ -9357,10 +9478,10 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 6,
+      "observed_days": 7,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 6일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 7일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "181",
@@ -9376,10 +9497,10 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 5,
-      "verdict": "pending",
-      "verdict_reason": "세 번째 유효 TOP20 관측일 대기",
-      "verdict_at": "2026-08-11"
+      "observed_days": 6,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 6일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "182",
@@ -9394,10 +9515,10 @@
         "C-H3-NEWBUILD-GAP"
       ],
       "observations": [],
-      "observed_days": 4,
-      "verdict": "unobserved",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
-      "verdict_at": "2026-08-11"
+      "observed_days": 5,
+      "verdict": "pending",
+      "verdict_reason": "세 번째 유효 TOP20 관측일 대기",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "183",
@@ -9413,10 +9534,10 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 3,
-      "verdict": "pending",
-      "verdict_reason": "발행 후 3일 미만",
-      "verdict_at": "2026-08-11"
+      "observed_days": 4,
+      "verdict": "unobserved",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 4일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "184",
@@ -9432,10 +9553,10 @@
         "C-H4-H5-REPLACEMENT"
       ],
       "observations": [],
-      "observed_days": 2,
+      "observed_days": 3,
       "verdict": "pending",
       "verdict_reason": "발행 후 3일 미만",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "185",
@@ -9451,14 +9572,14 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 1,
+      "observed_days": 2,
       "verdict": "pending",
       "verdict_reason": "발행 후 3일 미만",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "186",
-      "title": "멤브레인도어 부풀면 ABS도어로 바꾸는 3가지 이유",
+      "title": "멤브레인도어를 ABS도어로 바꾸는 3가지 이유!",
       "published_at": null,
       "published_at_source": "unknown",
       "queue_id": "Q-033",
@@ -9472,7 +9593,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -9490,7 +9611,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -9508,7 +9629,7 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -9527,7 +9648,64 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
+      "verdict_reason": "발행일 미상"
+    },
+    {
+      "post_no": "190",
+      "title": "예쁘다고 무작정 달면 후회하는 원슬라이딩중문 조건 3가지",
+      "published_at": null,
+      "published_at_source": "unknown",
+      "queue_id": "Q-030",
+      "hub_ids": [
+        "H2",
+        "H3"
+      ],
+      "cluster_ids": [
+        "C-H2-H3-OPENING-CONFIG"
+      ],
+      "observations": [],
+      "observed_days": 0,
+      "verdict": "unobserved",
+      "verdict_at": "2026-08-12",
+      "verdict_reason": "발행일 미상"
+    },
+    {
+      "post_no": "191",
+      "title": "간살중문 장단점 3가지, 청소와 답답함 극복 조합",
+      "published_at": null,
+      "published_at_source": "unknown",
+      "queue_id": "Q-029",
+      "hub_ids": [
+        "H1",
+        "H2"
+      ],
+      "cluster_ids": [
+        "C-H1-H2-GLASS-RANGE"
+      ],
+      "observations": [],
+      "observed_days": 0,
+      "verdict": "unobserved",
+      "verdict_at": "2026-08-12",
+      "verdict_reason": "발행일 미상"
+    },
+    {
+      "post_no": "192",
+      "title": "초슬림3연동중문 얇아도 강한 이유, 일반 3연동과 차이",
+      "published_at": null,
+      "published_at_source": "unknown",
+      "queue_id": "Q-029",
+      "hub_ids": [
+        "H1",
+        "H2"
+      ],
+      "cluster_ids": [
+        "C-H1-H2-GLASS-RANGE"
+      ],
+      "observations": [],
+      "observed_days": 0,
+      "verdict": "unobserved",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     },
     {
@@ -9549,7 +9727,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "legacy-222663593685",
@@ -9594,7 +9772,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "legacy-224136409673",
@@ -9615,7 +9793,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "legacy-224254112031",
@@ -9654,7 +9832,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "legacy-224263475087",
@@ -9675,7 +9853,7 @@
       "observed_days": 0,
       "verdict": "unobserved",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 0일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "리뷰릴스-미매칭-20260721",
@@ -9689,7 +9867,7 @@
       "observed_days": 15,
       "verdict": "faded",
       "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 15일",
-      "verdict_at": "2026-08-11"
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "리뷰릴스-미매칭-20260730",
@@ -9700,10 +9878,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 13,
+      "observed_days": 14,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 14일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "리뷰릴스-미매칭-20260731",
@@ -9714,10 +9892,10 @@
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 12,
+      "observed_days": 13,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 12일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 13일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "리뷰릴스-미매칭-20260806",
@@ -9735,10 +9913,10 @@
           "views": 17
         }
       ],
-      "observed_days": 6,
+      "observed_days": 7,
       "verdict": "faded",
-      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 6일",
-      "verdict_at": "2026-08-11"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 7일",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "리뷰릴스-미매칭-20260811",
@@ -9751,7 +9929,21 @@
       "observations": [],
       "observed_days": 0,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-11",
+      "verdict_at": "2026-08-12",
+      "verdict_reason": "발행일 미상"
+    },
+    {
+      "post_no": "리뷰릴스-미매칭-20260812",
+      "title": "오래된 방문 문턱제거, ABS도어 방문짝 문틀 교체 후기",
+      "published_at": null,
+      "published_at_source": "unknown",
+      "queue_id": "",
+      "hub_ids": [],
+      "cluster_ids": [],
+      "observations": [],
+      "observed_days": 0,
+      "verdict": "unobserved",
+      "verdict_at": "2026-08-12",
       "verdict_reason": "발행일 미상"
     }
   ],

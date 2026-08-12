@@ -20,7 +20,7 @@
 | --- | --- | --- | --- |
 | 채널 진단 | `outputs/reports/channel_diagnosis_2026-08-12.md` | 2026-07-29~2026-08-11 확정 daily, 2026-08-12 광고 API | 최근 7일 1,226회 기준선, 공개/URL/관찰 분리, 5연속 faded 가드 판단 |
 | 최신 포인터 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 2026-08-12 | 새 세션용 진입점 |
-| daily | `outputs/reports/daily/2026-08-12_seo_watch.md` | 2026-08-11 확정, 2026-08-12 10:38 실시간 | 1,315조회, 통합검색 79.58%. TOP20 20행, 신규 REVIEW URL은 별도 관찰 |
+| daily | `outputs/reports/daily/2026-08-13_seo_watch.md` | 2026-08-12 확정, 2026-08-13 08:33 실시간 | 1,227조회, 통합검색 80.52%. TOP20 20행, 186·신규 REVIEW URL은 별도 관찰 |
 | topic scorecard | `outputs/reports/topic_candidates/2026-07-14_topic_scorecard.md` | 2026-07-13 통계, 2026-07-06 광고 API 기반 | 159~161번의 방문 진단·중문 철거 후 재설치 각도와 중복 회피 판단 |
 | topic blind dataset | `outputs/reports/topic_analysis/2026-08-06_topic_blind_dataset.json` | 2026-08-06 성과 원장 | 글번호·날짜·순위·판정이 제거된 123건 독립 분류 입력 |
 | ranking | `outputs/reports/ranking_report.md` | 2026-07-07 | URL 기반 순위 참고 |
@@ -40,6 +40,7 @@
 
 | 보고서 | 기준일 | 핵심 메모 |
 | --- | --- | --- |
+| `outputs/reports/daily/2026-08-13_seo_watch.md` | 2026-08-12 | 조회수 1,227·통합검색 80.52%. TOP20 20행, 186 URL과 신규 REVIEW URL은 절대 발행일 미확인으로 분리 관찰. |
 | `outputs/reports/daily/2026-08-12_seo_watch.md` | 2026-08-11 | 조회수 1,315·통합검색 79.58%. TOP20 20행, 신규 REVIEW URL 1건은 원본 미매칭으로 분리 관찰. |
 | `outputs/reports/daily/2026-08-11_seo_watch.md` | 2026-08-10 | 조회수 1,442·통합검색 78.14%. TOP20 20행, 181~185 URL·발행일 직접 확인 등록. 184 제목 중복은 URL·글번호로 구분. |
 | `outputs/reports/daily/2026-08-10_seo_watch.md` | 2026-08-09 | 조회수 1,208·통합검색 77.98%. TOP20 20행 전수. |
