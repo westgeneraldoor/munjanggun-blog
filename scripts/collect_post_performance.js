@@ -234,6 +234,12 @@ function registryEntries(registry) {
       ));
       const titleIndex = headers.findIndex((header) => header === '포스팅제목' || header === '포스트제목');
       const publishedAtIndex = headers.findIndex((header) => header === '발행일(TOP20작성일기준)' || header === '발행일');
+      // 폐기 판정은 상태를 나타내는 칸에서만 읽는다. `다룬 소재`처럼 서술형 칸에는
+      // 폐기물 처리비용 같은 시공 항목이 들어와서 정상 글이 폐기로 오인된다.
+      const retiredIndexes = headers
+        .map((header, index) => ({ header, index }))
+        .filter(({ header }) => header === '허브' || header.includes('상태'))
+        .map(({ index }) => index);
       if (postNoIndex < 0) return;
 
       block.rows.forEach((row) => {
@@ -246,7 +252,7 @@ function registryEntries(registry) {
           entry.published_at = publishedAt;
           entry.published_at_source = 'registry';
         }
-        if (row.some((cell) => String(cell || '').includes('폐기'))) entry.retired = true;
+        if (retiredIndexes.some((index) => String(row[index] || '').includes('폐기'))) entry.retired = true;
 
         if (titleIndex >= 0) addTitle(postNo, row[titleIndex]);
         memoTitleAliases(row).forEach((title) => addTitle(postNo, title));

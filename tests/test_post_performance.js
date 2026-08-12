@@ -736,6 +736,60 @@ function testIncludesRegistryPostsWithoutTop20Appearances() {
   }
 }
 
+// 폐기물 처리비용을 설명한 정상 글이 폐기된 글로 오인되면 원장 사유가 사람을 속인다.
+function testDetectsRetiredOnlyFromStatusColumns() {
+  const fixture = writeFixture({
+    registryRows: [
+      ['152', '채움 글 하나', '2026-07-01'],
+      ['154', '채움 글 둘', '2026-07-01'],
+      ['155', '채움 글 셋', '2026-07-01'],
+      ['156', '채움 글 넷', '2026-07-01'],
+      ['157', '채움 글 다섯', '2026-07-01'],
+    ],
+    registryBlocks: [
+      {
+        type: 'table',
+        header: ['#', '파일', '허브', '포스팅 제목', '다룬 소재 (중복 방지용)'],
+        rows: [
+          ['161', '161_비용구조.md', '클러스터', '문짝 교체 비용 구조', '시공비/부자재/인양비/폐기물 처리비용 정리'],
+          ['162', '162_올인원.md', '클러스터', '올인원 패키지 비교', '자재+부자재+시공+폐기 구성 비교표 제공'],
+        ],
+      },
+      {
+        type: 'table',
+        header: ['#', '파일', '원고상태', '운영상태', '메모'],
+        rows: [['163', '163_폐기.md', '폐기', '폐기', '폐기 결정']],
+      },
+    ],
+    postNos: ['152', '154', '155', '156', '157', '161', '162', '163'],
+    files: Object.fromEntries(
+      ['2026-07-04', '2026-07-05', '2026-07-06', '2026-07-07', '2026-07-08'].map((date) => [
+        date,
+        topTable(
+          ['순위', '게시글', '조회수'],
+          padTop20Rows([
+            ['1', '채움 글 하나', '10'],
+            ['2', '채움 글 둘', '9'],
+            ['3', '채움 글 셋', '8'],
+            ['4', '채움 글 넷', '7'],
+            ['5', '채움 글 다섯', '6'],
+          ])
+        ),
+      ])
+    ),
+  });
+
+  try {
+    const ledger = collect(fixture);
+
+    assert.doesNotMatch(postByNo(ledger, '161').verdict_reason, /폐기/);
+    assert.doesNotMatch(postByNo(ledger, '162').verdict_reason, /폐기/);
+    assert.match(postByNo(ledger, '163').verdict_reason, /폐기/);
+  } finally {
+    removeDir(fixture.dir);
+  }
+}
+
 function testMapsMemoPublishedTitleAlias() {
   const fixture = writeFixture({
     registryRows: [
@@ -1093,6 +1147,7 @@ function main() {
   testMapsOnlyExplicitRegistryTitleAliases();
   testBlocksConflictingRegistryAliases();
   testIncludesRegistryPostsWithoutTop20Appearances();
+  testDetectsRetiredOnlyFromStatusColumns();
   testMapsMemoPublishedTitleAlias();
   testMapsConfirmedTitleHistoryAlias();
   testUsesEarliestDailyWrittenDateWhenRegistryDateIsMissing();
