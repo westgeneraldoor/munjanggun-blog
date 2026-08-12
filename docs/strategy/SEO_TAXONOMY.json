@@ -1208,6 +1208,60 @@
       ],
       "classification_status": "classified",
       "taxonomy_change_note": "022번 소재를 타공도어 마감/프라이버시 축으로 분류. 소스 refs로 쓴 Q-029는 동일 hub/cluster(H4·H5, C-H4-H5-TRIM-FINISH)지만 intent가 I-REPLACEMENT-SCOPE로 달라, 욕실문 노출 구조 판단이라는 핵심 검색 의도(I-PRIVACY-LAYOUT)를 명시적으로 추가했다."
+    },
+    "post:190": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-030"
+      ],
+      "hub_ids": [
+        "H2",
+        "H3"
+      ],
+      "cluster_ids": [
+        "C-H2-H3-OPENING-CONFIG"
+      ],
+      "intent_ids": [
+        "I-LAYOUT-SUITABILITY",
+        "I-SPECIAL-USE"
+      ],
+      "classification_status": "classified"
+    },
+    "post:191": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-029"
+      ],
+      "hub_ids": [
+        "H1",
+        "H2"
+      ],
+      "cluster_ids": [
+        "C-H1-H2-GLASS-RANGE"
+      ],
+      "intent_ids": [
+        "I-FINISH-COORDINATION"
+      ],
+      "classification_status": "classified",
+      "taxonomy_change_note": "092/023번 소재를 중문 유리·소재 조합 클러스터(C-H1-H2-GLASS-RANGE)로 분류. 소스 refs로 쓴 Q-029는 hub가 H4·H5로 달라 참고용 근접 큐이며, 간살중문의 프레임·유리 조합 마감 판단이라는 검색 의도(I-FINISH-COORDINATION)만 남기고 I-REPLACEMENT-SCOPE는 제외했다. 브랜드(문장군 간살) 방어 각도로 되돌리지 않는다."
+    },
+    "post:192": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-029"
+      ],
+      "hub_ids": [
+        "H1",
+        "H2"
+      ],
+      "cluster_ids": [
+        "C-H1-H2-GLASS-RANGE"
+      ],
+      "intent_ids": [
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified",
+      "taxonomy_change_note": "016/108번 소재를 초슬림 vs 일반 3연동 전체 교체 범위 판단(I-REPLACEMENT-SCOPE)으로 분류. 소스 refs로 쓴 Q-029는 hub가 H4·H5로 달라 참고용 근접 큐다. 016-1(유리 종류, C-H4-H5 계열 아님)과는 별도 클러스터로 겹치지 않는다."
     }
   }
 }
