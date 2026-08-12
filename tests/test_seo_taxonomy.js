@@ -96,6 +96,22 @@ function testUnclassifiedRecordCannotCarrySemanticIds() {
   });
 }
 
+function testHistoricalQueueLineageMayRemainAfterActiveBoardRotation() {
+  withFixture('historical-queue', (fixture) => {
+    fixture.assignments['queue:Q-999'] = {
+      entity_type: 'queue',
+      source_refs: [],
+      hub_ids: ['H3'],
+      cluster_ids: ['C-H3-CEILING-FINISH'],
+      intent_ids: ['I-LAYOUT-SUITABILITY'],
+      classification_status: 'classified',
+    };
+  }, (filePath) => {
+    const errors = validateTaxonomy({ taxonomyPath: filePath });
+    assert(!errors.some((error) => error.includes('queue:Q-999 references a queue that is not active')), errors.join('\n'));
+  });
+}
+
 function main() {
   testLiveTaxonomyPasses();
   testCoreHubLabelsComeFromTaxonomy();
@@ -103,6 +119,7 @@ function main() {
   testUnknownHubIdFails();
   testPostLineageIsRequired();
   testUnclassifiedRecordCannotCarrySemanticIds();
+  testHistoricalQueueLineageMayRemainAfterActiveBoardRotation();
   console.log('seo taxonomy tests passed');
 }
 

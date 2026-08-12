@@ -38,7 +38,7 @@
 | `docs/operations/TOPIC_SELECTION_SCORECARD.md` | ACTIVE_ROUTINE | 광고 API 시장 수요 + 블로그 실제 반응 + 문장군 필터 기준 |
 | `docs/operations/TOPIC_BLIND_CLASSIFICATION_PROTOCOL.md` | ACTIVE_ROUTINE | 소재 규칙 재설계 시 성패를 가린 독립 분류 절차와 오염 차단 계약 |
 | `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | GENERATED | 신규 글감 후보별 scorecard. 현재 누락 시 `ops:daily` WARN |
-| `docs/strategy/ACTIVE_TOPIC_QUEUE.json` | ACTIVE_ROUTINE | daily 다음 액션을 Q-ID, lane, status로 닫는 원본 실행판 |
+| `docs/strategy/ACTIVE_TOPIC_QUEUE.json` | ACTIVE_ROUTINE | daily 다음 액션을 Q-ID와 lane으로 닫고, action/manuscript/URL/observation 상태를 분리하는 원본 실행판 |
 | `docs/strategy/ACTIVE_TOPIC_QUEUE.md` | GENERATED | active topic queue의 사람이 읽는 렌더링본. 직접 수정하지 않고 `npm run render:strategy`로 갱신 |
 | `docs/strategy/SEO_TAXONOMY.json` | ACTIVE_ROUTINE | H1~H5 핵심 허브, 클러스터, 고객 의도와 cutover 이후 Q-ID·원고의 정규 분류 원본. 기존 원장의 `허브` 표기는 표시용 레거시 값 |
 | `docs/strategy/POSTING_REGISTRY.json` | ACTIVE_ROUTINE | 작성완료 글 전체의 키워드·소재·URL 상태와 중복/카니발 위험 원본. URL 없는 작성완료 글도 포함 |

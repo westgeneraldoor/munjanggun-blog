@@ -200,6 +200,18 @@ function activeLocks(queue) {
   const table = (queue.blocks || []).find((b) => b.type === 'table' && b.header.includes('id'));
   if (!table) return [];
   const col = (name) => table.header.indexOf(name);
+  const actionIndex = col('action_status');
+  const observationIndex = col('observation_status');
+  if (actionIndex >= 0 && observationIndex >= 0) {
+    return table.rows
+      .filter((row) => ['observe', 'publish_waiting', 'url_registration_pending'].includes(row[actionIndex]))
+      .map((row) => ({
+        id: row[col('id')],
+        status: row[actionIndex] === 'observe' ? row[observationIndex] : row[actionIndex],
+        topic: row[col('topic')],
+        keyword: row[col('primary_keyword')],
+      }));
+  }
   return table.rows
     .filter((r) => ['monitor_3d', 'monitor_7d', 'publish_waiting'].includes(r[col('status')]))
     .map((r) => ({ id: r[col('id')], status: r[col('status')], topic: r[col('topic')], keyword: r[col('primary_keyword')] }));
@@ -351,4 +363,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { registryEntries, scopeVerdict, duplicateCheck, subTokens, clusterStatus };
+module.exports = { registryEntries, scopeVerdict, duplicateCheck, subTokens, clusterStatus, activeLocks };

@@ -369,6 +369,78 @@
       ],
       "classification_status": "classified"
     },
+    "queue:Q-041": {
+      "entity_type": "queue",
+      "source_refs": ["post:186"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-SURFACE-CONDITION"],
+      "intent_ids": ["I-FINISH-COORDINATION", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-042": {
+      "entity_type": "queue",
+      "source_refs": ["post:187"],
+      "hub_ids": ["H3"],
+      "cluster_ids": ["C-H3-PET-ENTRY"],
+      "intent_ids": ["I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
+    "queue:Q-043": {
+      "entity_type": "queue",
+      "source_refs": ["post:188"],
+      "hub_ids": ["H4"],
+      "cluster_ids": ["C-H4-MOISTURE-RISK"],
+      "intent_ids": ["I-FAILURE-RISK", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-044": {
+      "entity_type": "queue",
+      "source_refs": ["post:189"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-TRIM-FINISH"],
+      "intent_ids": ["I-FINISH-COORDINATION", "I-PRIVACY-LAYOUT"],
+      "classification_status": "classified"
+    },
+    "queue:Q-045": {
+      "entity_type": "queue",
+      "source_refs": ["post:181"],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
+    "queue:Q-046": {
+      "entity_type": "queue",
+      "source_refs": ["post:182"],
+      "hub_ids": ["H3"],
+      "cluster_ids": ["C-H3-NEWBUILD-GAP"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY"],
+      "classification_status": "classified"
+    },
+    "queue:Q-047": {
+      "entity_type": "queue",
+      "source_refs": ["post:183"],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-SPECIAL-USE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-048": {
+      "entity_type": "queue",
+      "source_refs": ["post:184"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-COST-SCOPE", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-049": {
+      "entity_type": "queue",
+      "source_refs": ["post:185"],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY", "I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
     "post:152": {
       "entity_type": "post",
       "source_refs": [

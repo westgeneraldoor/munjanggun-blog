@@ -180,9 +180,8 @@ function validateTaxonomy(options = {}) {
     if (assignment.entity_type !== expectedEntityType) {
       errors.push(`${assignmentId} entity_type must be ${expectedEntityType}`);
     }
-    if (queueMatch && !activeQueues.includes(queueMatch[1])) {
-      errors.push(`${assignmentId} references a queue that is not active`);
-    }
+    // Queue assignments also preserve lineage for boards that have rotated out.
+    // Only the forward direction is strict: every active Q-ID must have taxonomy.
     if (postMatch && !currentPosts.includes(postMatch[1])) {
       errors.push(`${assignmentId} references a post outside the cutover set`);
     }

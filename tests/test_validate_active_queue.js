@@ -28,12 +28,30 @@ function runQueue(filePath, extraArgs = []) {
 }
 
 function queueTable(rows) {
+  const stateMap = {
+    internal_link: ['internal_link', 'published', 'registered', 'landed'],
+    rewrite_candidate: ['rewrite_candidate', 'published', 'registered', 'faded'],
+    scorecard_needed: ['scorecard_needed', 'idea', 'none', 'not_started'],
+    draft_ready: ['draft_ready', 'draft_ready', 'none', 'not_started'],
+    publish_waiting: ['publish_waiting', 'draft_ready', 'none', 'not_started'],
+    url_registration_pending: ['url_registration_pending', 'written', 'pending', 'not_started'],
+    monitor_3d: ['observe', 'published', 'registered', 'monitor_3d'],
+    monitor_7d: ['observe', 'published', 'registered', 'monitor_7d'],
+    excluded: ['excluded', 'not_applicable', 'not_applicable', 'not_applicable'],
+    done: ['done', 'published', 'registered', 'faded'],
+  };
+  const v3Rows = rows.map((line) => {
+    const cells = line.trim().slice(1, -1).split('|').map((cell) => cell.trim());
+    const [id, lane, status, ...rest] = cells;
+    const states = stateMap[status] || [status, 'idea', 'none', 'not_started'];
+    return `| ${id} | ${lane} | ${states.join(' | ')} | ${rest.join(' | ')} |`;
+  });
   return [
     '# Active Queue Fixture',
     '',
-    '| id | lane | status | topic | primary_keyword | market_volume | current_signal | linked_asset | next_action | due | risk | updated_at |',
-    '| --- | --- | --- | --- | --- | ---: | --- | --- | --- | --- | --- | --- |',
-    ...rows,
+    '| id | lane | action_status | manuscript_status | url_status | observation_status | topic | primary_keyword | market_volume | current_signal | linked_asset | next_action | due | risk | updated_at |',
+    '| --- | --- | --- | --- | --- | --- | --- | --- | ---: | --- | --- | --- | --- | --- | --- |',
+    ...v3Rows,
     '',
   ].join('\n');
 }
@@ -66,6 +84,76 @@ function validDaily(ids = ['Q-001', 'Q-003', 'Q-007']) {
     ...ids.map((id) => `| ${id} | 유지 | ${id} 판단 유지 |`),
     '',
   ].join('\n');
+}
+
+function queueTableV3(rows) {
+  return [
+    '# Active Queue V3 Fixture',
+    '',
+    '| id | lane | action_status | manuscript_status | url_status | observation_status | topic | primary_keyword | market_volume | current_signal | linked_asset | next_action | due | risk | updated_at |',
+    '| --- | --- | --- | --- | --- | --- | --- | --- | ---: | --- | --- | --- | --- | --- | --- |',
+    ...rows,
+    '',
+  ].join('\n');
+}
+
+function validRowsV3() {
+  return [
+    '| Q-101 | protect | internal_link | published | registered | landed | winner protection | winning keyword | 6430 | top20 repeat | posts/051.md | add internal links | 2026-08-13 | avoid major rewrite | 2026-08-12 |',
+    '| Q-102 | protect | observe | published | registered | monitor_7d | recent post | recent keyword | 1200 | early signal | posts/181.md | observe seven days | 2026-08-18 | premature judgment | 2026-08-12 |',
+    '| Q-103 | attack | scorecard_needed | idea | none | not_started | candidate one | keyword one | 2650 | market demand | scorecard/Q-103 | write scorecard | 2026-08-14 | overlap | 2026-08-12 |',
+    '| Q-104 | attack | draft_ready | draft_ready | none | not_started | candidate two | keyword two | 11750 | search demand | posts/190.md | run publish gate | 2026-08-15 | claim scope | 2026-08-12 |',
+    '| Q-105 | attack | url_registration_pending | written | pending | not_started | completed draft | keyword three | 6910 | manuscript complete | posts/189.md | register published URL | 2026-08-13 | unknown URL | 2026-08-12 |',
+    '| Q-106 | experiment | observe | published | registered | monitor_3d | experiment | test keyword | 500 | newly published | posts/185.md | observe three days | 2026-08-15 | low sample | 2026-08-12 |',
+    '| Q-107 | exclude | excluded | not_applicable | not_applicable | not_applicable | excluded topic | excluded keyword | 0 | permanent exclusion | - | keep excluded | 2026-09-01 | service mismatch | 2026-08-12 |',
+    '| Q-108 | exclude | excluded | not_applicable | not_applicable | not_applicable | blocked cluster | blocked keyword | 0 | faded cluster | - | observation only | 2026-09-01 | repeated fade | 2026-08-12 |',
+  ];
+}
+
+function testV3SeparatesManuscriptUrlAndObservationStates() {
+  const dir = makeTempDir('active-queue-v3-valid-');
+  try {
+    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
+    writeFile(filePath, queueTableV3(validRowsV3()));
+    const result = runQueue(filePath);
+    assert.strictEqual(result.status, 0, result.stderr || result.stdout);
+    assert.match(result.stdout, /contract v3/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testLegacyV2QueueIsRejected() {
+  const dir = makeTempDir('active-queue-v2-rejected-');
+  try {
+    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
+    writeFile(filePath, [
+      '| id | lane | status | topic | primary_keyword | market_volume | current_signal | linked_asset | next_action | due | risk | updated_at |',
+      '| --- | --- | --- | --- | --- | ---: | --- | --- | --- | --- | --- | --- |',
+      ...validRows(),
+      '',
+    ].join('\n'));
+    const result = runQueue(filePath);
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /v3 required columns/);
+  } finally {
+    removeDir(dir);
+  }
+}
+
+function testV3RejectsPublishedManuscriptWithoutRegisteredUrl() {
+  const dir = makeTempDir('active-queue-v3-contradiction-');
+  try {
+    const filePath = path.join(dir, 'ACTIVE_TOPIC_QUEUE.md');
+    const rows = validRowsV3();
+    rows[1] = rows[1].replace('| published | registered |', '| published | pending |');
+    writeFile(filePath, queueTableV3(rows));
+    const result = runQueue(filePath);
+    assert.strictEqual(result.status, 1, result.stdout);
+    assert.match(result.stdout, /published manuscript needs registered url_status/);
+  } finally {
+    removeDir(dir);
+  }
 }
 
 function runWithTempQueue(testName, mutateRows, extraArgs = []) {
@@ -118,7 +206,7 @@ function testInvalidStatusFails() {
     return rows;
   });
   assert.strictEqual(result.status, 1, result.stdout);
-  assert.match(result.stdout, /invalid status/);
+  assert.match(result.stdout, /invalid action_status/);
 }
 
 function testAttackMarketVolumeRequired() {
@@ -138,7 +226,7 @@ function testExcludeScorecardFails() {
     return rows;
   });
   assert.strictEqual(result.status, 1, result.stdout);
-  assert.match(result.stdout, /exclude lane/);
+  assert.match(result.stdout, /exclude lane must use excluded action_status/);
 }
 
 function testPublishWaitingNeedsLinkedAsset() {
@@ -210,7 +298,7 @@ function testDailyLaneStatusConflictFails() {
 
     assert.strictEqual(result.status, 1, result.stdout);
     assert.match(result.stdout, /daily lane exclude conflicts with queue lane attack/);
-    assert.match(result.stdout, /daily status excluded conflicts with queue status scorecard_needed/);
+  assert.match(result.stdout, /daily status excluded conflicts with queue status scorecard_needed/);
   } finally {
     removeDir(dir);
   }
@@ -340,6 +428,9 @@ function testDuplicateIdFails() {
 }
 
 function main() {
+  testV3SeparatesManuscriptUrlAndObservationStates();
+  testLegacyV2QueueIsRejected();
+  testV3RejectsPublishedManuscriptWithoutRegisteredUrl();
   testValidQueuePasses();
   testTooFewRowsFails();
   testTooManyRowsFails();

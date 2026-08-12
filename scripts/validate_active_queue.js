@@ -2,10 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const { paths } = require('./lib/paths');
 
-const REQUIRED_COLUMNS = [
+const REQUIRED_COLUMNS_V3 = [
   'id',
   'lane',
-  'status',
+  'action_status',
+  'manuscript_status',
+  'url_status',
+  'observation_status',
   'topic',
   'primary_keyword',
   'market_volume',
@@ -36,6 +39,22 @@ const ALLOWED_STATUSES = new Set([
   'excluded',
   'done',
 ]);
+
+const ALLOWED_ACTION_STATUSES = new Set([
+  'internal_link',
+  'rewrite_candidate',
+  'scorecard_needed',
+  'draft_ready',
+  'publish_waiting',
+  'url_registration_pending',
+  'observe',
+  'excluded',
+  'done',
+]);
+
+const ALLOWED_MANUSCRIPT_STATUSES = new Set(['idea', 'draft_ready', 'written', 'published', 'not_applicable']);
+const ALLOWED_URL_STATUSES = new Set(['none', 'pending', 'registered', 'not_applicable']);
+const ALLOWED_OBSERVATION_STATUSES = new Set(['not_started', 'monitor_3d', 'monitor_7d', 'landed', 'faded', 'not_applicable']);
 
 const FORBIDDEN_ACTIVE_PATTERNS = [
   { label: '싱크대', pattern: /싱크대/ },
@@ -137,7 +156,8 @@ function findQueueTable(content) {
 
   for (let index = 0; index < lines.length; index += 1) {
     const cells = splitTableLine(lines[index]);
-    if (!cells || !tableHasColumns(cells, REQUIRED_COLUMNS)) continue;
+    if (!cells) continue;
+    if (!tableHasColumns(cells, REQUIRED_COLUMNS_V3)) continue;
 
     const rows = [];
     let cursor = index + 1;
@@ -155,7 +175,7 @@ function findQueueTable(content) {
       rows.push(row);
     }
 
-    return { header: cells, rows };
+    return { header: cells, rows, version: 3 };
   }
 
   return null;
@@ -306,6 +326,72 @@ function validateRow(row, index) {
   return fails;
 }
 
+function validateRowV3(row, index) {
+  const fails = [];
+  const label = row.id || `row ${index + 1}`;
+
+  if (!/^Q-\d{3}$/.test(row.id || '')) fails.push(`${label}: id must match Q-000 format`);
+  if (!ALLOWED_LANES.has(row.lane)) fails.push(`${label}: invalid lane ${row.lane}`);
+  if (!ALLOWED_ACTION_STATUSES.has(row.action_status)) fails.push(`${label}: invalid action_status ${row.action_status}`);
+  if (!ALLOWED_MANUSCRIPT_STATUSES.has(row.manuscript_status)) fails.push(`${label}: invalid manuscript_status ${row.manuscript_status}`);
+  if (!ALLOWED_URL_STATUSES.has(row.url_status)) fails.push(`${label}: invalid url_status ${row.url_status}`);
+  if (!ALLOWED_OBSERVATION_STATUSES.has(row.observation_status)) fails.push(`${label}: invalid observation_status ${row.observation_status}`);
+  if (!isIsoDate(row.due)) fails.push(`${label}: due must be YYYY-MM-DD`);
+  if (!isIsoDate(row.updated_at)) fails.push(`${label}: updated_at must be YYYY-MM-DD`);
+
+  if (row.lane === 'attack') {
+    const marketVolume = parseMarketVolume(row.market_volume);
+    if (marketVolume === null || marketVolume <= 0) fails.push(`${label}: attack lane needs numeric market_volume`);
+  }
+
+  if (row.lane === 'exclude') {
+    if (row.action_status !== 'excluded') fails.push(`${label}: exclude lane must use excluded action_status`);
+    ['manuscript_status', 'url_status', 'observation_status'].forEach((column) => {
+      if (row[column] !== 'not_applicable') fails.push(`${label}: exclude lane must use not_applicable ${column}`);
+    });
+  } else if (row.action_status === 'excluded') {
+    fails.push(`${label}: excluded action_status must use exclude lane`);
+  }
+
+  if (row.manuscript_status === 'published' && row.url_status !== 'registered') {
+    fails.push(`${label}: published manuscript needs registered url_status`);
+  }
+  if (row.url_status === 'registered' && row.manuscript_status !== 'published') {
+    fails.push(`${label}: registered url_status needs published manuscript`);
+  }
+  if (row.action_status === 'url_registration_pending') {
+    if (row.manuscript_status !== 'written') fails.push(`${label}: url_registration_pending needs written manuscript_status`);
+    if (row.url_status !== 'pending') fails.push(`${label}: url_registration_pending needs pending url_status`);
+  }
+  if (row.action_status === 'observe') {
+    if (row.manuscript_status !== 'published' || row.url_status !== 'registered') {
+      fails.push(`${label}: observe needs published manuscript and registered URL`);
+    }
+    if (!['monitor_3d', 'monitor_7d'].includes(row.observation_status)) {
+      fails.push(`${label}: observe needs monitor_3d or monitor_7d observation_status`);
+    }
+  } else if (['monitor_3d', 'monitor_7d'].includes(row.observation_status)) {
+    fails.push(`${label}: monitoring observation_status needs observe action_status`);
+  }
+
+  if (row.action_status === 'scorecard_needed' && !/scorecard|스코어카드|점수표/i.test(row.next_action || '')) {
+    fails.push(`${label}: scorecard_needed next_action must mention scorecard`);
+  }
+  if (['publish_waiting', 'url_registration_pending'].includes(row.action_status) && isPlaceholder(row.linked_asset)) {
+    fails.push(`${label}: ${row.action_status} needs linked_asset`);
+  }
+  if (row.lane !== 'exclude') {
+    ['current_signal', 'linked_asset', 'next_action', 'risk'].forEach((column) => {
+      if (isPlaceholder(row[column])) fails.push(`${label}: ${column} is required for active lane`);
+    });
+    const text = activeDecisionText(row);
+    FORBIDDEN_ACTIVE_PATTERNS.forEach(({ label: termLabel, pattern }) => {
+      if (pattern.test(text)) fails.push(`${label}: forbidden term in active row: ${termLabel}`);
+    });
+  }
+  return fails;
+}
+
 function latestDailyReport(dailyDir) {
   if (!dailyDir || !fs.existsSync(dailyDir)) return null;
   const candidates = fs.readdirSync(dailyDir)
@@ -417,8 +503,11 @@ function validateDailyReflection(result, rowsById, args) {
       }
     });
     inferred.statuses.forEach((status) => {
-      if (status !== queueRow.status) {
-        result.fails.push(`${dailyBase}: ${id} daily status ${status} conflicts with queue status ${queueRow.status}`);
+      const queueStatus = ['monitor_3d', 'monitor_7d'].includes(status)
+        ? (queueRow.observation_status || queueRow.status)
+        : (queueRow.action_status || queueRow.status);
+      if (status !== queueStatus) {
+        result.fails.push(`${dailyBase}: ${id} daily status ${status} conflicts with queue status ${queueStatus}`);
       }
     });
   });
@@ -459,11 +548,11 @@ function validateActiveQueue(filePath, options = {}) {
   const table = findQueueTable(content);
   if (!table) {
     result.status = 'BLOCK';
-    result.fails.push('queue table with v2 required columns not found');
+    result.fails.push('queue table with v3 required columns not found');
     return result;
   }
 
-  REQUIRED_COLUMNS.forEach((column) => {
+  REQUIRED_COLUMNS_V3.forEach((column) => {
     if (!table.header.includes(column)) {
       result.fails.push(`required column missing: ${column}`);
     }
@@ -481,7 +570,7 @@ function validateActiveQueue(filePath, options = {}) {
   table.rows.forEach((row, index) => {
     if (row.id && rowsById.has(row.id)) result.fails.push(`${row.id}: duplicate id`);
     if (row.id) rowsById.set(row.id, row);
-    result.fails.push(...validateRow(row, index));
+    result.fails.push(...validateRowV3(row, index));
   });
 
   const laneCounts = table.rows.reduce((counts, row) => {
@@ -504,10 +593,12 @@ function validateActiveQueue(filePath, options = {}) {
 
   table.rows.forEach((row) => {
     const age = daysBetween(row.updated_at, args.today);
-    if (row.status === 'scorecard_needed' && age !== null && age >= 7) {
+    const actionStatus = row.action_status || row.status;
+    const observationStatus = row.observation_status || row.status;
+    if (actionStatus === 'scorecard_needed' && age !== null && age >= 7) {
       result.warns.push(`${row.id}: scorecard_needed has been open for ${age} days`);
     }
-    if (row.status === 'monitor_7d' && age !== null && age >= 14) {
+    if (observationStatus === 'monitor_7d' && age !== null && age >= 14) {
       result.warns.push(`${row.id}: monitor_7d has been open for ${age} days`);
     }
   });
@@ -520,7 +611,7 @@ function validateActiveQueue(filePath, options = {}) {
 
 function printResult(result) {
   const label = result.status === 'ALLOW' ? 'ALLOW' : 'FAIL';
-  console.log(`${label}: active topic queue contract v2`);
+  console.log(`${label}: active topic queue contract v3`);
   console.log(`file: ${result.filePath || '(none)'}`);
   if (result.dailyFile) console.log(`daily: ${result.dailyFile}`);
   result.fails.forEach((item) => console.log(`FAIL: ${item}`));

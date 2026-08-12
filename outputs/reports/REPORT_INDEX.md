@@ -18,8 +18,8 @@
 
 | 유형 | 최신 파일 | 기준일/기간 | 용도 |
 | --- | --- | --- | --- |
-| 채널 진단 | `outputs/reports/channel_diagnosis_2026-07-15.md` | 2026-06-15~2026-07-14 확정값, 2026-07-15 실시간 현황 | L3 진단. 성장 확인과 재방문·내부 회수 병목 판단 |
-| 최신 포인터 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 2026-07-15 | 새 세션용 진입점 |
+| 채널 진단 | `outputs/reports/channel_diagnosis_2026-08-12.md` | 2026-07-29~2026-08-11 확정 daily, 2026-08-12 광고 API | 최근 7일 1,226회 기준선, 공개/URL/관찰 분리, 5연속 faded 가드 판단 |
+| 최신 포인터 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 2026-08-12 | 새 세션용 진입점 |
 | daily | `outputs/reports/daily/2026-08-12_seo_watch.md` | 2026-08-11 확정, 2026-08-12 10:38 실시간 | 1,315조회, 통합검색 79.58%. TOP20 20행, 신규 REVIEW URL은 별도 관찰 |
 | topic scorecard | `outputs/reports/topic_candidates/2026-07-14_topic_scorecard.md` | 2026-07-13 통계, 2026-07-06 광고 API 기반 | 159~161번의 방문 진단·중문 철거 후 재설치 각도와 중복 회피 판단 |
 | topic blind dataset | `outputs/reports/topic_analysis/2026-08-06_topic_blind_dataset.json` | 2026-08-06 성과 원장 | 글번호·날짜·순위·판정이 제거된 123건 독립 분류 입력 |
@@ -31,6 +31,7 @@
 
 | 보고서 | 기준 자료 | 핵심 결론 |
 | --- | --- | --- |
+| `outputs/reports/channel_diagnosis_2026-08-12.md` | 2026-07-29~08-11 daily, 08-11 TOP20, 08-12 검색광고 API, 성과 원장 | 최근 7일 평균 1,226회. 기존 허브 보호, 186~189 URL 확인, 181~185 분리 관찰이 우선 |
 | `outputs/reports/channel_diagnosis_2026-07-15.md` | 인앱 브라우저 관리자 통계, 2026-06-15~07-14 일별 원본, 2026-07-15 실시간 현황 | 1,100뷰 방어선은 형성됐으나 2,000뷰의 다음 병목은 재방문·내부 링크 회수 |
 | `outputs/reports/channel_diagnosis_2026-07-09.md` | 네이버 블로그 관리자 통계 전체 메뉴, 2026-07-08 일간 확정값, 2026-07-09 실시간 현황 | 조회수 중심 daily에서 UV, 평균 사용 시간, 재방문율, 시간대별 유입어, 기기/성별/연령, 지표 다운로드 기반 운영으로 확장 필요 |
 | `outputs/reports/channel_diagnosis_2026-07-08.md` | 2026-06-26~2026-07-07 daily, ranking, 공감수, ACTIVE_TOPIC_QUEUE | 1,100대 방어선 형성. 2,000 돌파는 허브 복구와 내부링크 회수 구조가 필요 |

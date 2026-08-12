@@ -5,7 +5,7 @@ const { spawnSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..');
 const cli = path.join(root, 'scripts', 'topic_candidate.js');
-const { scopeVerdict, duplicateCheck, clusterStatus, registryEntries } = require('../scripts/topic_candidate');
+const { scopeVerdict, duplicateCheck, clusterStatus, registryEntries, activeLocks } = require('../scripts/topic_candidate');
 const scope = JSON.parse(fs.readFileSync(path.join(root, 'config', 'product_scope.json'), 'utf8'));
 
 function run(args) {
@@ -91,6 +91,24 @@ function testLandedResetsStreak() {
     { post_no: '904', verdict: 'faded', cluster_ids: ['C-TEST'] },
   ];
   assert.strictEqual(clusterStatus({ posts }).get('C-TEST').streak, 1);
+}
+
+function testV3QueueLocksObservationAndUrlPendingRows() {
+  const queue = {
+    blocks: [{
+      type: 'table',
+      header: ['id', 'action_status', 'observation_status', 'topic', 'primary_keyword'],
+      rows: [
+        ['Q-101', 'observe', 'monitor_3d', '관찰 글', '관찰키워드'],
+        ['Q-102', 'url_registration_pending', 'not_started', 'URL 대기 글', '대기키워드'],
+        ['Q-103', 'done', 'landed', '완료 글', '완료키워드'],
+      ],
+    }],
+  };
+  const locks = activeLocks(queue);
+  assert.deepStrictEqual(locks.map((item) => item.id), ['Q-101', 'Q-102']);
+  assert.strictEqual(locks[0].status, 'monitor_3d');
+  assert.strictEqual(locks[1].status, 'url_registration_pending');
 }
 
 function testCliBlocksOnUnhandledProduct() {
@@ -212,6 +230,7 @@ function main() {
   testNearDuplicateDetected();
   testClusterStreakCounted();
   testLandedResetsStreak();
+  testV3QueueLocksObservationAndUrlPendingRows();
   testCliBlocksOnUnhandledProduct();
   testCliEvaluatesCleanKeywordWithoutCandidateBlock();
   testRegisteredDraftBlocksSameKeyword();
