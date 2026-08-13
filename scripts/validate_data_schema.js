@@ -2,6 +2,7 @@ const fs = require('fs');
 const { paths } = require('./lib/paths');
 const { readJsonFile } = require('./lib/file_store');
 const { findPublicTextIssues, walkFiles } = require('./lib/public_safety');
+const { findRegisteredUrlsWithoutPublicationDates } = require('./lib/posting_registry');
 const { assertNoDrift } = require('./render_strategy_docs');
 const { validateTaxonomy } = require('./validate_seo_taxonomy');
 
@@ -154,33 +155,13 @@ function assertRecentRegistryRows(content) {
   });
 }
 
-// 2026-07-29: 기존 검사는 발행 상태 관리 표에 있는 행만 봤다.
-// 177번은 URL을 등록했지만 그 표에 행 자체가 없어서 검사에서 빠졌고,
-// published_at 이 null 인 채로 영구 unobserved 가 됐다.
-// URL 이 있는 모든 글을 모집단으로 잡고, 발행일이 어느 표에도 없으면 경고한다.
+// URL 등록이 끝났으면 성과 원장에 관찰 시작일이 생겨야 한다.
+// 상대 시각만 보이는 모바일 목록도 수집 시점(KST)을 기록해 날짜로 역산하고,
+// 날짜를 채우지 못한 URL 등록은 검증에서 차단한다.
 function assertRegisteredUrlPublicationDates() {
-  const registryPath = paths.docsStrategy('POSTING_REGISTRY.json');
-  const registry = readJsonFile(registryPath, null);
-  if (!registry || !Array.isArray(registry.blocks)) return;
-
-  const withUrl = new Set();
-  const withDate = new Set();
-
-  registry.blocks.filter((block) => block.type === 'table').forEach((block) => {
-    const urlIndex = block.header.findIndex((header) => /URL/.test(header));
-    const dateIndex = block.header.findIndex((header) => /발행일/.test(header));
-    (block.rows || []).forEach((row) => {
-      const postNo = String(row[0] || '').trim();
-      if (!postNo) return;
-      if (urlIndex >= 0 && /blog\.naver\.com/.test(String(row[urlIndex] || ''))) withUrl.add(postNo);
-      if (dateIndex >= 0 && /^\d{4}-\d{2}-\d{2}$/.test(String(row[dateIndex] || '').trim())) withDate.add(postNo);
-    });
-  });
-
-  const missing = [...withUrl].filter((postNo) => !withDate.has(postNo)).sort();
-  missing.forEach((postNo) => warn(`발행일 미등록: ${postNo}`));
+  const missing = findRegisteredUrlsWithoutPublicationDates(paths.docsStrategy('POSTING_REGISTRY.json'));
   if (missing.length > 0) {
-    warn(`발행일이 없는 글은 성과 원장에서 영구 unobserved 가 된다. 현재 ${missing.length}편이다.`);
+    fail(`발행일 미등록 URL은 성과 원장에서 관찰을 시작할 수 없습니다: ${missing.join(', ')}`);
   }
 }
 

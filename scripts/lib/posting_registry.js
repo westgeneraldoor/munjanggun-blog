@@ -43,6 +43,27 @@ function registryRows(sourcePath = REGISTRY_SOURCE_PATH) {
   return tableBlocks(source).flatMap((block) => block.rows.map((row) => rowObject(block.header, row)));
 }
 
+function findRegisteredUrlsWithoutPublicationDates(sourcePath = REGISTRY_SOURCE_PATH) {
+  const source = readJsonFile(sourcePath, null);
+  if (!source || !Array.isArray(source.blocks)) return [];
+
+  const withUrl = new Set();
+  const withDate = new Set();
+
+  tableBlocks(source).forEach((block) => {
+    const urlIndex = block.header.findIndex((header) => /URL/.test(header));
+    const dateIndex = block.header.findIndex((header) => /발행일/.test(header));
+    (block.rows || []).forEach((row) => {
+      const registryId = String(row[0] || '').trim();
+      if (!registryId) return;
+      if (urlIndex >= 0 && /blog\.naver\.com/.test(String(row[urlIndex] || ''))) withUrl.add(registryId);
+      if (dateIndex >= 0 && /^\d{4}-\d{2}-\d{2}$/.test(String(row[dateIndex] || '').trim())) withDate.add(registryId);
+    });
+  });
+
+  return [...withUrl].filter((registryId) => !withDate.has(registryId)).sort();
+}
+
 function postingEntries(sourcePath = REGISTRY_SOURCE_PATH) {
   const rows = registryRows(sourcePath);
   const byKey = new Map();
@@ -182,6 +203,7 @@ module.exports = {
   normalizePostNo,
   postNosFromValue,
   registryRows,
+  findRegisteredUrlsWithoutPublicationDates,
   postingEntries,
   dedupEntries,
   trackingKeywordRows,

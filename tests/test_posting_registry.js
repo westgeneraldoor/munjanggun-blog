@@ -2,7 +2,7 @@ const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { buildTrackingTargets, dedupEntries, postingEntries } = require('../scripts/lib/posting_registry');
+const { buildTrackingTargets, dedupEntries, postingEntries, findRegisteredUrlsWithoutPublicationDates } = require('../scripts/lib/posting_registry');
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'posting-registry-'));
 const sourcePath = path.join(dir, 'POSTING_REGISTRY.json');
@@ -61,6 +61,11 @@ assert.strictEqual(targets[2].postId, '333');
 
 const entries = postingEntries(sourcePath);
 assert.strictEqual(entries.find((entry) => entry.postNo === '003').publishedAt, '2026-08-12', '동일 URL의 발행일 보강 행은 기존 URL 행에 합쳐져야 한다');
+assert.deepStrictEqual(
+  findRegisteredUrlsWithoutPublicationDates(sourcePath),
+  ['005', '021', '022'],
+  'URL이 등록됐지만 발행일이 없는 글은 검증 차단 대상으로 식별해야 한다',
+);
 
 const protectedEntries = dedupEntries(sourcePath);
 const urlPendingEntry = protectedEntries.find((entry) => entry.postNo === '145');
