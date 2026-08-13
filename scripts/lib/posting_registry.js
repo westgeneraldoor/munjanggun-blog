@@ -54,9 +54,7 @@ function postingEntries(sourcePath = REGISTRY_SOURCE_PATH) {
 
     const postId = postIdFromUrl(url);
     const key = `${postNo}|${postId || url}`;
-    if (byKey.has(key)) return;
-
-    byKey.set(key, {
+    const entry = {
       postNo,
       file: row['파일'] || '',
       hub: row['허브'] || '',
@@ -66,7 +64,15 @@ function postingEntries(sourcePath = REGISTRY_SOURCE_PATH) {
       postId,
       publishedAt: row['발행일'] || row['발행일(TOP20 작성일 기준)'] || '',
       summary: row['소재 요약'] || row['다룬 소재 (중복 방지용)'] || row['메모'] || '',
-    });
+    };
+
+    const existing = byKey.get(key);
+    if (existing) {
+      if (!existing.publishedAt && entry.publishedAt) existing.publishedAt = entry.publishedAt;
+      return;
+    }
+
+    byKey.set(key, entry);
   });
 
   return [...byKey.values()];

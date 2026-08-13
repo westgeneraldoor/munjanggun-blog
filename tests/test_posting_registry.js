@@ -2,7 +2,7 @@ const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { buildTrackingTargets, dedupEntries } = require('../scripts/lib/posting_registry');
+const { buildTrackingTargets, dedupEntries, postingEntries } = require('../scripts/lib/posting_registry');
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'posting-registry-'));
 const sourcePath = path.join(dir, 'POSTING_REGISTRY.json');
@@ -31,6 +31,13 @@ fs.writeFileSync(sourcePath, JSON.stringify({
     },
     {
       type: 'table',
+      header: ['#', 'URL', '발행일'],
+      rows: [
+        ['003', 'https://blog.naver.com/doorgeneral/333', '2026-08-12'],
+      ],
+    },
+    {
+      type: 'table',
       header: ['#', '파일', '타겟 키워드', '포스트 제목', 'URL', '콘텐츠/URL 상태', '소재 요약'],
       rows: [
         ['145', '145_세탁실문교체비용문틀상태.md', '세탁실문교체, 세탁실문교체비용', '세탁실 문 교체비용, 문틀 상태에 따라 달라지는 기준', '-', '작성완료·URL등록대기', '문틀 하부 습기와 세탁기 간섭 기준'],
@@ -51,6 +58,9 @@ assert.strictEqual(targets[1].postNo, '022');
 assert.strictEqual(targets[1].postId, '222');
 assert.strictEqual(targets[2].postNo, '003');
 assert.strictEqual(targets[2].postId, '333');
+
+const entries = postingEntries(sourcePath);
+assert.strictEqual(entries.find((entry) => entry.postNo === '003').publishedAt, '2026-08-12', '동일 URL의 발행일 보강 행은 기존 URL 행에 합쳐져야 한다');
 
 const protectedEntries = dedupEntries(sourcePath);
 const urlPendingEntry = protectedEntries.find((entry) => entry.postNo === '145');

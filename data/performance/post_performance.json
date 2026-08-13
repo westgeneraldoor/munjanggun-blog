@@ -9580,8 +9580,8 @@
     {
       "post_no": "186",
       "title": "멤브레인도어를 ABS도어로 바꾸는 3가지 이유!",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-08-12",
+      "published_at_source": "registry",
       "queue_id": "Q-033",
       "hub_ids": [
         "H4",
@@ -9591,10 +9591,10 @@
         "C-H4-H5-SURFACE-CONDITION"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-12",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 1,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "187",
@@ -9921,30 +9921,30 @@
     {
       "post_no": "리뷰릴스-미매칭-20260811",
       "title": "현관 소리·냄새가 신경 쓰였다면? 브론즈 강화유리 3연동 중문 설치 후기",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-08-11",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-12",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 2,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-08-12"
     },
     {
       "post_no": "리뷰릴스-미매칭-20260812",
       "title": "오래된 방문 문턱제거, ABS도어 방문짝 문틀 교체 후기",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "published_at": "2026-08-12",
+      "published_at_source": "registry",
       "queue_id": "",
       "hub_ids": [],
       "cluster_ids": [],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-12",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 1,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-08-12"
     }
   ],
   "unmapped_titles": [
