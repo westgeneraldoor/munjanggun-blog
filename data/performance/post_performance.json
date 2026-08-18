@@ -9737,9 +9737,9 @@
     },
     {
       "post_no": "188",
-      "title": "문틀교체 전 썩은 정도 3단계로 문짝만 바꿀지 판단",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "화장실 문틀이 썩었는데 벽지까지 뜯어야 하나 걱정되신다면",
+      "published_at": "2026-08-14",
+      "published_at_source": "registry",
       "queue_id": "Q-040",
       "hub_ids": [
         "H4"
@@ -9748,16 +9748,16 @@
         "C-H4-MOISTURE-RISK"
       ],
       "observations": [],
-      "observed_days": 0,
+      "observed_days": 1,
       "verdict": "unobserved",
-      "verdict_at": "2026-08-17",
-      "verdict_reason": "발행일 미상"
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 1일",
+      "verdict_at": "2026-08-17"
     },
     {
       "post_no": "189",
-      "title": "욕실문교체 타공도어가 맞는 집, 안 맞는 집 3가지 이유",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "욕실문교체 타공도어가 맞는 집과 안 맞는 집 3가지 이유",
+      "published_at": "2026-08-15",
+      "published_at_source": "registry",
       "queue_id": "Q-029",
       "hub_ids": [
         "H4",
@@ -9767,16 +9767,16 @@
         "C-H4-H5-TRIM-FINISH"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-17",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 1,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-08-17"
     },
     {
       "post_no": "190",
-      "title": "예쁘다고 무작정 달면 후회하는 원슬라이딩중문 조건 3가지",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "원슬라이딩중문, 예쁘다고 무작정 달면 후회하는 조건 4가지!",
+      "published_at": "2026-08-16",
+      "published_at_source": "registry",
       "queue_id": "Q-030",
       "hub_ids": [
         "H2",
@@ -9786,16 +9786,16 @@
         "C-H2-H3-OPENING-CONFIG"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-17",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 1,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-08-17"
     },
     {
       "post_no": "191",
-      "title": "간살중문 장단점 3가지, 청소와 답답함 극복 조합",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "간살중문 장단점 3가지! 청소와 답답함 극복 조합",
+      "published_at": "2026-08-17",
+      "published_at_source": "registry",
       "queue_id": "Q-029",
       "hub_ids": [
         "H1",
@@ -9805,10 +9805,10 @@
         "C-H1-H2-GLASS-RANGE"
       ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-17",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 1,
+      "verdict": "pending",
+      "verdict_reason": "발행 후 3일 미만",
+      "verdict_at": "2026-08-17"
     },
     {
       "post_no": "192",
