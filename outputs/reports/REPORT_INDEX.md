@@ -10,7 +10,7 @@
 | 채널 상태/목표/전략 분석 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 최신 장기 진단의 결론과 다음 읽을 파일 |
 | 일일 유입경로/검색어 관제 | 최신 `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` | daily report가 주 근거 |
 | 오늘 글감/신규 후보 | 최신 daily + 최신 `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | daily는 증거, scorecard는 후보 판단 |
-| 소재 선정 구조 재검증 | `docs/strategy/TOPIC_SELECTION_REDESIGN_PLAN_V0.2.md` + `outputs/reports/topic_analysis/2026-08-06_topic_blind_dataset.json` | 성패를 가린 독립 분류가 끝나기 전 운영 규칙으로 승격 금지 |
+| 소재 선정 구조 재검증 | `outputs/reports/topic_analysis/2026-08-18_preregistered_w5_verdict.md` + `docs/strategy/TOPIC_SELECTION_REDESIGN_PLAN_V0.2.md` | W5 0/13은 원인 조사 재개 신호, W6 1/3은 연속 붕괴의 반례. 원인 확정이나 운영 규칙으로 바로 승격 금지 |
 | 순위 변화 참고 | `outputs/reports/ranking_report.md`, `outputs/reports/ranking_changes_summary.md` | weekly/experimental 보조 |
 | TOP10 구조 참고 | `outputs/reports/top10_analysis.md` | 제목/구조 참고, 단독 의사결정 금지 |
 
@@ -21,6 +21,7 @@
 | 채널 진단 | `outputs/reports/channel_diagnosis_2026-08-12.md` | 2026-07-29~2026-08-11 확정 daily, 2026-08-12 광고 API | 최근 7일 1,226회 기준선, 공개/URL/관찰 분리, 5연속 faded 가드 판단 |
 | 최신 포인터 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 2026-08-12 | 새 세션용 진입점 |
 | daily | `outputs/reports/daily/2026-08-18_seo_watch.md` | 2026-08-17 확정, 2026-08-18 08:53 실시간 | 1,212조회·순방문자 955·방문 횟수 985·평균 사용 시간 2m 11s, 통합검색 81.39%. TOP20 20행 및 6월 19일·7월 14일 TOP20·8월 13~16일 백필 완료 |
+| W5 사전 등록 판정 | `outputs/reports/topic_analysis/2026-08-18_preregistered_w5_verdict.md` | 2026-07-19~07-31 발행군, 2026-08-17 데이터 | 13건 모두 D3~D14 0회로 원인 조사 재개. W6 171 landed로 연속 붕괴 서술은 철회 |
 | topic scorecard | `outputs/reports/topic_candidates/2026-07-14_topic_scorecard.md` | 2026-07-13 통계, 2026-07-06 광고 API 기반 | 159~161번의 방문 진단·중문 철거 후 재설치 각도와 중복 회피 판단 |
 | topic blind dataset | `outputs/reports/topic_analysis/2026-08-06_topic_blind_dataset.json` | 2026-08-06 성과 원장 | 글번호·날짜·순위·판정이 제거된 123건 독립 분류 입력 |
 | ranking | `outputs/reports/ranking_report.md` | 2026-07-07 | URL 기반 순위 참고 |
