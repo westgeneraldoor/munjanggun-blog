@@ -122,7 +122,7 @@ function parseReportDate(fileName) {
 }
 
 function parseReportDataDate(content) {
-  const match = String(content || '').match(/^>\s*데이터 기준일:\s*(\d{4}-\d{2}-\d{2})\s*$/m);
+  const match = String(content || '').match(/^>\s*(?:전일\s*확정\s*데이터|확정\s*데이터|데이터)\s*기준일:\s*(\d{4}-\d{2}-\d{2})\s*$/m);
   if (!match || toUtcDay(match[1]) === null) return '';
   return match[1];
 }
@@ -615,6 +615,7 @@ module.exports = {
   collectPostPerformance,
   extractMarkdownTables,
   normalizeTitle,
+  parseReportDataDate,
   registryEntries,
   topTableColumns,
   verdictForPost,

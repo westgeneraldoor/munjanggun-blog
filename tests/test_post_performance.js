@@ -5,11 +5,13 @@ const path = require('path');
 
 let collectPostPerformance;
 let verdictForPost;
+let parseReportDataDate;
 try {
-  ({ collectPostPerformance, verdictForPost } = require('../scripts/collect_post_performance'));
+  ({ collectPostPerformance, verdictForPost, parseReportDataDate } = require('../scripts/collect_post_performance'));
 } catch (_error) {
   collectPostPerformance = undefined;
   verdictForPost = undefined;
+  parseReportDataDate = undefined;
 }
 
 let renderPerformanceReport;
@@ -1128,6 +1130,12 @@ function testThreeStreakDoesNotBlock() {
   assert.strictEqual(redesignClusters({ posts: fadedPosts('C-TEST-WARN', 3, '8') }).length, 0);
 }
 
+function testRecognizesLegacyDataDateLabels() {
+  assert.strictEqual(typeof parseReportDataDate, 'function', 'collector must export parseReportDataDate');
+  assert.strictEqual(parseReportDataDate('> 전일 확정 데이터 기준일: 2026-07-14\n'), '2026-07-14');
+  assert.strictEqual(parseReportDataDate('> 확정 데이터 기준일: 2026-07-16\n'), '2026-07-16');
+}
+
 function main() {
   testUsesMatchingReportDataDate();
   testUsesPriorReportDataDateInsteadOfFileName();
@@ -1158,6 +1166,7 @@ function main() {
   testReportsClusterWinRatesAndFadedStreakWarnings();
   testRedesignClusterBlocks();
   testThreeStreakDoesNotBlock();
+  testRecognizesLegacyDataDateLabels();
   console.log('post performance tests passed');
 }
 

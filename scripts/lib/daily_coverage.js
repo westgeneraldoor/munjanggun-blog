@@ -1,5 +1,5 @@
 function parseDataDate(content) {
-  const match = String(content || '').match(/^> 데이터 기준일:\s*(\d{4}-\d{2}-\d{2})\s*$/m);
+  const match = String(content || '').match(/^>\s*(?:전일\s*확정\s*데이터|확정\s*데이터|데이터)\s*기준일:\s*(\d{4}-\d{2}-\d{2})\s*$/m);
   return match ? match[1] : '';
 }
 
