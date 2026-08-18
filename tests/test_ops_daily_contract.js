@@ -682,6 +682,8 @@ function testOpsDailyScriptUsesDailyContract() {
   const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
   const opsDaily = packageJson.scripts['ops:daily'];
   assert(opsDaily.includes('validate_daily_report.js'), opsDaily);
+  assert(opsDaily.includes('check_daily_coverage.js'), opsDaily);
+  assert(opsDaily.includes('pending:public-check'), opsDaily);
   assert(opsDaily.includes('validate_topic_scorecard.js'), opsDaily);
   assert(opsDaily.includes('check:freshness'), opsDaily);
   assert(opsDaily.includes('validate_active_queue.js'), opsDaily);
