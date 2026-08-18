@@ -12,7 +12,7 @@
 | 오늘 글감/신규 후보 | 최신 daily + 최신 `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | daily는 증거, scorecard는 후보 판단 |
 | 소재 선정 구조 재검증 | `docs/strategy/REWRITE_COHORT_PREREGISTRATION_20260818.md` + `outputs/reports/topic_analysis/2026-08-18_preregistered_w5_verdict.md` + `docs/strategy/TOPIC_SELECTION_REDESIGN_PLAN_V0.2.md` | 180~191은 8월 31일 전 판정 금지. W5 0/13은 원인 조사 재개 신호, W6 1/3은 연속 붕괴의 반례 |
 | 브릿지 201~207 선정·판정 | `docs/strategy/BRIDGE_COHORT_PREREGISTRATION_20260824.md` + `docs/operations/BRIDGE_TOPIC_WORKFLOW.md` | 후보 7건을 먼저 승인·고정. 7편은 탐색 코호트이며 마지막 글 D14 전 판정 금지 |
-| 순위 변화 참고 | `outputs/reports/search_rank_measurement_2026-08-18.md`, `outputs/reports/ranking_report.md`, `outputs/reports/ranking_changes_summary.md` | URL 기반 계측값. weekly/experimental 보조 |
+| 순위 변화 참고 | `outputs/reports/pair_ranking_measurement_2026-08-18.md`, `outputs/reports/ranking_account_matches.md`, `outputs/reports/search_rank_measurement_2026-08-18.md`, `outputs/reports/ranking_report.md`, `outputs/reports/ranking_changes_summary.md` | URL 기반 계측값. weekly/experimental 보조 |
 | TOP10 구조 참고 | `outputs/reports/top10_analysis.md` | 제목/구조 참고, 단독 의사결정 금지 |
 
 ## 최신 운영 보고서
@@ -29,6 +29,8 @@
 | topic scorecard | `outputs/reports/topic_candidates/2026-07-14_topic_scorecard.md` | 2026-07-13 통계, 2026-07-06 광고 API 기반 | 159~161번의 방문 진단·중문 철거 후 재설치 각도와 중복 회피 판단 |
 | topic blind dataset | `outputs/reports/topic_analysis/2026-08-06_topic_blind_dataset.json` | 2026-08-06 성과 원장 | 글번호·날짜·순위·판정이 제거된 123건 독립 분류 입력 |
 | search rank measurement | `outputs/reports/search_rank_measurement_2026-08-18.md` | 2026-08-18 14:07 KST | 61개 URL-키워드 조합의 계측 조건과 지정 소재 원본 순위 |
+| rewrite pair rank measurement | `outputs/reports/pair_ranking_measurement_2026-08-18.md` | 2026-08-18 14:45 KST | 12개 원본·새 글 쌍을 동일 검색 결과에서 계측한 17개 행 |
+| account URL evidence | `outputs/reports/ranking_account_matches.md` | 2026-08-18 14:45 KST | 65개 검색어에서 검출된 문장군 계정 URL 202행 |
 | ranking | `outputs/reports/ranking_report.md` | 2026-08-18 | URL 기반 순위 참고 |
 | ranking summary | `outputs/reports/ranking_changes_summary.md` | 2026-07-27 -> 2026-08-18 | 순위 변화 보조 |
 | TOP10 analysis | `outputs/reports/top10_analysis.md` | 2026-07-06 갱신 | 상위 글 제목/구조 참고 |

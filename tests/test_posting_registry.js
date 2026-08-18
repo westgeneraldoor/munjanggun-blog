@@ -2,7 +2,13 @@ const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { buildTrackingTargets, dedupEntries, postingEntries, findRegisteredUrlsWithoutPublicationDates } = require('../scripts/lib/posting_registry');
+const {
+  buildTrackingTargets,
+  dedupEntries,
+  postingEntries,
+  findRegisteredUrlsWithoutPublicationDates,
+  registeredIdsByPostId,
+} = require('../scripts/lib/posting_registry');
 
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'posting-registry-'));
 const sourcePath = path.join(dir, 'POSTING_REGISTRY.json');
@@ -38,6 +44,13 @@ fs.writeFileSync(sourcePath, JSON.stringify({
     },
     {
       type: 'table',
+      header: ['콘텐츠 ID', 'URL'],
+      rows: [
+        ['리뷰릴스-005', 'https://blog.naver.com/doorgeneral/777'],
+      ],
+    },
+    {
+      type: 'table',
       header: ['#', '파일', '타겟 키워드', '포스트 제목', 'URL', '콘텐츠/URL 상태', '소재 요약'],
       rows: [
         ['145', '145_세탁실문교체비용문틀상태.md', '세탁실문교체, 세탁실문교체비용', '세탁실 문 교체비용, 문틀 상태에 따라 달라지는 기준', '-', '작성완료·URL등록대기', '문틀 하부 습기와 세탁기 간섭 기준'],
@@ -63,9 +76,11 @@ const entries = postingEntries(sourcePath);
 assert.strictEqual(entries.find((entry) => entry.postNo === '003').publishedAt, '2026-08-12', '동일 URL의 발행일 보강 행은 기존 URL 행에 합쳐져야 한다');
 assert.deepStrictEqual(
   findRegisteredUrlsWithoutPublicationDates(sourcePath),
-  ['005', '021', '022'],
+  ['005', '021', '022', '리뷰릴스-005'],
   'URL이 등록됐지만 발행일이 없는 글은 검증 차단 대상으로 식별해야 한다',
 );
+assert.strictEqual(typeof registeredIdsByPostId, 'function', '리뷰 콘텐츠 ID도 logNo로 역매핑해야 한다');
+assert.strictEqual(registeredIdsByPostId(sourcePath).get('777'), '리뷰릴스-005');
 
 const protectedEntries = dedupEntries(sourcePath);
 const urlPendingEntry = protectedEntries.find((entry) => entry.postNo === '145');
@@ -89,6 +104,26 @@ const requiredSearchBlindSpots = [
   ['살면서 방문교체', '083'],
 ];
 
+const requiredRewritePairTargets = [
+  ['중문설치', '047'], ['중문설치', '180'],
+  ['아파트 현관 중문', '070'], ['아파트 현관 중문', '181'],
+  ['신축중문옵션', '088'], ['신축중문옵션', '182'],
+  ['신축아파트중문', '088'], ['신축아파트중문', '182'],
+  ['중문스윙도어', '038'], ['중문스윙도어', '183'],
+  ['ABS도어가격', '059'], ['ABS도어가격', '184'],
+  ['자동중문', '028'], ['자동중문', '185'],
+  ['멤브레인도어', '029'], ['멤브레인도어', '186'],
+  ['방음중문', '040'], ['방음중문', '187'],
+  ['반려동물중문', '040'], ['반려동물중문', '187'],
+  ['반려견 소음', '040'], ['반려견 소음', '187'],
+  ['문틀교체', '024'], ['문틀교체', '188'],
+  ['문틀교체 썩음', '024'], ['문틀교체 썩음', '188'],
+  ['욕실문교체', '022'], ['욕실문교체', '189'],
+  ['타공도어', '022'], ['타공도어', '189'],
+  ['원슬라이딩중문', '012'], ['원슬라이딩중문', '190'],
+  ['간살중문', '023'], ['간살중문', '092'], ['간살중문', '191'],
+];
+
 requiredSearchBlindSpots.forEach(([keyword, postNo]) => {
   assert.ok(
     liveTrackingConfig.some((item) => item.keyword === keyword && item.postNo === postNo),
@@ -105,5 +140,18 @@ assert.strictEqual(
   '같은 키워드가 여러 원본에 연결돼도 URL 기반 trackingId는 서로 달라야 한다',
 );
 assert.ok(blindSpotTargets.every((target) => target.matchMode === 'url' && target.postId));
+
+requiredRewritePairTargets.forEach(([keyword, postNo]) => {
+  assert.ok(
+    liveTrackingConfig.some((item) => item.keyword === keyword && item.postNo === postNo),
+    `원본과 새 글을 같은 검색어로 함께 추적해야 한다: ${keyword} -> ${postNo}`,
+  );
+});
+
+const rewritePairTargets = buildTrackingTargets(liveTrackingConfig)
+  .filter((target) => requiredRewritePairTargets.some(([keyword, postNo]) => target.keyword === keyword && target.postNo === postNo));
+assert.strictEqual(rewritePairTargets.length, requiredRewritePairTargets.length);
+assert.strictEqual(new Set(rewritePairTargets.map((target) => target.trackingId)).size, rewritePairTargets.length);
+assert.ok(rewritePairTargets.every((target) => target.matchMode === 'url' && target.postId));
 
 console.log('posting registry target mapping tests passed');

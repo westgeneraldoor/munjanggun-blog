@@ -99,6 +99,17 @@ function postingEntries(sourcePath = REGISTRY_SOURCE_PATH) {
   return [...byKey.values()];
 }
 
+function registeredIdsByPostId(sourcePath = REGISTRY_SOURCE_PATH) {
+  const byPostId = new Map();
+  registryRows(sourcePath).forEach((row) => {
+    const registryId = String(row['#'] || row['글'] || row['콘텐츠 ID'] || '').trim();
+    const url = plainUrl(row.URL || row.url || row['메모']);
+    const postId = postIdFromUrl(url);
+    if (registryId && postId && !byPostId.has(postId)) byPostId.set(postId, registryId);
+  });
+  return byPostId;
+}
+
 function dedupEntries(sourcePath = REGISTRY_SOURCE_PATH) {
   const rows = registryRows(sourcePath);
   const byPostNo = new Map();
@@ -205,6 +216,7 @@ module.exports = {
   registryRows,
   findRegisteredUrlsWithoutPublicationDates,
   postingEntries,
+  registeredIdsByPostId,
   dedupEntries,
   trackingKeywordRows,
   buildTrackingTargets,

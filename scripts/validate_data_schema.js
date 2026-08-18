@@ -80,6 +80,34 @@ function assertHistory() {
         fail(`${ranking.keyword} URL 매칭 결과에는 postId가 필요합니다.`);
       }
     });
+
+    if (record.queryEvidence !== undefined) {
+      if (!Array.isArray(record.queryEvidence)) fail(`records[${recordIndex}].queryEvidence가 배열이 아닙니다.`);
+      const seenKeywords = new Set();
+      record.queryEvidence.forEach((evidence, evidenceIndex) => {
+        if (!evidence.keyword) fail(`records[${recordIndex}].queryEvidence[${evidenceIndex}].keyword가 없습니다.`);
+        if (seenKeywords.has(evidence.keyword)) fail(`records[${recordIndex}] 중복 검색어 증거: ${evidence.keyword}`);
+        seenKeywords.add(evidence.keyword);
+        if (!Number.isInteger(evidence.totalFound) || evidence.totalFound < 0) {
+          fail(`${evidence.keyword} totalFound가 0 이상의 정수가 아닙니다.`);
+        }
+        if (!Array.isArray(evidence.accountMatches)) fail(`${evidence.keyword} accountMatches가 배열이 아닙니다.`);
+        evidence.accountMatches.forEach((match, matchIndex) => {
+          if (!Number.isInteger(match.rank) || match.rank < 1 || match.rank > evidence.totalFound) {
+            fail(`${evidence.keyword} accountMatches[${matchIndex}].rank 범위가 이상합니다: ${match.rank}`);
+          }
+          if (!/^https:\/\/blog\.naver\.com\/doorgeneral\/\d+$/.test(String(match.url || ''))) {
+            fail(`${evidence.keyword} accountMatches[${matchIndex}].url 형식이 이상합니다: ${match.url}`);
+          }
+          if (!/^\d+$/.test(String(match.logNo || '')) || !match.url.endsWith(match.logNo)) {
+            fail(`${evidence.keyword} accountMatches[${matchIndex}].logNo가 URL과 맞지 않습니다.`);
+          }
+          if (typeof match.postNo !== 'string' || typeof match.title !== 'string') {
+            fail(`${evidence.keyword} accountMatches[${matchIndex}] 등록부 ID 또는 제목 형식이 이상합니다.`);
+          }
+        });
+      });
+    }
   });
 }
 

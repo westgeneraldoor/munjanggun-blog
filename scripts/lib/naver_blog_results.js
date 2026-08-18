@@ -58,7 +58,9 @@ function collectUniquePostResults(links) {
       blogId: parsed.blogId,
       postId: parsed.postId,
       href: parsed.href,
-      title: typeof link === 'string' ? '' : String(link.title || '').trim().substring(0, 80),
+      title: typeof link === 'string'
+        ? ''
+        : String(link.title || '').replace(/새 창 열림\s*$/, '').trim().substring(0, 80),
     });
   });
 
@@ -70,8 +72,68 @@ function findAccountRank(results, blogId) {
   return index === -1 ? 0 : index + 1;
 }
 
+function collectAccountMatches(results, blogId, postNoByPostId = new Map()) {
+  return results.flatMap((item, index) => {
+    if (item.blogId !== blogId) return [];
+    return [{
+      rank: index + 1,
+      url: `https://blog.naver.com/${item.blogId}/${item.postId}`,
+      logNo: item.postId,
+      postNo: postNoByPostId.get(item.postId) || '',
+      title: item.title || '',
+    }];
+  });
+}
+
+function groupTargetsByKeyword(targets) {
+  const groups = new Map();
+  targets.forEach((target) => {
+    const group = groups.get(target.keyword) || [];
+    group.push(target);
+    groups.set(target.keyword, group);
+  });
+  return [...groups].map(([keyword, groupedTargets]) => ({ keyword, targets: groupedTargets }));
+}
+
+function evaluateTargetRanking(searchResults, target, blogId) {
+  const accountRank = findAccountRank(searchResults, blogId);
+  const targetIndex = target.postId
+    ? searchResults.findIndex((item) => item.blogId === blogId && item.postId === target.postId)
+    : -1;
+
+  if (targetIndex >= 0) {
+    const item = searchResults[targetIndex];
+    return {
+      rank: targetIndex + 1,
+      accountRank,
+      title: item.title,
+      matchedTitle: item.title,
+      matchedUrl: item.href,
+      matchType: 'url',
+      totalFound: searchResults.length,
+      note: '',
+    };
+  }
+
+  return {
+    rank: 0,
+    accountRank,
+    title: '',
+    matchedTitle: '',
+    matchedUrl: '',
+    matchType: target.postId ? 'url_not_found' : 'account_fallback',
+    totalFound: searchResults.length,
+    note: target.postId
+      ? `target URL not found in TOP ${searchResults.length}`
+      : `TOP ${searchResults.length} account fallback`,
+  };
+}
+
 module.exports = {
   parseBlogLink,
   collectUniquePostResults,
   findAccountRank,
+  collectAccountMatches,
+  groupTargetsByKeyword,
+  evaluateTargetRanking,
 };
