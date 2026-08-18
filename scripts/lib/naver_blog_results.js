@@ -157,6 +157,27 @@ function findRankingEvidenceIssues(record) {
       issues.push(`totalFound mismatch: ${ranking.keyword} (${ranking.totalFound} != ${evidence.totalFound})`);
     }
 
+    if (evidence.error) {
+      if (evidence.totalFound !== 0 || (evidence.accountMatches || []).length !== 0) {
+        issues.push(`failed query evidence is not empty: ${ranking.keyword}`);
+      }
+      if (ranking.rank !== -1 || ranking.accountRank !== 0 || ranking.totalFound !== 0) {
+        issues.push(`failed query ranking mismatch: ${ranking.keyword}|${ranking.postId || '-'}`);
+      }
+      return;
+    }
+
+    if (ranking.rank === -1) {
+      issues.push(`error ranking without evidence error: ${ranking.keyword}|${ranking.postId || '-'}`);
+    }
+    const expectedAccountRank = (evidence.accountMatches || []).reduce(
+      (lowest, match) => (lowest === 0 || match.rank < lowest ? match.rank : lowest),
+      0,
+    );
+    if (ranking.accountRank !== expectedAccountRank) {
+      issues.push(`accountRank mismatch: ${ranking.keyword} (${ranking.accountRank} != ${expectedAccountRank})`);
+    }
+
     if (!ranking.postId) return;
     const targetMatch = (evidence.accountMatches || []).find((match) => String(match.logNo) === String(ranking.postId));
     if (ranking.rank > 0 && (!targetMatch || targetMatch.rank !== ranking.rank)) {
@@ -164,9 +185,6 @@ function findRankingEvidenceIssues(record) {
     }
     if (ranking.rank === 0 && targetMatch) {
       issues.push(`not-found contradicted by evidence: ${ranking.keyword}|${ranking.postId}|${targetMatch.rank}`);
-    }
-    if (ranking.rank === -1 && !evidence.error) {
-      issues.push(`error ranking without evidence error: ${ranking.keyword}|${ranking.postId}`);
     }
   });
 

@@ -107,8 +107,8 @@ assert.deepStrictEqual(
 
 const linkedRecord = {
   rankings: [
-    { keyword: '자동중문', postId: '222', rank: 2, totalFound: 4 },
-    { keyword: '간살중문', postId: '555', rank: 0, totalFound: 1 },
+    { keyword: '자동중문', postId: '222', rank: 2, accountRank: 2, totalFound: 4 },
+    { keyword: '간살중문', postId: '555', rank: 0, accountRank: 1, totalFound: 1 },
   ],
   queryEvidence: [
     {
@@ -129,7 +129,7 @@ assert.deepStrictEqual(findRankingEvidenceIssues(linkedRecord), []);
 assert.ok(
   findRankingEvidenceIssues({
     ...linkedRecord,
-    rankings: [{ keyword: '자동중문', postId: '222', rank: 2, totalFound: 3 }],
+    rankings: [{ keyword: '자동중문', postId: '222', rank: 2, accountRank: 2, totalFound: 3 }],
     queryEvidence: [linkedRecord.queryEvidence[0]],
   }).some((issue) => issue.includes('totalFound')),
   '순위 행과 검색 근거의 수집 개수가 다르면 검증해야 한다',
@@ -137,10 +137,25 @@ assert.ok(
 assert.ok(
   findRankingEvidenceIssues({
     ...linkedRecord,
-    rankings: [{ keyword: '자동중문', postId: '999', rank: 2, totalFound: 4 }],
+    rankings: [{ keyword: '자동중문', postId: '999', rank: 2, accountRank: 2, totalFound: 4 }],
     queryEvidence: [linkedRecord.queryEvidence[0]],
   }).some((issue) => issue.includes('rank support')),
   '양수 순위는 같은 logNo와 순위를 가진 계정 검색 결과가 뒷받침해야 한다',
+);
+assert.ok(
+  findRankingEvidenceIssues({
+    rankings: [{ keyword: '자동중문', postId: '222', rank: 0, accountRank: 0, totalFound: 0 }],
+    queryEvidence: [{ keyword: '자동중문', totalFound: 0, error: 'navigation timeout', accountMatches: [] }],
+  }).some((issue) => issue.includes('failed query ranking')),
+  '수집 실패를 정상 빈 결과나 미검출로 기록하지 못하게 해야 한다',
+);
+assert.ok(
+  findRankingEvidenceIssues({
+    ...linkedRecord,
+    rankings: [{ keyword: '자동중문', postId: '222', rank: 2, accountRank: 1, totalFound: 4 }],
+    queryEvidence: [linkedRecord.queryEvidence[0]],
+  }).some((issue) => issue.includes('accountRank mismatch')),
+  '계정 첫 순위는 같은 검색 근거의 첫 문장군 URL 순위와 일치해야 한다',
 );
 
 assert.strictEqual(formatRankingTrendLabel({ postNo: '185', keyword: '자동중문' }), '185 · 자동중문');
