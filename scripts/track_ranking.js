@@ -19,6 +19,8 @@ const {
   collectAccountMatches,
   groupTargetsByKeyword,
   evaluateTargetRanking,
+  formatRankingTrendLabel,
+  formatHistoryRecordLabels,
 } = require('./lib/naver_blog_results');
 
 function getPlatformDefaultChromePath() {
@@ -125,15 +127,16 @@ function generateReport(results, today, history) {
   const recent = history.records.slice(-7);
   if (recent.length > 1) {
     const keys = [...new Set(results.map((result) => result.trackingId || result.keyword))];
-    md += `\n## 순위 추이 (최근 ${recent.length}회)\n\n| 키워드 |`;
-    recent.forEach((record) => { md += ` ${record.date} |`; });
+    const recentLabels = formatHistoryRecordLabels(recent);
+    md += `\n## 순위 추이 (최근 ${recent.length}회)\n\n| 추적 대상 |`;
+    recentLabels.forEach((label) => { md += ` ${label} |`; });
     md += '\n| --- |';
     recent.forEach(() => { md += ' --- |'; });
     md += '\n';
 
     keys.forEach((key) => {
       const label = results.find((result) => (result.trackingId || result.keyword) === key);
-      md += `| ${label ? label.keyword : key} |`;
+      md += `| ${label ? formatRankingTrendLabel(label) : key} |`;
       recent.forEach((record) => {
         const found = (record.rankings || []).find((item) => (item.trackingId || item.keyword) === key);
         md += found && found.rank > 0 ? ` ${displayRank(found.rank)} |` : ' - |';
@@ -177,6 +180,16 @@ function generateAccountMatchesReport(queryEvidence, today, timestamp) {
 }
 
 async function main() {
+  if (process.argv.includes('--report-only')) {
+    const history = loadHistory();
+    const latest = history.records[history.records.length - 1];
+    if (!latest) throw new Error('리포트를 만들 순위 이력이 없습니다.');
+    generateReport(latest.rankings || [], latest.date, history);
+    generateAccountMatchesReport(latest.queryEvidence || [], latest.date, latest.timestamp || latest.date);
+    console.log('기존 최신 이력으로 리포트만 다시 만들었습니다. 새 계측 기록은 추가하지 않았습니다.');
+    return;
+  }
+
   const today = new Date().toISOString().split('T')[0];
   console.log(`\n문장군 블로그 순위 추적 v4.0 - ${today}`);
   console.log(`블로그: https://blog.naver.com/${BLOG_ID}`);

@@ -3,6 +3,7 @@ const { paths } = require('./lib/paths');
 const { readJsonFile } = require('./lib/file_store');
 const { findPublicTextIssues, walkFiles } = require('./lib/public_safety');
 const { findRegisteredUrlsWithoutPublicationDates } = require('./lib/posting_registry');
+const { findRankingEvidenceIssues } = require('./lib/naver_blog_results');
 const { assertNoDrift } = require('./render_strategy_docs');
 const { validateTaxonomy } = require('./validate_seo_taxonomy');
 
@@ -107,6 +108,10 @@ function assertHistory() {
           }
         });
       });
+      const linkageIssues = findRankingEvidenceIssues(record);
+      if (linkageIssues.length > 0) {
+        fail(`records[${recordIndex}] 순위/검색 증거 연결 오류: ${linkageIssues[0]}`);
+      }
     }
   });
 }

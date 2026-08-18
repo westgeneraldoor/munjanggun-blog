@@ -100,12 +100,20 @@ function postingEntries(sourcePath = REGISTRY_SOURCE_PATH) {
 }
 
 function registeredIdsByPostId(sourcePath = REGISTRY_SOURCE_PATH) {
-  const byPostId = new Map();
+  const idsByPostId = new Map();
   registryRows(sourcePath).forEach((row) => {
     const registryId = String(row['#'] || row['글'] || row['콘텐츠 ID'] || '').trim();
     const url = plainUrl(row.URL || row.url || row['메모']);
     const postId = postIdFromUrl(url);
-    if (registryId && postId && !byPostId.has(postId)) byPostId.set(postId, registryId);
+    if (!registryId || !postId) return;
+    const ids = idsByPostId.get(postId) || new Set();
+    ids.add(registryId);
+    idsByPostId.set(postId, ids);
+  });
+
+  const byPostId = new Map();
+  idsByPostId.forEach((ids, postId) => {
+    if (ids.size === 1) byPostId.set(postId, [...ids][0]);
   });
   return byPostId;
 }

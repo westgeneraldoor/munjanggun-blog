@@ -129,6 +129,68 @@ function evaluateTargetRanking(searchResults, target, blogId) {
   };
 }
 
+function findRankingEvidenceIssues(record) {
+  if (!Array.isArray(record.queryEvidence)) return [];
+
+  const issues = [];
+  const evidenceByKeyword = new Map();
+  record.queryEvidence.forEach((evidence) => {
+    if (evidenceByKeyword.has(evidence.keyword)) {
+      issues.push(`duplicate queryEvidence: ${evidence.keyword}`);
+      return;
+    }
+    evidenceByKeyword.set(evidence.keyword, evidence);
+  });
+
+  const rankingKeywords = new Set((record.rankings || []).map((ranking) => ranking.keyword));
+  rankingKeywords.forEach((keyword) => {
+    if (!evidenceByKeyword.has(keyword)) issues.push(`missing queryEvidence: ${keyword}`);
+  });
+  evidenceByKeyword.forEach((_, keyword) => {
+    if (!rankingKeywords.has(keyword)) issues.push(`orphan queryEvidence: ${keyword}`);
+  });
+
+  (record.rankings || []).forEach((ranking) => {
+    const evidence = evidenceByKeyword.get(ranking.keyword);
+    if (!evidence) return;
+    if (ranking.totalFound !== evidence.totalFound) {
+      issues.push(`totalFound mismatch: ${ranking.keyword} (${ranking.totalFound} != ${evidence.totalFound})`);
+    }
+
+    if (!ranking.postId) return;
+    const targetMatch = (evidence.accountMatches || []).find((match) => String(match.logNo) === String(ranking.postId));
+    if (ranking.rank > 0 && (!targetMatch || targetMatch.rank !== ranking.rank)) {
+      issues.push(`rank support missing: ${ranking.keyword}|${ranking.postId}|${ranking.rank}`);
+    }
+    if (ranking.rank === 0 && targetMatch) {
+      issues.push(`not-found contradicted by evidence: ${ranking.keyword}|${ranking.postId}|${targetMatch.rank}`);
+    }
+    if (ranking.rank === -1 && !evidence.error) {
+      issues.push(`error ranking without evidence error: ${ranking.keyword}|${ranking.postId}`);
+    }
+  });
+
+  return issues;
+}
+
+function formatRankingTrendLabel(result) {
+  const postNo = String((result && result.postNo) || '').trim();
+  const keyword = String((result && result.keyword) || '').trim();
+  return postNo ? `${postNo} · ${keyword}` : keyword;
+}
+
+function formatHistoryRecordLabels(records) {
+  const dateCounts = new Map();
+  records.forEach((record) => dateCounts.set(record.date, (dateCounts.get(record.date) || 0) + 1));
+  return records.map((record) => {
+    if ((dateCounts.get(record.date) || 0) < 2) return record.date;
+    const timestamp = new Date(record.timestamp);
+    if (Number.isNaN(timestamp.getTime())) return record.date;
+    const kstTime = new Date(timestamp.getTime() + (9 * 60 * 60 * 1000)).toISOString().slice(11, 16);
+    return `${record.date} ${kstTime} KST`;
+  });
+}
+
 module.exports = {
   parseBlogLink,
   collectUniquePostResults,
@@ -136,4 +198,7 @@ module.exports = {
   collectAccountMatches,
   groupTargetsByKeyword,
   evaluateTargetRanking,
+  findRankingEvidenceIssues,
+  formatRankingTrendLabel,
+  formatHistoryRecordLabels,
 };

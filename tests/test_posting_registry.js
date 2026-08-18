@@ -47,6 +47,8 @@ fs.writeFileSync(sourcePath, JSON.stringify({
       header: ['콘텐츠 ID', 'URL'],
       rows: [
         ['리뷰릴스-005', 'https://blog.naver.com/doorgeneral/777'],
+        ['리뷰릴스-중복', 'https://blog.naver.com/doorgeneral/777'],
+        ['리뷰릴스-006', 'https://blog.naver.com/doorgeneral/778'],
       ],
     },
     {
@@ -76,11 +78,12 @@ const entries = postingEntries(sourcePath);
 assert.strictEqual(entries.find((entry) => entry.postNo === '003').publishedAt, '2026-08-12', '동일 URL의 발행일 보강 행은 기존 URL 행에 합쳐져야 한다');
 assert.deepStrictEqual(
   findRegisteredUrlsWithoutPublicationDates(sourcePath),
-  ['005', '021', '022', '리뷰릴스-005'],
+  ['005', '021', '022', '리뷰릴스-005', '리뷰릴스-006', '리뷰릴스-중복'],
   'URL이 등록됐지만 발행일이 없는 글은 검증 차단 대상으로 식별해야 한다',
 );
 assert.strictEqual(typeof registeredIdsByPostId, 'function', '리뷰 콘텐츠 ID도 logNo로 역매핑해야 한다');
-assert.strictEqual(registeredIdsByPostId(sourcePath).get('777'), '리뷰릴스-005');
+assert.strictEqual(registeredIdsByPostId(sourcePath).has('777'), false, '한 logNo가 여러 ID와 충돌하면 어느 쪽도 추측하지 않아야 한다');
+assert.strictEqual(registeredIdsByPostId(sourcePath).get('778'), '리뷰릴스-006');
 
 const protectedEntries = dedupEntries(sourcePath);
 const urlPendingEntry = protectedEntries.find((entry) => entry.postNo === '145');
