@@ -248,5 +248,60 @@
     "keyword": "욕실문교체",
     "hub": "022",
     "postNo": "022"
+  },
+  {
+    "keyword": "자동중문",
+    "hub": "028",
+    "postNo": "028"
+  },
+  {
+    "keyword": "방음중문",
+    "hub": "040",
+    "postNo": "040"
+  },
+  {
+    "keyword": "반려동물중문",
+    "hub": "040",
+    "postNo": "040"
+  },
+  {
+    "keyword": "반려견 소음",
+    "hub": "040",
+    "postNo": "040"
+  },
+  {
+    "keyword": "간살중문",
+    "hub": "023",
+    "postNo": "023"
+  },
+  {
+    "keyword": "간살중문",
+    "hub": "092",
+    "postNo": "092"
+  },
+  {
+    "keyword": "문틀교체 썩음",
+    "hub": "024",
+    "postNo": "024"
+  },
+  {
+    "keyword": "중문업체",
+    "hub": "058",
+    "postNo": "058"
+  },
+  {
+    "keyword": "중문 시공업체 선택",
+    "hub": "058",
+    "postNo": "058"
+  },
+  {
+    "keyword": "신발장 간섭",
+    "hub": "039",
+    "postNo": "039"
+  },
+  {
+    "keyword": "살면서 방문교체",
+    "hub": "083",
+    "postNo": "083"
   }
 ]

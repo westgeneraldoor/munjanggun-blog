@@ -74,4 +74,36 @@ assert.strictEqual(urlPendingEntry.url, null);
 assert.strictEqual(urlPendingEntry.dedupStatus, '작성완료·URL등록대기');
 assert.strictEqual(urlPendingEntry.isDedupProtected, true);
 
+const liveTrackingConfig = require('../config/tracking_keywords.json');
+const requiredSearchBlindSpots = [
+  ['자동중문', '028'],
+  ['방음중문', '040'],
+  ['반려동물중문', '040'],
+  ['반려견 소음', '040'],
+  ['간살중문', '023'],
+  ['간살중문', '092'],
+  ['문틀교체 썩음', '024'],
+  ['중문업체', '058'],
+  ['중문 시공업체 선택', '058'],
+  ['신발장 간섭', '039'],
+  ['살면서 방문교체', '083'],
+];
+
+requiredSearchBlindSpots.forEach(([keyword, postNo]) => {
+  assert.ok(
+    liveTrackingConfig.some((item) => item.keyword === keyword && item.postNo === postNo),
+    `검색 순위 계측 사각지대가 없어야 한다: ${keyword} -> ${postNo}`,
+  );
+});
+
+const blindSpotTargets = buildTrackingTargets(liveTrackingConfig)
+  .filter((target) => requiredSearchBlindSpots.some(([keyword, postNo]) => target.keyword === keyword && target.postNo === postNo));
+assert.strictEqual(blindSpotTargets.length, requiredSearchBlindSpots.length);
+assert.strictEqual(
+  new Set(blindSpotTargets.map((target) => target.trackingId)).size,
+  blindSpotTargets.length,
+  '같은 키워드가 여러 원본에 연결돼도 URL 기반 trackingId는 서로 달라야 한다',
+);
+assert.ok(blindSpotTargets.every((target) => target.matchMode === 'url' && target.postId));
+
 console.log('posting registry target mapping tests passed');
