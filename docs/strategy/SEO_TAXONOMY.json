@@ -441,6 +441,22 @@
       "intent_ids": ["I-LAYOUT-SUITABILITY", "I-LIVING-SAFETY"],
       "classification_status": "classified"
     },
+    "queue:Q-050": {
+      "entity_type": "queue",
+      "source_refs": ["post:192"],
+      "hub_ids": ["H1", "H2"],
+      "cluster_ids": ["C-H1-H2-GLASS-RANGE"],
+      "intent_ids": ["I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-051": {
+      "entity_type": "queue",
+      "source_refs": ["post:193"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-SURFACE-CONDITION"],
+      "intent_ids": ["I-FINISH-COORDINATION", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
     "post:152": {
       "entity_type": "post",
       "source_refs": [
@@ -1248,7 +1264,7 @@
     "post:192": {
       "entity_type": "post",
       "source_refs": [
-        "queue:Q-029"
+        "queue:Q-050"
       ],
       "hub_ids": [
         "H1",
@@ -1261,7 +1277,26 @@
         "I-REPLACEMENT-SCOPE"
       ],
       "classification_status": "classified",
-      "taxonomy_change_note": "016/108번 소재를 초슬림 vs 일반 3연동 전체 교체 범위 판단(I-REPLACEMENT-SCOPE)으로 분류. 소스 refs로 쓴 Q-029는 hub가 H4·H5로 달라 참고용 근접 큐다. 016-1(유리 종류, C-H4-H5 계열 아님)과는 별도 클러스터로 겹치지 않는다."
+      "taxonomy_change_note": "016/108번 소재를 초슬림 vs 일반 3연동 전체 교체 범위 판단(I-REPLACEMENT-SCOPE)으로 분류. 2026-08-20 실제 URL 등록 후 Q-050 관찰 행으로 연결했으며, 016-1(유리 종류, C-H4-H5 계열 아님)과는 별도 클러스터로 겹치지 않는다."
+    },
+    "post:193": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-051"
+      ],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-SURFACE-CONDITION"
+      ],
+      "intent_ids": [
+        "I-FINISH-COORDINATION",
+        "I-REPLACEMENT-SCOPE"
+      ],
+      "classification_status": "classified",
+      "taxonomy_change_note": "실제 발행 제목의 문짝 소재·구조 비교 의도를 186번과 같은 표면 상태·교체 범위 클러스터로 분류했다. URL·발행일 등록 직후라 성과 판정은 3일 관찰 전까지 보류한다."
     }
   }
 }

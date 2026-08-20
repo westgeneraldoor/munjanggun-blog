@@ -20,7 +20,7 @@
 | --- | --- | --- | --- |
 | 채널 진단 | `outputs/reports/channel_diagnosis_2026-08-12.md` | 2026-07-29~2026-08-11 확정 daily, 2026-08-12 광고 API | 최근 7일 1,226회 기준선, 공개/URL/관찰 분리, 5연속 faded 가드 판단 |
 | 최신 포인터 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | 2026-08-12 | 새 세션용 진입점 |
-| daily | `outputs/reports/daily/2026-08-18_seo_watch.md` | 2026-08-17 확정, 2026-08-18 08:53 실시간 | 1,212조회·순방문자 955·방문 횟수 985·평균 사용 시간 2m 11s, 통합검색 81.39%. TOP20 20행 및 6월 19일·7월 14일 TOP20·8월 13~16일 백필 완료 |
+| daily | `outputs/reports/daily/2026-08-20_seo_watch.md` | 2026-08-19 확정, 2026-08-20 09:21 실시간 | 1,424조회·순방문자 1,089·방문 횟수 1,129·평균 사용 시간 2m 55s, 통합검색 77.61%. 8월 18~19일 TOP20 20행 전수, 171 제목 매핑 및 192·193 URL·발행일 등록 완료 |
 | W5 사전 등록 판정 | `outputs/reports/topic_analysis/2026-08-18_preregistered_w5_verdict.md` | 2026-07-19~07-31 발행군, 2026-08-17 데이터 | 13건 모두 D3~D14 0회로 원인 조사 재개. W6 171 landed로 연속 붕괴 서술은 철회 |
 | 리라이팅 코호트 사전 등록 | `docs/strategy/REWRITE_COHORT_PREREGISTRATION_20260818.md` | 180~191, 최종 판정 2026-08-31 | 중간에는 창 마감·등장 횟수만 기록. 12건 완료 전 판정 금지, 192 이후는 모수 제외 |
 | topic scorecard | `outputs/reports/topic_candidates/2026-07-14_topic_scorecard.md` | 2026-07-13 통계, 2026-07-06 광고 API 기반 | 159~161번의 방문 진단·중문 철거 후 재설치 각도와 중복 회피 판단 |
@@ -43,6 +43,8 @@
 
 | 보고서 | 기준일 | 핵심 메모 |
 | --- | --- | --- |
+| `outputs/reports/daily/2026-08-20_seo_watch.md` | 2026-08-19 | 조회수 1,424·순방문자 1,089·방문 횟수 1,129·평균 사용 시간 2m 55s. TOP20 20행, 171번 제목 별칭 매핑 보완. |
+| `outputs/reports/daily/2026-08-19_seo_watch.md` | 2026-08-18 | 조회수 1,340·순방문자 1,064·방문 횟수 1,104·평균 사용 시간 2m 44s. 관리자 백필 TOP20 20행. |
 | `outputs/reports/daily/2026-08-18_seo_watch.md` | 2026-08-17 | 조회수 1,212·통합검색 81.39%. TOP20 20행, 187~191 URL·발행일을 공개 모바일 블로그에서 직접 대조해 등록. |
 | `outputs/reports/daily/2026-08-17_seo_watch.md` | 2026-08-16 | 조회수 1,076·순방문자 853·방문 횟수 890·평균 사용 시간 2m 27s. 관리자 백필 TOP20 20행. |
 | `outputs/reports/daily/2026-08-16_seo_watch.md` | 2026-08-15 | 조회수 1,067·순방문자 839·방문 횟수 876·평균 사용 시간 2m 17s. 관리자 백필 TOP20 20행. |
