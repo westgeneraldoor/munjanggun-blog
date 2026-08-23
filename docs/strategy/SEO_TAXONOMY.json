@@ -457,6 +457,39 @@
       "intent_ids": ["I-FINISH-COORDINATION", "I-REPLACEMENT-SCOPE"],
       "classification_status": "classified"
     },
+    "queue:Q-052": {
+      "entity_type": "queue",
+      "source_refs": ["post:196"],
+      "hub_ids": ["H2", "H3"],
+      "cluster_ids": ["C-H2-H3-OPENING-CONFIG"],
+      "intent_ids": ["I-LAYOUT-SUITABILITY"],
+      "classification_status": "classified"
+    },
+    "queue:Q-053": {
+      "entity_type": "queue",
+      "source_refs": ["post:197"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "중문 업체 선택·견적서 확인은 현 taxonomy의 제품·공간·교체 범위 클러스터와 정확히 맞지 않는다. 맞춤 분류를 신설하기 전까지 과잉 분류하지 않는다."
+    },
+    "queue:Q-054": {
+      "entity_type": "queue",
+      "source_refs": ["post:198"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-REPLACEMENT-SCOPE", "I-FINISH-COORDINATION"],
+      "classification_status": "classified"
+    },
+    "queue:Q-055": {
+      "entity_type": "queue",
+      "source_refs": ["post:195"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-REPLACEMENT-SCOPE", "I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
     "post:152": {
       "entity_type": "post",
       "source_refs": [
@@ -1297,6 +1330,109 @@
       ],
       "classification_status": "classified",
       "taxonomy_change_note": "실제 발행 제목의 문짝 소재·구조 비교 의도를 186번과 같은 표면 상태·교체 범위 클러스터로 분류했다. URL·발행일 등록 직후라 성과 판정은 3일 관찰 전까지 보류한다."
+    },
+    "post:194": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-041"
+      ],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작성완료·URL등록대기 원고다. 실제 발행 제목·URL이 확인되기 전에는 초안의 주제만으로 taxonomy를 확정하지 않는다.",
+      "taxonomy_change_note": "Q-041은 과거 유사 소재의 이력 참조일 뿐, 미발행 194번의 분류를 확정하지 않는다."
+    },
+    "post:195": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-055"
+      ],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-REPLACEMENT"
+      ],
+      "intent_ids": [
+        "I-REPLACEMENT-SCOPE",
+        "I-LIVING-SAFETY"
+      ],
+      "classification_status": "classified",
+      "taxonomy_change_note": "실제 발행 제목의 거주 중 방문교체 작업 기간 조건을 방문·ABS도어 교체 범위 클러스터로 분류했다. 단일 공정 기간을 일반 보장으로 확대하지 않는다."
+    },
+    "post:196": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-052"
+      ],
+      "hub_ids": [
+        "H2",
+        "H3"
+      ],
+      "cluster_ids": [
+        "C-H2-H3-OPENING-CONFIG"
+      ],
+      "intent_ids": [
+        "I-LAYOUT-SUITABILITY"
+      ],
+      "classification_status": "classified",
+      "taxonomy_change_note": "실제 발행 제목의 신발장 돌출·3연동 설치 가능 판단을 개구부 조건 클러스터로 분류했다. 기존 faded 묶음의 전술을 되살리는 근거가 아니라 성과 분리 관찰 대상으로 둔다."
+    },
+    "post:197": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-053"
+      ],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "중문 업체 선택·견적서 확인은 현 taxonomy의 제품·공간·교체 범위 클러스터와 정확히 맞지 않는다. 맞춤 분류를 신설하기 전까지 과잉 분류하지 않는다."
+    },
+    "post:198": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-054"
+      ],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-REPLACEMENT"
+      ],
+      "intent_ids": [
+        "I-REPLACEMENT-SCOPE",
+        "I-FINISH-COORDINATION"
+      ],
+      "classification_status": "classified",
+      "taxonomy_change_note": "도어 한 짝과 전체 교체의 범위·마감 조화 판단을 방문·ABS도어 교체 범위 클러스터로 분류했다. 발행 당일 TOP20 진입은 단일 관측이므로 기존 글과 성과를 합산하지 않는다."
+    },
+    "post:199": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-030"
+      ],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작성완료·URL등록대기 원고다. 실제 발행 제목·URL이 확인되기 전에는 초안의 주제만으로 taxonomy를 확정하지 않는다.",
+      "taxonomy_change_note": "Q-030은 개구부 전술의 확대 차단 이력 참조일 뿐, 미발행 199번의 taxonomy를 확정하지 않는다."
+    },
+    "post:200": {
+      "entity_type": "post",
+      "source_refs": [
+        "queue:Q-030"
+      ],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작성완료·URL등록대기 원고다. 실제 발행 제목·URL이 확인되기 전에는 초안의 주제만으로 taxonomy를 확정하지 않는다.",
+      "taxonomy_change_note": "Q-030은 셀프·개구부 위험 가드의 참조일 뿐, 미발행 200번의 taxonomy를 확정하지 않는다."
     }
   }
 }
