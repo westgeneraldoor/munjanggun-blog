@@ -106,6 +106,14 @@ function testServiceScopeBlockIsPreserved() {
   assert.ok(result.blocks.some((item) => item.code === 'SERVICE_SCOPE_BLOCK'));
 }
 
+function testNonDoorServiceCannotEnterBridgeLane() {
+  const result = validateBridgeCandidate(validCandidate({
+    service_keyword: '입주청소',
+    dependency_statement: '입주청소 일정을 먼저 정해야 한다.',
+  }), fixtureContext());
+  assert.ok(result.blocks.some((item) => item.code === 'SERVICE_DOMAIN_REQUIRED'));
+}
+
 function testHumanReviewRelationWarns() {
   const result = validateBridgeCandidate(validCandidate({
     parent_keyword: '창호',
@@ -154,6 +162,7 @@ function main() {
   testMissingDependencyBlocks();
   testDependencyRequiresConcreteDoorConnection();
   testServiceScopeBlockIsPreserved();
+  testNonDoorServiceCannotEnterBridgeLane();
   testHumanReviewRelationWarns();
   testBridgeDuplicateSummaryShowsParentServiceAndQuestionMatches();
   testExactQuestionAlreadyRegisteredBlocks();

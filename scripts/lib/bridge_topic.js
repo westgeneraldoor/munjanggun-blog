@@ -1,6 +1,7 @@
 const SERVICE_CONNECTION_TERMS = [
   '중문', '방문', '문틀', '문짝', '문선', '문턱', '도어', '몰딩',
-  '손잡이', '경첩', '레일', '롤러', '실측', '현관',
+  '문교체', '화장실문', '욕실문', '안방문', '손잡이', '경첩',
+  '레일', '롤러', '실측', '현관',
 ];
 
 function normalize(value) {
@@ -100,6 +101,11 @@ function dependencyHasServiceConnection(candidate) {
   });
 }
 
+function serviceHasDoorDomain(serviceKeyword) {
+  const service = normalize(serviceKeyword);
+  return SERVICE_CONNECTION_TERMS.some((term) => service.includes(normalize(term)));
+}
+
 function exactVolume(parentKeyword, volumes) {
   const parent = normalize(parentKeyword);
   const hit = (volumes || []).find((item) => normalize(item.keyword) === parent);
@@ -119,6 +125,8 @@ function validateBridgeCandidate(candidate, context) {
 
   if (!String(candidate.service_keyword || '').trim()) {
     blocks.push({ code: 'SERVICE_REQUIRED', reason: '문장군 서비스 키워드가 필요하다' });
+  } else if (!serviceHasDoorDomain(candidate.service_keyword)) {
+    blocks.push({ code: 'SERVICE_DOMAIN_REQUIRED', reason: '서비스 키워드는 구체적인 문·중문 취급 영역이어야 한다' });
   } else if (service.level === 'BLOCK') {
     blocks.push({ code: 'SERVICE_SCOPE_BLOCK', reason: service.reason || service.label });
   } else if (service.level === 'WARN') {
