@@ -11,6 +11,7 @@
 | 일일 유입경로/검색어 관제 | 최신 `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` | daily report가 주 근거 |
 | 오늘 글감/신규 후보 | 최신 daily + 최신 `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | daily는 증거, scorecard는 후보 판단 |
 | 소재 선정 구조 재검증 | `docs/strategy/REWRITE_COHORT_PREREGISTRATION_20260818.md` + `outputs/reports/topic_analysis/2026-08-18_preregistered_w5_verdict.md` + `docs/strategy/TOPIC_SELECTION_REDESIGN_PLAN_V0.2.md` | 180~191은 8월 31일 전 판정 금지. W5 0/13은 원인 조사 재개 신호, W6 1/3은 연속 붕괴의 반례 |
+| 브릿지 201~207 선정·판정 | `docs/strategy/BRIDGE_COHORT_PREREGISTRATION_20260824.md` + `docs/operations/BRIDGE_TOPIC_WORKFLOW.md` | 후보 7건을 먼저 승인·고정. 7편은 탐색 코호트이며 마지막 글 D14 전 판정 금지 |
 | 순위 변화 참고 | `outputs/reports/search_rank_measurement_2026-08-18.md`, `outputs/reports/ranking_report.md`, `outputs/reports/ranking_changes_summary.md` | URL 기반 계측값. weekly/experimental 보조 |
 | TOP10 구조 참고 | `outputs/reports/top10_analysis.md` | 제목/구조 참고, 단독 의사결정 금지 |
 
@@ -23,6 +24,8 @@
 | daily | `outputs/reports/daily/2026-08-24_seo_watch.md` | 2026-08-23 확정, 2026-08-24 08:34 실시간 | 1,036조회·순방문자 795·방문 횟수 824·평균 사용 시간 2m 30s, 통합검색 80.67%. 8월 20~23일 TOP20 80행 전수, 195~198 및 REVIEW 2건 URL·발행일 등록 완료 |
 | W5 사전 등록 판정 | `outputs/reports/topic_analysis/2026-08-18_preregistered_w5_verdict.md` | 2026-07-19~07-31 발행군, 2026-08-17 데이터 | 13건 모두 D3~D14 0회로 원인 조사 재개. W6 171 landed로 연속 붕괴 서술은 철회 |
 | 리라이팅 코호트 사전 등록 | `docs/strategy/REWRITE_COHORT_PREREGISTRATION_20260818.md` | 180~191, 최종 판정 2026-08-31 | 중간에는 창 마감·등장 횟수만 기록. 12건 완료 전 판정 금지, 192 이후는 모수 제외 |
+| 브릿지 코호트 사전 등록 | `docs/strategy/BRIDGE_COHORT_PREREGISTRATION_20260824.md` | 201~207, 마지막 글 D14 최종 판정 | 3건 이상 강한 확장 신호, 2건 반복 확인, 1건 보류, 0건은 이번 구성 실패. 인과·전략 전체 유효/무효는 단정하지 않음 |
+| 브릿지 서비스 포화도 분석 | `outputs/reports/topic_analysis/2026-08-24_service_saturation.ipynb` | 2026-08-24 성과 원장·등록부 | 서비스별 재고 포화는 관측됐으나 시기 효과와 분리되지 않아 원인으로 확정하지 않음 |
 | topic scorecard | `outputs/reports/topic_candidates/2026-07-14_topic_scorecard.md` | 2026-07-13 통계, 2026-07-06 광고 API 기반 | 159~161번의 방문 진단·중문 철거 후 재설치 각도와 중복 회피 판단 |
 | topic blind dataset | `outputs/reports/topic_analysis/2026-08-06_topic_blind_dataset.json` | 2026-08-06 성과 원장 | 글번호·날짜·순위·판정이 제거된 123건 독립 분류 입력 |
 | search rank measurement | `outputs/reports/search_rank_measurement_2026-08-18.md` | 2026-08-18 14:07 KST | 61개 URL-키워드 조합의 계측 조건과 지정 소재 원본 순위 |
