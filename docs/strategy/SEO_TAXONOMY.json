@@ -1433,6 +1433,132 @@
       "classification_status": "unclassified",
       "unclassified_reason": "작성완료·URL등록대기 원고다. 실제 발행 제목·URL이 확인되기 전에는 초안의 주제만으로 taxonomy를 확정하지 않는다.",
       "taxonomy_change_note": "Q-030은 셀프·개구부 위험 가드의 참조일 뿐, 미발행 200번의 taxonomy를 확정하지 않는다."
+    },
+    "queue:Q-056": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+    },
+    "queue:Q-057": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+    },
+    "queue:Q-058": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+    },
+    "queue:Q-059": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+    },
+    "queue:Q-060": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+    },
+    "queue:Q-061": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+    },
+    "queue:Q-062": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+    },
+    "post:201": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-056"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+    },
+    "post:202": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-057"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+    },
+    "post:203": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-058"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+    },
+    "post:204": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-059"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+    },
+    "post:205": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-060"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+    },
+    "post:206": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-061"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+    },
+    "post:207": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-062"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
     }
   }
 }

@@ -38,6 +38,8 @@
 
 일곱 후보는 원고 작성 전에 한 번에 승인받는다. 승인표에는 각 글의 `parent_keyword`, `service_keyword`, `service_family`, `relation_type`, `customer_question`, `dependency_statement`, 예정 제목, 예정 발행일을 적는다.
 
+2026-08-24 사장님 최종 승인 결과는 `docs/strategy/BRIDGE_COHORT_APPROVAL_20260824.md`에 고정했다.
+
 첫 원고를 쓰기 전에 다음 조건도 함께 고정한다.
 
 - 부모 검색 의도는 7건 모두 서로 다르게 한다.
