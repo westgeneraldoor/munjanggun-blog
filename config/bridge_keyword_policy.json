@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-08-24",
+  "notice": "브릿지 부모 키워드는 개방형이다. known_parent_contexts는 허용 목록이 아니라 반복되는 문맥의 설명 사전이다.",
+  "relation_types": {
+    "sequencing": {
+      "label": "공정 순서",
+      "human_review": false
+    },
+    "finish_interface": {
+      "label": "마감 경계",
+      "human_review": false
+    },
+    "clearance_logistics": {
+      "label": "반입 폭과 동선",
+      "human_review": false
+    },
+    "cause_diagnosis": {
+      "label": "원인 분리",
+      "human_review": true,
+      "review_reason": "성능과 원인을 문장군 제품 하나로 단정하지 않는지 근거를 확인한다"
+    },
+    "schedule": {
+      "label": "일정 역산",
+      "human_review": false
+    },
+    "budget_priority": {
+      "label": "예산 우선순위",
+      "human_review": false
+    },
+    "contract_responsibility": {
+      "label": "계약과 책임",
+      "human_review": true,
+      "review_reason": "법률·계약·원상복구 주장은 최신 공공 근거를 확인한다"
+    },
+    "lifestyle_friction": {
+      "label": "생활 불편",
+      "human_review": false
+    }
+  },
+  "known_parent_contexts": [
+    {
+      "term": "입주청소",
+      "rule": "문·중문 설치의 분진과 작업 동선에 따른 공정 순서로 연결"
+    },
+    {
+      "term": "화장실타일공사",
+      "rule": "화장실문·문틀과 타일이 맞닿는 마감 경계로 연결"
+    },
+    {
+      "term": "타일",
+      "rule": "문틀·문선과 맞닿는 경계 또는 철거 손상 범위로 연결"
+    },
+    {
+      "term": "도배",
+      "rule": "문틀·문선 교체와 벽지 마감의 공정 순서로 연결"
+    },
+    {
+      "term": "마루",
+      "rule": "문 하단 간격·문턱·중문 레일과 바닥 마감 경계로 연결"
+    },
+    {
+      "term": "신발장",
+      "rule": "중문 설치선·문 열림·고정면 간섭으로 연결"
+    },
+    {
+      "term": "줄눈",
+      "rule": "현관 바닥 마감과 중문 설치의 실제 선후관계가 있을 때만 연결"
+    },
+    {
+      "term": "씽크대",
+      "rule": "문장군 서비스와 실제 공정·동선 의존성이 확인될 때만 연결"
+    },
+    {
+      "term": "싱크대",
+      "rule": "문장군 서비스와 실제 공정·동선 의존성이 확인될 때만 연결"
+    },
+    {
+      "term": "샷시",
+      "rule": "외풍 원인을 창호와 현관 중문으로 분리 진단할 때만 연결"
+    },
+    {
+      "term": "샤시",
+      "rule": "외풍 원인을 창호와 현관 중문으로 분리 진단할 때만 연결"
+    },
+    {
+      "term": "창호",
+      "rule": "외풍 원인을 창호와 현관 중문으로 분리 진단할 때만 연결"
+    },
+    {
+      "term": "이삿짐",
+      "rule": "문폭·중문 유효 통과 폭·문짝 탈부착과 반입 동선으로 연결"
+    },
+    {
+      "term": "이사일정",
+      "rule": "실측·제작·시공과 이사일의 일정 역산으로 연결"
+    },
+    {
+      "term": "소파",
+      "rule": "문폭·중문 유효 통과 폭·회전 동선으로 연결"
+    },
+    {
+      "term": "침대",
+      "rule": "문폭·중문 유효 통과 폭·회전 동선으로 연결"
+    }
+  ]
+}
