@@ -69,6 +69,7 @@ GitHub 운영 OS:
 | 리뷰릴스 기반 포스팅, 네이버 클립용 블로그 글 | `docs/operations/REVIEW_REELS_CLIP_BLOG_WORKFLOW.md` 기준으로 `C:\Users\hjh\안티그래비티\문장군 컨텐츠`의 승인 완료 리뷰·숏폼 패키지를 근거로 작성 |
 | 블로그 통계자료 수집해 | `docs/operations/BLOG_STATS_COLLECTION_WORKFLOW.md` 기준으로 **인앱 브라우저**의 네이버 관리자 통계창을 직접 수집한다. 인앱 브라우저 로그인·권한 문제가 해결되지 않을 때만 사용자 승인 후 Chrome을 보조 수단으로 쓴다. |
 | 다음 글감, 통계 기반 소재 | **먼저 `npm run topic:explore`와 `npm run topic:check -- --check "키워드"`를 돌린다.** 그 다음 `docs/operations/TOPIC_SELECTION_SCORECARD.md` + 최근 daily report + 광고 API 데이터 |
+| 입주청소·도배·가구 등 큰 키워드에서 문장군 연결 글감 | `docs/operations/BRIDGE_TOPIC_WORKFLOW.md` 기준으로 `npm run keywords:bridge` 후 구조화된 `npm run topic:bridge-check`를 돌린다. 부모와 서비스를 합친 문자열을 기존 `topic:check`에 넣지 않는다. |
 | 유입경로/검색어/일일 SEO 관제 | `docs/operations/DAILY_SEO_ROUTINE.md` |
 | 블로그 상태/목표/전략 분석, 2,000뷰 달성 계획, 채널 진단 | `outputs/reports/REPORT_INDEX.md` + `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` + 최신 daily report + `docs/strategy/ACTIVE_TOPIC_QUEUE.md` |
 | 발행 전 검수 | 로컬에서 `npm run validate:posts`, `npm run gate:blog -- --post "posts/NNN_키워드.md" --mode publish --json` |
@@ -110,7 +111,7 @@ GitHub 운영 OS:
 - POSTING_REGISTRY 중복/카니발 확인: 완료
 - POSTING_EXCLUSION_RULES 제외 키워드 확인: 완료
 - 광고 API 키워드 데이터 확인: YYYY-MM-DD 또는 사용 불가 사유
-- topic:check 검증기 실행: 완료 (후보별 BLOCK/WARN 결과를 그대로 인용)
+- topic:check 또는 topic:bridge-check 검증기 실행: 완료 (후보 유형에 맞는 BLOCK/WARN 결과를 그대로 인용)
 - 성과 원장 확인: landed·faded 클러스터 상태 인용
 - 탈락/보호/공격/실험 포트폴리오 작성: 완료
 ```
@@ -178,6 +179,12 @@ npm run topic:check -- --check "키워드1,키워드2"
 | 관찰 잠금 중인 Q-ID | WARN |
 
 BLOCK이 하나라도 있으면 그 후보를 글감으로 올리지 않는다. 종료 코드 1이다.
+
+### 0-1. 제품 밖 부모 키워드는 브릿지 검사로 분리한다
+
+입주청소, 도배, 타일, 마루, 창호, 가구처럼 문장군 제품 밖 키워드에서 시작하는 후보는 기존 제품 검증기에 합친 문자열로 넣지 않는다. `docs/operations/BRIDGE_TOPIC_WORKFLOW.md`에 따라 부모, 문장군 서비스, 연결 관계, 고객 질문, 실제 의존성을 분리해 `topic:bridge-check`로 검사한다.
+
+부모 키워드는 개방형이며 `config/bridge_seed_keywords.json`은 허용 목록이 아니다. 다만 부모 키워드가 크다는 이유만으로 발행하지 않고, 부모 검색자가 실제로 문 때문에 결정에 막히는지와 기존 글이 같은 질문에 이미 답했는지를 확인한다.
 
 취급 범위 원본은 `config/product_scope.json`이다. 검색량이 아무리 커도 이 파일에서 미취급이면 글감이 아니다. 실제로 도어클로저 21,240회, 폴딩도어 12,200회, 터닝도어 10,840회가 전부 미취급이다.
 

@@ -36,6 +36,7 @@
 | `outputs/reports/LATEST_CHANNEL_DIAGNOSIS.md` | ACTIVE_ROUTINE | 블로그 상태/목표/전략 분석 시 최신 장기 진단으로 들어가는 포인터 |
 | `outputs/reports/daily/YYYY-MM-DD_seo_watch.md` | GENERATED | 실제 유입어, TOP20, 작성일, 다음 액션 |
 | `docs/operations/TOPIC_SELECTION_SCORECARD.md` | ACTIVE_ROUTINE | 광고 API 시장 수요 + 블로그 실제 반응 + 문장군 필터 기준 |
+| `docs/operations/BRIDGE_TOPIC_WORKFLOW.md` | ACTIVE_ROUTINE | 제품 밖 생활·공정·가구 부모 키워드와 문장군 서비스의 실제 연결을 수집·검증하는 별도 레인 |
 | `docs/operations/TOPIC_BLIND_CLASSIFICATION_PROTOCOL.md` | ACTIVE_ROUTINE | 소재 규칙 재설계 시 성패를 가린 독립 분류 절차와 오염 차단 계약 |
 | `outputs/reports/topic_candidates/YYYY-MM-DD_topic_scorecard.md` | GENERATED | 신규 글감 후보별 scorecard. 현재 누락 시 `ops:daily` WARN |
 | `docs/strategy/ACTIVE_TOPIC_QUEUE.json` | ACTIVE_ROUTINE | daily 다음 액션을 Q-ID와 lane으로 닫고, action/manuscript/URL/observation 상태를 분리하는 원본 실행판 |
@@ -52,6 +53,8 @@
 주의: `outputs/reports/ranking_report.md`는 daily 글감 선정의 자동 근거가 아니다. URL 기반 추적 구현 전까지 weekly/experimental 참고로만 쓴다.
 
 글감 선정의 기본 순서는 `키워드 → 고객 상황 → 고객 불안 문장 → 제목 후보 → 문장군 필터`다. 광고 API와 daily 유입어는 검색 수요를 확인하는 뼈대이고, 최종 제목은 고객이 검색창에 치기 직전의 말에 가깝게 만든다.
+
+제품 밖 부모 키워드에서 시작할 때는 `BRIDGE_TOPIC_WORKFLOW.md`를 우선한다. 기존 제품 데이터와 `topic:check`를 억지로 확장하지 않고, `keywords:bridge`와 구조화된 `topic:bridge-check`로 부모와 문장군 서비스를 분리한다.
 
 ### 3-0. 작성완료와 URL 등록의 관계
 
