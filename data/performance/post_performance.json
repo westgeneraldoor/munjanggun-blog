@@ -12366,17 +12366,22 @@
     },
     {
       "post_no": "194",
-      "title": "화장실문 재교체, 다시 부푼 원인을 먼저 나눠보세요",
-      "published_at": null,
-      "published_at_source": "unknown",
+      "title": "화장실문 재교체, 바꾼 지 얼마 안 됐는데 또 들뜨기 시작했다면?",
+      "published_at": "2026-08-24",
+      "published_at_source": "registry",
       "queue_id": "Q-041",
-      "hub_ids": [],
-      "cluster_ids": [],
+      "hub_ids": [
+        "H4",
+        "H5"
+      ],
+      "cluster_ids": [
+        "C-H4-H5-SURFACE-CONDITION"
+      ],
       "observations": [],
-      "observed_days": 0,
-      "verdict": "unobserved",
-      "verdict_at": "2026-08-31",
-      "verdict_reason": "발행일 미상"
+      "observed_days": 8,
+      "verdict": "faded",
+      "verdict_reason": "발행 3~14일 구간 TOP20 0회 등장, 관측 유효일 8일",
+      "verdict_at": "2026-08-31"
     },
     {
       "post_no": "195",

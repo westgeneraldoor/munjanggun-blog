@@ -1336,12 +1336,11 @@
       "source_refs": [
         "queue:Q-041"
       ],
-      "hub_ids": [],
-      "cluster_ids": [],
-      "intent_ids": [],
-      "classification_status": "unclassified",
-      "unclassified_reason": "작성완료·URL등록대기 원고다. 실제 발행 제목·URL이 확인되기 전에는 초안의 주제만으로 taxonomy를 확정하지 않는다.",
-      "taxonomy_change_note": "Q-041은 과거 유사 소재의 이력 참조일 뿐, 미발행 194번의 분류를 확정하지 않는다."
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-SURFACE-CONDITION"],
+      "intent_ids": ["I-FAILURE-RISK", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified",
+      "taxonomy_change_note": "2026-09-01 공개 URL·실제 제목·발행일 확인 뒤, 교체한 화장실문이 다시 들뜨는 원인과 재교체 범위를 표면 상태 클러스터로 확정했다."
     },
     "post:195": {
       "entity_type": "post",
@@ -1496,6 +1495,65 @@
       "intent_ids": [],
       "classification_status": "unclassified",
       "unclassified_reason": "공개 URL은 확인됐지만 브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 성과 관찰 중 과잉 분류하지 않는다."
+    },
+    "queue:Q-063": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "작은방붙박이장 부모 의도와 방문교체의 열림·마감 의도를 함께 담을 브릿지 taxonomy가 없다. 원고 작성 전 억지 분류하지 않는다."
+    },
+    "queue:Q-064": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-HARDWARE-RANGE"],
+      "intent_ids": ["I-REPLACEMENT-SCOPE", "I-LIVING-SAFETY"],
+      "classification_status": "classified"
+    },
+    "queue:Q-065": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "침대 부모 의도와 방문 열림 방향 의도를 함께 담을 브릿지 taxonomy가 없다. 부모 검색량만으로 제품 taxonomy를 만들지 않는다."
+    },
+    "queue:Q-066": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-TRIM-FINISH"],
+      "intent_ids": ["I-FINISH-COORDINATION", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-067": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-HARDWARE-RANGE"],
+      "intent_ids": ["I-FAILURE-RISK", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "queue:Q-068": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
+      "intent_ids": ["I-LIVING-SAFETY", "I-PRIVACY-LAYOUT"],
+      "classification_status": "classified"
+    },
+    "queue:Q-069": {
+      "entity_type": "queue",
+      "source_refs": [],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "로봇청소기 부모 의도와 방문턱·바닥 경계 의도를 함께 담을 브릿지 taxonomy가 없다. 171번 보호글의 성과를 확인하기 전 분류를 신설하지 않는다."
     },
     "post:201": {
       "entity_type": "post",
