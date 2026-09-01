@@ -1419,8 +1419,8 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "작성완료·URL등록대기 원고다. 실제 발행 제목·URL이 확인되기 전에는 초안의 주제만으로 taxonomy를 확정하지 않는다.",
-      "taxonomy_change_note": "Q-030은 개구부 전술의 확대 차단 이력 참조일 뿐, 미발행 199번의 taxonomy를 확정하지 않는다."
+      "unclassified_reason": "공개 제목·URL은 확인됐지만 개구부 전술의 보호선과 별개로 분류할 taxonomy가 없다. 성과 관찰 중 억지 분류하지 않는다.",
+      "taxonomy_change_note": "Q-030은 개구부 전술의 확대 차단 이력 참조일 뿐, 199번의 성과와 taxonomy를 합산하지 않는다."
     },
     "post:200": {
       "entity_type": "post",
@@ -1441,7 +1441,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+      "unclassified_reason": "공개 URL은 확인됐지만 브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 성과 관찰 중 과잉 분류하지 않는다."
     },
     "queue:Q-057": {
       "entity_type": "queue",
@@ -1450,7 +1450,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+      "unclassified_reason": "공개 URL은 확인됐지만 브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 성과 관찰 중 과잉 분류하지 않는다."
     },
     "queue:Q-058": {
       "entity_type": "queue",
@@ -1459,7 +1459,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+      "unclassified_reason": "공개 URL은 확인됐지만 브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 성과 관찰 중 과잉 분류하지 않는다."
     },
     "queue:Q-059": {
       "entity_type": "queue",
@@ -1468,7 +1468,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+      "unclassified_reason": "공개 URL은 확인됐지만 브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 성과 관찰 중 과잉 분류하지 않는다."
     },
     "queue:Q-060": {
       "entity_type": "queue",
@@ -1477,7 +1477,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+      "unclassified_reason": "공개 URL은 확인됐지만 브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 성과 관찰 중 과잉 분류하지 않는다."
     },
     "queue:Q-061": {
       "entity_type": "queue",
@@ -1486,7 +1486,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+      "unclassified_reason": "공개 URL은 확인됐지만 브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 성과 관찰 중 과잉 분류하지 않는다."
     },
     "queue:Q-062": {
       "entity_type": "queue",
@@ -1495,7 +1495,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 발행 전 과잉 분류하지 않는다."
+      "unclassified_reason": "공개 URL은 확인됐지만 브릿지 코호트의 부모 검색 의도와 문장군 서비스 의도를 함께 담을 taxonomy가 아직 없다. 성과 관찰 중 과잉 분류하지 않는다."
     },
     "post:201": {
       "entity_type": "post",
@@ -1504,7 +1504,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+      "unclassified_reason": "공개 제목·URL이 확인된 브릿지 글이다. 부모 의도와 서비스 의도를 함께 담을 taxonomy가 없어 성과 관찰 중 억지 분류하지 않는다."
     },
     "post:202": {
       "entity_type": "post",
@@ -1513,7 +1513,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+      "unclassified_reason": "공개 제목·URL이 확인된 브릿지 글이다. 부모 의도와 서비스 의도를 함께 담을 taxonomy가 없어 성과 관찰 중 억지 분류하지 않는다."
     },
     "post:203": {
       "entity_type": "post",
@@ -1522,7 +1522,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+      "unclassified_reason": "공개 제목·URL이 확인된 브릿지 글이다. 부모 의도와 서비스 의도를 함께 담을 taxonomy가 없어 성과 관찰 중 억지 분류하지 않는다."
     },
     "post:204": {
       "entity_type": "post",
@@ -1531,7 +1531,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+      "unclassified_reason": "공개 제목·URL이 확인된 브릿지 글이다. 부모 의도와 서비스 의도를 함께 담을 taxonomy가 없어 성과 관찰 중 억지 분류하지 않는다."
     },
     "post:205": {
       "entity_type": "post",
@@ -1540,7 +1540,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+      "unclassified_reason": "공개 제목·URL이 확인된 브릿지 글이다. 부모 의도와 서비스 의도를 함께 담을 taxonomy가 없어 성과 관찰 중 억지 분류하지 않는다."
     },
     "post:206": {
       "entity_type": "post",
@@ -1549,7 +1549,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+      "unclassified_reason": "공개 제목·URL이 확인된 브릿지 글이다. 부모 의도와 서비스 의도를 함께 담을 taxonomy가 없어 성과 관찰 중 억지 분류하지 않는다."
     },
     "post:207": {
       "entity_type": "post",
@@ -1558,7 +1558,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "작성완료·URL등록대기 브릿지 원고다. 실제 발행 제목·URL 확인 전에는 부모 의도와 서비스 의도를 기존 taxonomy에 억지로 넣지 않는다."
+      "unclassified_reason": "공개 제목·URL이 확인된 브릿지 글이다. 부모 의도와 서비스 의도를 함께 담을 taxonomy가 없어 성과 관찰 중 억지 분류하지 않는다."
     }
   }
 }
