@@ -1534,10 +1534,11 @@
     "queue:Q-067": {
       "entity_type": "queue",
       "source_refs": [],
-      "hub_ids": ["H4", "H5"],
-      "cluster_ids": ["C-H4-H5-HARDWARE-RANGE"],
-      "intent_ids": ["I-FAILURE-RISK", "I-REPLACEMENT-SCOPE"],
-      "classification_status": "classified"
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "입주박람회 계약 범위와 현관중문 현장 실측을 연결하는 브릿지 질문이다. 하드웨어 고장·교체 범위가 아니므로 기존 H4/H5 분류를 제거하고 브릿지 taxonomy 신설 전까지 과잉 분류하지 않는다."
     },
     "queue:Q-068": {
       "entity_type": "queue",
@@ -1555,7 +1556,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "로봇청소기 부모 의도와 방문턱·문틀·바닥 경계 의도를 함께 담을 브릿지 taxonomy가 없다. 승인 리뷰 한 사례와 171번 보호 연결만 기록한다."
+      "unclassified_reason": "구축아파트 방문교체와 로봇청소기 생활 동선을 함께 담을 브릿지 taxonomy가 없다. 구형 리뷰 패키지 020의 사건 범위와 171번 보호 연결만 기록한다."
     },
     "post:201": {
       "entity_type": "post",
@@ -1619,6 +1620,68 @@
       "intent_ids": [],
       "classification_status": "unclassified",
       "unclassified_reason": "공개 제목·URL이 확인된 브릿지 글이다. 부모 의도와 서비스 의도를 함께 담을 taxonomy가 없어 성과 관찰 중 억지 분류하지 않는다."
+    },
+    "post:208": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-063"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "부모님 댁 가족 결정과 중문교체를 연결하는 승인 리뷰 기반 브릿지 글이다. 공개 URL 확인 전 별도 taxonomy로 과잉 분류하지 않는다."
+    },
+    "post:209": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-064"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "아기 있는 집의 생활 구역과 현관중문 선택을 연결하는 승인 리뷰 기반 브릿지 글이다. 아기 안전 효능 taxonomy로 확대하지 않는다."
+    },
+    "post:210": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-065"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "컬러 인테리어와 현관중문 색상 선택을 연결하는 승인 리뷰 기반 브릿지 글이다. 한 사례의 색상 조달로 새 제품 taxonomy를 만들지 않는다."
+    },
+    "post:211": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-066"],
+      "hub_ids": ["H4", "H5"],
+      "cluster_ids": ["C-H4-H5-TRIM-FINISH"],
+      "intent_ids": ["I-FINISH-COORDINATION", "I-REPLACEMENT-SCOPE"],
+      "classification_status": "classified"
+    },
+    "post:212": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-067"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "입주박람회 계약 범위와 현관중문 현장 실측을 연결하는 브릿지 글이다. 법률·하드웨어 분류를 붙이지 않고 공개 URL 확인 전 관찰한다."
+    },
+    "post:213": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-068"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "설치 직후와 한 달 뒤의 동일 고객 리뷰를 비교하는 시간차 리뷰 글이다. 기존 제품 taxonomy에 억지로 넣지 않는다."
+    },
+    "post:214": {
+      "entity_type": "post",
+      "source_refs": ["queue:Q-069"],
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "구축아파트 방문교체 뒤 문턱 정리와 로봇청소기 생활 동선 변화를 연결한 리뷰 글이다. 방문턱제거 단독 서비스나 로봇청소기 효능 글로 분류하지 않는다."
     }
   }
 }
