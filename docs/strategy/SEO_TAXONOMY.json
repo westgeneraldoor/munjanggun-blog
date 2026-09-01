@@ -1503,15 +1503,16 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "작은방붙박이장 부모 의도와 방문교체의 열림·마감 의도를 함께 담을 브릿지 taxonomy가 없다. 원고 작성 전 억지 분류하지 않는다."
+      "unclassified_reason": "부모님댁인테리어의 가족 결정 의도와 중문교체 서비스를 함께 담을 브릿지 taxonomy가 없다. 승인 리뷰 기반 후보를 원고 작성 전 억지 분류하지 않는다."
     },
     "queue:Q-064": {
       "entity_type": "queue",
       "source_refs": [],
-      "hub_ids": ["H4", "H5"],
-      "cluster_ids": ["C-H4-H5-HARDWARE-RANGE"],
-      "intent_ids": ["I-REPLACEMENT-SCOPE", "I-LIVING-SAFETY"],
-      "classification_status": "classified"
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "육아인테리어의 생활 동선과 현관중문 선택을 함께 담을 브릿지 taxonomy가 없다. 아기 안전 효능으로 과잉 분류하지 않는다."
     },
     "queue:Q-065": {
       "entity_type": "queue",
@@ -1520,7 +1521,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "침대 부모 의도와 방문 열림 방향 의도를 함께 담을 브릿지 taxonomy가 없다. 부모 검색량만으로 제품 taxonomy를 만들지 않는다."
+      "unclassified_reason": "컬러인테리어의 색상 선택과 현관중문 서비스를 함께 담을 브릿지 taxonomy가 없다. 승인 리뷰 한 사례로 색상 taxonomy를 신설하지 않는다."
     },
     "queue:Q-066": {
       "entity_type": "queue",
@@ -1541,10 +1542,11 @@
     "queue:Q-068": {
       "entity_type": "queue",
       "source_refs": [],
-      "hub_ids": ["H4", "H5"],
-      "cluster_ids": ["C-H4-H5-REPLACEMENT"],
-      "intent_ids": ["I-LIVING-SAFETY", "I-PRIVACY-LAYOUT"],
-      "classification_status": "classified"
+      "hub_ids": [],
+      "cluster_ids": [],
+      "intent_ids": [],
+      "classification_status": "unclassified",
+      "unclassified_reason": "설치 직후와 한 달 뒤의 동일 고객 리뷰를 비교하는 시간차 사례다. 기존 제품 taxonomy에 억지로 넣지 않고 성과를 관찰한다."
     },
     "queue:Q-069": {
       "entity_type": "queue",
@@ -1553,7 +1555,7 @@
       "cluster_ids": [],
       "intent_ids": [],
       "classification_status": "unclassified",
-      "unclassified_reason": "로봇청소기 부모 의도와 방문턱·바닥 경계 의도를 함께 담을 브릿지 taxonomy가 없다. 171번 보호글의 성과를 확인하기 전 분류를 신설하지 않는다."
+      "unclassified_reason": "로봇청소기 부모 의도와 방문턱·문틀·바닥 경계 의도를 함께 담을 브릿지 taxonomy가 없다. 승인 리뷰 한 사례와 171번 보호 연결만 기록한다."
     },
     "post:201": {
       "entity_type": "post",
